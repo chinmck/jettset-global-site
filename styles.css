@@ -934,6 +934,7 @@
   }
   @media(max-width:880px){
     .route-preview-grid{grid-template-columns:1fr;}
+    .rp-city{font-size:19px;} /* SVG user-unit size; cards go full-width on mobile so scale factor is gentler, but the original 10.5 still rendered under 7px \u2014 this targets a comfortable ~11px actual */
   }
 
   /* ===== PILLAR SUMMARY (Movement Without Compromise) ===== */
@@ -1455,7 +1456,7 @@
     .rm-plane{transition:none;}
   }
   @media(max-width:680px){
-    .rm-city-label{font-size:9px;}
+    .rm-city-label{display:none;} /* SVG text scales with the viewBox, not the screen \u2014 at this width it renders unreadably small regardless of font-size. Route info is already fully available via the chip list and caption below, both real HTML. */
     .rm-chip{font-size:10px; padding:8px 14px;}
     .rm-meta{flex-direction:column; gap:6px;}
   }
@@ -1666,6 +1667,14 @@
     font-size:14px;
     text-align:center;
     margin:0 24px;
+  }
+  @media(max-width:560px){
+    .journeys{padding:0 24px 100px;}
+    .journey-row{
+      font-size:15px;
+      padding:20px 0;
+    }
+    .journey-row .journey-arrow{margin:0 10px;}
   }
   .journey-note{
     margin-top:32px;
