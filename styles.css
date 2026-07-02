@@ -324,8 +324,8 @@
   }
   @media(max-width:680px){
     .hero{
-      height:88vh;
-      height:88svh; /* slightly shorter on mobile so the wide nose-on shot needs less vertical crop, keeping more of the wingspan in frame */
+      height:78vh;
+      height:78svh; /* slightly shorter on mobile so the wide nose-on shot needs less vertical crop, keeping more of the wingspan in frame */
     }
     .hero-content{padding:0 24px 56px;}
   }
@@ -1103,6 +1103,11 @@
   }
   .jb-progress-step.is-active,
   .jb-progress-step.is-done{color:var(--platinum);}
+  @media(max-width:560px){
+    .jb-progress-labels{justify-content:center;}
+    .jb-progress-step{display:none;}
+    .jb-progress-step.is-active{display:block; font-size:11px;}
+  }
 
   .jb-panel{display:none;}
   .jb-panel.is-active{display:block; animation:fadeUp 0.5s ease;}
@@ -1343,6 +1348,10 @@
   }
   @media(max-width:680px){
     .route-map{padding:0 20px 100px;}
+    .rm-route{opacity:0; pointer-events:none;}
+    .rm-route.is-active{opacity:1; pointer-events:auto;}
+    .rm-city-dot{opacity:0; pointer-events:none;}
+    .rm-city-dot.is-active{opacity:1; pointer-events:auto;}
   }
   .rm-head{
     text-align:center;
