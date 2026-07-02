@@ -1348,10 +1348,6 @@
   }
   @media(max-width:680px){
     .route-map{padding:0 20px 100px;}
-    .rm-route{opacity:0; pointer-events:none;}
-    .rm-route.is-active{opacity:1; pointer-events:auto;}
-    .rm-city-dot{opacity:0; pointer-events:none;}
-    .rm-city-dot.is-active{opacity:1; pointer-events:auto;}
   }
   .rm-head{
     text-align:center;
