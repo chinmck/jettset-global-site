@@ -859,7 +859,7 @@
       if(!veil) return;
 
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var VEIL_OUT_MS = reduceMotion ? 0 : 380; // time veil takes to cover the screen before navigating away
+      var VEIL_OUT_MS = reduceMotion ? 0 : 280; // time veil takes to cover the screen before navigating away
       var isNavigating = false;
 
       // ---- INCOMING: reveal this page ----
