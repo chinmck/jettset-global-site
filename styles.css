@@ -316,10 +316,18 @@
   .hero{
     position:relative;
     height:100vh;
+    height:100svh; /* mobile browsers resize the viewport as the address bar shows/hides; 100vh can misjudge this and push content under the fixed nav. svh is the stable equivalent. */
     width:100%;
     display:flex;
     align-items:flex-end;
     overflow:hidden;
+  }
+  @media(max-width:680px){
+    .hero{
+      height:88vh;
+      height:88svh; /* slightly shorter on mobile so the wide nose-on shot needs less vertical crop, keeping more of the wingspan in frame */
+    }
+    .hero-content{padding:0 24px 56px;}
   }
   .hero img{
     position:absolute;
@@ -1123,6 +1131,10 @@
     transition:border-color 0.25s, color 0.25s, background 0.25s;
   }
   .jb-chip:hover{border-color:var(--gold); background:rgba(201,162,75,0.08);}
+  @media(max-width:560px){
+    .jb-chip{font-size:10px; padding:6px 11px;}
+    .jb-quick-routes{gap:6px;}
+  }
 
   /* Choice grid — flat boxy cards, sans-serif, checkmark on selection */
   .jb-choice-grid{
@@ -1328,6 +1340,9 @@
   /* ===== SECTION: SIGNATURE ROUTE MAP ===== */
   .route-map{
     padding:0 56px 160px;
+  }
+  @media(max-width:680px){
+    .route-map{padding:0 20px 100px;}
   }
   .rm-head{
     text-align:center;
