@@ -170,7 +170,8 @@
       });
     });
 
-    document.getElementById('quoteForm').addEventListener('submit', function(e){
+    var quoteFormEl = document.getElementById('quoteForm');
+    if(quoteFormEl) quoteFormEl.addEventListener('submit', function(e){
       e.preventDefault();
       var consent = document.getElementById('qConsent').checked;
       var name = document.getElementById('qName').value.trim();
@@ -192,7 +193,8 @@
       });
     });
 
-    document.getElementById('partnerForm').addEventListener('submit', function(e){
+    var partnerFormEl = document.getElementById('partnerForm');
+    if(partnerFormEl) partnerFormEl.addEventListener('submit', function(e){
       e.preventDefault();
       var consent = document.getElementById('pConsent').checked;
       var name = document.getElementById('pName').value.trim();
@@ -209,7 +211,8 @@
       this.reset();
     });
 
-    document.getElementById('enquiryForm').addEventListener('submit', function(e){
+    var enquiryFormEl = document.getElementById('enquiryForm');
+    if(enquiryFormEl) enquiryFormEl.addEventListener('submit', function(e){
       e.preventDefault();
       var consent = document.getElementById('eConsent').checked;
       var name = document.getElementById('eName').value.trim();
@@ -226,7 +229,8 @@
       this.reset();
     });
 
-    document.getElementById('legsWaitlistForm').addEventListener('submit', function(e){
+    var legsWaitlistFormEl = document.getElementById('legsWaitlistForm');
+    if(legsWaitlistFormEl) legsWaitlistFormEl.addEventListener('submit', function(e){
       e.preventDefault();
       var consent = document.getElementById('lwConsent').checked;
       var name = document.getElementById('lwName').value.trim();
@@ -244,7 +248,8 @@
       this.reset();
     });
 
-    document.getElementById('jetCardForm').addEventListener('submit', function(e){
+    var jetCardFormEl = document.getElementById('jetCardForm');
+    if(jetCardFormEl) jetCardFormEl.addEventListener('submit', function(e){
       e.preventDefault();
       var consent = document.getElementById('jcConsent').checked;
       var name = document.getElementById('jcName').value.trim();
