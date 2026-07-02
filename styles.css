@@ -3311,3 +3311,37 @@
     .nav-links{display:none;}
     .nav{padding:22px 24px;}
   }
+
+  /* ===== PAGE TRANSITION VEIL ===== */
+  /* Default state: veil covers the screen so incoming content is hidden until
+     JS reveals it. This is pure CSS so it applies from first paint, before
+     script.js has a chance to run \u2014 no flash of unstyled content. */
+  #jtVeil{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:var(--black);
+    opacity:1;
+    pointer-events:none;
+    transition:opacity 0.42s cubic-bezier(0.4,0,0.2,1);
+  }
+  #jtVeil.jt-veil-hidden{opacity:0;}
+
+  /* Incoming content: subtle upward reveal, layered slightly behind the veil fade
+     so the page is already moving into place as the veil clears. */
+  .page.active{
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity 0.5s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .page.active.jt-revealed{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* Reduced motion: no movement, no fade duration \u2014 content and veil simply
+     appear/disappear in their final state instantly. */
+  @media(prefers-reduced-motion: reduce){
+    #jtVeil{transition:none;}
+    .page.active{opacity:1; transform:none; transition:none;}
+  }

@@ -123,12 +123,12 @@
       e.preventDefault();
       var dest = document.getElementById('jbDestination').value.trim();
       if(dest){ sessionStorage.setItem('prefill_qTo', dest); }
-      window.location.href = 'quote.html';
+      window.jtNavigate('quote.html');
     });
 
     document.querySelector('.nav-enquire').addEventListener('click', function(e){
       e.preventDefault();
-      window.location.href = 'quote.html';
+      window.jtNavigate('quote.html');
     });
 
     document.querySelectorAll('.btn-ghost').forEach(function(btn){
@@ -137,7 +137,7 @@
         btn.addEventListener('click', function(e){
           if(btn.getAttribute('href') && btn.getAttribute('href') !== '#') return; // real link already, let it navigate
           e.preventDefault();
-          window.location.href = 'quote.html';
+          window.jtNavigate('quote.html');
         });
       }
     });
@@ -819,7 +819,7 @@
         if(state.occasion) noteParts.push('Occasion: ' + state.occasion);
         if(state.prefs.length) noteParts.push('Please arrange: ' + state.prefs.join(', '));
         if(noteParts.length) sessionStorage.setItem('prefill_qNotes', noteParts.join('. '));
-        window.location.href = 'quote.html';
+        window.jtNavigate('quote.html');
       });
 
       showStep(1);
@@ -850,4 +850,68 @@
         sessionStorage.removeItem('prefill_qFrom');
         sessionStorage.removeItem('prefill_qNotes');
       }
+    })();
+
+    // ===== PAGE TRANSITIONS ("chapter turn") =====
+    (function(){
+      var veil = document.getElementById('jtVeil');
+      var pageEl = document.querySelector('.page.active');
+      if(!veil) return;
+
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var VEIL_OUT_MS = reduceMotion ? 0 : 380; // time veil takes to cover the screen before navigating away
+      var isNavigating = false;
+
+      // ---- INCOMING: reveal this page ----
+      function revealPage(){
+        // Force a reflow so the transition actually runs (rather than the
+        // browser coalescing the class changes into a single paint).
+        void veil.offsetWidth;
+        veil.classList.add('jt-veil-hidden');
+        if(pageEl) pageEl.classList.add('jt-revealed');
+        isNavigating = false;
+      }
+      // 'pageshow' fires on fresh loads AND on back/forward restores from
+      // bfcache (where 'DOMContentLoaded' does not re-fire), so this is the
+      // one event that reliably covers every way a guest can arrive here.
+      window.addEventListener('pageshow', revealPage);
+
+      // ---- OUTGOING: veil the screen, then navigate ----
+      function jtNavigate(url){
+        if(isNavigating) return; // guards against double-click / double-submit
+        if(!url) return;
+        isNavigating = true;
+        if(reduceMotion){
+          window.location.href = url;
+          return;
+        }
+        veil.classList.remove('jt-veil-hidden');
+        setTimeout(function(){ window.location.href = url; }, VEIL_OUT_MS);
+      }
+      window.jtNavigate = jtNavigate; // exposed so other handlers below can reuse it
+
+      // ---- Intercept internal link clicks site-wide ----
+      document.addEventListener('click', function(e){
+        var link = e.target.closest('a');
+        if(!link) return;
+
+        // Let the browser handle: modified clicks (new tab/window), non-left
+        // clicks, explicit new-tab targets, external/protocol links.
+        if(e.defaultPrevented) return;
+        if(e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        if(link.target && link.target !== '_self') return;
+
+        var href = link.getAttribute('href');
+        if(!href || href.indexOf('#') === 0) return; // pure in-page anchors: no veil, let native scroll happen
+        if(/^(mailto:|tel:|https?:\/\/|\/\/)/i.test(href)) return; // external / contact links untouched
+
+        var dest = new URL(href, window.location.href);
+        if(dest.origin !== window.location.origin) return; // safety net for absolute external URLs
+
+        // Same-document hash link (e.g. staying on this page) \u2014 no veil needed.
+        if(dest.pathname === window.location.pathname && dest.hash) return;
+
+        e.preventDefault();
+        jtNavigate(dest.pathname + dest.search + dest.hash);
+      });
     })();
