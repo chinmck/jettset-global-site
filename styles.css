@@ -3323,7 +3323,7 @@
     background:var(--black);
     opacity:1;
     pointer-events:none;
-    transition:opacity 0.3s cubic-bezier(0.4,0,0.2,1);
+    transition:opacity 0.2s cubic-bezier(0.4,0,0.2,1);
   }
   #jtVeil.jt-veil-hidden{opacity:0;}
 
@@ -3331,8 +3331,8 @@
      so the page is already moving into place as the veil clears. */
   .page.active{
     opacity:0;
-    transform:translateY(9px);
-    transition:opacity 0.36s cubic-bezier(0.4,0,0.2,1), transform 0.36s cubic-bezier(0.4,0,0.2,1);
+    transform:translateY(6px);
+    transition:opacity 0.24s cubic-bezier(0.4,0,0.2,1), transform 0.24s cubic-bezier(0.4,0,0.2,1);
   }
   .page.active.jt-revealed{
     opacity:1;
