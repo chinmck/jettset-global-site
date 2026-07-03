@@ -363,7 +363,7 @@
       filter:blur(60px) brightness(0.32) saturate(1.15);
       transform:scale(1.2); /* avoids the sharp source edge showing through the blur */
     }
-    .hero-img-main{
+    .hero .hero-img-main{
       object-fit:contain;
       object-position:center 38%;
       filter:contrast(1.05) brightness(1);
