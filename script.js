@@ -532,6 +532,8 @@
         caption.querySelector('.eyebrow').textContent = route.label;
         caption.querySelector('h4').textContent = route.theme || 'A Signature Journey';
         caption.querySelector('p').textContent = route.note;
+        var mobileRouteName = document.getElementById('rmMobileRouteName');
+        if(mobileRouteName) mobileRouteName.textContent = route.label;
         var existingMeta = caption.querySelector('.rm-meta');
         if(existingMeta) existingMeta.remove();
         var meta = document.createElement('div');

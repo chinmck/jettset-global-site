@@ -24,7 +24,7 @@
     <div class="nav-actions">
       <span class="nav-response-time">Enquiries Answered In &le;10 Min</span>
       <a href="#" class="nav-contact-link"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M3.654 1.328a.678.678 0 0 1 1.015-.063l2.143 2.143a.678.678 0 0 1 .063 1.015l-1.18 1.18a8.5 8.5 0 0 0 9.728 9.728l1.18-1.18a.678.678 0 0 1 1.015.063l2.143 2.143a.678.678 0 0 1-.063 1.015l-1.6 1.4a1.5 1.5 0 0 1-1.21.36C9.937 17.78 2.22 10.063.91 3.011a1.5 1.5 0 0 1 .36-1.21z"/></svg><span class="full">Call</span> / WhatsApp</a>
-      <a href="#" class="nav-enquire">Begin Your Journey</a>
+      <a href="#" class="nav-enquire"><span class="full">Begin Your Journey</span><span class="short">Enquire</span></a>
     </div>
   </nav>
 
@@ -82,7 +82,8 @@
   <div class="page active" id="page-home">
 
     <section class="hero">
-      <img src="images/hero-home.jpg" alt="Private jet, nose-on studio view, representing Jettset Global private aviation and concierge services">
+      <img class="hero-img-blur" src="images/hero-home.jpg" alt="" aria-hidden="true">
+      <img class="hero-img-main" src="images/hero-home.jpg" alt="Private jet, nose-on studio view, representing Jettset Global private aviation and concierge services">
       <div class="hero-glow" id="heroGlow"></div>
       <div class="hero-content">
         <span class="eyebrow">Private Aviation &amp; Concierge</span>
@@ -357,6 +358,10 @@
         <p>A handful of routes guests return to. Select one to see it in the air.</p>
       </div>
       <div class="rm-wrap">
+        <div class="rm-mobile-showcase" id="rmMobileShowcase">
+          <div class="rm-mobile-route-name" id="rmMobileRouteName">Select A Journey</div>
+          <div class="rm-mobile-line"><span class="rm-mobile-plane">&#10148;</span></div>
+        </div>
         <svg class="rm-svg" viewBox="0 0 1600 650" id="rmSvg">
           <ellipse class="rm-grid-line" cx="800" cy="325" rx="740" ry="250"></ellipse>
           <ellipse class="rm-grid-line" cx="800" cy="325" rx="500" ry="165"></ellipse>
