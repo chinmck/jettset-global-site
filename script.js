@@ -128,8 +128,30 @@
 
     document.querySelector('.nav-enquire').addEventListener('click', function(e){
       e.preventDefault();
-      window.jtNavigate('quote.html');
+      var isMobile = window.matchMedia('(max-width:700px)').matches;
+      var sheet = document.getElementById('contactSheetOverlay');
+      if(isMobile && sheet){
+        sheet.classList.add('is-active');
+      } else {
+        window.jtNavigate('quote.html');
+      }
     });
+
+    // Contact sheet dismissal (mobile only, harmless no-op if markup absent)
+    (function(){
+      var sheet = document.getElementById('contactSheetOverlay');
+      if(!sheet) return;
+      sheet.addEventListener('click', function(e){
+        if(e.target === sheet) sheet.classList.remove('is-active');
+      });
+      var cancelBtn = document.getElementById('contactSheetCancel');
+      if(cancelBtn){
+        cancelBtn.addEventListener('click', function(){ sheet.classList.remove('is-active'); });
+      }
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape') sheet.classList.remove('is-active');
+      });
+    })();
 
     document.querySelectorAll('.btn-ghost').forEach(function(btn){
       var text = btn.textContent.trim();
