@@ -151,7 +151,7 @@
     .nav-burger .burger-label{display:none;}
     .nav-contact-link span.full{display:none;}
     .whatsapp-label{display:none;}
-    .icon-whatsapp{display:inline-block; margin-left:5px;}
+    .icon-whatsapp{display:inline-block;}
     .nav-response-time{display:none;}
     .nav-actions{gap:12px;}
     .nav-enquire{padding:8px 12px; font-size:10px;}
