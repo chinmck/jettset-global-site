@@ -770,6 +770,17 @@
   #page-club .sub-hero video{
     filter:none;
   }
+  /* Legibility against the brighter unfiltered image - shadow follows the
+     text itself rather than darkening the photo, so it holds regardless
+     of what's bright or dark behind any given word. */
+  #page-charter .sub-hero-content .eyebrow,
+  #page-charter .sub-hero-content h1,
+  #page-charter .sub-hero-content p,
+  #page-club .sub-hero-content .eyebrow,
+  #page-club .sub-hero-content h1,
+  #page-club .sub-hero-content p{
+    text-shadow:0 1px 3px rgba(0,0,0,0.5), 0 2px 12px rgba(0,0,0,0.6);
+  }
   .sub-hero::after{
     content:'';
     position:absolute;inset:0;
