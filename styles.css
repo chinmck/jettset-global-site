@@ -762,6 +762,14 @@
   .sub-hero.tone-light video{
     filter:contrast(1.08) brightness(0.85) saturate(1.05);
   }
+  /* Charter and Club specifically: full vibrancy, no darkening filter at all,
+     matching how the same images appear on the homepage segment cards. */
+  #page-charter .sub-hero img,
+  #page-charter .sub-hero video,
+  #page-club .sub-hero img,
+  #page-club .sub-hero video{
+    filter:none;
+  }
   .sub-hero::after{
     content:'';
     position:absolute;inset:0;
