@@ -1249,7 +1249,13 @@
   @media(max-width:560px){
     .jb-chip{font-size:10px; padding:6px 11px;}
     .jb-quick-routes{gap:6px;}
-    .jb-chip:nth-child(n+5){display:none;} /* show only the top 4 routes on mobile; full list remains on desktop */
+    .jb-chip{display:none;} /* hide all by default on mobile, then explicitly show a curated 4 */
+    .jb-chip:nth-child(2), /* London -> Ibiza */
+    .jb-chip:nth-child(4), /* Paris -> Mykonos */
+    .jb-chip:nth-child(8), /* Singapore -> Hong Kong - signals Asia reach */
+    .jb-chip:nth-child(10){ /* Lagos -> New York - signals Africa/Americas reach */
+      display:inline-block;
+    }
   }
 
   /* Choice grid — flat boxy cards, sans-serif, checkmark on selection */
