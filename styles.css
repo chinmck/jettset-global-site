@@ -673,7 +673,7 @@
 
   /* ===== FOOTER ===== */
   footer{
-    padding:80px 56px 40px;
+    padding:80px 56px 140px;
   }
   .footer-grid{
     display:grid;
@@ -729,6 +729,7 @@
   @media(max-width:880px){
     .footer-grid{grid-template-columns:1fr 1fr; gap:36px;}
     .footer-bottom{flex-direction:column; gap:12px; text-align:center;}
+    footer{padding-bottom:210px;}
   }
 
   /* ===== PAGE: CHARTER (product template) ===== */
