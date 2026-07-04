@@ -131,6 +131,7 @@
   }
   .nav-contact-link:hover{opacity:1; color:var(--gold);}
   .nav-contact-link svg{width:13px;height:13px;flex-shrink:0;}
+  .icon-whatsapp{display:none;}
 
   .nav-enquire{
     border:1px solid var(--gold);
@@ -149,6 +150,8 @@
   @media(max-width:700px){
     .nav-burger .burger-label{display:none;}
     .nav-contact-link span.full{display:none;}
+    .whatsapp-label{display:none;}
+    .icon-whatsapp{display:inline-block; margin-left:5px;}
     .nav-response-time{display:none;}
     .nav-actions{gap:12px;}
     .nav-enquire{padding:8px 12px; font-size:10px;}
