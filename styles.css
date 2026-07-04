@@ -471,11 +471,17 @@
     text-align:center;
     padding:0 24px 80px;
   }
-  .hero-content .eyebrow{
-    display:block;
-    margin-bottom:24px;
+  .hero-kicker{
+    position:absolute;
+    top:170px;
+    left:0; right:0;
+    z-index:2;
+    text-align:center;
     opacity:0;
     animation:fadeUp 1s ease 0.3s forwards;
+  }
+  @media(max-width:680px){
+    .hero-kicker{top:110px;}
   }
   .hero-content h1{
     font-size:clamp(36px,5.6vw,80px);
