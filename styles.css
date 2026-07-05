@@ -763,13 +763,18 @@
   .sub-hero.tone-light video{
     filter:contrast(1.08) brightness(0.85) saturate(1.05);
   }
-  /* TEST - Jet Card hero: shift crop right (away from heading text),
-     zoom out slightly so the card reads at a more natural scale,
-     refine filter for a more editorial (less flat) look. */
+  /* Jet Card hero: taller container reduces vertical cropping (was cutting
+     into the watch/passport at top and bottom), revealing more of the
+     original scene. Refined filter for a moodier, more editorial tone. */
+  #page-jetcard .sub-hero{
+    height:780px;
+  }
   #page-jetcard .sub-hero img{
-    object-position:78% 45%;
-    transform:scale(0.88);
-    filter:contrast(1.12) brightness(0.8) saturate(0.95);
+    object-position:center 42%;
+    filter:contrast(1.12) brightness(0.82) saturate(0.95);
+  }
+  @media(max-width:680px){
+    #page-jetcard .sub-hero{height:60vh;}
   }
   /* Charter and Club specifically: full vibrancy, no darkening filter at all,
      matching how the same images appear on the homepage segment cards. */
