@@ -312,7 +312,7 @@
       }
     })();
 
-    // ===== IN MOTION (structural placeholder) =====
+    // ===== IN MOTION =====
     (function(){
       var counterEl = document.getElementById('imCounter');
       var eyebrowEl = document.getElementById('imEyebrow');
@@ -320,17 +320,18 @@
       var textEl = document.getElementById('imText');
       var prevBtn = document.getElementById('imPrev');
       var nextBtn = document.getElementById('imNext');
+      var videoEl = document.getElementById('imVideo');
       if(!counterEl) return;
 
       var moments = [
-        {eyebrow:'Airport Arrival', title:'Arrival', text:'The first moments on the ground \u2014 a private terminal, a car already waiting.'},
-        {eyebrow:'Chauffeur Collection', title:'Collection', text:'The handover from air to road, timed so nothing is left waiting.'},
-        {eyebrow:'Aircraft Boarding', title:'Boarding', text:'The walk to the aircraft \u2014 no queue, no gate, no delay.'},
-        {eyebrow:'Inflight Experience', title:'Onboard', text:'What the cabin actually looks like once the door is closed.'},
-        {eyebrow:'Concierge Arrangement', title:'Arranged In Advance', text:'The details settled before a guest ever has to ask.'},
-        {eyebrow:'Destination Arrival', title:'Touchdown', text:'The moment a journey becomes a place.'},
-        {eyebrow:'Lifestyle Access', title:'Beyond The Flight', text:'What a Jettset journey opens up once the aircraft is behind you.'},
-        {eyebrow:'Events & Hospitality', title:'On The Ground', text:'Where a journey leads \u2014 and what is waiting there.'}
+        {eyebrow:'Airport Arrival', title:'Arrival', text:'The first moments on the ground \u2014 a private terminal, a car already waiting.', video:'videos/im-arrival.mp4'},
+        {eyebrow:'Chauffeur Collection', title:'Collection', text:'The handover from air to road, timed so nothing is left waiting.', video:'videos/im-collection.mp4'},
+        {eyebrow:'Aircraft Boarding', title:'Boarding', text:'The walk to the aircraft \u2014 no queue, no gate, no delay.', video:'videos/im-boarding.mp4'},
+        {eyebrow:'Inflight Experience', title:'Onboard', text:'What the cabin actually looks like once the door is closed.', video:'videos/im-onboard.mp4'},
+        {eyebrow:'Concierge Arrangement', title:'Arranged In Advance', text:'The details settled before a guest ever has to ask.', video:'videos/im-arranged.mp4'},
+        {eyebrow:'Destination Arrival', title:'Touchdown', text:'The moment a journey becomes a place.', video:'videos/im-touchdown.mp4'},
+        {eyebrow:'Lifestyle Access', title:'Beyond The Flight', text:'What a Jettset journey opens up once the aircraft is behind you.', video:'videos/im-beyond.mp4'},
+        {eyebrow:'Events & Hospitality', title:'On The Ground', text:'Where a journey leads \u2014 and what is waiting there.', video:'videos/im-ground.mp4'}
       ];
 
       var index = 0;
@@ -340,6 +341,11 @@
         eyebrowEl.textContent = m.eyebrow;
         titleEl.textContent = m.title;
         textEl.textContent = m.text;
+        if(videoEl){
+          videoEl.src = m.video;
+          videoEl.load();
+          videoEl.play().catch(function(){}); // autoplay can be blocked pre-interaction; harmless if so
+        }
       }
       prevBtn.addEventListener('click', function(){
         index = (index - 1 + moments.length) % moments.length;
