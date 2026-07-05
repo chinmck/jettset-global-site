@@ -763,6 +763,14 @@
   .sub-hero.tone-light video{
     filter:contrast(1.08) brightness(0.85) saturate(1.05);
   }
+  /* TEST - Jet Card hero: shift crop right (away from heading text),
+     zoom out slightly so the card reads at a more natural scale,
+     refine filter for a more editorial (less flat) look. */
+  #page-jetcard .sub-hero img{
+    object-position:78% 45%;
+    transform:scale(0.88);
+    filter:contrast(1.12) brightness(0.8) saturate(0.95);
+  }
   /* Charter and Club specifically: full vibrancy, no darkening filter at all,
      matching how the same images appear on the homepage segment cards. */
   #page-charter .sub-hero img,
