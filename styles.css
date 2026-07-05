@@ -1075,6 +1075,66 @@
     .rp-city{font-size:19px;} /* SVG user-unit size; cards go full-width on mobile so scale factor is gentler, but the original 10.5 still rendered under 7px \u2014 this targets a comfortable ~11px actual */
   }
 
+  /* ===== FLEET PREVIEW (Concierge - Ground Fleet showcase) ===== */
+  /* Mirrors .route-preview-card's visual language exactly, with a real
+     photo in place of the animated route line. Kept as separate classes
+     so this never touches Charter's shared route-preview styling. */
+  .fleet-preview{
+    padding:0 56px 90px;
+  }
+  .fleet-preview-head{
+    text-align:center;
+    max-width:600px;
+    margin:0 auto 50px;
+  }
+  .fleet-preview-head .eyebrow{margin-bottom:18px;}
+  .fleet-preview-head h2{
+    font-size:clamp(26px,3.4vw,42px);
+    line-height:1.2;
+    margin-bottom:16px;
+  }
+  .fleet-preview-head p{
+    font-size:14px;
+    color:var(--grey);
+    line-height:1.8;
+  }
+  .fleet-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--grey-line);
+    max-width:1160px;
+    margin:0 auto;
+  }
+  .fleet-card{
+    background:var(--black);
+    padding:36px 32px 30px;
+  }
+  .fleet-photo{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    display:block;
+    margin-bottom:20px;
+  }
+  .fleet-name{
+    display:block;
+    font-family:'Canela Text','Playfair Display',serif;
+    font-size:18px;
+    color:var(--off-white);
+    margin-bottom:8px;
+  }
+  .fleet-meta{
+    display:block;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--gold-dim);
+  }
+  @media(max-width:880px){
+    .fleet-grid{grid-template-columns:1fr;}
+  }
+
   /* ===== PILLAR SUMMARY (Movement Without Compromise) ===== */
   .pillar-summary{
     padding:0 0 160px;
