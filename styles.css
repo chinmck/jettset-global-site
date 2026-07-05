@@ -805,6 +805,10 @@
     color:var(--grey);
     line-height:1.8;
   }
+  .sub-hero-content .btn-ghost{
+    display:inline-block;
+    margin-top:28px;
+  }
 
   .intro-block{
     padding:120px 56px;
