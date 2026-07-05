@@ -763,11 +763,12 @@
   .sub-hero.tone-light video{
     filter:contrast(1.08) brightness(0.85) saturate(1.05);
   }
-  /* Jet Card hero: refined crop position and filter for a moodier,
-     more editorial tone. Height intentionally left at the standard
-     72vh (no override) to match every other hero page's proportions. */
+  /* Jet Card hero: crop position tuned to the card's actual vertical
+     position in the current source photo (verified via pixel sampling,
+     not guessed). Standard 72vh height - no custom override, matching
+     every other hero page's proportions. */
   #page-jetcard .sub-hero img{
-    object-position:center 42%;
+    object-position:center 38%;
     filter:contrast(1.12) brightness(0.82) saturate(0.95);
   }
   /* Charter and Club specifically: full vibrancy, no darkening filter at all,
