@@ -481,7 +481,7 @@
     animation:fadeUp 1s ease 0.3s forwards;
   }
   @media(max-width:680px){
-    .hero-kicker{top:85px;}
+    .hero-kicker{top:78px;}
   }
   .hero-content h1{
     font-size:clamp(36px,5.6vw,80px);
