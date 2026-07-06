@@ -772,6 +772,31 @@
     object-position:center center;
     filter:contrast(1.12) brightness(0.82) saturate(0.95);
   }
+  /* Mobile: this image's severe aspect mismatch (1.5 photo vs ~0.64 mobile
+     container) combined with the card's diagonal tilt means no crop
+     position avoids clipping a corner into the overlaid text. Stacking
+     the image above the text instead removes the conflict structurally,
+     same approach used for the homepage hero's mobile fix earlier. */
+  @media(max-width:680px){
+    #page-jetcard .sub-hero{
+      height:auto;
+      display:block;
+      overflow:visible;
+    }
+    #page-jetcard .sub-hero img{
+      position:relative;
+      width:100%;
+      height:280px;
+      object-fit:cover;
+      object-position:center center;
+    }
+    #page-jetcard .sub-hero::after{display:none;}
+    #page-jetcard .sub-hero-content{
+      position:static;
+      padding:32px 24px 40px;
+      max-width:none;
+    }
+  }
   /* Charter and Club specifically: full vibrancy, no darkening filter at all,
      matching how the same images appear on the homepage segment cards. */
   #page-charter .sub-hero img,
