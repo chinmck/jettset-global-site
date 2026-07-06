@@ -414,7 +414,7 @@
     }
     .hero-content{
       position:static;
-      padding:40px 24px 56px;
+      padding:40px 24px 40px;
     }
   }
   .hero img{
@@ -532,6 +532,10 @@
     text-align:center;
     max-width:880px;
     margin:0 auto;
+  }
+  @media(max-width:680px){
+    .statement{padding:48px 24px;}
+    .statement .divider{margin-bottom:28px;}
   }
   .statement .divider{margin-bottom:40px;}
   .statement h2{
