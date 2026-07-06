@@ -751,7 +751,6 @@
     display:flex;
     align-items:center;
     overflow:hidden;
-    border-bottom:1px solid var(--grey-line);
   }
   .sub-hero img,
   .sub-hero video{
