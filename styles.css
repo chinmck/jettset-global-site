@@ -846,6 +846,18 @@
     display:inline-block;
     margin-top:28px;
   }
+  /* Editions: availability line sits between heading and paragraph,
+     matching the small-caps status label style already used in the
+     capsule items list below, but in gold to give it hero-level presence. */
+  #page-editions .sub-hero-content h1{margin-bottom:14px;}
+  .editions-availability{
+    display:block;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:20px;
+  }
 
   .intro-block{
     padding:120px 56px;
