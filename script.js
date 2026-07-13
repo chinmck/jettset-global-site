@@ -153,6 +153,118 @@
       });
     })();
 
+    // ===== FLEET CATEGORY MODAL =====
+    (function(){
+      var overlay = document.getElementById('fleetModalOverlay');
+      var cards = document.querySelectorAll('.category-card');
+      if(!overlay || !cards.length) return;
+
+      var modal = overlay.querySelector('.fleet-modal');
+      var titleEl = document.getElementById('fleetModalTitle');
+      var metaEl = document.getElementById('fleetModalMeta');
+      var descEl = document.getElementById('fleetModalDesc');
+      var aircraftEl = document.getElementById('fleetModalAircraft');
+
+      // Aircraft imagery per category. Add new entries here as fresh (unbranded)
+      // quotes come in -- no HTML changes needed elsewhere.
+      var fleetData = {
+        'vlj-light': {
+          aircraft: [
+            {name:'Citation CJ3', image:'images/fleet/cj3_ext.jpg'},
+            {name:'Citation XLS', image:'images/fleet/citation_xls_ext.jpg'},
+            {name:'Pilatus PC-24', image:'images/fleet/pilatus_pc24_ext.jpg'}
+          ]
+        },
+        'midsize': {
+          aircraft: [
+            {name:'Citation Latitude', image:'images/fleet/citation_latitude_ext.jpg'}
+          ]
+        },
+        'heavy': {
+          aircraft: [
+            {name:'Challenger 604', image:'images/fleet/challenger604_ext.jpg'}
+          ]
+        },
+        'ulr': {
+          aircraft: [
+            {name:'Gulfstream G550', image:'images/fleet/g550_ext.jpg'},
+            {name:'Global 7500', image:'images/fleet/global7500_ext.jpg'}
+          ]
+        },
+        'group-charter': {
+          aircraft: [
+            {name:'Boeing Business Jet', image:'images/fleet/bbj_ext.jpg'}
+          ]
+        },
+        'helicopter': {
+          aircraft: []
+        }
+      };
+
+      function openModal(card){
+        var categoryId = card.getAttribute('data-category');
+        var data = fleetData[categoryId];
+        var title = card.querySelector('h4').textContent;
+        var meta = card.querySelector('.category-meta').textContent;
+        var desc = card.querySelector('p').textContent;
+
+        titleEl.textContent = title;
+        metaEl.textContent = meta;
+        descEl.textContent = desc;
+
+        aircraftEl.innerHTML = '';
+        var list = (data && data.aircraft) ? data.aircraft : [];
+        if(list.length){
+          modal.classList.remove('is-empty');
+          list.forEach(function(plane){
+            var card2 = document.createElement('div');
+            card2.className = 'fleet-aircraft-card';
+            var img = document.createElement('img');
+            img.src = plane.image;
+            img.alt = plane.name + ', ' + title + ' category, Jettset Global charter fleet';
+            img.loading = 'lazy';
+            var nameWrap = document.createElement('div');
+            nameWrap.className = 'fleet-aircraft-name';
+            var eyebrow = document.createElement('span');
+            eyebrow.className = 'eyebrow';
+            eyebrow.textContent = 'Aircraft';
+            var h5 = document.createElement('h5');
+            h5.textContent = plane.name;
+            nameWrap.appendChild(eyebrow);
+            nameWrap.appendChild(h5);
+            card2.appendChild(img);
+            card2.appendChild(nameWrap);
+            aircraftEl.appendChild(card2);
+          });
+        } else {
+          modal.classList.add('is-empty');
+        }
+
+        overlay.classList.add('is-active');
+      }
+
+      function closeModal(){
+        overlay.classList.remove('is-active');
+      }
+
+      cards.forEach(function(card){
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.addEventListener('click', function(){ openModal(card); });
+        card.addEventListener('keydown', function(e){
+          if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openModal(card); }
+        });
+      });
+
+      document.getElementById('fleetModalClose').addEventListener('click', closeModal);
+      overlay.addEventListener('click', function(e){
+        if(e.target === overlay) closeModal();
+      });
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape') closeModal();
+      });
+    })();
+
     document.querySelectorAll('.btn-ghost').forEach(function(btn){
       var text = btn.textContent.trim();
       if(['Enquire Now', 'Begin Your Journey', 'Find Your Fit', 'Start A Conversation'].indexOf(text) !== -1){
