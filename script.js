@@ -170,30 +170,30 @@
       var fleetData = {
         'vlj-light': {
           aircraft: [
-            {name:'Citation CJ3', image:'images/fleet/cj3_ext.jpg'},
-            {name:'Citation XLS', image:'images/fleet/citation_xls_ext.jpg'},
-            {name:'Pilatus PC-24', image:'images/fleet/pilatus_pc24_ext.jpg'}
+            {name:'Citation CJ3', exterior:'images/fleet/cj3_ext.jpg', interior:'images/fleet/cj3_int.jpg'},
+            {name:'Citation XLS', exterior:'images/fleet/citation_xls_ext.jpg', interior:'images/fleet/citation_xls_int.jpg'},
+            {name:'Pilatus PC-24', exterior:'images/fleet/pilatus_pc24_ext.jpg', interior:'images/fleet/pilatus_pc24_int.jpg'}
           ]
         },
         'midsize': {
           aircraft: [
-            {name:'Citation Latitude', image:'images/fleet/citation_latitude_ext.jpg'}
+            {name:'Citation Latitude', exterior:'images/fleet/citation_latitude_ext.jpg', interior:'images/fleet/citation_latitude_int.jpg'}
           ]
         },
         'heavy': {
           aircraft: [
-            {name:'Challenger 604', image:'images/fleet/challenger604_ext.jpg'}
+            {name:'Challenger 604', exterior:'images/fleet/challenger604_ext.jpg', interior:'images/fleet/challenger604_int.jpg'}
           ]
         },
         'ulr': {
           aircraft: [
-            {name:'Gulfstream G550', image:'images/fleet/g550_ext.jpg'},
-            {name:'Global 7500', image:'images/fleet/global7500_ext.jpg'}
+            {name:'Gulfstream G550', exterior:'images/fleet/g550_ext.jpg', interior:'images/fleet/g550_int.jpg'},
+            {name:'Global 7500', exterior:'images/fleet/global7500_ext.jpg', interior:'images/fleet/global7500_int.jpg'}
           ]
         },
         'group-charter': {
           aircraft: [
-            {name:'Boeing Business Jet', image:'images/fleet/bbj_ext.jpg'}
+            {name:'Boeing Business Jet', exterior:'images/fleet/bbj_ext.jpg', interior:'images/fleet/bbj_lounge.jpg'}
           ]
         },
         'helicopter': {
@@ -219,10 +219,30 @@
           list.forEach(function(plane){
             var card2 = document.createElement('div');
             card2.className = 'fleet-aircraft-card';
-            var img = document.createElement('img');
-            img.src = plane.image;
-            img.alt = plane.name + ', ' + title + ' category, Jettset Global charter fleet';
-            img.loading = 'lazy';
+
+            var media = document.createElement('div');
+            media.className = 'fleet-aircraft-media';
+
+            function buildPane(src, label, altSuffix){
+              var pane = document.createElement('div');
+              pane.className = 'fleet-aircraft-pane';
+              var img = document.createElement('img');
+              img.src = src;
+              img.alt = plane.name + ' ' + altSuffix + ', ' + title + ' category, Jettset Global charter fleet';
+              img.loading = 'lazy';
+              var cap = document.createElement('span');
+              cap.className = 'fleet-aircraft-pane-label';
+              cap.textContent = label;
+              pane.appendChild(img);
+              pane.appendChild(cap);
+              return pane;
+            }
+
+            media.appendChild(buildPane(plane.exterior, 'Exterior', 'exterior'));
+            if(plane.interior){
+              media.appendChild(buildPane(plane.interior, 'Interior', 'cabin interior'));
+            }
+
             var nameWrap = document.createElement('div');
             nameWrap.className = 'fleet-aircraft-name';
             var eyebrow = document.createElement('span');
@@ -232,7 +252,8 @@
             h5.textContent = plane.name;
             nameWrap.appendChild(eyebrow);
             nameWrap.appendChild(h5);
-            card2.appendChild(img);
+
+            card2.appendChild(media);
             card2.appendChild(nameWrap);
             aircraftEl.appendChild(card2);
           });
