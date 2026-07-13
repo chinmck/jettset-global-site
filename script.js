@@ -172,18 +172,20 @@
           aircraft: [
             {
               name:'Citation CJ3', exterior:'images/fleet/cj3_ext.jpg', interior:'images/fleet/cj3_int.jpg',
-              specs:{lengthM:4.78, widthM:1.47, heightM:1.45, seats:'Up to 7', length:'4.78m (15\'8")', width:'1.47m (4\'10")', height:'1.45m (4\'9")', range:'3,500km / 1,890nm', speed:'770km/h'},
-              features:{catering:'Light bites, chilled beverages', wifi:'Optional, operator-dependent', wc:'Enclosed, belted lavatory', luggage:'~6 items, 20kg max', smoking:'No', flightAttendant:'Optional, on request', ownerApproval:'Yes, typical'}
+              specs:{lengthM:4.78, widthM:1.47, heightM:1.45, seats:'Up to 8', length:'4.78m (15\'8")', width:'1.47m (4\'10")', height:'1.45m (4\'9")', range:'3,500km / 1,890nm', speed:'770km/h'},
+              features:{catering:'Snack catering included', wifi:'Not available', wc:'Yes, fully enclosed', luggage:'6 items, 20kg max', smoking:'No', flightAttendant:'No'}
             },
             {
               name:'Citation XLS', exterior:'images/fleet/citation_xls_ext.jpg', interior:'images/fleet/citation_xls_int.jpg',
-              specs:{lengthM:5.64, widthM:1.68, heightM:1.73, seats:'Up to 9', length:'5.64m (18\'6")', width:'1.68m (5\'6")', height:'1.73m (5\'8")', range:'3,280km / 1,770nm', speed:'798km/h'},
-              features:{catering:'Light bites, chilled beverages', wifi:'Optional, operator-dependent', wc:'Enclosed, private aft lavatory', luggage:'~8 items, 20kg max', smoking:'No', flightAttendant:'Optional, on request', ownerApproval:'Yes, typical'}
+              specs:{lengthM:5.7, widthM:1.68, heightM:1.73, seats:'Up to 8', length:'5.7m (18\'7")', width:'1.68m (5\'5")', height:'1.73m (5\'8")', range:'3,280km / 1,770nm', speed:'816km/h'},
+              features:{catering:'Snack catering included', wifi:'Not available', wc:'Yes, fully enclosed', luggage:'8 items, 20kg max', smoking:'No', flightAttendant:'No'},
+              note:'Manufactured 2004 / Refurbished 2021'
             },
             {
               name:'Pilatus PC-24', exterior:'images/fleet/pilatus_pc24_ext.jpg', interior:'images/fleet/pilatus_pc24_int.jpg',
-              specs:{lengthM:7.0, widthM:1.69, heightM:1.55, seats:'Up to 10', length:'7.00m (23\'0")', width:'1.69m (5\'7")', height:'1.55m (5\'1")', range:'3,700km / 2,000nm', speed:'815km/h'},
-              features:{catering:'Light bites, chilled beverages', wifi:'Optional, operator-dependent', wc:'Enclosed, private lavatory', luggage:'~8 items, 20kg max', smoking:'No', flightAttendant:'Optional, on request', ownerApproval:'Yes, typical'}
+              specs:{lengthM:7.01, widthM:1.69, heightM:1.55, seats:'Up to 8', length:'7.01m (23\'0")', width:'1.69m (5\'6")', height:'1.55m (5\'1")', range:'3,700km / 2,000nm', speed:'815km/h'},
+              features:{catering:'Snack catering included', wifi:'Not available', wc:'Yes, fully enclosed', luggage:'9 items, 20kg max', smoking:'No', flightAttendant:'No'},
+              note:'Manufactured 2021+ / Floating fleet'
             }
           ]
         },
@@ -191,8 +193,15 @@
           aircraft: [
             {
               name:'Citation Latitude', exterior:'images/fleet/citation_latitude_ext.jpg', interior:'images/fleet/citation_latitude_int.jpg',
-              specs:{lengthM:6.43, widthM:1.96, heightM:1.83, seats:'Up to 9', length:'6.43m (21\'1")', width:'1.96m (6\'5")', height:'1.83m (6\'0")', range:'5,280km / 2,850nm', speed:'826km/h'},
-              features:{catering:'Full galley, hot/cold options', wifi:'Yes, standard', wc:'Enclosed, private aft lavatory', luggage:'~12 items, 20kg max', smoking:'No', flightAttendant:'Yes, standard', ownerApproval:'Yes, typical'}
+              specs:{lengthM:6.63, widthM:1.96, heightM:1.83, seats:'Up to 8', length:'6.63m (21\'8")', width:'1.96m (6\'5")', height:'1.83m (6\'0")', range:'5,280km / 2,850nm', speed:'826km/h'},
+              features:{catering:'Snack catering included', wifi:'Not available', wc:'Yes, fully enclosed', luggage:'10 items, 20kg max', smoking:'No', flightAttendant:'No', ownerApproval:'Yes'},
+              note:'Manufactured 2017'
+            },
+            {
+              name:'Praetor 600', exterior:'images/fleet/praetor600_ext.jpg', interior:'images/fleet/praetor600_int.jpg',
+              specs:{lengthM:8.08, widthM:2.08, heightM:1.83, seats:'Up to 9', length:'8.08m (26\'6")', width:'2.08m (6\'10")', height:'1.83m (6\'0")', range:'6,780km / 3,700nm', speed:'863km/h'},
+              features:{catering:'Snack catering included', wifi:'Not available', wc:'Yes, fully enclosed', luggage:'14 items, 20kg max', smoking:'No', flightAttendant:'No', ownerApproval:'Yes'},
+              note:'Manufactured 2019'
             }
           ]
         },
@@ -200,8 +209,9 @@
           aircraft: [
             {
               name:'Challenger 604', exterior:'images/fleet/challenger604_ext.jpg', interior:'images/fleet/challenger604_int.jpg',
-              specs:{lengthM:8.65, widthM:2.49, heightM:1.85, seats:'Up to 12', length:'8.65m (28\'4")', width:'2.49m (8\'2")', height:'1.85m (6\'1")', range:'7,450km / 4,024nm', speed:'904km/h'},
-              features:{catering:'Full galley, hot/cold options', wifi:'Yes, standard', wc:'Enclosed, with vanity', luggage:'~15 items, 20kg max', smoking:'No', flightAttendant:'Yes, standard', ownerApproval:'Yes, typical'}
+              specs:{lengthM:8.6, widthM:2.48, heightM:1.83, seats:'Up to 10', length:'8.6m (28\'2")', width:'2.48m (8\'1")', height:'1.83m (6\'0")', range:'7,450km / 4,024nm', speed:'904km/h'},
+              features:{catering:'Snack catering included', wifi:'Not available', wc:'Yes, fully enclosed', luggage:'14 items, 20kg max', smoking:'No', flightAttendant:'No'},
+              note:'Manufactured 2004+ / Refurbished 2021+ / Floating fleet'
             }
           ]
         },
@@ -209,13 +219,15 @@
           aircraft: [
             {
               name:'Gulfstream G550', exterior:'images/fleet/g550_ext.jpg', interior:'images/fleet/g550_int.jpg',
-              specs:{lengthM:13.39, widthM:2.24, heightM:1.88, seats:'Up to 16', length:'13.39m (43\'11")', width:'2.24m (7\'4")', height:'1.88m (6\'2")', range:'12,500km / 6,750nm', speed:'904km/h'},
-              features:{catering:'VIP catering included', wifi:'Yes, high-speed', wc:'Yes, fully enclosed', luggage:'~18 items, 20kg max', smoking:'No', flightAttendant:'Yes', ownerApproval:'Yes'}
+              specs:{lengthM:15.27, widthM:2.24, heightM:1.88, seats:'Up to 14', length:'15.27m (50\'1")', width:'2.24m (7\'4")', height:'1.88m (6\'2")', range:'12,500km / 6,750nm', speed:'904km/h'},
+              features:{catering:'VIP catering included', wifi:'Not available', wc:'Yes, fully enclosed', luggage:'18 items, 20kg max', smoking:'No', flightAttendant:'Yes'},
+              note:'Manufactured 2013'
             },
             {
               name:'Global 7500', exterior:'images/fleet/global7500_ext.jpg', interior:'images/fleet/global7500_int.jpg',
-              specs:{lengthM:16.6, widthM:2.44, heightM:1.89, seats:'Up to 16', length:'16.60m (54\'5")', width:'2.44m (8\'0")', height:'1.89m (6\'2")', range:'14,260km / 7,700nm', speed:'956km/h'},
-              features:{catering:'VIP catering included', wifi:'Yes, high-speed Ka-band', wc:'Yes, fully enclosed', luggage:'~20 items, 20kg max', smoking:'No', flightAttendant:'Yes', ownerApproval:'Yes'}
+              specs:{lengthM:16.59, widthM:2.41, heightM:1.88, seats:'Up to 12', length:'16.59m (54\'4")', width:'2.41m (7\'11")', height:'1.88m (6\'2")', range:'14,260km / 7,700nm', speed:'956km/h'},
+              features:{catering:'VIP catering included', wifi:'Available (additional cost)', wc:'Yes, fully enclosed', luggage:'22 items, 20kg max', smoking:'No', flightAttendant:'Yes'},
+              note:'Manufactured 2023'
             }
           ]
         },
@@ -223,8 +235,8 @@
           aircraft: [
             {
               name:'Boeing Business Jet', exterior:'images/fleet/bbj_ext.jpg', interior:'images/fleet/bbj_lounge.jpg',
-              specs:{lengthM:24.1, widthM:3.53, heightM:2.16, seats:'Typically 19, up to 50', length:'24.10m (79\'2")', width:'3.53m (11\'7")', height:'2.16m (7\'1")', range:'11,500km / 6,200nm', speed:'870km/h'},
-              features:{catering:'Full galley, restaurant-quality', wifi:'Yes, high-speed', wc:'Multiple, fully enclosed', luggage:'By arrangement, full cargo hold', smoking:'No', flightAttendant:'Yes, full cabin crew', ownerApproval:'Yes'}
+              specs:{lengthM:24.1, widthM:3.53, heightM:2.16, seats:'Up to 20', length:'24.1m (79\'2")', width:'3.53m (11\'7")', height:'2.16m (7\'1")', range:'11,500km / 6,200nm', speed:'870km/h'},
+              features:{catering:'Full VIP catering as standard', wifi:'Yes', wc:'Multiple, fully enclosed', luggage:'By arrangement, full cargo hold', smoking:'No', flightAttendant:'Yes, full cabin crew'}
             }
           ]
         },
@@ -297,6 +309,7 @@
           ['Owner approval', features.ownerApproval]
         ];
         rows.forEach(function(r){
+          if(!r[1]) return;
           var row = document.createElement('div');
           row.className = 'fleet-feature-row';
           row.innerHTML = '<b>' + r[0] + '</b><span>' + r[1] + '</span>';
@@ -356,6 +369,12 @@
             h5.textContent = plane.name;
             nameWrap.appendChild(eyebrow);
             nameWrap.appendChild(h5);
+            if(plane.note){
+              var noteEl = document.createElement('span');
+              noteEl.className = 'fleet-aircraft-note';
+              noteEl.textContent = plane.note;
+              nameWrap.appendChild(noteEl);
+            }
 
             card2.appendChild(media);
             card2.appendChild(nameWrap);

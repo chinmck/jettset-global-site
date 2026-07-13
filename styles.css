@@ -1164,6 +1164,13 @@
     font-weight:400;
     color:var(--off-white);
   }
+  .fleet-aircraft-note{
+    display:block;
+    margin-top:4px;
+    font-size:11px;
+    color:var(--grey);
+    font-style:italic;
+  }
 
   /* ----- Aircraft detail: specs + dimension diagram + features ----- */
   .fleet-aircraft-detail{
