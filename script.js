@@ -599,7 +599,7 @@
       }
 
       // Default selection so the map isn't inert on load
-      selectRoute('r2');
+      selectRoute('r3');
     })();
 
     // ===== SIGNATURE JOURNEY TIMELINE =====
