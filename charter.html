@@ -38,6 +38,22 @@
     </div>
   </div>
 
+  <div class="fleet-modal-overlay" id="fleetModalOverlay">
+    <div class="fleet-modal">
+      <button type="button" class="fleet-modal-close" id="fleetModalClose" aria-label="Close">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L8.94 10l-4.72 4.72a.75.75 0 1 0 1.06 1.06L10 11.06l4.72 4.72a.75.75 0 1 0 1.06-1.06L11.06 10l4.72-4.72a.75.75 0 0 0-1.06-1.06L10 8.94z"/></svg>
+      </button>
+      <div class="fleet-modal-head">
+        <span class="eyebrow">Category</span>
+        <h3 id="fleetModalTitle">&nbsp;</h3>
+        <div class="fleet-modal-meta" id="fleetModalMeta">&nbsp;</div>
+        <p id="fleetModalDesc">&nbsp;</p>
+      </div>
+      <div class="fleet-modal-aircraft" id="fleetModalAircraft"></div>
+      <p class="fleet-modal-empty" id="fleetModalEmpty">Fleet imagery for this category is being finalised — every journey is still sourced operator-direct against the specific aircraft available.</p>
+    </div>
+  </div>
+
 
   <div class="side-overlay" id="sideOverlay"></div>
   <div class="side-panel" id="sidePanel">
@@ -162,7 +178,7 @@
         <div class="moment-row">
           <span class="moment-num">05</span>
           <div class="moment-text">
-            <div class="moment-headline">A deal that couldn't wait for tomorrow's flights.</div>
+            <div class="moment-headline">A negotiation that couldn't wait for tomorrow's flights.</div>
             <div class="moment-resolution">Signed in one city, celebrated in another, the same day.</div>
           </div>
         </div>
@@ -176,29 +192,41 @@
         <p>We don't own aircraft, so we're not trying to fill one. Every journey is matched to a category, not a hangar.</p>
       </div>
       <div class="category-grid">
-        <div class="category-card">
+        <div class="category-card" data-category="vlj-light">
           <span class="eyebrow">Category</span>
-          <h4>Light Jet</h4>
-          <div class="category-meta">~4&ndash;7 Guests &middot; Up To ~3h</div>
-          <p>Regional hops and short city pairs, where speed to the aircraft matters more than cabin size.</p>
+          <h4>VLJ &amp; Light Jets</h4>
+          <div class="category-meta">~4&ndash;6 Guests &middot; Up To ~3h</div>
+          <p>Regional hops and short city pairs, where speed to the aircraft matters more than cabin size. Select models extend to ~3.5h.</p>
         </div>
-        <div class="category-card">
+        <div class="category-card" data-category="midsize">
           <span class="eyebrow">Category</span>
-          <h4>Midsize Jet</h4>
-          <div class="category-meta">~6&ndash;9 Guests &middot; Up To ~5h</div>
-          <p>Full stand-up cabins and more baggage room, for journeys that outgrow a light jet's range.</p>
+          <h4>Midsize Jets</h4>
+          <div class="category-meta">~8&ndash;9 Guests</div>
+          <p>Full stand-up cabins and more baggage room, built for longer regional travel and extended European journeys.</p>
         </div>
-        <div class="category-card">
+        <div class="category-card" data-category="heavy">
           <span class="eyebrow">Category</span>
-          <h4>Super-Midsize Jet</h4>
-          <div class="category-meta">~8&ndash;10 Guests &middot; Up To ~7h</div>
-          <p>Transatlantic-capable on many routes, with a cabin built for working as easily as resting.</p>
+          <h4>Heavy Jets</h4>
+          <div class="category-meta">4&ndash;6h &middot; Short Transatlantic</div>
+          <p>Capable of short transatlantic routes, most efficient with a full cabin — significantly more space, baggage capacity, and onboard amenities.</p>
         </div>
-        <div class="category-card">
+        <div class="category-card" data-category="ulr">
           <span class="eyebrow">Category</span>
-          <h4>Long Range Jet</h4>
-          <div class="category-meta">~10&ndash;14 Guests &middot; 8h+</div>
-          <p>Nonstop intercontinental journeys, with a cabin arranged for genuine rest along the way.</p>
+          <h4>Ultra Long Range</h4>
+          <div class="category-meta">~16&ndash;18 Guests &middot; Intercontinental</div>
+          <p>Built for transatlantic and long-haul routes nonstop, with the range, comfort, and performance genuine intercontinental travel demands.</p>
+        </div>
+        <div class="category-card" data-category="group-charter">
+          <span class="eyebrow">Category</span>
+          <h4>Group Charters</h4>
+          <div class="category-meta">Full Cabin &middot; Group Sizes</div>
+          <p>Whole-aircraft charters for larger parties — teams, delegations, and touring groups moving together on one aircraft.</p>
+        </div>
+        <div class="category-card" data-category="helicopter">
+          <span class="eyebrow">Category</span>
+          <h4>Helicopter</h4>
+          <div class="category-meta">Point-To-Point &middot; Short Hop</div>
+          <p>Direct transfers where a runway isn't the fastest way in — arranged with the same discretion as every other journey.</p>
         </div>
       </div>
       <p class="category-note">Figures are typical, not guaranteed — every seat count, range, and cabin layout is confirmed against the specific aircraft sourced for your journey.</p>
