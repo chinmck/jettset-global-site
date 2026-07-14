@@ -171,18 +171,18 @@
         'vlj-light': {
           aircraft: [
             {
-              name:'Citation CJ3', exterior:'images/fleet/cj3_ext.jpg', interior:'images/fleet/cj3_int.jpg',
+              name:'Citation CJ3', exterior:'images/fleet/cj3_ext.jpg', interior:'images/fleet/cj3_int.jpg', diagram:'images/fleet/diagrams/cj3_diagram.svg',
               specs:{lengthM:4.78, widthM:1.47, heightM:1.45, seats:'Up to 8', length:'4.78m (15\'8")', width:'1.47m (4\'10")', height:'1.45m (4\'9")', range:'3,500km / 1,890nm', speed:'770km/h'},
               features:{catering:'Snack catering included', wifi:'Not available', wc:'Yes, fully enclosed', luggage:'6 items, 20kg max', smoking:'No', flightAttendant:'No'}
             },
             {
-              name:'Citation XLS', exterior:'images/fleet/citation_xls_ext.jpg', interior:'images/fleet/citation_xls_int.jpg',
+              name:'Citation XLS', exterior:'images/fleet/citation_xls_ext.jpg', interior:'images/fleet/citation_xls_int.jpg', diagram:'images/fleet/diagrams/citation_xls_diagram.png',
               specs:{lengthM:5.7, widthM:1.68, heightM:1.73, seats:'Up to 8', length:'5.7m (18\'7")', width:'1.68m (5\'5")', height:'1.73m (5\'8")', range:'3,280km / 1,770nm', speed:'816km/h'},
               features:{catering:'Snack catering included', wifi:'Not available', wc:'Yes, fully enclosed', luggage:'8 items, 20kg max', smoking:'No', flightAttendant:'No'},
               note:'Manufactured 2004 / Refurbished 2021'
             },
             {
-              name:'Pilatus PC-24', exterior:'images/fleet/pilatus_pc24_ext.jpg', interior:'images/fleet/pilatus_pc24_int.jpg',
+              name:'Pilatus PC-24', exterior:'images/fleet/pilatus_pc24_ext.jpg', interior:'images/fleet/pilatus_pc24_int.jpg', diagram:'images/fleet/diagrams/pilatus_pc24_diagram.png',
               specs:{lengthM:7.01, widthM:1.69, heightM:1.55, seats:'Up to 8', length:'7.01m (23\'0")', width:'1.69m (5\'6")', height:'1.55m (5\'1")', range:'3,700km / 2,000nm', speed:'815km/h'},
               features:{catering:'Snack catering included', wifi:'Not available', wc:'Yes, fully enclosed', luggage:'9 items, 20kg max', smoking:'No', flightAttendant:'No'},
               note:'Manufactured 2021+ / Floating fleet'
@@ -192,13 +192,13 @@
         'midsize': {
           aircraft: [
             {
-              name:'Citation Latitude', exterior:'images/fleet/citation_latitude_ext.jpg', interior:'images/fleet/citation_latitude_int.jpg',
+              name:'Citation Latitude', exterior:'images/fleet/citation_latitude_ext.jpg', interior:'images/fleet/citation_latitude_int.jpg', diagram:'images/fleet/diagrams/citation_latitude_diagram.png',
               specs:{lengthM:6.63, widthM:1.96, heightM:1.83, seats:'Up to 8', length:'6.63m (21\'8")', width:'1.96m (6\'5")', height:'1.83m (6\'0")', range:'5,280km / 2,850nm', speed:'826km/h'},
               features:{catering:'Snack catering included', wifi:'Not available', wc:'Yes, fully enclosed', luggage:'10 items, 20kg max', smoking:'No', flightAttendant:'No', ownerApproval:'Yes'},
               note:'Manufactured 2017'
             },
             {
-              name:'Praetor 600', exterior:'images/fleet/praetor600_ext.jpg', interior:'images/fleet/praetor600_int.jpg',
+              name:'Praetor 600', exterior:'images/fleet/praetor600_ext.jpg', interior:'images/fleet/praetor600_int.jpg', diagram:'images/fleet/diagrams/praetor600_diagram.png',
               specs:{lengthM:8.08, widthM:2.08, heightM:1.83, seats:'Up to 9', length:'8.08m (26\'6")', width:'2.08m (6\'10")', height:'1.83m (6\'0")', range:'6,780km / 3,700nm', speed:'863km/h'},
               features:{catering:'Snack catering included', wifi:'Not available', wc:'Yes, fully enclosed', luggage:'14 items, 20kg max', smoking:'No', flightAttendant:'No', ownerApproval:'Yes'},
               note:'Manufactured 2019'
@@ -208,7 +208,7 @@
         'heavy': {
           aircraft: [
             {
-              name:'Challenger 604', exterior:'images/fleet/challenger604_ext.jpg', interior:'images/fleet/challenger604_int.jpg',
+              name:'Challenger 604', exterior:'images/fleet/challenger604_ext.jpg', interior:'images/fleet/challenger604_int.jpg', diagram:'images/fleet/diagrams/challenger604_diagram.png',
               specs:{lengthM:8.6, widthM:2.48, heightM:1.83, seats:'Up to 10', length:'8.6m (28\'2")', width:'2.48m (8\'1")', height:'1.83m (6\'0")', range:'7,450km / 4,024nm', speed:'904km/h'},
               features:{catering:'Snack catering included', wifi:'Not available', wc:'Yes, fully enclosed', luggage:'14 items, 20kg max', smoking:'No', flightAttendant:'No'},
               note:'Manufactured 2004+ / Refurbished 2021+ / Floating fleet'
@@ -218,13 +218,13 @@
         'ulr': {
           aircraft: [
             {
-              name:'Gulfstream G550', exterior:'images/fleet/g550_ext.jpg', interior:'images/fleet/g550_int.jpg',
+              name:'Gulfstream G550', exterior:'images/fleet/g550_ext.jpg', interior:'images/fleet/g550_int.jpg', diagram:'images/fleet/diagrams/g550_diagram.png',
               specs:{lengthM:15.27, widthM:2.24, heightM:1.88, seats:'Up to 14', length:'15.27m (50\'1")', width:'2.24m (7\'4")', height:'1.88m (6\'2")', range:'12,500km / 6,750nm', speed:'904km/h'},
               features:{catering:'VIP catering included', wifi:'Not available', wc:'Yes, fully enclosed', luggage:'18 items, 20kg max', smoking:'No', flightAttendant:'Yes'},
               note:'Manufactured 2013'
             },
             {
-              name:'Global 7500', exterior:'images/fleet/global7500_ext.jpg', interior:'images/fleet/global7500_int.jpg',
+              name:'Global 7500', exterior:'images/fleet/global7500_ext.jpg', interior:'images/fleet/global7500_int.jpg', diagram:'images/fleet/diagrams/global7500_diagram.png',
               specs:{lengthM:16.59, widthM:2.41, heightM:1.88, seats:'Up to 12', length:'16.59m (54\'4")', width:'2.41m (7\'11")', height:'1.88m (6\'2")', range:'14,260km / 7,700nm', speed:'956km/h'},
               features:{catering:'VIP catering included', wifi:'Available (additional cost)', wc:'Yes, fully enclosed', luggage:'22 items, 20kg max', smoking:'No', flightAttendant:'Yes'},
               note:'Manufactured 2023'
@@ -234,7 +234,7 @@
         'group-charter': {
           aircraft: [
             {
-              name:'Boeing Business Jet', exterior:'images/fleet/bbj_ext.jpg', interior:'images/fleet/bbj_lounge.jpg',
+              name:'Boeing Business Jet', exterior:'images/fleet/bbj_ext.jpg', interior:'images/fleet/bbj_lounge.jpg', diagram:'images/fleet/diagrams/bbj_diagram.svg',
               specs:{lengthM:24.1, widthM:3.53, heightM:2.16, seats:'Up to 20', length:'24.1m (79\'2")', width:'3.53m (11\'7")', height:'2.16m (7\'1")', range:'11,500km / 6,200nm', speed:'870km/h'},
               features:{catering:'Full VIP catering as standard', wifi:'Yes', wc:'Multiple, fully enclosed', luggage:'By arrangement, full cargo hold', smoking:'No', flightAttendant:'Yes, full cabin crew'}
             }
@@ -248,9 +248,19 @@
       // Longest cabin among all aircraft, used to scale the dimension diagram consistently
       var MAX_CABIN_LENGTH_M = 16.60; // Global 7500 -- BBJ excluded, it's an outlier airliner cabin
 
-      function buildDimensionDiagram(specs){
+      function buildDimensionDiagram(plane){
+        var specs = plane.specs;
         var wrap = document.createElement('div');
         wrap.className = 'fleet-dim-diagram';
+
+        if(plane.diagram){
+          var layoutImg = document.createElement('img');
+          layoutImg.className = 'fleet-layout-diagram';
+          layoutImg.src = plane.diagram;
+          layoutImg.alt = plane.name + ' cabin layout diagram: seating configuration and cross-section';
+          layoutImg.loading = 'lazy';
+          wrap.appendChild(layoutImg);
+        }
 
         var lengthPct = Math.min(100, (specs.lengthM / MAX_CABIN_LENGTH_M) * 100);
 
@@ -390,7 +400,7 @@
               specsLabel.textContent = 'Specifications';
               specsCol.appendChild(specsLabel);
               if(plane.specs){
-                specsCol.appendChild(buildDimensionDiagram(plane.specs));
+                specsCol.appendChild(buildDimensionDiagram(plane));
                 specsCol.appendChild(buildSpecList(plane.specs));
               }
 

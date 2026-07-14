@@ -1192,6 +1192,12 @@
   }
 
   .fleet-dim-diagram{margin-bottom:16px;}
+  .fleet-layout-diagram{
+    width:100%;
+    height:auto;
+    display:block;
+    margin-bottom:14px;
+  }
   .fleet-dim-length-row{margin-bottom:8px;}
   .fleet-dim-length-track{
     width:100%;
