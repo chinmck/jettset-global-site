@@ -780,30 +780,35 @@
       });
     })();
 
-    // ===== CINEMATIC HERO: parallax + ambient cursor glow =====
+    // ===== CINEMATIC HERO: film reveal + ambient cursor glow =====
     (function(){
       var heroSection = document.querySelector('.hero');
-      var heroImg = heroSection ? heroSection.querySelector('img') : null;
+      var heroFilm = document.getElementById('heroFilm');
       var heroGlow = document.getElementById('heroGlow');
-      if(!heroSection || !heroImg) return;
+      if(!heroSection) return;
 
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(reduceMotion) return; // image and content remain fully visible, statically
 
-      // Subtle parallax: image drifts slower than scroll, clamped so edges never show
-      var ticking = false;
-      function updateParallax(){
-        var rect = heroSection.getBoundingClientRect();
-        if(rect.bottom > 0 && rect.top < window.innerHeight){
-          var offset = Math.max(-90, Math.min(90, -rect.top * 0.08));
-          heroImg.style.transform = 'translateY(' + offset + 'px) scale(1.12)';
+      // Film: play once, hold final frame, cue copy in as the reveal completes
+      if(heroFilm){
+        var cued = false;
+        function reveal(){ if(!cued){ cued = true; heroSection.classList.add('revealed'); } }
+        heroFilm.addEventListener('timeupdate', function(){
+          if(heroFilm.duration && heroFilm.currentTime / heroFilm.duration > 0.80) reveal();
+        });
+        heroFilm.addEventListener('ended', reveal);
+        if(reduceMotion){
+          heroFilm.removeAttribute('autoplay');
+          heroFilm.pause();
+          reveal();
+        } else {
+          var playAttempt = heroFilm.play();
+          if(playAttempt && playAttempt.catch){ playAttempt.catch(reveal); }
         }
-        ticking = false;
+        setTimeout(reveal, 14000); // absolute failsafe
       }
-      window.addEventListener('scroll', function(){
-        if(!ticking){ requestAnimationFrame(updateParallax); ticking = true; }
-      }, {passive:true});
-      updateParallax();
+
+      if(reduceMotion) return;
 
       // Ambient gold glow follows cursor — desktop pointer devices only
       var isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
