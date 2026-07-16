@@ -789,25 +789,38 @@
 
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // Film: play once, hold final frame, cue copy in as the reveal completes
+      // Film loops continuously; copy enters early on staggered one-way
+      // latches (0.5s / 0.9s / 1.5s / 2.1s after playback starts) and then
+      // remains stable — nothing resets when the video loops.
       if(heroFilm){
-        var cued = false;
-        function reveal(){ if(!cued){ cued = true; heroSection.classList.add('revealed'); } }
-        heroFilm.addEventListener('timeupdate', function(){
-          // Copy enters only once the camera has settled: the film ends with a
-          // 1.75s freeze-frame hold; cue 0.3s into that hold (duration - 1.45s)
-          if(heroFilm.duration && heroFilm.currentTime >= heroFilm.duration - 1.45) reveal();
-        });
-        heroFilm.addEventListener('ended', reveal);
+        var CUES = [
+          {cls:'r-kicker', at: 500},
+          {cls:'r-title',  at: 900},
+          {cls:'r-sub',    at:1500},
+          {cls:'r-cta',    at:2100}
+        ];
+        var started = false;
+        function revealAll(){
+          CUES.forEach(function(c){ heroSection.classList.add(c.cls); });
+        }
+        function startCues(){
+          if(started) return;
+          started = true;
+          CUES.forEach(function(c){
+            setTimeout(function(){ heroSection.classList.add(c.cls); }, c.at);
+          });
+        }
+        heroFilm.addEventListener('playing', startCues);
         if(reduceMotion){
           heroFilm.removeAttribute('autoplay');
+          heroFilm.removeAttribute('loop');
           heroFilm.pause();
-          reveal();
+          revealAll();
         } else {
           var playAttempt = heroFilm.play();
-          if(playAttempt && playAttempt.catch){ playAttempt.catch(reveal); }
+          if(playAttempt && playAttempt.catch){ playAttempt.catch(revealAll); }
         }
-        setTimeout(reveal, 14000); // absolute failsafe
+        setTimeout(revealAll, 6000); // failsafe: copy never stays hidden
       }
 
       if(reduceMotion) return;
