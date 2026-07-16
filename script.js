@@ -1031,7 +1031,7 @@
       var card = document.querySelector('.jb-card');
       if(!card) return;
 
-      var state = { from:'', to:'', occasion:'', prefs:[] };
+      var state = { from:'', to:'', depart:'', tripType:'oneway', returnDate:'', adults:1, children:0, occasion:'', prefs:[] };
       var currentStep = 1;
       var totalSteps = 4;
 
@@ -1099,16 +1099,22 @@
         });
         progressFill.style.width = (((n - 1) / (totalSteps - 1)) * 100) + '%';
         backBtn.disabled = (n === 1);
-        nextBtn.textContent = (n === totalSteps) ? 'Begin Your Journey' : 'Continue';
+        nextBtn.textContent = (n === totalSteps) ? 'Continue Your Journey' : 'Continue';
         if(n === totalSteps){ renderSummary(); }
       }
 
       function renderSummary(){
-        var prefsText = state.prefs.length ? state.prefs.join(', ') : 'None selected';
+        var prefsText = state.prefs.length ? state.prefs.join(', ') : 'Not yet decided';
+        var travellers = state.adults + (state.adults === 1 ? ' Adult' : ' Adults') + (state.children ? ', ' + state.children + (state.children === 1 ? ' Child' : ' Children') : '');
+        var dateText = state.depart ? state.depart : 'Flexible';
+        if(state.tripType === 'roundtrip' && state.returnDate){ dateText += ' → ' + state.returnDate; }
+        else if(state.tripType === 'roundtrip'){ dateText += ' (Return)'; }
         var rows = [
           ['Route', (state.from || 'Open') + ' → ' + (state.to || 'Open')],
-          ['Occasion', state.occasion || 'Not specified'],
-          ['Preferences', prefsText]
+          ['Date', dateText],
+          ['Travellers', travellers],
+          ['Shaping This Journey', state.occasion || 'Not specified'],
+          ['Begin Arranging', prefsText]
         ];
         summaryCard.innerHTML = rows.map(function(r){
           return '<div class="jb-summary-row"><span class="jb-summary-label">' + r[0] + '</span><span class="jb-summary-value">' + r[1] + '</span></div>';
@@ -1127,6 +1133,41 @@
       });
       fromInput.addEventListener('input', function(){ state.from = fromInput.value; updateTicketHeader(); });
       toInput.addEventListener('input', function(){ state.to = toInput.value; updateTicketHeader(); });
+
+      // Departure / return date
+      var departInput = document.getElementById('jbDepart');
+      var returnDateInput = document.getElementById('jbReturnDate');
+      if(departInput) departInput.addEventListener('input', function(){ state.depart = departInput.value; });
+      if(returnDateInput) returnDateInput.addEventListener('input', function(){ state.returnDate = returnDateInput.value; });
+
+      // One way / Return toggle
+      var tripToggle = document.getElementById('jbTripToggle');
+      var returnField = document.getElementById('jbReturnField');
+      if(tripToggle){
+        tripToggle.querySelectorAll('button').forEach(function(btn){
+          btn.addEventListener('click', function(){
+            tripToggle.querySelectorAll('button').forEach(function(b){ b.classList.remove('is-active'); });
+            btn.classList.add('is-active');
+            state.tripType = btn.getAttribute('data-trip');
+            if(returnField) returnField.style.display = (state.tripType === 'roundtrip') ? 'flex' : 'none';
+          });
+        });
+      }
+
+      // Passenger steppers (Adults / Children)
+      document.querySelectorAll('.jb-passenger-stepper').forEach(function(stepper){
+        var key = stepper.getAttribute('data-counter');
+        var span = stepper.querySelector('.jb-stepper span');
+        stepper.querySelectorAll('button').forEach(function(btn){
+          btn.addEventListener('click', function(){
+            var action = this.getAttribute('data-action');
+            var min = (key === 'adults') ? 1 : 0;
+            if(action === 'inc') state[key]++;
+            else state[key] = Math.max(min, state[key] - 1);
+            span.textContent = state[key];
+          });
+        });
+      });
 
       // Occasion — single select
       document.querySelectorAll('#jbOccasionGrid .jb-choice').forEach(function(btn){
@@ -1159,12 +1200,19 @@
           showStep(currentStep + 1);
           return;
         }
-        // Final step — hand off to the quote page, pre-filled via sessionStorage
+        // Final step — hand off to the quote page, pre-filled via sessionStorage.
+        // Nothing entered here is lost: every field maps onto its quote.html
+        // counterpart, which remains the actual point of enquiry capture.
         if(state.from) sessionStorage.setItem('prefill_qFrom', state.from);
         if(state.to) sessionStorage.setItem('prefill_qTo', state.to);
+        if(state.depart) sessionStorage.setItem('prefill_qDepart', state.depart);
+        if(state.tripType === 'roundtrip') sessionStorage.setItem('prefill_qTrip', 'roundtrip');
+        if(state.returnDate) sessionStorage.setItem('prefill_qReturn', state.returnDate);
+        sessionStorage.setItem('prefill_qAdults', String(state.adults));
+        if(state.children) sessionStorage.setItem('prefill_qChildren', String(state.children));
         var noteParts = [];
-        if(state.occasion) noteParts.push('Occasion: ' + state.occasion);
-        if(state.prefs.length) noteParts.push('Please arrange: ' + state.prefs.join(', '));
+        if(state.occasion) noteParts.push('Shaping this journey: ' + state.occasion);
+        if(state.prefs.length) noteParts.push('Please begin arranging: ' + state.prefs.join(', '));
         if(noteParts.length) sessionStorage.setItem('prefill_qNotes', noteParts.join('. '));
         window.jtNavigate('quote.html');
       });
@@ -1182,20 +1230,61 @@
           openArticle(articleId);
         }
       }
-      // Quote page: apply any pre-fill values stashed by other pages, then clear them
+      // Quote page: apply any pre-fill values stashed by other pages, then clear them.
+      // Extended to carry the Journey Builder's date/trip/traveller fields across
+      // too, so nothing entered there is lost on handoff. Existing quote-page
+      // controls (trip toggle, passenger steppers) are triggered via their own
+      // click handlers rather than duplicated, so quote.html's logic stays the
+      // single source of truth and is not otherwise modified.
       var qTo = document.getElementById('qTo');
       if(qTo){
         var prefillTo = sessionStorage.getItem('prefill_qTo');
         var prefillFrom = sessionStorage.getItem('prefill_qFrom');
         var prefillNotes = sessionStorage.getItem('prefill_qNotes');
+        var prefillDepart = sessionStorage.getItem('prefill_qDepart');
+        var prefillTrip = sessionStorage.getItem('prefill_qTrip');
+        var prefillReturn = sessionStorage.getItem('prefill_qReturn');
+        var prefillAdults = sessionStorage.getItem('prefill_qAdults');
+        var prefillChildren = sessionStorage.getItem('prefill_qChildren');
+
         if(prefillTo) qTo.value = prefillTo;
         var qFrom = document.getElementById('qFrom');
         if(prefillFrom && qFrom) qFrom.value = prefillFrom;
         var qNotes = document.getElementById('qNotes');
         if(prefillNotes && qNotes) qNotes.value = prefillNotes;
+
+        var qDepart = document.getElementById('qDepart');
+        if(prefillDepart && qDepart) qDepart.value = prefillDepart;
+
+        if(prefillTrip === 'roundtrip'){
+          var roundTripBtn = document.querySelector('#quoteTripToggle button[data-trip="roundtrip"]');
+          if(roundTripBtn) roundTripBtn.click(); // reveals the return field via quote.html's own handler
+          var qReturn = document.getElementById('qReturn');
+          if(prefillReturn && qReturn) qReturn.value = prefillReturn;
+        }
+
+        function clickStepper(key, times){
+          var stepper = document.querySelector('.stepper[data-counter="' + key + '"] button[data-action="inc"]');
+          if(!stepper) return;
+          for(var i=0; i<times && i<8; i++){ stepper.click(); }
+        }
+        if(prefillAdults){
+          var adultsWanted = parseInt(prefillAdults, 10) || 1;
+          if(adultsWanted > 1) clickStepper('adults', adultsWanted - 1); // default state is already 1
+        }
+        if(prefillChildren){
+          var childrenWanted = parseInt(prefillChildren, 10) || 0;
+          if(childrenWanted > 0) clickStepper('children', childrenWanted);
+        }
+
         sessionStorage.removeItem('prefill_qTo');
         sessionStorage.removeItem('prefill_qFrom');
         sessionStorage.removeItem('prefill_qNotes');
+        sessionStorage.removeItem('prefill_qDepart');
+        sessionStorage.removeItem('prefill_qTrip');
+        sessionStorage.removeItem('prefill_qReturn');
+        sessionStorage.removeItem('prefill_qAdults');
+        sessionStorage.removeItem('prefill_qChildren');
       }
     })();
 

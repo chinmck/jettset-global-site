@@ -144,9 +144,9 @@
 
     <section class="journey-builder" id="journeyBuilderSection">
       <div class="jb-builder-head">
-        <span class="eyebrow">Plan Ahead</span>
-        <h2>Build Your Journey</h2>
-        <p>Share the shape of it, and we will already be working on the rest.</p>
+        <span class="eyebrow">Begin Your Journey</span>
+        <h2>Tell us where you need to be.<br>We&rsquo;ll understand everything around it.</h2>
+        <p>Every journey begins with the route. The difference lies in understanding the timing, people, priorities and expectations surrounding it.</p>
       </div>
 
       <div class="jb-card">
@@ -162,20 +162,21 @@
           <div class="jb-progress-track"><div class="jb-progress-fill" id="jbProgressFill"></div></div>
           <div class="jb-progress-labels">
             <span class="jb-progress-step is-active" data-step="1">Route</span>
-            <span class="jb-progress-step" data-step="2">Occasion</span>
-            <span class="jb-progress-step" data-step="3">Preferences</span>
+            <span class="jb-progress-step" data-step="2">Date &amp; Travellers</span>
+            <span class="jb-progress-step" data-step="3">Context</span>
             <span class="jb-progress-step" data-step="4">Summary</span>
           </div>
         </div>
 
         <div class="jb-panels">
           <div class="jb-panel is-active" data-panel="1">
-            <div class="quote-row">
-              <div class="quote-field">
+            <div class="jb-route-row">
+              <div class="jb-route-field">
                 <label for="jbFrom">From</label>
                 <input type="text" id="jbFrom" placeholder="Departure city">
               </div>
-              <div class="quote-field">
+              <span class="jb-route-glyph">&#8594;</span>
+              <div class="jb-route-field">
                 <label for="jbTo">To</label>
                 <input type="text" id="jbTo" placeholder="Arrival city">
               </div>
@@ -195,22 +196,61 @@
           </div>
 
           <div class="jb-panel" data-panel="2">
-            <div class="jb-panel-label">What is this journey for? <span style="text-transform:none; letter-spacing:0;">(choose one)</span></div>
-            <div class="jb-choice-grid" id="jbOccasionGrid">
-              <button type="button" class="jb-choice" data-occasion="Business">Business</button>
-              <button type="button" class="jb-choice" data-occasion="Leisure &amp; Family">Leisure &amp; Family</button>
-              <button type="button" class="jb-choice" data-occasion="Celebration">Celebration</button>
-              <button type="button" class="jb-choice" data-occasion="Discreet &amp; Private">Discreet &amp; Private</button>
+            <div class="jb-panel-label">When, and for how many? <span style="text-transform:none; letter-spacing:0;">(optional)</span></div>
+            <div class="jb-inline-row">
+              <div class="jb-date-field">
+                <label for="jbDepart">Departure Date</label>
+                <input type="date" id="jbDepart">
+              </div>
+              <div class="jb-trip-toggle" id="jbTripToggle">
+                <button type="button" class="is-active" data-trip="oneway">One Way</button>
+                <button type="button" data-trip="roundtrip">Return</button>
+              </div>
+              <div class="jb-date-field" id="jbReturnField" style="display:none;">
+                <label for="jbReturnDate">Return Date</label>
+                <input type="date" id="jbReturnDate">
+              </div>
+            </div>
+            <div class="jb-passenger-row">
+              <div class="jb-passenger-stepper" data-counter="adults">
+                <span class="jb-passenger-label">Adults</span>
+                <div class="jb-stepper">
+                  <button type="button" data-action="dec">&minus;</button>
+                  <span>1</span>
+                  <button type="button" data-action="inc">&plus;</button>
+                </div>
+              </div>
+              <div class="jb-passenger-stepper" data-counter="children">
+                <span class="jb-passenger-label">Children</span>
+                <div class="jb-stepper">
+                  <button type="button" data-action="dec">&minus;</button>
+                  <span>0</span>
+                  <button type="button" data-action="inc">&plus;</button>
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="jb-panel" data-panel="3">
-            <div class="jb-panel-label">Anything we should begin arranging? <span style="text-transform:none; letter-spacing:0;">(optional, select any)</span></div>
+            <div class="jb-panel-label">What is shaping this journey? <span style="text-transform:none; letter-spacing:0;">(choose one)</span></div>
+            <div class="jb-choice-grid" id="jbOccasionGrid">
+              <button type="button" class="jb-choice" data-occasion="Business">Business</button>
+              <button type="button" class="jb-choice" data-occasion="Family &amp; Leisure">Family &amp; Leisure</button>
+              <button type="button" class="jb-choice" data-occasion="Sport &amp; Performance">Sport &amp; Performance</button>
+              <button type="button" class="jb-choice" data-occasion="Touring &amp; Production">Touring &amp; Production</button>
+              <button type="button" class="jb-choice" data-occasion="Celebration">Celebration</button>
+              <button type="button" class="jb-choice" data-occasion="Private &amp; Sensitive">Private &amp; Sensitive</button>
+              <button type="button" class="jb-choice" data-occasion="Other">Other</button>
+            </div>
+            <div class="jb-panel-label jb-panel-label-second">What should we begin arranging? <span style="text-transform:none; letter-spacing:0;">(optional, select any)</span></div>
             <div class="jb-choice-grid" id="jbPrefGrid">
-              <button type="button" class="jb-choice" data-pref="Catering Preferences">Catering Preferences</button>
-              <button type="button" class="jb-choice" data-pref="Occasion Styling">Occasion Styling</button>
-              <button type="button" class="jb-choice" data-pref="Ground Transfer">Ground Transfer</button>
-              <button type="button" class="jb-choice" data-pref="Accommodation Support">Accommodation Support</button>
+              <button type="button" class="jb-choice" data-pref="Ground Transport">Ground Transport</button>
+              <button type="button" class="jb-choice" data-pref="Accommodation">Accommodation</button>
+              <button type="button" class="jb-choice" data-pref="Security">Security</button>
+              <button type="button" class="jb-choice" data-pref="Catering">Catering</button>
+              <button type="button" class="jb-choice" data-pref="Destination Access">Destination Access</button>
+              <button type="button" class="jb-choice" data-pref="Luggage or Equipment">Luggage or Equipment</button>
+              <button type="button" class="jb-choice" data-pref="Not Yet Decided">Not Yet Decided</button>
             </div>
           </div>
 
@@ -219,6 +259,8 @@
             <div class="jb-summary" id="jbSummaryCard"></div>
           </div>
         </div>
+
+        <div class="jb-reassurance">Every enquiry is reviewed personally. Your details remain private and are never shared beyond the requirements of your journey.</div>
 
         <div class="jb-nav">
           <button type="button" class="jb-back" id="jbBack" disabled>Back</button>

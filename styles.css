@@ -1524,39 +1524,47 @@
 
   /* ===== SECTION: BUILD YOUR JOURNEY (configurator) ===== */
   .journey-builder{
-    padding:0 56px 110px;
+    padding:130px 56px 150px;
   }
   .jb-builder-head{
     text-align:center;
-    max-width:640px;
-    margin:0 auto 30px;
+    max-width:620px;
+    margin:0 auto 64px;
   }
-  .jb-builder-head .eyebrow{margin-bottom:10px;}
+  .jb-builder-head .eyebrow{margin-bottom:20px;}
   .jb-builder-head h2{
-    font-size:clamp(24px,3vw,36px);
-    line-height:1.2;
-    margin-bottom:8px;
+    font-family:'Canela Text','Playfair Display',serif;
+    font-size:clamp(28px,3.4vw,42px);
+    line-height:1.25;
+    color:var(--off-white);
+    margin-bottom:22px;
   }
   .jb-builder-head p{
-    font-size:13.5px;
+    font-size:14.5px;
     color:var(--grey);
-    line-height:1.7;
+    line-height:1.8;
+    max-width:480px;
+    margin:0 auto;
   }
   .jb-card{
     position:relative;
     max-width:660px;
     margin:0 auto;
-    border:1px solid var(--grey-line);
-    padding:32px 36px 26px;
-    background:var(--black-elevated);
+    border:1px solid rgba(216,219,222,0.14);
+    padding:52px 48px 34px;
+    background:transparent;
     overflow:hidden;
   }
   .jb-card::before{
     content:'';
     position:absolute;
     top:0; left:0; right:0;
-    height:2px;
-    background:linear-gradient(90deg, transparent, var(--platinum) 50%, transparent);
+    height:1px;
+    background:linear-gradient(90deg, transparent, rgba(201,162,75,0.5) 50%, transparent);
+  }
+  @media(max-width:680px){
+    .journey-builder{padding:80px 24px 100px;}
+    .jb-builder-head{margin-bottom:44px;}
   }
 
   /* Live route preview — quiet sans-serif pill, not a ticket motif */
@@ -1651,6 +1659,120 @@
     color:var(--grey);
     margin-bottom:12px;
   }
+  .jb-panel-label-second{margin-top:34px;}
+
+  /* Route — the dominant visual element of the section */
+  .jb-route-row{
+    display:flex;
+    align-items:flex-end;
+    gap:22px;
+    margin-bottom:6px;
+  }
+  .jb-route-field{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .jb-route-field label{
+    font-size:10px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--grey);
+  }
+  .jb-route-field input{
+    background:none;
+    border:none;
+    border-bottom:1px solid var(--grey-line);
+    color:var(--off-white);
+    font-family:'Canela Text','Playfair Display',serif;
+    font-size:clamp(20px,2.4vw,27px);
+    padding:2px 0 10px;
+    transition:border-color 0.3s;
+  }
+  .jb-route-field input::placeholder{color:rgba(138,135,130,0.55); font-family:'Inter',sans-serif; font-size:15px;}
+  .jb-route-field input:focus{outline:none; border-bottom-color:var(--gold);}
+  .jb-route-glyph{
+    color:var(--gold-dim);
+    font-size:20px;
+    padding-bottom:12px;
+  }
+  @media(max-width:560px){
+    .jb-route-row{flex-direction:column; align-items:stretch; gap:20px;}
+    .jb-route-glyph{display:none;}
+  }
+
+  /* Date, trip type, travellers — quiet secondary controls beneath the route */
+  .jb-inline-row{
+    display:flex;
+    align-items:flex-end;
+    gap:26px;
+    flex-wrap:wrap;
+    margin-bottom:22px;
+  }
+  .jb-date-field{display:flex; flex-direction:column; gap:8px;}
+  .jb-date-field label{
+    font-size:9.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--grey);
+  }
+  .jb-date-field input{
+    background:none;
+    border:none;
+    border-bottom:1px solid var(--grey-line);
+    color:var(--off-white);
+    font-family:'Inter',sans-serif;
+    font-size:13.5px;
+    padding:2px 0 8px;
+    color-scheme:dark;
+  }
+  .jb-date-field input:focus{outline:none; border-bottom-color:var(--gold);}
+  .jb-trip-toggle{display:flex; gap:0; border:1px solid var(--grey-line);}
+  .jb-trip-toggle button{
+    background:none;
+    border:none;
+    color:var(--grey);
+    font-family:'Inter',sans-serif;
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:10px 16px;
+    cursor:pointer;
+    transition:color 0.25s, background 0.25s;
+  }
+  .jb-trip-toggle button + button{border-left:1px solid var(--grey-line);}
+  .jb-trip-toggle button.is-active{color:var(--gold); background:rgba(201,162,75,0.06);}
+
+  .jb-passenger-row{display:flex; gap:26px; flex-wrap:wrap;}
+  .jb-passenger-stepper{display:flex; flex-direction:column; gap:8px;}
+  .jb-passenger-label{
+    font-size:9.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--grey);
+  }
+  .jb-stepper{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    border:1px solid var(--grey-line);
+    padding:7px 14px;
+    min-width:96px;
+  }
+  .jb-stepper button{
+    background:none; border:none; color:var(--platinum);
+    font-size:14px; cursor:pointer; font-family:inherit;
+    transition:color 0.25s;
+  }
+  .jb-stepper button:hover{color:var(--gold);}
+  .jb-stepper span{font-family:'Inter',sans-serif; font-size:13px; color:var(--off-white);}
+
+  @media(max-width:560px){
+    .jb-inline-row{gap:18px;}
+  }
+
   .jb-quick-routes{
     display:flex;
     flex-wrap:wrap;
@@ -1741,6 +1863,14 @@
     text-align:right;
   }
 
+  .jb-reassurance{
+    font-size:11.5px;
+    color:var(--grey);
+    line-height:1.7;
+    text-align:center;
+    max-width:420px;
+    margin:38px auto 0;
+  }
   .jb-nav{
     display:flex;
     justify-content:space-between;
@@ -1763,7 +1893,7 @@
   }
   .jb-back::before{content:'\2190'; font-size:12px;}
   .jb-back:hover{color:var(--gold);}
-  .jb-nav .btn-ghost{border-color:rgba(201,162,75,0.5); color:var(--gold);}
+  .jb-nav .btn-ghost{border-color:rgba(201,162,75,0.5); color:var(--gold); background:none;}
   .jb-back[disabled]{visibility:hidden;}
 
   @media(prefers-reduced-motion: reduce){
@@ -1771,7 +1901,7 @@
     .jb-choice:hover{transform:none;}
   }
   @media(max-width:680px){
-    .jb-card{padding:26px 20px 22px;}
+    .jb-card{padding:32px 22px 26px;}
     .jb-progress-step{font-size:8.5px;}
     .jb-ticket-header{font-size:11px;}
     .jb-choice{padding:14px 12px; font-size:12.5px;}
