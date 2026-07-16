@@ -459,7 +459,8 @@
   /* one-way latches — set by JS at 0.5s / 0.9s / 1.5s / 2.1s after playback
      starts; copy remains stable while the film loops behind it */
   .hero.r-kicker .hero-kicker .eyebrow{opacity:1;transform:none;}
-  .hero.r-title .hero-content h1{opacity:1;transform:none;}
+  .hero.r-title .hero-content h1{opacity:1;transform:none;
+    transition-duration:0.6s;}  /* begins 0.7s, fully visible 1.3s */
   .hero.r-sub .hero-content p{opacity:1;transform:none;}
   .hero.r-cta .hero-content .hero-scroll{opacity:1;transform:none;}
   @media(max-width:680px){

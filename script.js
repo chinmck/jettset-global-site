@@ -794,10 +794,10 @@
       // remains stable — nothing resets when the video loops.
       if(heroFilm){
         var CUES = [
-          {cls:'r-kicker', at: 500},
-          {cls:'r-title',  at: 900},
-          {cls:'r-sub',    at:1500},
-          {cls:'r-cta',    at:2100}
+          {cls:'r-kicker', at: 400},
+          {cls:'r-title',  at: 700},
+          {cls:'r-sub',    at:1600},
+          {cls:'r-cta',    at:2000}
         ];
         var started = false;
         function revealAll(){
