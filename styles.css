@@ -451,6 +451,7 @@
   .hero-content h1,
   .hero-content p,
   .hero-content .hero-scroll{
+    animation:none !important;   /* film cue owns the entrance, not fixed timers */
     opacity:0;
     transform:translateY(16px);
     filter:blur(5px);
@@ -464,7 +465,7 @@
   .hero.revealed .hero-content .hero-scroll{opacity:1;transform:none;filter:none;transition-delay:.7s;}
   @media(max-width:680px){
     .hero-kicker .eyebrow,.hero-content h1,.hero-content p,.hero-content .hero-scroll{
-      opacity:1;transform:none;filter:none;
+      opacity:1 !important;transform:none !important;filter:none !important;
     }
   }
   @media(max-width:680px){

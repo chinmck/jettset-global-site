@@ -794,7 +794,9 @@
         var cued = false;
         function reveal(){ if(!cued){ cued = true; heroSection.classList.add('revealed'); } }
         heroFilm.addEventListener('timeupdate', function(){
-          if(heroFilm.duration && heroFilm.currentTime / heroFilm.duration > 0.80) reveal();
+          // Copy enters only once the camera has settled: the film ends with a
+          // 1.75s freeze-frame hold; cue 0.3s into that hold (duration - 1.45s)
+          if(heroFilm.duration && heroFilm.currentTime >= heroFilm.duration - 1.45) reveal();
         });
         heroFilm.addEventListener('ended', reveal);
         if(reduceMotion){
