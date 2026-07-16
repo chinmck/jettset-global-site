@@ -625,38 +625,64 @@
     .house-intro-body .house-intro-emphasis{font-size:16px;}
   }
 
-  /* ===== SECTION: CULTURALLY FLUENT LUXURY ===== */
+  /* ===== SECTION: CULTURALLY FLUENT LUXURY — asymmetric editorial layout ===== */
+  /* Deliberately NOT centered like House: House is the monumental statement,
+     this is the second beat, so it needs a different rhythm even with
+     near-identical prose density. */
   .fluency-intro{
-    padding:170px 56px 190px;
+    padding:150px 56px 0;
     background:var(--near-black, #0d0d0c);
     border-top:1px solid var(--grey-line);
-    border-bottom:1px solid var(--grey-line);
   }
-  .fluency-intro-inner{max-width:720px; margin:0 auto; text-align:center;}
-  .fluency-intro-inner > .eyebrow{display:block; margin-bottom:26px;}
-  .fluency-intro-inner h2{
-    font-size:clamp(30px,4vw,50px);
-    line-height:1.2;
+  .fluency-intro-grid{
+    max-width:1080px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:70px;
+  }
+  .fluency-intro-heading{padding-top:6px;}
+  .fluency-intro-heading > .eyebrow{display:block; margin-bottom:24px;}
+  .fluency-intro-heading h2{
+    font-size:clamp(28px,3.4vw,42px);
+    line-height:1.28;
     color:var(--off-white);
-    margin-bottom:50px;
   }
+  .fluency-intro-body{padding-top:2px;}
   .fluency-intro-body p{
-    font-size:15.5px;
+    font-size:15px;
     line-height:1.85;
     color:var(--grey);
-    max-width:600px;
-    margin:0 auto 22px;
+    max-width:520px;
+    margin:0 0 22px;
   }
+  .fluency-intro-body p:last-child{margin-bottom:0;}
+
+  /* Closing line — full-width standalone pull-quote, not another centered
+     paragraph stack; this is the section's one dominant visual moment. */
   .fluency-intro-closing{
     font-family:'Canela Text','Playfair Display',serif;
-    font-size:clamp(19px,2vw,23px);
+    font-size:clamp(32px,4.6vw,56px);
+    line-height:1.22;
     color:var(--gold);
-    margin-top:44px;
+    text-align:center;
+    max-width:900px;
+    margin:100px auto 0;
+    padding:80px 56px 150px;
+    border-top:1px solid rgba(201,162,75,0.18);
+  }
+  @media(max-width:900px){
+    .fluency-intro-grid{grid-template-columns:1fr; gap:34px;}
+    .fluency-intro-heading{padding-top:0;}
   }
   @media(max-width:680px){
-    .fluency-intro{padding:90px 24px 100px;}
-    .fluency-intro-inner h2{margin-bottom:34px;}
+    .fluency-intro{padding:90px 24px 0;}
     .fluency-intro-body p{font-size:14px;}
+    .fluency-intro-closing{
+      font-size:clamp(24px,7vw,32px);
+      margin-top:60px;
+      padding:56px 24px 90px;
+    }
   }
 
   /* ===== SECTION: INSIDE THE HOUSE (replaces .seven) ===== */
@@ -1524,26 +1550,32 @@
 
   /* ===== SECTION: BUILD YOUR JOURNEY (configurator) ===== */
   .journey-builder{
-    padding:130px 56px 150px;
+    padding:90px 56px 150px;
   }
+  /* Deliberately quiet — this is the third consecutive section head on the
+     page (after House and Fluency), so it steps back rather than repeating
+     another eyebrow+headline monument. Small, tight, functions as a caption
+     introducing the card rather than a third statement to read. */
   .jb-builder-head{
     text-align:center;
-    max-width:620px;
-    margin:0 auto 64px;
+    max-width:480px;
+    margin:0 auto 44px;
   }
-  .jb-builder-head .eyebrow{margin-bottom:20px;}
+  .jb-builder-head .eyebrow{display:none;}
   .jb-builder-head h2{
-    font-family:'Canela Text','Playfair Display',serif;
-    font-size:clamp(28px,3.4vw,42px);
-    line-height:1.25;
-    color:var(--off-white);
-    margin-bottom:22px;
+    font-family:'Inter',sans-serif;
+    font-weight:500;
+    font-size:15px;
+    letter-spacing:0.01em;
+    line-height:1.5;
+    color:var(--platinum);
+    margin-bottom:8px;
   }
   .jb-builder-head p{
-    font-size:14.5px;
+    font-size:12.5px;
     color:var(--grey);
-    line-height:1.8;
-    max-width:480px;
+    line-height:1.7;
+    max-width:420px;
     margin:0 auto;
   }
   .jb-card{
