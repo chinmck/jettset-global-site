@@ -965,30 +965,50 @@
       });
     })();
 
-    // ===== CINEMATIC HERO: parallax + ambient cursor glow =====
+    // ===== CINEMATIC HERO: film reveal + ambient cursor glow =====
     (function(){
       var heroSection = document.querySelector('.hero');
-      var heroImg = heroSection ? heroSection.querySelector('img') : null;
+      var heroFilm = document.getElementById('heroFilm');
       var heroGlow = document.getElementById('heroGlow');
-      if(!heroSection || !heroImg) return;
+      if(!heroSection) return;
 
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(reduceMotion) return; // image and content remain fully visible, statically
 
-      // Subtle parallax: image drifts slower than scroll, clamped so edges never show
-      var ticking = false;
-      function updateParallax(){
-        var rect = heroSection.getBoundingClientRect();
-        if(rect.bottom > 0 && rect.top < window.innerHeight){
-          var offset = Math.max(-90, Math.min(90, -rect.top * 0.08));
-          heroImg.style.transform = 'translateY(' + offset + 'px) scale(1.12)';
+      // Film loops continuously; copy enters early on staggered one-way
+      // latches (0.5s / 0.9s / 1.5s / 2.1s after playback starts) and then
+      // remains stable — nothing resets when the video loops.
+      if(heroFilm){
+        var CUES = [
+          {cls:'r-kicker', at: 400},
+          {cls:'r-title',  at: 700},
+          {cls:'r-sub',    at:1600},
+          {cls:'r-cta',    at:2000}
+        ];
+        var started = false;
+        function revealAll(){
+          CUES.forEach(function(c){ heroSection.classList.add(c.cls); });
         }
-        ticking = false;
+        function startCues(){
+          if(started) return;
+          started = true;
+          CUES.forEach(function(c){
+            setTimeout(function(){ heroSection.classList.add(c.cls); }, c.at);
+          });
+        }
+        heroFilm.addEventListener('playing', startCues);
+        if(reduceMotion){
+          heroFilm.removeAttribute('autoplay');
+          heroFilm.removeAttribute('loop');
+          heroFilm.pause();
+          revealAll();
+        } else {
+          var playAttempt = heroFilm.play();
+          if(playAttempt && playAttempt.catch){ playAttempt.catch(revealAll); }
+        }
+        setTimeout(revealAll, 6000); // failsafe: copy never stays hidden
       }
-      window.addEventListener('scroll', function(){
-        if(!ticking){ requestAnimationFrame(updateParallax); ticking = true; }
-      }, {passive:true});
-      updateParallax();
+
+      if(reduceMotion) return;
 
       // Ambient gold glow follows cursor — desktop pointer devices only
       var isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;

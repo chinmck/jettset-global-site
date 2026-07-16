@@ -93,9 +93,14 @@
 
   <div class="page active" id="page-home">
 
-    <section class="hero">
-      <img class="hero-img-blur" src="images/hero-home.jpg" alt="" aria-hidden="true">
-      <img class="hero-img-main" src="images/hero-home.jpg" alt="Private jet, nose-on studio view, representing Jettset Global private aviation and concierge services">
+    <section class="hero" id="heroSection">
+      <video class="hero-video" id="heroFilm" muted playsinline autoplay loop preload="auto"
+             poster="images/hero-film-poster.jpg"
+             aria-label="Private jet, cinematic studio reveal, representing Jettset Global private aviation and concierge services">
+        <source src="images/hero-film.webm" type="video/webm">
+        <source src="images/hero-film.mp4" type="video/mp4">
+      </video>
+      <img class="hero-img-main" src="images/hero-film-poster.jpg" alt="" aria-hidden="true" id="heroPosterFallback" style="display:none;">
       <div class="hero-glow" id="heroGlow"></div>
       <div class="hero-kicker"><span class="eyebrow">Private Aviation &amp; Concierge</span></div>
       <div class="hero-content">
