@@ -391,66 +391,43 @@
   }
 
   /* ===== STICKY JOURNEY BAR ===== */
-  .journey-bar{
+  /* Chin: bring back a persistent way to convert while scrolling, but
+     tasteful and editorial -- not a utility bar. Homepage only (index.html
+     no longer includes this markup on any other page); interior pages
+     already have their own in-content CTA sections. A quiet corner mark,
+     not a full-width bar: no input field, no button box, appears once the
+     hero has passed. */
+  .journey-mark{
     position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
+    bottom:32px;
+    right:32px;
     z-index:90;
-    background:rgba(10,9,8,0.97);
-    backdrop-filter:blur(10px);
-    border-top:1px solid var(--grey-line);
-    transform:translateY(100%);
-    transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);
-    padding:16px 28px;
-  }
-  .journey-bar.is-visible{transform:translateY(0);}
-  .journey-bar-inner{
-    max-width:680px;
-    margin:0 auto;
-    display:flex;
+    display:inline-flex;
     align-items:center;
-    gap:14px;
+    background:rgba(10,9,8,0.75);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(201,162,75,0.4);
+    padding:14px 22px;
+    opacity:0;
+    transform:translateY(14px);
+    pointer-events:none;
+    transition:opacity 0.5s ease, transform 0.5s ease, border-color 0.3s;
   }
-  .journey-bar-inner .jb-label{
-    font-size:11px;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--grey);
-    white-space:nowrap;
-    flex-shrink:0;
-  }
-  .journey-bar-inner input{
-    flex:1;
-    background:transparent;
-    border:none;
-    border-bottom:1px solid var(--grey-line);
-    color:var(--off-white);
-    font-family:inherit;
-    font-size:14px;
-    padding:6px 4px;
-    min-width:0;
-  }
-  .journey-bar-inner input::placeholder{color:var(--grey);}
-  .journey-bar-inner input:focus{outline:none; border-bottom-color:var(--gold);}
-  .journey-bar-inner .jb-btn{
-    flex-shrink:0;
+  .journey-mark.is-visible{opacity:1; transform:none; pointer-events:auto;}
+  .journey-mark:hover{border-color:var(--gold);}
+  .journey-mark-label{
+    font-family:'General Sans','Inter',sans-serif;
     font-size:11px;
     letter-spacing:0.14em;
     text-transform:uppercase;
-    color:var(--gold);
-    border:1px solid var(--gold);
-    background:transparent;
-    padding:10px 20px;
-    cursor:pointer;
-    transition:background 0.25s, color 0.25s;
-    white-space:nowrap;
+    color:var(--off-white);
+    transition:color 0.25s;
   }
-  .journey-bar-inner .jb-btn:hover{background:var(--gold); color:var(--black);}
+  .journey-mark:hover .journey-mark-label{color:var(--gold);}
 
   @media(max-width:600px){
-    .journey-bar-inner .jb-label{display:none;}
-    .journey-bar{padding:14px 18px;}
+    .journey-mark{bottom:20px; right:20px; padding:12px 18px;}
+    .journey-mark-label{font-size:10px;}
   }
 
   /* ===== SIGNATURE DIVIDER (nose-cone motif) ===== */
