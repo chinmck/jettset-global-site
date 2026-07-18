@@ -98,36 +98,45 @@
       });
     }
 
-    // Full-screen editorial index (Design Law Rule 1) — locks background
-    // scroll while open and closes on Escape, in addition to the existing
-    // close button / overlay-click handlers.
+    // Full-screen editorial index (Design Law Rule 1) — a single mark does
+    // every job: opens the index, and its own +/x rotation is the only
+    // open/closed signal. No separate close button, no burger label.
+    var navToggle = document.getElementById('navBurgerOpen');
     function openSidePanel(){
       document.getElementById('sidePanel').classList.add('is-open');
       document.getElementById('sideOverlay').classList.add('is-open');
+      document.getElementById('mainNav').classList.add('menu-open');
+      navToggle.setAttribute('aria-expanded', 'true');
+      navToggle.setAttribute('aria-label', 'Close menu');
       document.body.style.overflow = 'hidden';
     }
     function closeSidePanel(){
       document.getElementById('sidePanel').classList.remove('is-open');
       document.getElementById('sideOverlay').classList.remove('is-open');
+      document.getElementById('mainNav').classList.remove('menu-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open menu');
       document.body.style.overflow = '';
     }
+    function isSidePanelOpen(){
+      return document.getElementById('sidePanel').classList.contains('is-open');
+    }
 
-    document.getElementById('navBurgerOpen').addEventListener('click', function(e){
+    navToggle.addEventListener('click', function(e){
       e.preventDefault();
-      openSidePanel();
+      if(isSidePanelOpen()){ closeSidePanel(); } else { openSidePanel(); }
     });
-    document.getElementById('navBurgerClose').addEventListener('click', closeSidePanel);
     document.getElementById('sideOverlay').addEventListener('click', closeSidePanel);
-    // The index is now full-screen, so there is no exposed backdrop area left
-    // for the old "click outside to close" pattern -- instead, clicking
-    // anywhere in the panel's negative space (not on a link or button) closes it.
+    // The index is full-screen, so there is no exposed backdrop area left for
+    // the old "click outside to close" pattern -- instead, clicking anywhere
+    // in the panel's negative space (not on a link or button) closes it.
     document.getElementById('sidePanel').addEventListener('click', function(e){
       if(!e.target.closest('a, button')){
         closeSidePanel();
       }
     });
     document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape' && document.getElementById('sidePanel').classList.contains('is-open')){
+      if(e.key === 'Escape' && isSidePanelOpen()){
         closeSidePanel();
       }
     });
