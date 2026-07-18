@@ -20,7 +20,7 @@
   body{
     background:var(--black);
     color:var(--off-white);
-    font-family:'Inter','Helvetica Neue',Arial,sans-serif;
+    font-family:'General Sans','Inter','Helvetica Neue',Arial,sans-serif;
     overflow-x:hidden;
   }
 
@@ -31,7 +31,7 @@
   }
 
   .eyebrow{
-    font-family:'Inter',sans-serif;
+    font-family:'General Sans','Inter',sans-serif;
     font-size:11px;
     letter-spacing:0.28em;
     text-transform:uppercase;
@@ -1099,7 +1099,7 @@
   .hero-badge{
     display:block;
     width:fit-content;
-    font-family:'Inter',sans-serif;
+    font-family:'General Sans','Inter',sans-serif;
     font-size:11px;
     letter-spacing:0.22em;
     text-transform:uppercase;
@@ -1579,7 +1579,7 @@
   .rp-line{fill:none; stroke:var(--gold-dim); stroke-width:1.2;}
   .rp-dot{fill:var(--gold);}
   .rp-city{
-    font-family:'Inter',sans-serif;
+    font-family:'General Sans','Inter',sans-serif;
     font-size:10.5px;
     letter-spacing:0.05em;
     fill:var(--grey);
@@ -1663,7 +1663,7 @@
   }
   .jb-builder-head .eyebrow{display:none;}
   .jb-builder-head h2{
-    font-family:'Inter',sans-serif;
+    font-family:'General Sans','Inter',sans-serif;
     font-weight:500;
     font-size:15px;
     letter-spacing:0.01em;
@@ -1734,7 +1734,7 @@
     display:flex;
     align-items:center;
     gap:10px;
-    font-family:'Inter',sans-serif;
+    font-family:'General Sans','Inter',sans-serif;
     font-weight:500;
     font-size:11.5px;
     letter-spacing:0.08em;
@@ -1767,7 +1767,7 @@
     justify-content:space-between;
   }
   .jb-progress-step{
-    font-family:'Inter',sans-serif;
+    font-family:'General Sans','Inter',sans-serif;
     font-size:9.5px;
     letter-spacing:0.12em;
     text-transform:uppercase;
@@ -1822,7 +1822,7 @@
     padding:2px 0 10px;
     transition:border-color 0.3s;
   }
-  .jb-route-field input::placeholder{color:rgba(138,135,130,0.55); font-family:'Inter',sans-serif; font-size:15px;}
+  .jb-route-field input::placeholder{color:rgba(138,135,130,0.55); font-family:'General Sans','Inter',sans-serif; font-size:15px;}
   .jb-route-field input:focus{outline:none; border-bottom-color:var(--gold);}
   .jb-route-glyph{
     color:var(--gold-dim);
@@ -1854,7 +1854,7 @@
     border:none;
     border-bottom:1px solid var(--grey-line);
     color:var(--off-white);
-    font-family:'Inter',sans-serif;
+    font-family:'General Sans','Inter',sans-serif;
     font-size:13.5px;
     padding:2px 0 8px;
     color-scheme:dark;
@@ -1865,7 +1865,7 @@
     background:none;
     border:none;
     color:var(--grey);
-    font-family:'Inter',sans-serif;
+    font-family:'General Sans','Inter',sans-serif;
     font-size:10.5px;
     letter-spacing:0.08em;
     text-transform:uppercase;
@@ -1899,7 +1899,7 @@
     transition:color 0.25s;
   }
   .jb-stepper button:hover{color:var(--gold);}
-  .jb-stepper span{font-family:'Inter',sans-serif; font-size:13px; color:var(--off-white);}
+  .jb-stepper span{font-family:'General Sans','Inter',sans-serif; font-size:13px; color:var(--off-white);}
 
   @media(max-width:560px){
     .jb-inline-row{gap:18px;}
@@ -1946,7 +1946,7 @@
     background:rgba(245,243,239,0.025);
     border:1px solid rgba(201,162,75,0.35);
     color:var(--off-white);
-    font-family:'Inter',sans-serif;
+    font-family:'General Sans','Inter',sans-serif;
     font-size:13px;
     letter-spacing:0.01em;
     text-align:center;
@@ -1988,7 +1988,7 @@
     flex-shrink:0;
   }
   .jb-summary-value{
-    font-family:'Inter',sans-serif;
+    font-family:'General Sans','Inter',sans-serif;
     font-weight:500;
     font-size:13.5px;
     color:var(--off-white);
@@ -2245,7 +2245,7 @@
   }
   .rm-city-dot.is-active{fill:var(--gold);}
   .rm-city-label{
-    font-family:'Inter',sans-serif;
+    font-family:'General Sans','Inter',sans-serif;
     font-size:11px;
     letter-spacing:0.04em;
     fill:var(--grey);
@@ -2531,7 +2531,7 @@
   .journey-row span:last-child{text-align:right;}
   .journey-row .journey-arrow{
     color:var(--gold);
-    font-family:'Inter',sans-serif;
+    font-family:'General Sans','Inter',sans-serif;
     font-size:14px;
     text-align:center;
     margin:0 24px;
@@ -2656,7 +2656,7 @@
     margin-top:36px;
     padding-top:32px;
     border-top:1px solid var(--grey-line);
-    font-family:'Inter',sans-serif;
+    font-family:'General Sans','Inter',sans-serif;
     font-size:13px;
     letter-spacing:0.04em;
     color:var(--grey);
@@ -2983,7 +2983,7 @@
   }
   .legal-block h2 .legal-num{
     color:var(--gold);
-    font-family:'Inter',sans-serif;
+    font-family:'General Sans','Inter',sans-serif;
     font-size:13px;
     letter-spacing:0.06em;
   }
@@ -3102,7 +3102,7 @@
   .formula-equation .x{
     color:var(--grey);
     margin:0 18px;
-    font-family:'Inter',sans-serif;
+    font-family:'General Sans','Inter',sans-serif;
   }
   .formula-band p{
     color:var(--grey);
@@ -3284,7 +3284,7 @@
   }
   .caveat-band span.small{
     display:block;
-    font-family:'Inter',sans-serif;
+    font-family:'General Sans','Inter',sans-serif;
     font-size:13px;
     color:var(--grey);
     max-width:520px;
