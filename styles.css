@@ -910,6 +910,95 @@
     .page{transition:none;}
   }
 
+  /* ===== CHARTER FLAGSHIP CHAPTER OPENING (Design Law Rule 4 pilot) =====
+     Scoped entirely to #page-charter -- does not touch .sub-hero, which
+     every other interior page still uses. Full-viewport cinematic
+     confidence matching the homepage, rather than a 72vh banner. Proof of
+     concept before rolling the same treatment to other flagship pages. */
+  .chapter-hero{
+    position:relative;
+    height:100vh;
+    min-height:640px;
+    display:flex;
+    align-items:flex-end;
+    overflow:hidden;
+  }
+  .chapter-hero-img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:center 38%;
+    animation:chapterZoom 22s ease-out forwards;
+  }
+  @keyframes chapterZoom{
+    from{transform:scale(1.08);}
+    to{transform:scale(1);}
+  }
+  .chapter-hero::after{
+    content:'';
+    position:absolute; inset:0;
+    background:
+      linear-gradient(to top, rgba(10,9,8,0.95) 0%, rgba(10,9,8,0.35) 38%, rgba(10,9,8,0.05) 62%, rgba(10,9,8,0.35) 100%);
+  }
+  .chapter-hero-content{
+    position:relative;
+    z-index:2;
+    padding:0 clamp(28px,6vw,64px) 130px;
+    max-width:780px;
+  }
+  .chapter-hero-content .eyebrow{display:block; margin-bottom:26px;}
+  .chapter-hero-content h1{
+    font-family:'Canela Text','Playfair Display',serif;
+    font-size:clamp(56px,9vw,132px);
+    text-transform:uppercase;
+    line-height:0.95;
+    letter-spacing:0.01em;
+    margin-bottom:30px;
+    color:var(--off-white);
+  }
+  .chapter-hero-content p{
+    font-size:15.5px;
+    color:var(--platinum);
+    line-height:1.85;
+    max-width:460px;
+  }
+  .chapter-hero-scroll{
+    position:absolute;
+    left:50%;
+    bottom:40px;
+    z-index:2;
+    transform:translateX(-50%);
+    width:1px;
+    height:44px;
+    background:rgba(216,219,222,0.25);
+    overflow:hidden;
+  }
+  .chapter-hero-scroll span{
+    position:absolute; top:-100%; left:0;
+    width:100%; height:100%;
+    background:var(--gold);
+    animation:chapterScrollCue 2.2s ease-in-out infinite;
+  }
+  @keyframes chapterScrollCue{
+    0%{top:-100%;} 60%{top:100%;} 100%{top:100%;}
+  }
+  .c-reveal{
+    opacity:0;
+    animation:fadeUp 1s cubic-bezier(0.22,0.61,0.21,1) forwards;
+  }
+  @media(max-width:680px){
+    .chapter-hero{height:88vh; min-height:560px;}
+    .chapter-hero-content{padding:0 24px 90px;}
+    .chapter-hero-content h1{font-size:clamp(42px,15vw,60px);}
+    .chapter-hero-content p{font-size:14px;}
+    .chapter-hero-scroll{display:none;}
+  }
+  @media(prefers-reduced-motion: reduce){
+    .chapter-hero-img{animation:none;}
+    .c-reveal{animation:none; opacity:1;}
+    .chapter-hero-scroll{display:none;}
+  }
+
   .sub-hero{
     position:relative;
     height:72vh;
@@ -965,10 +1054,10 @@
       max-width:none;
     }
   }
-  /* Charter and Club specifically: full vibrancy, no darkening filter at all,
-     matching how the same images appear on the homepage segment cards. */
-  #page-charter .sub-hero img,
-  #page-charter .sub-hero video,
+  /* Club specifically: full vibrancy, no darkening filter at all, matching
+     how the same image appears on the homepage segment cards. (Charter's
+     equivalent rules retired -- Charter now uses .chapter-hero, which has
+     its own dedicated overlay/gradient system, not .sub-hero at all.) */
   #page-club .sub-hero img,
   #page-club .sub-hero video{
     filter:none;
@@ -976,9 +1065,6 @@
   /* Legibility against the brighter unfiltered image - shadow follows the
      text itself rather than darkening the photo, so it holds regardless
      of what's bright or dark behind any given word. */
-  #page-charter .sub-hero-content .eyebrow,
-  #page-charter .sub-hero-content h1,
-  #page-charter .sub-hero-content p,
   #page-club .sub-hero-content .eyebrow,
   #page-club .sub-hero-content h1,
   #page-club .sub-hero-content p{
