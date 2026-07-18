@@ -473,6 +473,17 @@
     })();
 
     document.querySelectorAll('.btn-ghost').forEach(function(btn){
+      // Real form-submit buttons must never be hijacked by this generic CTA
+      // handler. Bug found during Rule 5 verification: quote.html's own
+      // submit button shares both the .btn-ghost class and the exact text
+      // "Begin Your Journey" with this handler's match list, so a genuine
+      // click was being intercepted, preventDefault()-ed, and redirected to
+      // 'quote.html' -- instead of ever reaching the form's real submit
+      // handler. The form's own validation/alert/reset logic was correct
+      // the whole time; it just never received the click. Excluding any
+      // type="submit" button here, not just this one instance, so the same
+      // collision can't happen again if button copy changes later.
+      if(btn.tagName === 'BUTTON' && btn.type === 'submit') return;
       var text = btn.textContent.trim();
       if(['Enquire Now', 'Begin Your Journey', 'Find Your Fit', 'Start A Conversation'].indexOf(text) !== -1){
         btn.addEventListener('click', function(e){
