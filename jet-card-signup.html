@@ -12,21 +12,23 @@
   <div id="jtVeil"></div>
 
   <nav class="nav" id="mainNav">
-    <button class="nav-burger" id="navBurgerOpen" aria-label="Open menu">
-      <span class="lines"><span></span><span></span><span></span></span>
-      <span class="burger-label">Menu</span>
+    <button class="nav-burger" id="navBurgerOpen" aria-label="Open menu" aria-expanded="false">
+      <span class="nav-burger-glyph">+</span>
     </button>
 
     <a href="index.html" class="nav-logo-center" >
       <img src="images/nav-logo.png" alt="Jettset">
     </a>
-
-    <div class="nav-actions">
-      <span class="nav-response-time">Enquiries Answered In &le;10 Min</span>
-      <a href="#" class="nav-contact-link"><svg class="icon-phone" viewBox="0 0 20 20" fill="currentColor"><path d="M3.654 1.328a.678.678 0 0 1 1.015-.063l2.143 2.143a.678.678 0 0 1 .063 1.015l-1.18 1.18a8.5 8.5 0 0 0 9.728 9.728l1.18-1.18a.678.678 0 0 1 1.015.063l2.143 2.143a.678.678 0 0 1-.063 1.015l-1.6 1.4a1.5 1.5 0 0 1-1.21.36C9.937 17.78 2.22 10.063.91 3.011a1.5 1.5 0 0 1 .36-1.21z"/></svg><svg class="icon-whatsapp" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-label="WhatsApp"><path d="M4.5 15.5L3 18l2.7-1.3A7 7 0 1 0 3 10a7 7 0 0 0 1.5 4.3z"/></svg><span class="full">Call</span><span class="whatsapp-label"> / WhatsApp</span></a>
-      <a href="#" class="nav-enquire"><span class="full">Begin Your Journey</span><span class="short">Enquire</span></a>
-    </div>
   </nav>
+
+  <div class="contact-mark" id="contactMark">
+    <a href="tel:+448005999888" class="contact-mark-icon" aria-label="Call Jettset">
+      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3.654 1.328a.678.678 0 0 1 1.015-.063l2.143 2.143a.678.678 0 0 1 .063 1.015l-1.18 1.18a8.5 8.5 0 0 0 9.728 9.728l1.18-1.18a.678.678 0 0 1 1.015.063l2.143 2.143a.678.678 0 0 1-.063 1.015l-1.6 1.4a1.5 1.5 0 0 1-1.21.36C9.937 17.78 2.22 10.063.91 3.011a1.5 1.5 0 0 1 .36-1.21z"/></svg>
+    </a>
+    <a href="https://wa.me/447393171717" class="contact-mark-icon" aria-label="WhatsApp Jettset" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.12-2.9-6.99A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.19 0 4.25.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.79c0 4.52-3.68 8.2-8.2 8.2a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.15.82.84-3.07-.2-.32a8.15 8.15 0 0 1-1.25-4.35c0-4.52 3.68-8.2 8.2-8.2zm-4.5 4.6c-.15 0-.4.06-.6.29-.21.23-.8.78-.8 1.9 0 1.12.82 2.2.93 2.35.11.15 1.6 2.5 3.9 3.44 1.9.79 2.3.63 2.71.6.42-.04 1.35-.55 1.54-1.09.19-.53.19-.98.13-1.08-.06-.1-.21-.16-.44-.28-.23-.11-1.35-.67-1.56-.74-.21-.08-.36-.11-.51.11-.15.23-.58.74-.71.89-.13.15-.26.17-.49.06-.23-.11-.96-.35-1.83-1.13-.68-.6-1.13-1.35-1.27-1.58-.13-.23-.01-.35.1-.47.1-.1.23-.26.35-.4.11-.13.15-.23.23-.38.08-.15.04-.29-.02-.4-.06-.11-.51-1.25-.71-1.7-.18-.44-.37-.38-.51-.39z"/></svg>
+    </a>
+  </div>
 
   <div class="contact-sheet-overlay" id="contactSheetOverlay">
     <div class="contact-sheet">
@@ -41,51 +43,79 @@
 
   <div class="side-overlay" id="sideOverlay"></div>
   <div class="side-panel" id="sidePanel">
-    <button class="side-panel-close" id="navBurgerClose">
-      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L8.94 10l-4.72 4.72a.75.75 0 1 0 1.06 1.06L10 11.06l4.72 4.72a.75.75 0 1 0 1.06-1.06L11.06 10l4.72-4.72a.75.75 0 0 0-1.06-1.06L10 8.94z"/></svg>
-      Close
-    </button>
+    <div class="nav-index-inner">
+      <a href="index.html" class="nav-index-home" id="navHome">Jettset &mdash; Private Aviation &amp; Concierge House</a>
+      <div class="nav-index-proof">Enquiries Answered In &le;10 Min</div>
 
-    <div class="side-nav-group">
-      <span class="eyebrow">Jettset</span>
-      <a href="index.html" class="side-nav-link"  id="navHome">Home</a>
-      <a href="about.html" class="side-nav-link"  id="navAbout">About</a>
-      <a href="the-manifest.html" class="side-nav-link"  id="navManifest">The Manifest</a>
-      <a href="in-motion.html" class="side-nav-link"  id="navInMotion">In Motion</a>
-      <a href="guest-segments.html" class="side-nav-link"  id="navSegments">Guest Segments</a>
-    </div>
+      <div class="nav-index-group">
+        <span class="nav-index-num">01</span>
+        <div>
+          <span class="nav-index-title">Aviation</span>
+          <div class="nav-index-links">
+            <a href="charter.html" class="" id="navCharter">Charter</a>
+            <a href="jet-card.html" class="active" id="navJetcard">Jet Card</a>
+            <a href="legs.html" class="" id="navLegs">Legs</a>
+          </div>
+        </div>
+      </div>
 
-    <div class="side-panel-divider"></div>
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">02</span>
+        <div>
+          <span class="nav-index-title"><a href="concierge.html" class="" id="navConcierge">Concierge</a></span>
+        </div>
+      </div>
 
-    <div class="side-nav-group">
-      <span class="eyebrow">Experiences</span>
-      <a href="charter.html" class="side-nav-sub"  id="navCharter">Charter</a>
-      <a href="jet-card.html" class="side-nav-sub"  id="navJetcard">Jet Card</a>
-      <a href="club.html" class="side-nav-sub"  id="navClub">Club</a>
-      <a href="legs.html" class="side-nav-sub"  id="navLegs">Legs</a>
-      <a href="concierge.html" class="side-nav-sub"  id="navConcierge">Concierge</a>
-    </div>
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">03</span>
+        <div>
+          <span class="nav-index-title"><a href="club.html" class="" id="navClub">Membership &mdash; Club</a></span>
+        </div>
+      </div>
 
-    <div class="side-panel-divider"></div>
+      <div class="nav-index-group">
+        <span class="nav-index-num">04</span>
+        <div>
+          <span class="nav-index-title">The House</span>
+          <div class="nav-index-links">
+            <a href="about.html" class="" id="navAbout">About</a>
+            <a href="guest-segments.html" class="" id="navSegments">Who We Serve</a>
+            <a href="advisory.html" class="" id="navAdvisory">Advisory</a>
+            <a href="editions.html" class="" id="navEditions">Editions</a>
+          </div>
+        </div>
+      </div>
 
-    <div class="side-nav-group">
-      <span class="eyebrow">Institutional</span>
-      <a href="advisory.html" class="side-nav-sub"  id="navAdvisory">Advisory</a>
-      <a href="editions.html" class="side-nav-sub"  id="navEditions">Editions</a>
-      <a href="partners.html" class="side-nav-sub"  id="navPartners">Partner With Us</a>
-      <a href="access-partners.html" class="side-nav-sub"  id="navAccessPartners">Access Partners</a>
-    </div>
+      <div class="nav-index-group">
+        <span class="nav-index-num">05</span>
+        <div>
+          <span class="nav-index-title">Journal</span>
+          <div class="nav-index-links">
+            <a href="the-manifest.html" class="" id="navManifest">The Manifest</a>
+            <a href="in-motion.html" class="" id="navInMotion">In Motion</a>
+          </div>
+        </div>
+      </div>
 
-    <div class="side-panel-divider"></div>
+      <div class="nav-index-group">
+        <span class="nav-index-num">06</span>
+        <div>
+          <span class="nav-index-title">Partnerships</span>
+          <div class="nav-index-links">
+            <a href="partners.html" class="" id="navPartners">Partner With Us</a>
+            <a href="access-partners.html" class="" id="navAccessPartners">Access Partners</a>
+          </div>
+        </div>
+      </div>
 
-    <a href="#" class="side-member-login" id="navMemberLogin"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a3.5 3.5 0 0 0-3.5 3.5V7H6a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-.5V5.5A3.5 3.5 0 0 0 10 2zm2 5H8V5.5a2 2 0 1 1 4 0V7z"/></svg>Member Login</a>
-  </div>
-
-  <div class="journey-bar" id="journeyBar">
-    <div class="journey-bar-inner">
-      <span class="jb-label">Begin Your Journey</span>
-      <input type="text" id="jbDestination" placeholder="Where are you flying?">
-      <button class="jb-btn" id="jbSubmit">Begin Your Journey</button>
+      <div class="nav-index-footer">
+        <a href="#" class="nav-index-cta btn-ghost">Begin Your Journey</a>
+        <div class="nav-index-contact">
+          <a href="tel:+448005999888">Call</a>
+          <a href="https://wa.me/447393171717">WhatsApp</a>
+          <a href="#" class="side-member-login" id="navMemberLogin"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a3.5 3.5 0 0 0-3.5 3.5V7H6a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-.5V5.5A3.5 3.5 0 0 0 10 2zm2 5H8V5.5a2 2 0 1 1 4 0V7z"/></svg>Member Login</a>
+        </div>
+      </div>
     </div>
   </div>
 

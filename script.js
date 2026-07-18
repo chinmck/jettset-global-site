@@ -98,46 +98,68 @@
       });
     }
 
+    // Full-screen editorial index (Design Law Rule 1) — a single mark does
+    // every job: opens the index, and its own +/x rotation is the only
+    // open/closed signal. No separate close button, no burger label.
+    var navToggle = document.getElementById('navBurgerOpen');
     function openSidePanel(){
       document.getElementById('sidePanel').classList.add('is-open');
       document.getElementById('sideOverlay').classList.add('is-open');
+      document.getElementById('mainNav').classList.add('menu-open');
+      navToggle.setAttribute('aria-expanded', 'true');
+      navToggle.setAttribute('aria-label', 'Close menu');
+      document.body.style.overflow = 'hidden';
     }
     function closeSidePanel(){
       document.getElementById('sidePanel').classList.remove('is-open');
       document.getElementById('sideOverlay').classList.remove('is-open');
+      document.getElementById('mainNav').classList.remove('menu-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open menu');
+      document.body.style.overflow = '';
+    }
+    function isSidePanelOpen(){
+      return document.getElementById('sidePanel').classList.contains('is-open');
     }
 
-    document.getElementById('navBurgerOpen').addEventListener('click', function(e){
+    navToggle.addEventListener('click', function(e){
       e.preventDefault();
-      openSidePanel();
+      if(isSidePanelOpen()){ closeSidePanel(); } else { openSidePanel(); }
     });
-    document.getElementById('navBurgerClose').addEventListener('click', closeSidePanel);
     document.getElementById('sideOverlay').addEventListener('click', closeSidePanel);
+    // The index is full-screen, so there is no exposed backdrop area left for
+    // the old "click outside to close" pattern -- instead, clicking anywhere
+    // in the panel's negative space (not on a link or button) closes it.
+    document.getElementById('sidePanel').addEventListener('click', function(e){
+      if(!e.target.closest('a, button')){
+        closeSidePanel();
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && isSidePanelOpen()){
+        closeSidePanel();
+      }
+    });
 
     document.getElementById('navMemberLogin').addEventListener('click', function(e){
       e.preventDefault();
       alert('The Legs member portal is a separate, secure login area. Ask your assistant to open the Legs member portal to access it.');
     });
 
-    document.getElementById('jbSubmit').addEventListener('click', function(e){
-      e.preventDefault();
-      var dest = document.getElementById('jbDestination').value.trim();
-      if(dest){ sessionStorage.setItem('prefill_qTo', dest); }
-      window.jtNavigate('quote.html');
-    });
+    // The old jbSubmit/jbDestination (a persistent full-width destination
+    // input on every page) is retired -- the journey mark on the homepage
+    // is now a plain anchor to the Journey Builder section, using the
+    // sitewide scroll-behavior:smooth already in place, no JS needed here.
 
-    document.querySelector('.nav-enquire').addEventListener('click', function(e){
-      e.preventDefault();
-      var isMobile = window.matchMedia('(max-width:700px)').matches;
-      var sheet = document.getElementById('contactSheetOverlay');
-      if(isMobile && sheet){
-        sheet.classList.add('is-active');
-      } else {
-        window.jtNavigate('quote.html');
-      }
-    });
-
-    // Contact sheet dismissal (mobile only, harmless no-op if markup absent)
+    // .nav-enquire (the persistent bar's old CTA) no longer exists in the DOM
+    // -- removed from the bar per Design Law Rule 1 (single mark + one
+    // toggle). Its "open a Call/WhatsApp/Email sheet on mobile" behaviour is
+    // now redundant: Call and WhatsApp are permanent, direct links inside
+    // the full-screen index (.nav-index-contact), reachable in one tap
+    // rather than hidden behind a second sheet. The contactSheetOverlay
+    // markup itself is left in the page (harmless, unreachable) rather than
+    // stripped from 22 files in the same pass as this fix -- flagged as a
+    // follow-up cleanup rather than expanding this change further.
     (function(){
       var sheet = document.getElementById('contactSheetOverlay');
       if(!sheet) return;
@@ -590,9 +612,13 @@
       if(window.scrollY > 60){ nav.classList.add('scrolled'); }
       else{ nav.classList.remove('scrolled'); }
 
+      // journeyBar only exists on the homepage now (Chin: keep this mark
+      // off interior pages, which already have their own in-content CTAs)
       var jb = document.getElementById('journeyBar');
-      if(window.scrollY > window.innerHeight * 0.6){ jb.classList.add('is-visible'); }
-      else{ jb.classList.remove('is-visible'); }
+      if(jb){
+        if(window.scrollY > window.innerHeight * 0.6){ jb.classList.add('is-visible'); }
+        else{ jb.classList.remove('is-visible'); }
+      }
     });
 
     // ===== HERO VIDEOS: respect reduced motion =====
