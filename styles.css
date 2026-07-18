@@ -2537,6 +2537,15 @@
     flex-wrap:wrap;
     justify-content:center;
   }
+  /* Design Law Rule 2: gold is punctuation only -- a line, a word --
+     never a fill. This was the one remaining solid-gold hover fill on
+     the site (found via a full-stylesheet audit); every other
+     interactive element already just intensifies border/text color on
+     hover, so this brings the last outlier into line with everything
+     else rather than inventing a new hover language for it. Also
+     dropped the 2px border-radius -- the only rounded corner found in
+     the same audit, inconsistent with the sharp-cornered treatment
+     used everywhere else on the site. */
   .urgent-desk-links a{
     font-size:12.5px;
     letter-spacing:0.05em;
@@ -2544,12 +2553,11 @@
     color:var(--gold);
     border:1px solid var(--gold-dim);
     padding:10px 22px;
-    border-radius:2px;
-    transition:background 0.2s, color 0.2s;
+    transition:border-color 0.2s, color 0.2s;
   }
   .urgent-desk-links a:hover{
-    background:var(--gold);
-    color:var(--black);
+    border-color:var(--gold);
+    color:var(--off-white);
   }
   @media(max-width:660px){
     .urgent-desk-inner{flex-direction:column; gap:18px;}
@@ -2726,7 +2734,6 @@
     color:var(--off-white);
     border:1px solid var(--grey-line);
     padding:10px 20px;
-    border-radius:2px;
   }
   .route-other-list a:hover{
     border-color:var(--gold);
@@ -4122,7 +4129,6 @@
     height:34px;
     background:var(--off-white);
     padding:8px 14px;
-    border-radius:2px;
   }
   .partner-cat .eyebrow{margin-bottom:16px;}
   .partner-cat h4{
