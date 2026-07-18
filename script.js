@@ -144,18 +144,15 @@
       window.jtNavigate('quote.html');
     });
 
-    document.querySelector('.nav-enquire').addEventListener('click', function(e){
-      e.preventDefault();
-      var isMobile = window.matchMedia('(max-width:700px)').matches;
-      var sheet = document.getElementById('contactSheetOverlay');
-      if(isMobile && sheet){
-        sheet.classList.add('is-active');
-      } else {
-        window.jtNavigate('quote.html');
-      }
-    });
-
-    // Contact sheet dismissal (mobile only, harmless no-op if markup absent)
+    // .nav-enquire (the persistent bar's old CTA) no longer exists in the DOM
+    // -- removed from the bar per Design Law Rule 1 (single mark + one
+    // toggle). Its "open a Call/WhatsApp/Email sheet on mobile" behaviour is
+    // now redundant: Call and WhatsApp are permanent, direct links inside
+    // the full-screen index (.nav-index-contact), reachable in one tap
+    // rather than hidden behind a second sheet. The contactSheetOverlay
+    // markup itself is left in the page (harmless, unreachable) rather than
+    // stripped from 22 files in the same pass as this fix -- flagged as a
+    // follow-up cleanup rather than expanding this change further.
     (function(){
       var sheet = document.getElementById('contactSheetOverlay');
       if(!sheet) return;

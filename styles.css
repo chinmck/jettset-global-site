@@ -104,49 +104,10 @@
     display:block;
   }
 
-  .nav-actions{
-    justify-self:end;
-    display:flex;
-    align-items:center;
-    gap:28px;
-  }
-  .nav-response-time{
-    font-size:11px;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--gold);
-    opacity:0.9;
-    white-space:nowrap;
-  }
-  .nav-contact-link{
-    font-size:11px;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
-    color:var(--off-white);
-    opacity:0.8;
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    transition:opacity 0.25s, color 0.25s;
-    white-space:nowrap;
-  }
-  .nav-contact-link:hover{opacity:1; color:var(--gold);}
-  .nav-contact-link svg{width:13px;height:13px;flex-shrink:0;}
-  .icon-whatsapp{display:none;}
-
-  .nav-enquire{
-    border:1px solid var(--gold);
-    color:var(--gold);
-    font-size:10.5px;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    padding:9px 16px;
-    white-space:nowrap;
-    display:inline-block;
-    transition:background 0.25s ease, color 0.25s ease;
-  }
-  .nav-enquire:hover{background:var(--gold); color:var(--black);}
-  .nav-enquire .short{display:none;}
+  /* .nav-actions / .nav-response-time / .nav-contact-link / .nav-enquire
+     retired from the persistent bar (Design Law Rule 1: single mark + one
+     toggle only). Equivalent content now lives inside the full-screen
+     index -- see .nav-index-proof and .nav-index-contact below. */
 
   /* ===== CONTACT SHEET (mobile Enquire tap) ===== */
   .contact-sheet-overlay{
@@ -216,12 +177,6 @@
 
   @media(max-width:700px){
     .nav-burger .burger-label{display:none;}
-    .nav-contact-link{display:none;}
-    .nav-response-time{display:none;}
-    .nav-actions{gap:12px;}
-    .nav-enquire{padding:8px 12px; font-size:10px;}
-    .nav-enquire .full{display:none;}
-    .nav-enquire .short{display:inline;}
   }
 
   /* ===== SIDE PANEL (slide-out menu) ===== */
@@ -297,6 +252,35 @@
   }
   .nav-index-home:hover{color:var(--gold);}
   .side-panel.is-open .nav-index-home{opacity:1; transform:none; transition-delay:.05s;}
+
+  /* Response-time proof point -- relocated from the persistent bar */
+  .nav-index-proof{
+    font-family:'General Sans','Inter',sans-serif;
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--gold);
+    opacity:0;
+    margin:-46px 0 70px;
+    transform:translateY(10px);
+    transition:opacity 0.6s ease, transform 0.6s ease;
+  }
+  .side-panel.is-open .nav-index-proof{opacity:0.9; transform:none; transition-delay:.08s;}
+
+  /* Call / WhatsApp -- relocated from the persistent bar, now real links */
+  .nav-index-contact{
+    display:flex;
+    gap:22px;
+  }
+  .nav-index-contact a{
+    font-family:'General Sans','Inter',sans-serif;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--grey);
+    transition:color 0.25s;
+  }
+  .nav-index-contact a:hover{color:var(--gold);}
 
   .nav-index-group{
     display:grid;
