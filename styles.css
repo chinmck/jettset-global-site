@@ -1184,6 +1184,18 @@
     position:absolute;inset:0;
     background:linear-gradient(to right, rgba(10,9,8,0.92) 0%, rgba(10,9,8,0.55) 48%, rgba(10,9,8,0.25) 100%);
   }
+  /* Trust: the source image is already a deliberately dark, moody
+     photograph (mean brightness ~26/255) -- the default environmental
+     darkening filter + gradient overlay were compounding on top of that
+     and crushing the door detail and gold highlight Chin specifically
+     approved. Brighten instead of darken, and lighten the overlay so the
+     image's own contrast survives. */
+  #page-trust .sub-hero img{
+    filter:contrast(1.06) saturate(1.08) brightness(1.35);
+  }
+  #page-trust .sub-hero::after{
+    background:linear-gradient(to right, rgba(10,9,8,0.5) 0%, rgba(10,9,8,0.22) 45%, rgba(10,9,8,0.05) 100%);
+  }
   .sub-hero-content{
     position:relative;
     z-index:2;
