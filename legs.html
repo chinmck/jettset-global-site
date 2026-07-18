@@ -172,21 +172,33 @@
 
       <form class="waitlist-form" id="legsWaitlistForm">
         <div class="waitlist-row">
-          <input type="text" id="lwName" placeholder="Full name" required>
-          <input type="email" id="lwEmail" placeholder="Email address" required>
+          <div class="quote-field">
+            <label for="lwName">Full Name</label>
+            <input type="text" id="lwName" placeholder="Your full name" required>
+          </div>
+          <div class="quote-field">
+            <label for="lwEmail">Email Address</label>
+            <input type="email" id="lwEmail" placeholder="you@example.com" required>
+          </div>
         </div>
         <div class="waitlist-row">
-          <input type="tel" id="lwPhone" placeholder="Phone (with country code)">
-          <select id="lwRegion" required>
-            <option value="">Your primary region</option>
-            <option>Europe</option>
-            <option>United Kingdom</option>
-            <option>Middle East</option>
-            <option>United States</option>
-            <option>Africa</option>
-            <option>Asia-Pacific</option>
-            <option>Other / Multiple Regions</option>
-          </select>
+          <div class="quote-field">
+            <label for="lwPhone">Phone</label>
+            <input type="tel" id="lwPhone" placeholder="With country code">
+          </div>
+          <div class="quote-field">
+            <label for="lwRegion">Primary Region</label>
+            <select id="lwRegion" required>
+              <option value="">Select region</option>
+              <option>Europe</option>
+              <option>United Kingdom</option>
+              <option>Middle East</option>
+              <option>United States</option>
+              <option>Africa</option>
+              <option>Asia-Pacific</option>
+              <option>Other / Multiple Regions</option>
+            </select>
+          </div>
         </div>
         <div class="waitlist-consent">
           <input type="checkbox" id="lwConsent">

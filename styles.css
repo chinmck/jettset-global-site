@@ -2941,41 +2941,46 @@
     flex-direction:column;
   }
   .quote-field label{
-    font-size:11px;
-    letter-spacing:0.12em;
+    font-size:10px;
+    letter-spacing:0.14em;
     text-transform:uppercase;
     color:var(--grey);
-    margin-bottom:10px;
+    margin-bottom:12px;
   }
+  /* Design Law Rule 5: no boxed, white/filled-background utility fields
+     anywhere on the site. Underline-only, same visual language as the
+     Journey Builder's route fields -- editorial, not a form. */
   .quote-field input,
   .quote-field select,
   .quote-field textarea{
-    background:rgba(245,243,239,0.04);
-    border:1px solid var(--grey-line);
+    background:none;
+    border:none;
+    border-bottom:1px solid var(--grey-line);
+    border-radius:0;
     color:var(--off-white);
-    padding:14px 16px;
-    font-size:14px;
+    padding:8px 2px 12px;
+    font-size:15px;
     font-family:inherit;
-    border-radius:1px;
   }
   .quote-field input::placeholder,
-  .quote-field textarea::placeholder{color:var(--grey);}
+  .quote-field textarea::placeholder{color:rgba(138,135,130,0.55);}
   .quote-field input:focus,
   .quote-field select:focus,
   .quote-field textarea:focus{
     outline:none;
-    border-color:var(--gold);
+    border-bottom-color:var(--gold);
   }
   .quote-field textarea{
     resize:vertical;
-    min-height:110px;
+    min-height:100px;
     font-family:inherit;
   }
   .quote-field select{
     appearance:none;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%238A8782'%3E%3Cpath d='M5.5 7.5l4.5 4.5 4.5-4.5'/%3E%3C/svg%3E");
     background-repeat:no-repeat;
-    background-position:right 14px center;
+    background-position:right 4px center;
+    padding-right:22px;
   }
   .passenger-row{
     display:grid;
@@ -3405,34 +3410,23 @@
     line-height:1.8;
   }
   .waitlist-form{
-    max-width:480px;
+    max-width:520px;
     margin:0 auto;
     display:flex;
     flex-direction:column;
-    gap:16px;
+    gap:26px;
     text-align:left;
   }
+  /* Design Law Rule 5: fields now use the same .quote-field markup and
+     underline-only styling as Quote/Enquiry -- was a boxed, filled-
+     background input before, and had no visible label (placeholder-only,
+     which disappears once the guest starts typing). */
   .waitlist-row{
     display:flex;
-    gap:14px;
+    gap:24px;
   }
-  .waitlist-row input,
-  .waitlist-row select{
-    flex:1;
-    min-width:0;
-    background:rgba(245,243,239,0.04);
-    border:1px solid var(--grey-line);
-    color:var(--off-white);
-    padding:14px 16px;
-    font-size:14px;
-    font-family:inherit;
-    border-radius:1px;
-  }
-  .waitlist-row input::placeholder{color:var(--grey);}
-  .waitlist-row input:focus,
-  .waitlist-row select:focus{outline:none; border-color:var(--gold);}
-  .waitlist-row select{appearance:auto; color:var(--off-white);}
-  .waitlist-row select option{color:var(--black);}
+  .waitlist-row .quote-field{flex:1; min-width:0;}
+  .waitlist-row select option{color:var(--black);}  /* native dropdown list rendering */
   .waitlist-consent{
     display:flex;
     align-items:flex-start;
