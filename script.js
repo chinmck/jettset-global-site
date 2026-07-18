@@ -98,13 +98,18 @@
       });
     }
 
+    // Full-screen editorial index (Design Law Rule 1) — locks background
+    // scroll while open and closes on Escape, in addition to the existing
+    // close button / overlay-click handlers.
     function openSidePanel(){
       document.getElementById('sidePanel').classList.add('is-open');
       document.getElementById('sideOverlay').classList.add('is-open');
+      document.body.style.overflow = 'hidden';
     }
     function closeSidePanel(){
       document.getElementById('sidePanel').classList.remove('is-open');
       document.getElementById('sideOverlay').classList.remove('is-open');
+      document.body.style.overflow = '';
     }
 
     document.getElementById('navBurgerOpen').addEventListener('click', function(e){
@@ -113,6 +118,19 @@
     });
     document.getElementById('navBurgerClose').addEventListener('click', closeSidePanel);
     document.getElementById('sideOverlay').addEventListener('click', closeSidePanel);
+    // The index is now full-screen, so there is no exposed backdrop area left
+    // for the old "click outside to close" pattern -- instead, clicking
+    // anywhere in the panel's negative space (not on a link or button) closes it.
+    document.getElementById('sidePanel').addEventListener('click', function(e){
+      if(!e.target.closest('a, button')){
+        closeSidePanel();
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && document.getElementById('sidePanel').classList.contains('is-open')){
+        closeSidePanel();
+      }
+    });
 
     document.getElementById('navMemberLogin').addEventListener('click', function(e){
       e.preventDefault();
