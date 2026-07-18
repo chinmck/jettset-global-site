@@ -1115,28 +1115,24 @@
     align-items:center;
     overflow:hidden;
   }
+  /* Chin: pull the blanket darkening filter off entirely, sitewide --
+     three page-specific patches in a row (Trust, then Terms/Privacy)
+     were all fighting the same root cause: a default brightness(0.55)
+     cut (45% darker) applied to every hero image regardless of whether
+     the source image was already dark, already bright, moody, or
+     staged. Removed here, raw/natural display everywhere. Proper,
+     considered tonal treatment per image (if any is even needed) is a
+     later, deliberate pass -- not a blanket filter reapplied reactively
+     page by page. */
   .sub-hero img,
   .sub-hero video{
     position:absolute;inset:0;
     width:100%;height:100%;
     object-fit:cover;
     object-position:center 40%;
-    filter:contrast(1.05) brightness(0.55) saturate(0.9);
   }
-  /* Lighter editorial tone — for staged/product photography (e.g. Jet Card), where
-     the default environmental darkening would obscure the subject rather than set a mood. */
-  .sub-hero.tone-light img,
-  .sub-hero.tone-light video{
-    filter:contrast(1.08) brightness(0.85) saturate(1.05);
-  }
-  /* Jet Card hero: this composition places the card centrally (verified
-     via brightness mapping - spans roughly 29%-76% down the source image),
-     so a simple centered crop keeps the whole card in view with margin,
-     unlike the previous photo which needed careful tuning. Standard
-     72vh height, no override. */
   #page-jetcard .sub-hero img{
     object-position:center center;
-    filter:contrast(1.12) brightness(0.82) saturate(0.95);
   }
   /* Mobile: this image's severe aspect mismatch (1.5 photo vs ~0.64 mobile
      container) combined with the card's diagonal tilt means no crop
@@ -1184,32 +1180,10 @@
     position:absolute;inset:0;
     background:linear-gradient(to right, rgba(10,9,8,0.92) 0%, rgba(10,9,8,0.55) 48%, rgba(10,9,8,0.25) 100%);
   }
-  /* Trust: the source image is already a deliberately dark, moody
-     photograph (mean brightness ~26/255) -- the default environmental
-     darkening filter + gradient overlay were compounding on top of that
-     and crushing the door detail and gold highlight Chin specifically
-     approved. Brighten instead of darken, and lighten the overlay so the
-     image's own contrast survives. */
-  #page-trust .sub-hero img{
-    filter:contrast(1.06) saturate(1.08) brightness(1.35);
-  }
-  #page-trust .sub-hero::after{
-    background:linear-gradient(to right, rgba(10,9,8,0.5) 0%, rgba(10,9,8,0.22) 45%, rgba(10,9,8,0.05) 100%);
-  }
-  /* Terms + Privacy: same double-darkening issue as Trust -- this crop is
-     mostly dark carpet by nature (source crop mean brightness ~43), and the
-     default filter was crushing it further to ~22-25, losing the dog's fur
-     detail and the carpet's own texture. Same fix pattern: brighten instead
-     of darken, lighten the overlay. Measured, not assumed -- checked the
-     dog's actual region specifically, not just the frame average. */
-  #page-terms .sub-hero img,
-  #page-privacy .sub-hero img{
-    filter:contrast(1.02) saturate(1.05) brightness(0.85);
-  }
-  #page-terms .sub-hero::after,
-  #page-privacy .sub-hero::after{
-    background:linear-gradient(to right, rgba(10,9,8,0.42) 0%, rgba(10,9,8,0.18) 45%, rgba(10,9,8,0.04) 100%);
-  }
+  /* Trust and Terms/Privacy's page-specific brightness patches removed --
+     they existed only to counteract the default filter above, which is now
+     gone. All three back on the same unfiltered baseline as every other
+     .sub-hero page, pending a proper considered pass later. */
   .sub-hero-content{
     position:relative;
     z-index:2;
