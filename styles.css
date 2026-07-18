@@ -101,6 +101,45 @@
     display:block;
   }
 
+  /* Sitewide Call + WhatsApp -- brought back after Chin's real-world read:
+     principals want to call and be done with it; assistants and
+     culturally-fluent guests want to message on their own time. Both are
+     proven channels, cutting either loses real enquiries. Icon-only, no
+     text, no button box -- a single recognisable glyph reads as an
+     expected service affordance, not utility-bar clutter, on every page
+     including the homepage (independent of the homepage's own
+     Begin-Your-Journey mark, .journey-mark). */
+  .contact-mark{
+    position:fixed;
+    bottom:32px;
+    left:32px;
+    z-index:90;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .contact-mark-icon{
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(10,9,8,0.75);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--grey-line);
+    color:var(--off-white);
+    opacity:0.85;
+    transition:opacity 0.25s, border-color 0.3s, color 0.25s;
+  }
+  .contact-mark-icon svg{width:17px; height:17px;}
+  .contact-mark-icon:hover{opacity:1; border-color:rgba(201,162,75,0.5); color:var(--gold);}
+
+  @media(max-width:600px){
+    .contact-mark{bottom:20px; left:20px; gap:10px;}
+    .contact-mark-icon{width:38px; height:38px;}
+    .contact-mark-icon svg{width:15px; height:15px;}
+  }
+
   /* .nav-actions / .nav-response-time / .nav-contact-link / .nav-enquire
      retired from the persistent bar (Design Law Rule 1: single mark + one
      toggle only). Equivalent content now lives inside the full-screen
