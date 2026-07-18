@@ -1108,43 +1108,6 @@
     .chapter-hero-scroll{display:none;}
   }
 
-  /* Legal pages (Terms/Privacy): a real, portrait-oriented brand photo
-     (Jettset's own hangar carpet + the office dog, aircraft visible behind)
-     -- forcing this into the standard ultra-wide .sub-hero banner would
-     crop away either the aircraft or the carpet/dog. Centered portrait
-     treatment instead: generous dark negative space either side, full
-     composition intact, reads as a deliberate editorial moment rather
-     than a stretched banner. */
-  .legal-hero{
-    padding:100px 24px 64px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    background:var(--black);
-  }
-  .legal-hero-media{
-    width:100%;
-    max-width:460px;
-    margin-bottom:40px;
-    border:1px solid var(--grey-line);
-  }
-  .legal-hero-media img{
-    display:block;
-    width:100%;
-    height:auto;
-  }
-  .legal-hero-content .eyebrow{display:block; margin-bottom:16px;}
-  .legal-hero-content h1{
-    font-size:clamp(28px,4vw,42px);
-    text-transform:uppercase;
-    line-height:1.1;
-  }
-  @media(max-width:680px){
-    .legal-hero{padding:80px 20px 48px;}
-    .legal-hero-media{max-width:320px; margin-bottom:30px;}
-  }
-
   .sub-hero{
     position:relative;
     height:72vh;
@@ -1232,6 +1195,20 @@
   }
   #page-trust .sub-hero::after{
     background:linear-gradient(to right, rgba(10,9,8,0.5) 0%, rgba(10,9,8,0.22) 45%, rgba(10,9,8,0.05) 100%);
+  }
+  /* Terms + Privacy: same double-darkening issue as Trust -- this crop is
+     mostly dark carpet by nature (source crop mean brightness ~43), and the
+     default filter was crushing it further to ~22-25, losing the dog's fur
+     detail and the carpet's own texture. Same fix pattern: brighten instead
+     of darken, lighten the overlay. Measured, not assumed -- checked the
+     dog's actual region specifically, not just the frame average. */
+  #page-terms .sub-hero img,
+  #page-privacy .sub-hero img{
+    filter:contrast(1.02) saturate(1.05) brightness(0.85);
+  }
+  #page-terms .sub-hero::after,
+  #page-privacy .sub-hero::after{
+    background:linear-gradient(to right, rgba(10,9,8,0.42) 0%, rgba(10,9,8,0.18) 45%, rgba(10,9,8,0.04) 100%);
   }
   .sub-hero-content{
     position:relative;
