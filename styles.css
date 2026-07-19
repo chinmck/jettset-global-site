@@ -1035,6 +1035,26 @@
     from{transform:scale(1.08);}
     to{transform:scale(1);}
   }
+  /* ===== PARALLAX DEPTH (the "3D touch") =====
+     A rotating 3D globe/aircraft was considered and deliberately rejected --
+     that reads as a generic template trope, not a considered luxury choice.
+     Real depth, the way Aman and Rolls-Royce use it, is quieter: the hero
+     image drifts slightly slower than the page scrolls past it, so the
+     content in front feels like it's moving *through* space rather than
+     past a flat photograph. Applied via a wrapping element so it never
+     fights the existing chapterZoom load-in animation on the image itself. */
+  .chapter-hero-parallax{
+    position:absolute;
+    inset:-8% 0;
+    will-change:transform;
+  }
+  .chapter-hero-parallax .chapter-hero-img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+  }
+  @media(prefers-reduced-motion: reduce){
+    .chapter-hero-parallax{transform:none !important;}
+  }
   .chapter-hero::after{
     content:'';
     position:absolute; inset:0;
