@@ -1002,6 +1002,30 @@
       });
     })();
 
+    // ===== SITEWIDE SCROLL REVEAL =====
+    // Same IntersectionObserver pattern already proven on the Journey
+    // Builder timeline above -- generalized so any page can opt an element
+    // in with [data-reveal], rather than every page reinventing its own
+    // reveal logic. Runs once per element, then unobserves (no repeat cost).
+    (function(){
+      var revealEls = document.querySelectorAll('[data-reveal]');
+      if(!revealEls.length) return;
+
+      if('IntersectionObserver' in window){
+        var revealObserver = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if(entry.isIntersecting){
+              entry.target.classList.add('is-revealed');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, {threshold:0.2, rootMargin:'0px 0px -8% 0px'});
+        revealEls.forEach(function(el){ revealObserver.observe(el); });
+      } else {
+        revealEls.forEach(function(el){ el.classList.add('is-revealed'); });
+      }
+    })();
+
     // ===== CINEMATIC HERO: film reveal + ambient cursor glow =====
     (function(){
       var heroSection = document.querySelector('.hero');

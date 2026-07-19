@@ -1128,6 +1128,63 @@
     .chapter-hero-scroll{display:none;}
   }
 
+  /* ===== SITEWIDE SCROLL REVEAL =====
+     Chapter heroes already have a load-in sequence (.c-reveal). Everything
+     below the fold on every chapter page was static -- appearing instantly,
+     with no pacing. This extends the same restrained fadeUp language to
+     scroll-triggered content, using the identical IntersectionObserver
+     pattern already proven on the homepage Journey Builder timeline.
+     Opt-in via [data-reveal] -- markup decides what earns the moment,
+     this never fires automatically on every element. */
+  [data-reveal]{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity 0.9s cubic-bezier(0.22,0.61,0.21,1),
+                transform 0.9s cubic-bezier(0.22,0.61,0.21,1);
+  }
+  [data-reveal].is-revealed{
+    opacity:1;
+    transform:translateY(0);
+  }
+  /* Stagger children of a revealed group without extra JS observers --
+     each child delays slightly past the parent's own transition. */
+  [data-reveal-group] > [data-reveal]:nth-child(1){transition-delay:0s;}
+  [data-reveal-group] > [data-reveal]:nth-child(2){transition-delay:0.1s;}
+  [data-reveal-group] > [data-reveal]:nth-child(3){transition-delay:0.2s;}
+  [data-reveal-group] > [data-reveal]:nth-child(4){transition-delay:0.3s;}
+  [data-reveal-group] > [data-reveal]:nth-child(5){transition-delay:0.4s;}
+  [data-reveal-group] > [data-reveal]:nth-child(6){transition-delay:0.5s;}
+
+  @media(prefers-reduced-motion: reduce){
+    [data-reveal]{opacity:1; transform:none; transition:none;}
+  }
+
+  /* ===== FOUNDER NOTE (trust device: a named person, not a stat) ===== */
+  .founder-note{
+    padding:150px 56px;
+    text-align:center;
+    max-width:760px;
+    margin:0 auto;
+  }
+  .founder-note .divider{margin-bottom:40px;}
+  .founder-note blockquote{
+    font-family:'Canela Text','Playfair Display',Georgia,serif;
+    font-weight:400;
+    font-size:clamp(22px,2.6vw,32px);
+    line-height:1.55;
+    color:var(--off-white);
+    margin:0 0 34px;
+  }
+  .founder-note .founder-sig{
+    font-size:13px;
+    letter-spacing:0.06em;
+    color:var(--grey);
+  }
+  .founder-note .founder-sig strong{
+    color:var(--off-white);
+    font-weight:500;
+  }
+
   .sub-hero{
     position:relative;
     height:72vh;
