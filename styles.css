@@ -1382,6 +1382,11 @@
     font-size:clamp(26px,3.4vw,42px);
     line-height:1.2;
   }
+  .moments-solve-head .moments-solve-sub{
+    margin-top:20px;
+    font-size:14px;
+    color:var(--grey);
+  }
   .moments-solve-list{
     max-width:720px;
     margin:0 auto;
