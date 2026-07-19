@@ -1160,6 +1160,25 @@
   }
 
   /* ===== FOUNDER NOTE (trust device: a named person, not a stat) ===== */
+  /* ===== PULL STATEMENT (unsigned brand line -- replaces the orphaned
+     .statement class, which lost its CSS during the House homepage
+     rebuild). Use this for a single strong line that doesn't need a
+     named voice behind it; use .founder-note when it does. ===== */
+  .pull-statement{
+    padding:150px 56px;
+    text-align:center;
+    max-width:820px;
+    margin:0 auto;
+  }
+  .pull-statement .divider{margin-bottom:40px;}
+  .pull-statement h2{
+    font-family:'Canela Text','Playfair Display',Georgia,serif;
+    font-weight:400;
+    font-size:clamp(26px,3.2vw,40px);
+    line-height:1.4;
+    color:var(--off-white);
+  }
+
   .founder-note{
     padding:150px 56px;
     text-align:center;
