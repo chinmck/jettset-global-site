@@ -15,7 +15,8 @@
 /partners             /partners.html              200
 /access-partners      /access-partners.html       200
 /quote                /quote.html                 200
-/enquiry              /enquiry.html               200
+/contact              /contact.html               200
+/enquiry              /contact.html               301
 /terms                /terms.html                 200
 /privacy              /privacy.html               200
 /trust                /trust.html                 200
