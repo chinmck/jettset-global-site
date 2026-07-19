@@ -4288,6 +4288,72 @@
     color:var(--off-white);
   }
   .origin-pull .divider{margin:0 auto 28px;}
+
+  /* ===== CULTURAL FLUENCY (About) ===== */
+  .cultural-fluency-section{
+    padding:60px 56px 140px;
+    max-width:720px;
+    margin:0 auto;
+  }
+  .cultural-fluency-head{
+    text-align:center;
+    margin-bottom:56px;
+  }
+  .cultural-fluency-head .eyebrow{margin-bottom:18px;}
+  .cultural-fluency-head h2{
+    font-size:clamp(28px,3.6vw,46px);
+  }
+  .cultural-fluency-body p{
+    font-size:15px;
+    color:var(--off-white);
+    line-height:1.95;
+    margin-bottom:18px;
+  }
+  .cultural-fluency-body p.dim{color:var(--grey);}
+  .cultural-fluency-body p:last-child{margin-bottom:0;}
+  .cultural-fluency-pull{
+    text-align:center;
+    padding:50px 20px 0;
+    margin:56px auto 0;
+    max-width:600px;
+  }
+  .cultural-fluency-pull .divider{margin:0 auto 28px;}
+  .cultural-fluency-pull p{
+    font-family:'Canela Text','Playfair Display',serif;
+    font-size:clamp(20px,2.4vw,28px);
+    line-height:1.5;
+    color:var(--gold);
+  }
+
+  /* ===== ABOUT CROSSLINKS (Manifest / Trust & Safety) ===== */
+  .about-crosslinks{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--grey-line);
+    max-width:960px;
+    margin:0 auto 160px;
+  }
+  .about-crosslink{
+    background:var(--black);
+    padding:52px 44px;
+    transition:background 0.3s ease;
+  }
+  .about-crosslink:hover{background:rgba(201,162,75,0.04);}
+  .about-crosslink .eyebrow{margin-bottom:16px;}
+  .about-crosslink h4{
+    font-family:'Canela Text','Playfair Display',serif;
+    font-size:22px;
+    margin-bottom:14px;
+  }
+  .about-crosslink p{
+    font-size:14px;
+    color:var(--grey);
+    line-height:1.7;
+  }
+  @media(max-width:800px){
+    .about-crosslinks{grid-template-columns:1fr;}
+  }
   .origin-list{
     margin:40px 0;
     padding-left:0;

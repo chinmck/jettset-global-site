@@ -1002,6 +1002,30 @@
       });
     })();
 
+    // ===== PARALLAX DEPTH (chapter hero "3D touch") =====
+    (function(){
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var layers = document.querySelectorAll('.chapter-hero-parallax');
+      if(reduceMotion || !layers.length) return;
+
+      var ticking = false;
+      function updateParallax(){
+        layers.forEach(function(layer){
+          var hero = layer.closest('.chapter-hero');
+          if(!hero) return;
+          var rect = hero.getBoundingClientRect();
+          if(rect.bottom < 0 || rect.top > window.innerHeight) return;
+          var offset = rect.top * 0.12;
+          layer.style.transform = 'translateY(' + offset + 'px)';
+        });
+        ticking = false;
+      }
+      window.addEventListener('scroll', function(){
+        if(!ticking){ requestAnimationFrame(updateParallax); ticking = true; }
+      }, {passive:true});
+      updateParallax();
+    })();
+
     // ===== SITEWIDE SCROLL REVEAL =====
     // Same IntersectionObserver pattern already proven on the Journey
     // Builder timeline above -- generalized so any page can opt an element
