@@ -237,6 +237,14 @@
             }
           ]
         },
+        'super-midsize': {
+          // No real quote-sourced photos/specs for this category yet --
+          // deliberately left empty rather than reusing 'midsize' data
+          // (a different aircraft class) or inventing figures. Renders
+          // the same honest empty-state as 'helicopter' below, until
+          // real sourced aircraft are added here.
+          aircraft: []
+        },
         'ulr': {
           aircraft: [
             {

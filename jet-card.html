@@ -40,6 +40,23 @@
     </div>
   </div>
 
+  <div class="fleet-modal-overlay" id="fleetModalOverlay">
+    <div class="fleet-modal">
+      <button type="button" class="fleet-modal-close" id="fleetModalClose" aria-label="Close">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L8.94 10l-4.72 4.72a.75.75 0 1 0 1.06 1.06L10 11.06l4.72 4.72a.75.75 0 1 0 1.06-1.06L11.06 10l4.72-4.72a.75.75 0 0 0-1.06-1.06L10 8.94z"/></svg>
+      </button>
+      <div class="fleet-modal-head">
+        <span class="eyebrow">Category</span>
+        <h3 id="fleetModalTitle">&nbsp;</h3>
+        <div class="fleet-modal-meta" id="fleetModalMeta">&nbsp;</div>
+        <p id="fleetModalDesc">&nbsp;</p>
+      </div>
+      <div class="fleet-modal-aircraft" id="fleetModalAircraft"></div>
+      <p class="fleet-modal-empty" id="fleetModalEmpty">Fleet imagery for this category is being finalised — every journey is still sourced operator-direct against the specific aircraft available.</p>
+    </div>
+  </div>
+
+
 
   <div class="side-overlay" id="sideOverlay"></div>
   <div class="side-panel" id="sidePanel">
@@ -216,31 +233,31 @@
         <p>Your Jet Card is not tied to one aircraft type. Each trip can be matched to the category that best reflects the distance, passenger count, baggage, cabin and range required.</p>
       </div>
       <div class="category-grid jc-category-grid" data-reveal-group>
-        <div class="category-card" data-reveal>
+        <div class="category-card" data-category="vlj-light" data-reveal>
           <span class="eyebrow">Category</span>
           <h4>Light Jet</h4>
           <div class="category-meta">4&ndash;6 Guests &middot; ~2&ndash;3h</div>
           <p>Short regional journeys and efficient city pairs.</p>
         </div>
-        <div class="category-card" data-reveal>
+        <div class="category-card" data-category="midsize" data-reveal>
           <span class="eyebrow">Category</span>
           <h4>Midsize Jet</h4>
           <div class="category-meta">6&ndash;8 Guests &middot; ~3&ndash;4h</div>
           <p>Longer regional travel with added cabin and baggage space.</p>
         </div>
-        <div class="category-card" data-reveal>
+        <div class="category-card" data-category="super-midsize" data-reveal>
           <span class="eyebrow">Category</span>
           <h4>Super-Midsize Jet</h4>
           <div class="category-meta">8&ndash;10 Guests &middot; ~5&ndash;6h</div>
           <p>Extended range with stand-up cabin comfort.</p>
         </div>
-        <div class="category-card" data-reveal>
+        <div class="category-card" data-category="heavy" data-reveal>
           <span class="eyebrow">Category</span>
           <h4>Heavy Jet</h4>
           <div class="category-meta">10&ndash;14 Guests &middot; ~7&ndash;8h</div>
           <p>Long-range journeys with generous cabin space and amenities.</p>
         </div>
-        <div class="category-card" data-reveal>
+        <div class="category-card" data-category="ulr" data-reveal>
           <span class="eyebrow">Category</span>
           <h4>Ultra Long Range</h4>
           <div class="category-meta">12&ndash;16 Guests &middot; ~12h+</div>
