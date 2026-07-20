@@ -1205,10 +1205,13 @@
      rebuild). Use this for a single strong line that doesn't need a
      named voice behind it; use .founder-note when it does. ===== */
   .pull-statement{
-    padding:150px 56px;
+    padding:var(--space-immersive-d) 56px var(--space-immersive-d);
     text-align:center;
     max-width:820px;
     margin:0 auto;
+  }
+  @media(max-width:680px){
+    .pull-statement{padding:var(--space-immersive-m) 24px var(--space-immersive-m);}
   }
   .pull-statement .divider{margin-bottom:40px;}
   .pull-statement h2{
@@ -1395,6 +1398,18 @@
     background:var(--grey-line);
     margin:0 56px 160px;
   }
+  /* Jet Card-only override: Charter's identical .feature-grid is locked/
+     approved, so this uses a modifier class rather than touching the
+     shared rule above. Converts the old margin-based zero-top-dependency
+     hack into real, tokenized top+bottom padding. */
+  .jc-feature-grid{
+    margin:0 auto !important;
+    padding:var(--space-standard-d) 56px var(--space-standard-d);
+    max-width:1160px;
+  }
+  @media(max-width:680px){
+    .jc-feature-grid{padding:var(--space-standard-m) 24px var(--space-standard-m);}
+  }
   .feature-card{
     background:var(--black);
     padding:52px 40px;
@@ -1568,6 +1583,19 @@
   }
   @media(max-width:960px){
     .category-grid{grid-template-columns:1fr 1fr;}
+  }
+  /* Jet Card has 5 cards -> 2-column layout leaves an orphaned last card
+     aligned alone on the left. Charter's identical .category-grid has 6
+     (even, no orphan) and is locked, so this is scoped to the Jet-Card-
+     only modifier class and only within the 2-column range -- never
+     touches the shared base rule or Charter's rendering. */
+  @media(min-width:561px) and (max-width:960px){
+    .jc-category-grid{justify-items:stretch;}
+    .jc-category-grid .category-card:last-child{
+      grid-column:1 / -1;
+      justify-self:center;
+      width:calc(50% - 0.5px);
+    }
   }
   @media(max-width:560px){
     .category-grid{grid-template-columns:1fr;}
@@ -3382,7 +3410,7 @@
 
   /* ===== COVERAGE GRID (Jet Card) ===== */
   .coverage{
-    padding:0 56px 140px;
+    padding:var(--space-immersive-d) 56px var(--space-immersive-d);
     max-width:1100px;
     margin:0 auto;
   }
@@ -3415,7 +3443,7 @@
   }
   @media(max-width:880px){
     .coverage-grid{grid-template-columns:1fr;}
-    .coverage{padding:0 0 100px;}
+    .coverage{padding:var(--space-immersive-m) 0 var(--space-immersive-m);}
   }
 
   /* ===== CONCIERGE: GROUND FLEET SELECTOR (reuses region-tab pattern) ===== */
@@ -3535,13 +3563,16 @@
 
   /* ===== PRICING FORMULA BAND ===== */
   .formula-band{
-    padding:100px 56px;
+    padding:var(--space-standard-d) 56px;
     text-align:center;
     background:var(--black-elevated);
     border-top:1px solid var(--grey-line);
     border-bottom:1px solid var(--grey-line);
   }
   .formula-band .eyebrow{margin-bottom:24px;}
+  @media(max-width:680px){
+    .formula-band{padding:var(--space-standard-m) 24px;}
+  }
   .formula-equation{
     font-family:'Canela Text','Playfair Display',serif;
     font-size:clamp(22px,3vw,34px);
@@ -3564,12 +3595,15 @@
 
   /* ===== FIT-CHECK LIST (who it's for) ===== */
   .fit-check{
-    padding:0 56px 160px;
+    padding:var(--space-standard-d) 56px var(--space-standard-d);
     max-width:680px;
     margin:0 auto;
     text-align:center;
   }
   .fit-check .eyebrow{margin-bottom:20px;}
+  @media(max-width:680px){
+    .fit-check{padding:var(--space-standard-m) 24px var(--space-standard-m);}
+  }
   .fit-check h2{
     font-size:clamp(24px,3vw,36px);
     text-transform:uppercase;
@@ -3844,11 +3878,14 @@
   }
 
   .caveat-band{
-    padding:90px 56px;
+    padding:var(--space-compact-d) 56px;
     text-align:center;
     background:var(--black-elevated);
     border-top:1px solid var(--grey-line);
     border-bottom:1px solid var(--grey-line);
+  }
+  @media(max-width:680px){
+    .caveat-band{padding:var(--space-compact-m) 24px;}
   }
   .caveat-band .eyebrow{margin-bottom:20px;}
   .caveat-band p{
