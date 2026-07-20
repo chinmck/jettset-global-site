@@ -473,41 +473,41 @@
       </div>
     </section>
 
-    <section class="route-map" id="routeMapSection" data-reveal>
-      <div class="rm-head">
-        <span class="eyebrow">Signature Journeys</span>
-        <h2>Journeys We Know Well</h2>
-        <p>A selection of routes our guests return to time and again. Every journey is sourced individually, wherever in the world it begins — select one to see it in the air.</p>
-      </div>
-      <div class="rm-wrap">
-        <div class="rm-mobile-showcase" id="rmMobileShowcase">
-          <div class="rm-mobile-route-name" id="rmMobileRouteName">Select A Journey</div>
-          <div class="rm-mobile-line"><span class="rm-mobile-plane">&#10148;</span></div>
+    <section class="route-map jw-embed" id="routeMapSection" data-reveal>
+      <div class="jw-embed-grid">
+        <div class="jw-embed-copy">
+          <span class="eyebrow">Signature Journeys</span>
+          <h2>Wherever The World Gathers.</h2>
+          <p>Six routes our guests return to, sourced individually every time. Select one to see it in the air.</p>
         </div>
-        <svg class="rm-svg" viewBox="0 0 1600 650" id="rmSvg">
-          <g class="rm-globe" id="rmGlobe">
-            <ellipse class="rm-globe-outline" cx="800" cy="325" rx="740" ry="300"></ellipse>
-            <ellipse class="rm-globe-lat" cx="800" cy="325" rx="740" ry="90"></ellipse>
-            <ellipse class="rm-globe-lat" cx="800" cy="325" rx="700" ry="190"></ellipse>
-            <ellipse class="rm-globe-lat" cx="800" cy="325" rx="700" ry="250"></ellipse>
-            <g class="rm-globe-meridians">
-              <ellipse class="rm-globe-lon" cx="800" cy="325" rx="185" ry="300"></ellipse>
-              <ellipse class="rm-globe-lon" cx="800" cy="325" rx="370" ry="300"></ellipse>
-              <ellipse class="rm-globe-lon" cx="800" cy="325" rx="555" ry="300"></ellipse>
-              <line class="rm-globe-lon" x1="800" y1="25" x2="800" y2="625"></line>
-            </g>
-          </g>
-          <ellipse class="rm-grid-line" cx="800" cy="325" rx="740" ry="250"></ellipse>
-          <ellipse class="rm-grid-line" cx="800" cy="325" rx="500" ry="165"></ellipse>
-          <line class="rm-grid-line" x1="40" y1="325" x2="1560" y2="325"></line>
-        </svg>
-        <div class="rm-chip-list" id="rmChipList"></div>
-        <div class="rm-caption" id="rmCaption">
-          <span class="eyebrow">Select A Journey</span>
-          <h4>Choose A Route</h4>
-          <p>Select any route above to see an approximate flight time and journey note.</p>
+
+        <div class="jw-embed-stage">
+          <div class="world-stage">
+            <canvas id="globeCanvas" width="900" height="900" aria-label="Three-dimensional globe showing recognisable world geography"></canvas>
+            <span class="globe-hint" id="globeHint">Drag to rotate</span>
+            <div class="static-fallback" id="staticFallback"></div>
+          </div>
         </div>
-        <p class="rm-disclaimer">A sample of where guests travel most — Jettset sources journeys globally, wherever yours may lead.</p>
+
+        <div class="jw-embed-chips">
+          <div class="route-chips" id="routeChips"></div>
+        </div>
+
+        <div class="jw-embed-panel">
+          <div class="journey-panel" id="journeyPanel">
+            <h3 class="jp-route-name" id="jpRouteName">&nbsp;</h3>
+            <span class="jp-route-sub" id="jpRouteSub">&nbsp;</span>
+            <div class="jp-grid">
+              <div><span class="jp-stat-label">Flight Time</span><span class="jp-stat-value" id="jpFlightTime">&mdash;</span></div>
+              <div><span class="jp-stat-label">Suitable Category</span><span class="jp-stat-value" id="jpAircraft">&mdash;</span></div>
+              <div><span class="jp-stat-label">Local Time, Destination</span><span class="jp-stat-value" id="jpLocalTime">&mdash;</span></div>
+            </div>
+            <p class="jp-concierge" id="jpConcierge"></p>
+            <div class="jp-cultural" id="jpCultural"></div>
+            <button type="button" class="jp-cta" id="jpCta">Build This Journey</button>
+            <p class="jp-cta-note">In production, this prefills the Journey Builder above with this route.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -668,5 +668,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script type="module" src="./jettset-world/globe.js"></script>
 </body>
 </html>
