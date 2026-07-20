@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Jettset World — Prototype</title>
+<style>
+  @import url('https://fonts.cdnfonts.com/css/canela-text');
+  @import url('https://api.fontshare.com/v2/css?f[]=general-sans@500,600,400&display=swap');
+
+  :root{
+    --black:#0A0908;
+    --black-elevated:#16140F;
+    --off-white:#F5F3EF;
+    --gold:#C9A24B;
+    --gold-dim:#8C763F;
+    --grey:#8A8782;
+    --grey-line:rgba(245,243,239,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:var(--black); color:var(--off-white); font-family:'General Sans','Inter',sans-serif;}
+  h1,h2,h3{font-family:'Canela Text','Playfair Display',Georgia,serif; font-weight:400;}
+
+  .proto-banner{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:var(--gold); color:var(--black);
+    text-align:center; font-size:11px; letter-spacing:0.14em;
+    text-transform:uppercase; padding:8px 12px; font-weight:600;
+  }
+
+  .world-section{
+    min-height:100vh;
+    padding:64px 24px 80px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .world-section::before{
+    content:'';
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse 70% 50% at 50% 38%, rgba(201,162,75,0.05), transparent 65%);
+    pointer-events:none;
+  }
+
+  .world-head{ text-align:center; max-width:620px; margin:0 auto 8px; position:relative; z-index:2; }
+  .world-eyebrow{
+    font-size:11px; letter-spacing:0.28em; text-transform:uppercase;
+    color:var(--grey); font-weight:500; display:block; margin-bottom:20px;
+  }
+  .world-head h1{ font-size:clamp(32px,5vw,56px); line-height:1.1; margin-bottom:18px; }
+  .world-head p{ font-size:15px; color:var(--grey); line-height:1.75; max-width:520px; margin:0 auto; }
+
+  .world-stage{
+    position:relative;
+    width:100%;
+    max-width:900px;
+    margin:32px auto 0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  #globeCanvas{
+    display:block;
+    width:100%;
+    max-width:560px;
+    aspect-ratio:1/1;
+    touch-action:none;
+    cursor:grab;
+  }
+  #globeCanvas:active{cursor:grabbing;}
+  .globe-hint{
+    font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--grey); text-align:center; margin-top:6px; opacity:0.7;
+  }
+
+  /* ===== ROUTE CHIPS ===== */
+  .route-chips{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:8px;
+    max-width:720px; margin:36px auto 0; position:relative; z-index:2;
+  }
+  .route-chip{
+    font-size:12px; letter-spacing:0.02em;
+    border:1px solid var(--grey-line);
+    color:var(--grey);
+    background:none;
+    padding:10px 18px;
+    cursor:pointer;
+    transition:color 0.25s, border-color 0.25s, background 0.25s;
+    font-family:'General Sans','Inter',sans-serif;
+  }
+  .route-chip:hover{color:var(--off-white); border-color:var(--gold-dim);}
+  .route-chip.is-active{
+    color:var(--black);
+    background:var(--gold);
+    border-color:var(--gold);
+  }
+
+  /* ===== INFO PANEL ===== */
+  .journey-panel{
+    width:100%; max-width:720px;
+    margin:44px auto 0;
+    background:var(--black-elevated);
+    border:1px solid var(--grey-line);
+    padding:40px 44px;
+    position:relative; z-index:2;
+    opacity:0; transform:translateY(14px);
+    transition:opacity 0.6s cubic-bezier(.22,.61,.21,1), transform 0.6s cubic-bezier(.22,.61,.21,1);
+  }
+  .journey-panel.is-visible{ opacity:1; transform:translateY(0); }
+
+  .jp-route-name{
+    font-size:clamp(20px,2.4vw,28px);
+    margin-bottom:6px;
+  }
+  .jp-route-sub{ font-size:12px; color:var(--gold-dim); letter-spacing:0.06em; margin-bottom:28px; }
+
+  .jp-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:28px;
+    padding-bottom:24px; margin-bottom:24px; border-bottom:1px solid var(--grey-line);
+  }
+  .jp-stat-label{ font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--grey); display:block; margin-bottom:8px; }
+  .jp-stat-value{ font-size:16px; color:var(--off-white); }
+
+  .jp-concierge{ font-size:13.5px; color:var(--grey); line-height:1.8; margin-bottom:20px; }
+
+  .jp-cultural{
+    display:flex; align-items:baseline; gap:10px;
+    font-size:12.5px; color:var(--gold); margin-bottom:28px;
+    border-left:2px solid var(--gold-dim); padding-left:14px;
+  }
+  .jp-cultural.is-empty{ display:none; }
+
+  .jp-cta{
+    display:inline-block;
+    font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--off-white); border:1px solid var(--gold); padding:15px 34px;
+    transition:background 0.3s, color 0.3s;
+    cursor:pointer; background:none; font-family:'General Sans','Inter',sans-serif;
+  }
+  .jp-cta:hover{ background:var(--gold); color:var(--black); }
+
+  .jp-cta-note{ font-size:11.5px; color:var(--grey); margin-top:14px; }
+
+  /* ===== STATIC / NO-CANVAS FALLBACK ===== */
+  .static-fallback{ display:none; width:100%; max-width:720px; margin:0 auto; }
+  .static-fallback.is-shown{ display:block; }
+  .static-route-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 4px; border-bottom:1px solid var(--grey-line);
+    cursor:pointer; font-size:14px;
+  }
+  .static-route-row:hover{ color:var(--gold); }
+
+  @media(max-width:680px){
+    .world-section{ padding:100px 20px 64px; }
+    .jp-grid{ grid-template-columns:1fr 1fr; }
+    .journey-panel{ padding:32px 26px; }
+  }
+
+  @media(prefers-reduced-motion: reduce){
+    .journey-panel{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="proto-banner">Prototype — The Jettset World — not integrated into the live site</div>
+
+<section class="world-section">
+  <div class="world-head">
+    <span class="world-eyebrow">The Jettset World</span>
+    <h1>Wherever The World Gathers.</h1>
+    <p>Six routes our guests return to, sourced individually every time. Select one to see it in the air.</p>
+  </div>
+
+  <div class="world-stage">
+    <canvas id="globeCanvas" width="1000" height="1000" aria-label="Interactive globe showing Jettset signature routes"></canvas>
+    <span class="globe-hint" id="globeHint">Drag to rotate</span>
+
+    <div class="static-fallback" id="staticFallback">
+      <!-- populated by JS only if canvas is unavailable -->
+    </div>
+  </div>
+
+  <div class="route-chips" id="routeChips"></div>
+
+  <div class="journey-panel" id="journeyPanel">
+    <h3 class="jp-route-name" id="jpRouteName">&nbsp;</h3>
+    <span class="jp-route-sub" id="jpRouteSub">&nbsp;</span>
+
+    <div class="jp-grid">
+      <div>
+        <span class="jp-stat-label">Flight Time</span>
+        <span class="jp-stat-value" id="jpFlightTime">&mdash;</span>
+      </div>
+      <div>
+        <span class="jp-stat-label">Suitable Category</span>
+        <span class="jp-stat-value" id="jpAircraft">&mdash;</span>
+      </div>
+      <div>
+        <span class="jp-stat-label">Local Time, Destination</span>
+        <span class="jp-stat-value" id="jpLocalTime">&mdash;</span>
+      </div>
+    </div>
+
+    <p class="jp-concierge" id="jpConcierge"></p>
+    <div class="jp-cultural" id="jpCultural"></div>
+
+    <button type="button" class="jp-cta" id="jpCta">Build This Journey</button>
+    <p class="jp-cta-note">Prototype only &mdash; in production, this prefills the Journey Builder with this route.</p>
+  </div>
+</section>
+
+<script>
+(function(){
+
+  // ============================================================
+  // ROUTE DATA — reusing Jettset's existing Signature Journeys +
+  // Journey Builder quick-routes, extended just enough to reach
+  // the five named cultural-fluency moments.
+  // ============================================================
+  var ROUTES = [
+    {
+      id:'london-monaco', a:{name:'London', lat:51.5074, lon:-0.1278},
+      b:{name:'Monaco', lat:43.7384, lon:7.4246, tz:2},
+      label:'London &rarr; Monaco', sub:'Riviera Escape',
+      flightTime:'1h 40m', aircraft:'Light / Midsize Jet',
+      concierge:'Ground transfer from Nice Côte d\u2019Azur and villa coordination arranged as part of the same journey.',
+      cultural:'Monaco Grand Prix \u2014 May'
+    },
+    {
+      id:'london-dubai', a:{name:'London', lat:51.5074, lon:-0.1278},
+      b:{name:'Dubai', lat:25.2048, lon:55.2708, tz:4},
+      label:'London &rarr; Dubai', sub:'Gulf Crossing',
+      flightTime:'6h 45m', aircraft:'Heavy Jet',
+      concierge:'Cabin and departure time selected around the arrival experience, with ground handling pre-arranged.',
+      cultural:''
+    },
+    {
+      id:'ny-london', a:{name:'New York', lat:40.7128, lon:-74.0060},
+      b:{name:'London', lat:51.5074, lon:-0.1278, tz:1},
+      label:'New York &rarr; London', sub:'Atlantic Crossing',
+      flightTime:'7h 15m', aircraft:'Heavy / Ultra Long Range',
+      concierge:'Arranged for work, rest and a considered arrival into the next time zone.',
+      cultural:''
+    },
+    {
+      id:'miami-newyork', a:{name:'Miami', lat:25.7617, lon:-80.1918, tz:-4},
+      b:{name:'New York', lat:40.7128, lon:-74.0060, tz:-4},
+      label:'Miami &rarr; New York', sub:'Fair Week Route',
+      flightTime:'2h 20m', aircraft:'Light / Midsize Jet',
+      concierge:'Gallery and preview-day access coordinated through Concierge ahead of arrival.',
+      cultural:'Miami Art Basel \u2014 December'
+    },
+    {
+      id:'lagos-london', a:{name:'Lagos', lat:6.5244, lon:3.3792, tz:1},
+      b:{name:'London', lat:51.5074, lon:-0.1278, tz:1},
+      label:'Lagos &rarr; London', sub:'',
+      flightTime:'6h 30m', aircraft:'Heavy Jet',
+      concierge:'Ground transfer and onward arrangements held ready on both ends of the journey.',
+      cultural:'Lagos Seasonal Travel \u2014 December'
+    },
+    {
+      id:'london-cannes', a:{name:'London', lat:51.5074, lon:-0.1278},
+      b:{name:'Cannes', lat:43.5528, lon:7.0174, tz:2},
+      label:'London &rarr; Cannes', sub:'Festival Route',
+      flightTime:'1h 45m', aircraft:'Light / Midsize Jet',
+      concierge:'Accreditation and venue movement coordinated in advance through Concierge.',
+      cultural:'Cannes Film Festival \u2014 May'
+    },
+    {
+      id:'london-paris', a:{name:'London', lat:51.5074, lon:-0.1278},
+      b:{name:'Paris', lat:48.8566, lon:2.3522, tz:2},
+      label:'London &rarr; Paris', sub:'',
+      flightTime:'55m', aircraft:'Light Jet',
+      concierge:'Show-seating and venue transfers arranged alongside the journey.',
+      cultural:'Paris Fashion Week \u2014 September'
+    }
+  ];
+
+  // ============================================================
+  // SIMPLIFIED / STYLISED CONTINENT SILHOUETTES
+  // Editorial impressions, not cartographically precise data --
+  // deliberately abstracted, matching a 'sculptural object' feel
+  // rather than a mapping-app globe.
+  // ============================================================
+  var CONTINENTS = [
+    // Europe
+    [[36,-9],[43,-9],[48,-5],[52,2],[58,8],[60,20],[54,30],[46,28],[40,20],[36,10],[36,-9]],
+    // Africa
+    [[37,-6],[33,10],[30,32],[12,42],[-2,42],[-18,35],[-34,20],[-30,14],[-20,12],[-4,8],[10,-6],[22,-16],[32,-10],[37,-6]],
+    // Asia (broad, simplified)
+    [[55,40],[62,60],[68,90],[60,120],[45,135],[30,122],[18,105],[8,98],[10,78],[20,68],[30,55],[42,45],[55,40]],
+    // North America
+    [[70,-160],[68,-120],[60,-95],[48,-70],[42,-65],[32,-80],[26,-97],[20,-105],[28,-115],[45,-124],[58,-135],[70,-160]],
+    // South America
+    [[10,-72],[8,-60],[-5,-35],[-22,-40],[-38,-58],[-54,-68],[-40,-73],[-18,-78],[-4,-80],[10,-72]],
+    // Australia
+    [[-12,113],[-14,130],[-24,150],[-38,147],[-35,138],[-32,116],[-20,114],[-12,113]]
+  ];
+
+  // ============================================================
+  // 3D MATH — lat/lon on a unit sphere, simple yaw/pitch rotation,
+  // orthographic-ish projection with a mild perspective falloff.
+  // ============================================================
+  function toVec3(lat, lon){
+    var phi = (90 - lat) * Math.PI / 180;
+    var theta = (lon + 180) * Math.PI / 180;
+    return {
+      x: -Math.sin(phi) * Math.cos(theta),
+      y: Math.cos(phi),
+      z: Math.sin(phi) * Math.sin(theta)
+    };
+  }
+
+  function rotateY(v, a){
+    var c = Math.cos(a), s = Math.sin(a);
+    return { x: v.x*c + v.z*s, y: v.y, z: -v.x*s + v.z*c };
+  }
+  function rotateX(v, a){
+    var c = Math.cos(a), s = Math.sin(a);
+    return { x: v.x, y: v.y*c - v.z*s, z: v.y*s + v.z*c };
+  }
+
+  function slerp(a, b, t){
+    var dot = a.x*b.x + a.y*b.y + a.z*b.z;
+    dot = Math.max(-1, Math.min(1, dot));
+    var theta = Math.acos(dot) * t;
+    var relX = b.x - a.x*dot, relY = b.y - a.y*dot, relZ = b.z - a.z*dot;
+    var len = Math.sqrt(relX*relX + relY*relY + relZ*relZ) || 1;
+    relX/=len; relY/=len; relZ/=len;
+    return {
+      x: a.x*Math.cos(theta) + relX*Math.sin(theta),
+      y: a.y*Math.cos(theta) + relY*Math.sin(theta),
+      z: a.z*Math.cos(theta) + relZ*Math.sin(theta)
+    };
+  }
+
+  // ============================================================
+  // GLOBE ENGINE
+  // ============================================================
+  function initGlobe(canvas){
+    var ctx = canvas.getContext('2d');
+    if(!ctx) return null;
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var W, H, R, cx, cy, dpr;
+
+    function resize(){
+      var rect = canvas.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = rect.width; H = rect.height;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      cx = W/2; cy = H/2;
+      R = Math.min(W,H) * 0.42;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var rotation = { yaw: 0.5, pitch: -0.15 };
+    var targetRotation = { yaw: 0.5, pitch: -0.15 };
+    var dragging = false;
+    var lastX = 0, lastY = 0;
+    var idleDrift = !reduceMotion;
+
+    var activeRoute = null;
+    var arcProgress = 0;      // 0..1 draw-in of the route arc
+    var markerProgress = 0;   // 0..1 aircraft marker position along arc
+    var arcAnimating = false;
+
+    function project(v){
+      var scale = 1 / (1.9 - v.z); // mild perspective falloff, restrained (not fisheye)
+      return { x: cx + v.x * R * scale, y: cy - v.y * R * scale, z: v.z, scale: scale };
+    }
+
+    function getRotatedPoint(lat, lon){
+      var v = toVec3(lat, lon);
+      v = rotateY(v, rotation.yaw);
+      v = rotateX(v, rotation.pitch);
+      return v;
+    }
+
+    function drawGraticule(){
+      ctx.strokeStyle = 'rgba(245,243,239,0.09)';
+      ctx.lineWidth = 1;
+      // meridians every 30deg
+      for(var lon=-180; lon<180; lon+=30){
+        ctx.beginPath();
+        var started = false;
+        for(var lat=-90; lat<=90; lat+=4){
+          var v = getRotatedPoint(lat, lon);
+          if(v.z < -0.05){ started = false; continue; }
+          var p = project(v);
+          if(!started){ ctx.moveTo(p.x, p.y); started = true; }
+          else ctx.lineTo(p.x, p.y);
+        }
+        ctx.stroke();
+      }
+      // parallels every 30deg
+      for(var lat2=-60; lat2<=60; lat2+=30){
+        ctx.beginPath();
+        var started2 = false;
+        for(var lon2=-180; lon2<=180; lon2+=4){
+          var v2 = getRotatedPoint(lat2, lon2);
+          if(v2.z < -0.05){ started2 = false; continue; }
+          var p2 = project(v2);
+          if(!started2){ ctx.moveTo(p2.x, p2.y); started2 = true; }
+          else ctx.lineTo(p2.x, p2.y);
+        }
+        ctx.stroke();
+      }
+    }
+
+    function drawContinents(){
+      ctx.fillStyle = 'rgba(140,118,63,0.14)'; // muted gold-grey landmass tint
+      CONTINENTS.forEach(function(poly){
+        ctx.beginPath();
+        var started = false;
+        var anyFront = false;
+        poly.forEach(function(pt){
+          var v = getRotatedPoint(pt[0], pt[1]);
+          var p = project(v);
+          if(v.z > -0.05){
+            anyFront = true;
+            if(!started){ ctx.moveTo(p.x, p.y); started = true; }
+            else ctx.lineTo(p.x, p.y);
+          } else {
+            started = false;
+          }
+        });
+        if(anyFront){ ctx.closePath(); ctx.fill(); }
+      });
+    }
+
+    function drawSphereOutline(){
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI*2);
+      ctx.strokeStyle = 'rgba(201,162,75,0.28)';
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+      // very restrained ambient glow -- a soft radial, not neon
+      var glow = ctx.createRadialGradient(cx, cy, R*0.75, cx, cy, R*1.25);
+      glow.addColorStop(0, 'rgba(201,162,75,0.05)');
+      glow.addColorStop(1, 'rgba(201,162,75,0)');
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(cx, cy, R*1.25, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    function drawCityDot(lat, lon, isActive){
+      var v = getRotatedPoint(lat, lon);
+      if(v.z < -0.1) return null;
+      var p = project(v);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, isActive ? 4 : 2.5, 0, Math.PI*2);
+      ctx.fillStyle = isActive ? '#C9A24B' : 'rgba(245,243,239,0.55)';
+      ctx.fill();
+      return p;
+    }
+
+    function drawArcAndMarker(){
+      if(!activeRoute) return;
+      var vA = toVec3(activeRoute.a.lat, activeRoute.a.lon);
+      var vB = toVec3(activeRoute.b.lat, activeRoute.b.lon);
+
+      var segments = 48;
+      var visibleSegments = Math.round(segments * arcProgress);
+      var pts = [];
+      for(var i=0; i<=segments; i++){
+        var t = i/segments;
+        var mid = slerp(vA, vB, t);
+        var lift = 1 + Math.sin(Math.PI * t) * 0.055; // gentle arc bulge above surface
+        var lifted = { x: mid.x*lift, y: mid.y*lift, z: mid.z*lift };
+        var rotated = rotateX(rotateY(lifted, rotation.yaw), rotation.pitch);
+        pts.push(rotated);
+      }
+
+      ctx.beginPath();
+      var started = false;
+      for(var j=0; j<=visibleSegments; j++){
+        var pr = pts[j];
+        if(pr.z < -0.08){ started = false; continue; }
+        var pp = project(pr);
+        if(!started){ ctx.moveTo(pp.x, pp.y); started = true; }
+        else ctx.lineTo(pp.x, pp.y);
+      }
+      ctx.strokeStyle = 'rgba(201,162,75,0.85)';
+      ctx.lineWidth = 1.6;
+      ctx.stroke();
+
+      // restrained aircraft marker -- a small diamond, not an icon-heavy plane glyph
+      if(arcProgress >= 0.999){
+        var mIdx = Math.min(segments, Math.round(segments * markerProgress));
+        var mPt = pts[mIdx];
+        if(mPt && mPt.z > -0.08){
+          var mp = project(mPt);
+          ctx.save();
+          ctx.translate(mp.x, mp.y);
+          ctx.rotate(Math.PI/4);
+          ctx.fillStyle = '#F5F3EF';
+          ctx.fillRect(-3,-3,6,6);
+          ctx.restore();
+        }
+      }
+    }
+
+    function render(){
+      ctx.clearRect(0,0,W,H);
+      drawSphereOutline();
+      drawGraticule();
+      drawContinents();
+
+      // always show all 7 route city-pairs faintly as context
+      ROUTES.forEach(function(r){
+        drawCityDot(r.a.lat, r.a.lon, false);
+        drawCityDot(r.b.lat, r.b.lon, false);
+      });
+
+      if(activeRoute){
+        drawArcAndMarker();
+        drawCityDot(activeRoute.a.lat, activeRoute.a.lon, true);
+        drawCityDot(activeRoute.b.lat, activeRoute.b.lon, true);
+      }
+    }
+
+    // ---- animation loop: smooth rotation tween + arc/marker progress ----
+    function tick(){
+      // ease current rotation toward target
+      rotation.yaw += (targetRotation.yaw - rotation.yaw) * 0.08;
+      rotation.pitch += (targetRotation.pitch - rotation.pitch) * 0.08;
+
+      if(idleDrift && !dragging && !activeRoute){
+        targetRotation.yaw += 0.0009; // slow, elegant ambient drift only before a route is chosen
+      }
+
+      if(activeRoute && arcProgress < 1 && !reduceMotion){
+        arcProgress = Math.min(1, arcProgress + 0.018);
+      } else if(activeRoute && reduceMotion){
+        arcProgress = 1; // snap, no animated draw-in under reduced motion
+      }
+
+      if(activeRoute && arcProgress >= 1 && !reduceMotion){
+        markerProgress += 0.0035;
+        if(markerProgress > 1) markerProgress = 1; // move once, hold at destination -- restrained, not a looping shuttle
+      } else if(activeRoute && reduceMotion){
+        markerProgress = 1;
+      }
+
+      render();
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    // ---- drag / swipe (Pointer Events unify mouse + touch) ----
+    canvas.addEventListener('pointerdown', function(e){
+      dragging = true;
+      lastX = e.clientX; lastY = e.clientY;
+      canvas.setPointerCapture(e.pointerId);
+    });
+    canvas.addEventListener('pointermove', function(e){
+      if(!dragging) return;
+      var dx = e.clientX - lastX, dy = e.clientY - lastY;
+      lastX = e.clientX; lastY = e.clientY;
+      targetRotation.yaw += dx * 0.006;
+      targetRotation.pitch = Math.max(-1.1, Math.min(1.1, targetRotation.pitch - dy * 0.006));
+      rotation.yaw = targetRotation.yaw; rotation.pitch = targetRotation.pitch; // direct-feel while dragging
+    });
+    function endDrag(){ dragging = false; }
+    canvas.addEventListener('pointerup', endDrag);
+    canvas.addEventListener('pointercancel', endDrag);
+    canvas.addEventListener('pointerleave', endDrag);
+
+    return {
+      selectRoute: function(route){
+        activeRoute = route;
+        arcProgress = reduceMotion ? 1 : 0;
+        markerProgress = reduceMotion ? 1 : 0;
+
+        // target rotation: face the midpoint of the two cities
+        var vA = toVec3(route.a.lat, route.a.lon);
+        var vB = toVec3(route.b.lat, route.b.lon);
+        var mid = slerp(vA, vB, 0.5);
+        var targetLon = Math.atan2(mid.z, -mid.x) * 180/Math.PI - 90;
+        var targetLat = Math.asin(Math.max(-1,Math.min(1,mid.y))) * 180/Math.PI;
+
+        var yaw = -(targetLon) * Math.PI/180;
+        var pitch = -(targetLat) * Math.PI/180 * 0.5; // dampened pitch so poles never flip oddly
+
+        if(reduceMotion){
+          rotation.yaw = yaw; rotation.pitch = pitch;
+        }
+        targetRotation.yaw = yaw;
+        targetRotation.pitch = pitch;
+      }
+    };
+  }
+
+  // ============================================================
+  // UI WIRING
+  // ============================================================
+  var canvas = document.getElementById('globeCanvas');
+  var canvasSupported = !!(canvas && canvas.getContext && canvas.getContext('2d'));
+  var globe = canvasSupported ? initGlobe(canvas) : null;
+
+  var chipWrap = document.getElementById('routeChips');
+  var staticFallback = document.getElementById('staticFallback');
+  var panel = document.getElementById('journeyPanel');
+  var hint = document.getElementById('globeHint');
+
+  if(!canvasSupported){
+    canvas.style.display = 'none';
+    hint.style.display = 'none';
+    staticFallback.classList.add('is-shown');
+  }
+
+  function tzLabel(offset){
+    var sign = offset >= 0 ? '+' : '';
+    return 'UTC' + sign + offset;
+  }
+  function localTimeFor(offsetHours){
+    var now = new Date();
+    var utcMs = now.getTime() + (now.getTimezoneOffset()*60000);
+    var dest = new Date(utcMs + offsetHours*3600000);
+    var h = dest.getHours(), m = dest.getMinutes();
+    var period = h >= 12 ? 'PM' : 'AM';
+    var h12 = h % 12; if(h12===0) h12 = 12;
+    return h12 + ':' + (m<10?'0':'') + m + ' ' + period;
+  }
+
+  function renderChips(){
+    ROUTES.forEach(function(r){
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'route-chip';
+      btn.dataset.id = r.id;
+      btn.innerHTML = r.label;
+      btn.addEventListener('click', function(){ selectRoute(r.id); });
+      chipWrap.appendChild(btn);
+
+      if(!canvasSupported){
+        var row = document.createElement('div');
+        row.className = 'static-route-row';
+        row.innerHTML = '<span>' + r.label + '</span><span>' + r.flightTime + '</span>';
+        row.addEventListener('click', function(){ selectRoute(r.id); });
+        staticFallback.appendChild(row);
+      }
+    });
+  }
+  renderChips();
+
+  var timeInterval = null;
+
+  function selectRoute(id){
+    var route = ROUTES.filter(function(r){ return r.id === id; })[0];
+    if(!route) return;
+
+    Array.prototype.forEach.call(chipWrap.querySelectorAll('.route-chip'), function(c){
+      c.classList.toggle('is-active', c.dataset.id === id);
+    });
+
+    if(globe) globe.selectRoute(route);
+
+    document.getElementById('jpRouteName').innerHTML = route.label;
+    document.getElementById('jpRouteSub').textContent = route.sub || 'Signature Journey';
+    document.getElementById('jpFlightTime').textContent = route.flightTime;
+    document.getElementById('jpAircraft').textContent = route.aircraft;
+    document.getElementById('jpConcierge').textContent = route.concierge;
+
+    var culturalEl = document.getElementById('jpCultural');
+    if(route.cultural){
+      culturalEl.textContent = route.cultural;
+      culturalEl.classList.remove('is-empty');
+    } else {
+      culturalEl.textContent = '';
+      culturalEl.classList.add('is-empty');
+    }
+
+    function updateTime(){
+      document.getElementById('jpLocalTime').textContent =
+        localTimeFor(route.b.tz) + ' (' + tzLabel(route.b.tz) + ')';
+    }
+    updateTime();
+    if(timeInterval) clearInterval(timeInterval);
+    timeInterval = setInterval(updateTime, 60000);
+
+    panel.classList.add('is-visible');
+
+    if(hint){ hint.textContent = 'Drag to rotate'; }
+  }
+
+  document.getElementById('jpCta').addEventListener('click', function(){
+    var active = chipWrap.querySelector('.route-chip.is-active');
+    alert('Prototype only: in production, this hands off to the Journey Builder pre-filled with ' +
+      (active ? active.textContent.replace(/<[^>]+>/g,' ') : 'this route') + '.');
+  });
+
+  // Select the first route by default so the page never looks inert
+  selectRoute(ROUTES[0].id);
+
+})();
+</script>
+</body>
+</html>
