@@ -646,6 +646,109 @@
       }
     })();
 
+    // ===== CONCIERGE: GROUND FLEET SELECTOR =====
+    (function(){
+      var tabsWrap = document.getElementById('fleetTabs');
+      var panel = document.getElementById('fleetPanel');
+      if(!tabsWrap || !panel) return;
+
+      var uses = {
+        individuals: {
+          title:'Door-To-Door, Discreetly',
+          text:'Door-to-door airport transfers, full-day chauffeur hire, discreet principal transport, family travel and multi-stop itineraries.',
+          vehicles:['Rolls-Royce Cullinan','Range Rover Autobiography','Mercedes-Benz S-Class']
+        },
+        touring: {
+          title:'City-By-City, Coordinated',
+          text:'City-by-city movement plans, VIP Sprinters, V-Class fleets, luggage vehicles, driver manifests, call-time coordination and live operational support.',
+          vehicles:['Mercedes-Maybach V-Class','Custom VIP Sprinters','Executive Minibuses','Luggage Support Vehicles']
+        },
+        events: {
+          title:'Guest Movement, At Scale',
+          text:'Guest movement, executive transport, delegations, brand activations, hospitality programmes and high-volume arrivals.',
+          vehicles:['Executive Saloons','VIP Sprinters','Luggage Vehicles','Security Vehicles']
+        },
+        aviation: {
+          title:'Seamless, Start To Finish',
+          text:'Seamless movement between home, hotel, private terminal, commercial airport and onward destination, coordinated against the live itinerary.',
+          vehicles:['Executive Saloons','Mercedes-Maybach V-Class','Accessible Transport']
+        }
+      };
+
+      function render(use){
+        var u = uses[use];
+        panel.innerHTML = '<h4>' + u.title + '</h4><p>' + u.text + '</p>' +
+          '<div class="fleet-panel-vehicles">' + u.vehicles.map(function(v){ return '<span class="fleet-vehicle-chip">' + v + '</span>'; }).join('') + '</div>';
+      }
+
+      tabsWrap.querySelectorAll('.fleet-tab').forEach(function(tab){
+        tab.addEventListener('click', function(){
+          tabsWrap.querySelectorAll('.fleet-tab').forEach(function(t){ t.classList.remove('is-active'); });
+          tab.classList.add('is-active');
+          render(tab.dataset.use);
+        });
+      });
+
+      render('individuals');
+    })();
+
+    // ===== JET CARD: REGION SELECTOR =====
+    (function(){
+      var tabsWrap = document.getElementById('regionTabs');
+      var chipsWrap = document.getElementById('regionChips');
+      if(!tabsWrap || !chipsWrap) return;
+
+      var regions = {
+        europe: ['United Kingdom','France','Germany','Switzerland','Italy','Spain','Portugal','Greece','Nordic Countries','Central & Eastern Europe'],
+        us: ['All 50 States','Alaska','Hawaii','Canada','Mexico','Puerto Rico','U.S. Virgin Islands','Core Caribbean'],
+        me: ['United Arab Emirates','Saudi Arabia','Qatar','Kuwait','Oman','Bahrain','Jordan','Egypt','Israel','The Maldives','The Seychelles']
+      };
+
+      function render(region){
+        chipsWrap.innerHTML = regions[region].map(function(c){ return '<span class="region-chip">' + c + '</span>'; }).join('');
+      }
+
+      tabsWrap.querySelectorAll('.region-tab').forEach(function(tab){
+        tab.addEventListener('click', function(){
+          tabsWrap.querySelectorAll('.region-tab').forEach(function(t){ t.classList.remove('is-active'); });
+          tab.classList.add('is-active');
+          render(tab.dataset.region);
+        });
+      });
+
+      render('europe');
+    })();
+
+    // ===== LEGS: LIVE OPPORTUNITY TICKER =====
+    (function(){
+      var track = document.getElementById('legsTickerTrack');
+      if(!track) return;
+
+      var opportunities = [
+        {route:'Nice &#8594; London', cat:'Midsize Jet', price:'~45% below charter rate', window:'Departs today, 18:40', badge:'One-Way'},
+        {route:'Geneva &#8594; Dubai', cat:'Heavy Jet', price:'~38% below charter rate', window:'Departs tomorrow, AM', badge:'Time-Sensitive'},
+        {route:'Miami &#8594; New York', cat:'Light Jet', price:'~50% below charter rate', window:'Departs today, 21:15', badge:'One-Way'},
+        {route:'London &#8594; Ibiza', cat:'Midsize Jet', price:'~40% below charter rate', window:'Departs in 3 days', badge:'Flexible Window'},
+        {route:'Los Angeles &#8594; Aspen', cat:'Super-Midsize', price:'~35% below charter rate', window:'Departs tomorrow, PM', badge:'Time-Sensitive'},
+        {route:'Paris &#8594; Milan', cat:'Light Jet', price:'~48% below charter rate', window:'Departs today, 16:00', badge:'One-Way'},
+        {route:'Dubai &#8594; Riyadh', cat:'Midsize Jet', price:'~42% below charter rate', window:'Departs in 2 days', badge:'Flexible Window'},
+        {route:'New York &#8594; Palm Beach', cat:'Light Jet', price:'~44% below charter rate', window:'Departs today, 19:30', badge:'One-Way'}
+      ];
+
+      function cardHTML(o){
+        return '<div class="legs-ticker-card">' +
+          '<div class="legs-ticker-route">' + o.route + '</div>' +
+          '<div class="legs-ticker-meta"><span>' + o.cat + '</span><span class="legs-ticker-price">' + o.price + '</span></div>' +
+          '<div class="legs-ticker-meta"><span>' + o.window + '</span></div>' +
+          '<span class="legs-ticker-badge">' + o.badge + '</span>' +
+        '</div>';
+      }
+
+      // Duplicate the list once so the CSS scroll (translateX -50%) loops seamlessly
+      var html = opportunities.map(cardHTML).join('') + opportunities.map(cardHTML).join('');
+      track.innerHTML = html;
+    })();
+
     // ===== IN MOTION =====
     (function(){
       var counterEl = document.getElementById('imCounter');
@@ -658,20 +761,35 @@
       if(!counterEl) return;
 
       var moments = [
-        {eyebrow:'Airport Arrival', title:'Arrival', text:'The first moments on the ground \u2014 a private terminal, a car already waiting.', video:'videos/im-arrival.mp4'},
-        {eyebrow:'Chauffeur Collection', title:'Collection', text:'The handover from air to road, timed so nothing is left waiting.', video:'videos/im-collection.mp4'},
-        {eyebrow:'Aircraft Boarding', title:'Boarding', text:'The walk to the aircraft \u2014 no queue, no gate, no delay.', video:'videos/im-boarding.mp4'},
-        {eyebrow:'Inflight Experience', title:'Onboard', text:'What the cabin actually looks like once the door is closed.', video:'videos/im-onboard.mp4'},
-        {eyebrow:'Concierge Arrangement', title:'Arranged In Advance', text:'The details settled before a guest ever has to ask.', video:'videos/im-arranged.mp4'},
-        {eyebrow:'Destination Arrival', title:'Touchdown', text:'The moment a journey becomes a place.', video:'videos/im-touchdown.mp4'},
-        {eyebrow:'Lifestyle Access', title:'Beyond The Flight', text:'What a Jettset journey opens up once the aircraft is behind you.', video:'videos/im-beyond.mp4'},
-        {eyebrow:'Events & Hospitality', title:'On The Ground', text:'Where a journey leads \u2014 and what is waiting there.', video:'videos/im-ground.mp4'}
+        {eyebrow:'Airport Arrival', title:'Arrival', text:'The first moments on the ground \u2014 a private terminal, a car already waiting.', video:'videos/im-arrival.mp4', cat:'arrivals'},
+        {eyebrow:'Chauffeur Collection', title:'Collection', text:'The handover from air to road, timed so nothing is left waiting.', video:'videos/im-collection.mp4', cat:'ground'},
+        {eyebrow:'Aircraft Boarding', title:'Boarding', text:'The walk to the aircraft \u2014 no queue, no gate, no delay.', video:'videos/im-boarding.mp4', cat:'aviation'},
+        {eyebrow:'Inflight Experience', title:'Onboard', text:'What the cabin actually looks like once the door is closed.', video:'videos/im-onboard.mp4', cat:'aviation'},
+        {eyebrow:'Concierge Arrangement', title:'Arranged In Advance', text:'The details settled before a guest ever has to ask.', video:'videos/im-arranged.mp4', cat:'concierge'},
+        {eyebrow:'Destination Arrival', title:'Touchdown', text:'The moment a journey becomes a place.', video:'videos/im-touchdown.mp4', cat:'arrivals'},
+        {eyebrow:'Lifestyle Access', title:'Beyond The Flight', text:'What a Jettset journey opens up once the aircraft is behind you.', video:'videos/im-beyond.mp4', cat:'concierge'},
+        {eyebrow:'Events & Hospitality', title:'On The Ground', text:'Where a journey leads \u2014 and what is waiting there.', video:'videos/im-ground.mp4', cat:'culture'}
       ];
 
+      var activeCat = 'all';
+      var filtered = moments.map(function(m,i){ return i; });
       var index = 0;
+
+      function applyFilter(cat){
+        activeCat = cat;
+        filtered = moments
+          .map(function(m,i){ return {m:m, i:i}; })
+          .filter(function(o){ return cat === 'all' || o.m.cat === cat; })
+          .map(function(o){ return o.i; });
+        if(!filtered.length) filtered = moments.map(function(m,i){ return i; });
+        index = 0;
+        render();
+      }
+
       function render(){
-        var m = moments[index];
-        counterEl.textContent = String(index + 1).padStart(2, '0') + ' / ' + String(moments.length).padStart(2, '0');
+        var realIndex = filtered[index];
+        var m = moments[realIndex];
+        counterEl.textContent = String(index + 1).padStart(2, '0') + ' / ' + String(filtered.length).padStart(2, '0');
         eyebrowEl.textContent = m.eyebrow;
         titleEl.textContent = m.title;
         textEl.textContent = m.text;
@@ -682,13 +800,53 @@
         }
       }
       prevBtn.addEventListener('click', function(){
-        index = (index - 1 + moments.length) % moments.length;
+        index = (index - 1 + filtered.length) % filtered.length;
         render();
       });
       nextBtn.addEventListener('click', function(){
-        index = (index + 1) % moments.length;
+        index = (index + 1) % filtered.length;
         render();
       });
+
+      // Wire the filter tag row (All / Aviation / Arrivals / Ground / Concierge / Culture)
+      var tagMap = {'All':'all','Aviation':'aviation','Arrivals':'arrivals','Ground':'ground','Concierge':'concierge','Culture':'culture'};
+      var tags = document.querySelectorAll('.pillar-tags .pillar-tag');
+      tags.forEach(function(tag){
+        tag.addEventListener('click', function(){
+          tags.forEach(function(t){ t.classList.remove('is-active'); });
+          tag.classList.add('is-active');
+          var cat = tagMap[tag.textContent.trim()] || 'all';
+          applyFilter(cat);
+        });
+      });
+
+      // Wire Featured Films cards to jump straight to that film
+      var filmTitleToMoment = {
+        'The Departure':'Collection',
+        'The Arrival':'Arrival',
+        'The Ground Movement':'Collection',
+        'The Destination':'Touchdown',
+        'The House':'Beyond The Flight'
+      };
+      document.querySelectorAll('.pillars .pillar-card').forEach(function(card){
+        var h = card.querySelector('.eyebrow');
+        if(!h || !filmTitleToMoment[h.textContent.trim()]) return;
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function(){
+          var wantTitle = filmTitleToMoment[h.textContent.trim()];
+          var realIdx = moments.findIndex(function(m){ return m.title === wantTitle; });
+          if(realIdx === -1) return;
+          // Reset to "All" so the target film is reachable regardless of active filter
+          tags.forEach(function(t){ t.classList.remove('is-active'); });
+          var allTag = Array.prototype.find ? tags[0] : null;
+          if(tags[0]) tags[0].classList.add('is-active');
+          applyFilter('all');
+          index = filtered.indexOf(realIdx);
+          render();
+          document.getElementById('imVideo').scrollIntoView({behavior:'smooth', block:'center'});
+        });
+      });
+
       render();
     })();
 

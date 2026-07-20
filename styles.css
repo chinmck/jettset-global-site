@@ -3298,6 +3298,121 @@
     .coverage{padding:0 0 100px;}
   }
 
+  /* ===== CONCIERGE: GROUND FLEET SELECTOR (reuses region-tab pattern) ===== */
+  .fleet-selector{
+    max-width:900px;
+    margin:0 auto;
+  }
+  .fleet-tabs{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+  }
+  .fleet-tab{
+    background:none;
+    border:1px solid var(--grey-line);
+    border-bottom:none;
+    color:var(--grey);
+    font-family:'General Sans','Inter',sans-serif;
+    font-size:12px;
+    letter-spacing:0.04em;
+    padding:16px 22px;
+    cursor:pointer;
+    transition:color .25s, background .25s;
+  }
+  .fleet-tab.is-active{color:var(--off-white); background:var(--black-elevated);}
+  .fleet-tab:hover{color:var(--off-white);}
+  .fleet-panel{
+    background:var(--black-elevated);
+    border:1px solid var(--grey-line);
+    padding:44px 40px;
+  }
+  .fleet-panel h4{
+    font-family:'Canela Text','Playfair Display',serif;
+    font-size:20px;
+    margin-bottom:16px;
+  }
+  .fleet-panel p{
+    font-size:14px;
+    color:var(--grey);
+    line-height:1.8;
+    margin-bottom:20px;
+  }
+  .fleet-panel-vehicles{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .fleet-vehicle-chip{
+    font-size:12px;
+    color:var(--off-white);
+    border:1px solid var(--gold-dim);
+    padding:8px 16px;
+  }
+  @media(max-width:700px){
+    .fleet-tabs{flex-direction:column; gap:0;}
+    .fleet-tab{border-bottom:1px solid var(--grey-line);}
+  }
+
+  /* ===== JET CARD: REGION SELECTOR ===== */
+  .region-selector{
+    max-width:760px;
+    margin:0 auto;
+  }
+  .region-tabs{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-bottom:0;
+  }
+  .region-tab{
+    background:none;
+    border:1px solid var(--grey-line);
+    border-bottom:none;
+    color:var(--grey);
+    font-family:'General Sans','Inter',sans-serif;
+    font-size:12px;
+    letter-spacing:0.06em;
+    padding:16px 28px;
+    cursor:pointer;
+    transition:color .25s, background .25s;
+  }
+  .region-tab.is-active{
+    color:var(--off-white);
+    background:var(--black-elevated);
+  }
+  .region-tab:hover{color:var(--off-white);}
+  .region-panel{
+    background:var(--black-elevated);
+    border:1px solid var(--grey-line);
+    padding:44px 40px;
+    text-align:center;
+  }
+  .region-panel h4{
+    font-family:'Canela Text','Playfair Display',serif;
+    font-size:20px;
+    margin-bottom:22px;
+  }
+  .region-chips{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+  }
+  .region-chip{
+    font-size:12px;
+    color:var(--grey);
+    border:1px solid var(--grey-line);
+    padding:8px 16px;
+    transition:color .25s, border-color .25s;
+  }
+  .region-chip:hover{color:var(--off-white); border-color:var(--gold-dim);}
+  @media(max-width:640px){
+    .region-tabs{flex-direction:column; gap:0;}
+    .region-tab{border-bottom:1px solid var(--grey-line);}
+  }
+
   /* ===== PRICING FORMULA BAND ===== */
   .formula-band{
     padding:100px 56px;
@@ -3522,6 +3637,92 @@
   }
 
   /* ===== CAVEAT BAND ===== */
+  /* ===== LEGS: LIVE OPPORTUNITY TICKER =====
+     Deliberately more motion than the rest of the site -- Legs is the one
+     product that's genuinely time-sensitive/live, so a continuously
+     scrolling ticker earns its place here in a way it wouldn't elsewhere. */
+  .legs-ticker{
+    padding:70px 0;
+    background:var(--black-elevated);
+    border-top:1px solid var(--grey-line);
+    border-bottom:1px solid var(--grey-line);
+    overflow:hidden;
+  }
+  .legs-ticker-head{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:36px;
+  }
+  .legs-live-dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--gold);
+    animation:legsLivePulse 1.8s ease-in-out infinite;
+  }
+  @keyframes legsLivePulse{
+    0%,100%{opacity:1; box-shadow:0 0 0 0 rgba(201,162,75,0.5);}
+    50%{opacity:0.6; box-shadow:0 0 0 6px rgba(201,162,75,0);}
+  }
+  .legs-ticker-label{
+    font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--grey);
+  }
+  .legs-ticker-track{
+    display:flex;
+    gap:20px;
+    width:max-content;
+    animation:legsTickerScroll 38s linear infinite;
+  }
+  .legs-ticker:hover .legs-ticker-track{ animation-play-state:paused; }
+  @keyframes legsTickerScroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  .legs-ticker-card{
+    flex:0 0 auto;
+    width:280px;
+    background:var(--black);
+    border:1px solid var(--grey-line);
+    padding:22px 24px;
+  }
+  .legs-ticker-route{
+    font-family:'Canela Text','Playfair Display',serif;
+    font-size:17px;
+    color:var(--off-white);
+    margin-bottom:10px;
+  }
+  .legs-ticker-meta{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    color:var(--grey);
+    margin-bottom:6px;
+  }
+  .legs-ticker-price{color:var(--gold);}
+  .legs-ticker-badge{
+    display:inline-block;
+    margin-top:10px;
+    font-size:10px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--gold-dim);
+    border:1px solid var(--gold-dim);
+    padding:3px 9px;
+  }
+  .legs-ticker-note{
+    text-align:center;
+    font-size:12px;
+    color:var(--grey);
+    max-width:560px;
+    margin:36px auto 0;
+    padding:0 24px;
+  }
+  @media(prefers-reduced-motion: reduce){
+    .legs-ticker-track{animation:none; flex-wrap:wrap; justify-content:center;}
+    .legs-live-dot{animation:none;}
+  }
+
   .caveat-band{
     padding:90px 56px;
     text-align:center;

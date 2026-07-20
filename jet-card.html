@@ -196,21 +196,15 @@
         <h2>Three Primary Regions</h2>
         <p>Flights within these regions are supported under the applicable Jet Card terms, aircraft category and hourly pricing structure. Secondary areas provide further global flexibility, subject to availability and operational conditions.</p>
       </div>
-      <div class="coverage-grid" data-reveal-group>
-        <div class="coverage-card" data-reveal>
-          <span class="eyebrow">Europe</span>
-          <h4>Primary Service Area</h4>
-          <p>United Kingdom, France, Germany, Switzerland, Italy, Spain, Portugal, Greece, the Nordic countries, and Central &amp; Eastern Europe.</p>
+      <div class="region-selector" data-reveal>
+        <div class="region-tabs" id="regionTabs">
+          <button type="button" class="region-tab is-active" data-region="europe">Europe</button>
+          <button type="button" class="region-tab" data-region="us">United States</button>
+          <button type="button" class="region-tab" data-region="me">Middle East</button>
         </div>
-        <div class="coverage-card" data-reveal>
-          <span class="eyebrow">United States</span>
+        <div class="region-panel" id="regionPanel">
           <h4>Primary Service Area</h4>
-          <p>All fifty states, including Alaska and Hawaii, with coverage extending to Canada, Mexico, Puerto Rico, the U.S. Virgin Islands and core Caribbean destinations.</p>
-        </div>
-        <div class="coverage-card" data-reveal>
-          <span class="eyebrow">Middle East</span>
-          <h4>Primary Service Area</h4>
-          <p>United Arab Emirates, Saudi Arabia, Qatar, Kuwait, Oman, Bahrain, Jordan, Egypt, Israel, the Maldives and the Seychelles.</p>
+          <div class="region-chips" id="regionChips"></div>
         </div>
       </div>
     </section>
