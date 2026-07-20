@@ -11,6 +11,19 @@
     --grey-line: rgba(245,243,239,0.12);
     --platinum: #D8DBDE;
     --steel: #565B60;
+
+    /* ===== SPACING RHYTHM SYSTEM =====
+       Three tokens, used sitewide, top+bottom on every section. Replaces
+       ad-hoc per-section padding values that had no consistent logic
+       (some sections relied on 0 top-padding + a neighbor's bottom
+       padding for separation, producing wildly inconsistent gaps
+       between sections -- 320px in one place, 90px in the next). */
+    --space-compact-d: 64px;
+    --space-compact-m: 32px;
+    --space-standard-d: 96px;
+    --space-standard-m: 48px;
+    --space-immersive-d: 140px;
+    --space-immersive-m: 72px;
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -683,7 +696,7 @@
 
   /* ===== SECTION: THE JETTSET HOUSE (replaces .statement) ===== */
   .house-intro{
-    padding:200px 56px 170px;
+    padding:var(--space-immersive-d) 56px var(--space-immersive-d);
     background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,162,75,0.05) 0%, transparent 60%), var(--black);
   }
   .house-intro-inner{max-width:760px; margin:0 auto; text-align:center;}
@@ -716,7 +729,7 @@
     letter-spacing:0.01em;
   }
   @media(max-width:680px){
-    .house-intro{padding:110px 24px 90px;}
+    .house-intro{padding:var(--space-immersive-m) 24px var(--space-immersive-m);}
     .house-intro-inner h2{margin-bottom:38px;}
     .house-intro-body p{font-size:14.5px;}
     .house-intro-body .house-intro-emphasis{font-size:16px;}
@@ -727,7 +740,7 @@
      this is the second beat, so it needs a different rhythm even with
      near-identical prose density. */
   .fluency-intro{
-    padding:150px 56px 0;
+    padding:var(--space-immersive-d) 56px var(--space-immersive-d);
     background:var(--near-black, #0d0d0c);
     border-top:1px solid var(--grey-line);
   }
@@ -773,7 +786,7 @@
     .fluency-intro-heading{padding-top:0;}
   }
   @media(max-width:680px){
-    .fluency-intro{padding:90px 24px 0;}
+    .fluency-intro{padding:var(--space-immersive-m) 24px var(--space-immersive-m);}
     .fluency-intro-body p{font-size:14px;}
     .fluency-intro-closing{
       font-size:clamp(24px,7vw,32px);
@@ -783,7 +796,7 @@
   }
 
   /* ===== SECTION: INSIDE THE HOUSE (replaces .seven) ===== */
-  .inside-house{padding:60px 56px 170px;}
+  .inside-house{padding:var(--space-immersive-d) 56px var(--space-immersive-d);}
   .inside-house-head{max-width:640px; margin:0 auto 84px; text-align:center;}
   .inside-house-head > .eyebrow{display:block; margin-bottom:20px;}
   .inside-house-head h2{
@@ -861,7 +874,7 @@
     .ih-row{grid-template-columns:1fr; gap:48px;}
   }
   @media(max-width:680px){
-    .inside-house{padding:20px 24px 100px;}
+    .inside-house{padding:var(--space-immersive-m) 24px var(--space-immersive-m);}
     .inside-house-head{margin-bottom:52px;}
     .ih-aviation{padding:0 0 56px;}
     .ih-culture{padding:48px 0 0;}
@@ -871,7 +884,10 @@
   }
 
   /* ===== SECTION: SEGMENTS (editorial alternating) ===== */
-  .segments{padding:0 0 160px;}
+  .segments{padding:var(--space-standard-d) 0 var(--space-standard-d);}
+  @media(max-width:680px){
+    .segments{padding:var(--space-standard-m) 0 var(--space-standard-m);}
+  }
   .segment-row{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -929,7 +945,7 @@
     display:block;
     text-decoration:none;
     color:inherit;
-    padding:110px 64px;
+    padding:var(--space-standard-d) 64px;
     text-align:center;
     transition:background 0.35s;
   }
@@ -958,7 +974,7 @@
   @media(max-width:880px){
     .editorial-preview{grid-template-columns:1fr;}
     .editorial-preview-col:first-child{border-right:none; border-bottom:1px solid var(--grey-line);}
-    .editorial-preview-col{padding:80px 32px;}
+    .editorial-preview-col{padding:var(--space-standard-m) 32px;}
   }
 
   /* ===== FOOTER ===== */
@@ -1870,7 +1886,7 @@
 
   /* ===== SECTION: BUILD YOUR JOURNEY (configurator) ===== */
   .journey-builder{
-    padding:90px 56px 150px;
+    padding:var(--space-standard-d) 56px var(--space-standard-d);
   }
   /* Deliberately quiet — this is the third consecutive section head on the
      page (after House and Fluency), so it steps back rather than repeating
@@ -1915,7 +1931,7 @@
     background:linear-gradient(90deg, transparent, rgba(201,162,75,0.5) 50%, transparent);
   }
   @media(max-width:680px){
-    .journey-builder{padding:80px 24px 100px;}
+    .journey-builder{padding:var(--space-standard-m) 24px var(--space-standard-m);}
     .jb-builder-head{margin-bottom:44px;}
   }
 
@@ -2262,7 +2278,10 @@
 
   /* ===== SECTION: SIGNATURE JOURNEY TIMELINE ===== */
   .journey-timeline{
-    padding:0 56px 160px;
+    padding:var(--space-standard-d) 56px var(--space-standard-d);
+  }
+  @media(max-width:680px){
+    .journey-timeline{padding:var(--space-standard-m) 24px var(--space-standard-m);}
   }
   .jt-head{
     text-align:center;
@@ -2367,10 +2386,10 @@
 
   /* ===== SECTION: SIGNATURE ROUTE MAP ===== */
   .route-map{
-    padding:0 56px 160px;
+    padding:var(--space-immersive-d) 56px var(--space-immersive-d);
   }
   @media(max-width:680px){
-    .route-map{padding:0 20px 100px;}
+    .route-map{padding:var(--space-immersive-m) 20px var(--space-immersive-m);}
   }
 
   .rm-mobile-showcase{display:none;}
@@ -2595,10 +2614,13 @@
 
   /* ===== THE JETTSET STANDARD (trust + response promise, combined) ===== */
   .standard{
-    padding:100px 56px;
+    padding:var(--space-standard-d) 56px;
     background:var(--black-elevated);
     border-top:1px solid var(--grey-line);
     border-bottom:1px solid var(--grey-line);
+  }
+  @media(max-width:680px){
+    .standard{padding:var(--space-standard-m) 24px;}
   }
   .standard-head{
     text-align:center;
@@ -2681,9 +2703,12 @@
 
   /* ===== URGENT DESK (human accessibility prompt) ===== */
   .urgent-desk{
-    padding:56px 56px 64px;
+    padding:var(--space-standard-d) 56px;
     text-align:center;
     border-bottom:1px solid var(--grey-line);
+  }
+  @media(max-width:680px){
+    .urgent-desk{padding:var(--space-standard-m) 24px;}
   }
   .urgent-desk-inner{
     max-width:640px;
@@ -2734,7 +2759,10 @@
 
   /* ===== GUEST SEGMENTS (visual grid) ===== */
   .who-for{
-    padding:0 0 160px;
+    padding:var(--space-immersive-d) 0 var(--space-immersive-d);
+  }
+  @media(max-width:680px){
+    .who-for{padding:var(--space-immersive-m) 0 var(--space-immersive-m);}
   }
   .who-for-head{
     text-align:center;
@@ -3311,7 +3339,7 @@
   .legal-contact a{color:var(--gold); text-decoration:underline;}
 
   .cta-band{
-    padding:120px 56px;
+    padding:var(--space-standard-d) 56px;
     text-align:center;
     background:var(--black-elevated);
   }
@@ -3326,6 +3354,9 @@
     margin:0 auto 36px;
     font-size:14px;
     line-height:1.8;
+  }
+  @media(max-width:680px){
+    .cta-band{padding:var(--space-standard-m) 24px;}
   }
 
   /* ===== COVERAGE GRID (Jet Card) ===== */
