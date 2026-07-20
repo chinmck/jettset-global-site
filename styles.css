@@ -891,13 +891,14 @@
   .segment-row{
     display:grid;
     grid-template-columns:1fr 1fr;
-    min-height:560px;
+    min-height:75vh;
+    max-height:820px;
   }
   .segment-row.reverse{direction:rtl;}
   .segment-row.reverse > *{direction:ltr;}
   .segment-img{
     background-size:cover;
-    background-position:center;
+    background-position:center 32%;
     position:relative;
   }
   .segment-img::after{
@@ -927,7 +928,7 @@
   }
   @media(max-width:880px){
     .segment-row, .segment-row.reverse{grid-template-columns:1fr; direction:ltr;}
-    .segment-img{height:340px;}
+    .segment-img{height:56vh; min-height:420px; background-position:center 28%;}
     .segment-text{padding:56px 32px;}
   }
 
