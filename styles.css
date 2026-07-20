@@ -794,54 +794,54 @@
   }
   .inside-house-head p{font-size:15px; color:var(--grey); line-height:1.7;}
 
-  .ih-grid{display:flex; flex-direction:column; gap:2px; max-width:1180px; margin:0 auto;}
+  .ih-grid{display:flex; flex-direction:column; gap:0; max-width:1180px; margin:0 auto;}
   .ih-division{
     display:block;
     text-decoration:none;
     color:inherit;
-    background:rgba(255,255,255,0.015);
-    border:1px solid var(--grey-line);
-    transition:background 0.35s, border-color 0.35s;
   }
-  .ih-division:hover{background:rgba(201,162,75,0.045); border-color:rgba(201,162,75,0.3);}
-  .ih-division-head{display:flex; align-items:center; gap:14px; margin-bottom:18px;}
+  .ih-division:hover .ih-cta{color:var(--off-white);}
+  .ih-division-head{display:flex; align-items:center; gap:14px; margin-bottom:22px;}
   .ih-num{font-size:12px; color:var(--gold-dim); letter-spacing:0.1em;}
 
   /* Aviation — dominant block, the foundation */
-  .ih-aviation{padding:64px 64px 56px;}
+  .ih-aviation{padding:0 0 88px;}
   .ih-aviation h3{
     font-family:'Canela Text','Playfair Display',serif;
-    font-size:clamp(28px,3.2vw,40px);
+    font-size:clamp(30px,3.6vw,46px);
     color:var(--off-white);
-    margin-bottom:36px;
-    max-width:640px;
+    margin-bottom:44px;
+    max-width:680px;
   }
-  .ih-items{list-style:none; display:flex; gap:48px; flex-wrap:wrap; margin-bottom:32px;}
-  .ih-items li{display:flex; flex-direction:column; gap:8px; max-width:280px;}
+  .ih-items{list-style:none; display:flex; gap:56px; flex-wrap:wrap; margin-bottom:40px;}
+  .ih-items li{display:flex; flex-direction:column; gap:10px; max-width:280px;}
   .ih-items li > span:first-child{
-    font-family:'Canela Text','Playfair Display',serif;
-    font-size:19px; color:var(--off-white);
+    font-family:'General Sans','Inter',sans-serif;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold-dim);
   }
-  .ih-item-desc{font-size:13px; color:var(--grey); line-height:1.65;}
+  .ih-item-desc{font-size:14px; color:var(--grey); line-height:1.75;}
 
   /* Middle row — three equal divisions extending the relationship */
-  .ih-row{display:grid; grid-template-columns:repeat(3,1fr); gap:2px;}
-  .ih-row .ih-division{padding:48px 40px;}
+  .ih-row{display:grid; grid-template-columns:repeat(3,1fr); gap:56px; padding:64px 0; border-top:1px solid var(--grey-line);}
+  .ih-row .ih-division{padding:0;}
   .ih-row h3{
     font-family:'Canela Text','Playfair Display',serif;
-    font-size:22px;
+    font-size:24px;
     color:var(--off-white);
-    margin-bottom:16px;
+    margin-bottom:18px;
   }
-  .ih-desc{font-size:13.5px; color:var(--grey); line-height:1.75; margin-bottom:28px; min-height:80px;}
+  .ih-desc{font-size:14px; color:var(--grey); line-height:1.8; margin-bottom:30px; min-height:80px;}
 
   /* Culture — closing wide band */
-  .ih-culture{padding:64px 64px 56px; background:rgba(201,162,75,0.02);}
+  .ih-culture{padding:64px 0 0; border-top:1px solid var(--grey-line);}
   .ih-culture h3{
     font-family:'Canela Text','Playfair Display',serif;
-    font-size:clamp(22px,2.6vw,30px);
+    font-size:clamp(24px,2.6vw,32px);
     color:var(--off-white);
-    margin-bottom:32px;
+    margin-bottom:36px;
     max-width:600px;
   }
   .ih-items-inline li{max-width:240px;}
@@ -852,20 +852,21 @@
     letter-spacing:0.14em;
     text-transform:uppercase;
     color:var(--gold);
+    transition:color 0.3s;
   }
   .ih-cta i{font-style:normal; display:inline-block; transition:transform 0.3s;}
   .ih-division:hover .ih-cta i{transform:translateX(6px);}
 
   @media(max-width:900px){
-    .ih-row{grid-template-columns:1fr;}
-    .ih-row .ih-division{border-bottom:1px solid var(--grey-line);}
+    .ih-row{grid-template-columns:1fr; gap:48px;}
   }
   @media(max-width:680px){
     .inside-house{padding:20px 24px 100px;}
     .inside-house-head{margin-bottom:52px;}
-    .ih-aviation,.ih-culture{padding:36px 26px 32px;}
-    .ih-row .ih-division{padding:36px 26px;}
-    .ih-items{gap:28px;}
+    .ih-aviation{padding:0 0 56px;}
+    .ih-culture{padding:48px 0 0;}
+    .ih-row{padding:48px 0;}
+    .ih-items{gap:32px;}
     .ih-desc{min-height:0;}
   }
 
