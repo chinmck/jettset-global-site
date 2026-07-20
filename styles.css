@@ -4711,6 +4711,26 @@
   @media(max-width:700px){
     .origin-list{columns:1;}
   }
+
+  /* ===== ABOUT: five-more-details disclosure ===== */
+  .origin-list-more{margin:-8px 0 40px;}
+  .origin-list-more summary{
+    list-style:none;
+    cursor:pointer;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--gold);
+    transition:color 0.25s;
+  }
+  .origin-list-more summary::-webkit-details-marker{display:none;}
+  .origin-list-more summary:hover{color:var(--off-white);}
+  .origin-list-more summary::before{content:'+ ';}
+  .origin-list-more[open] summary::before{content:'\2212 ';}
+  .origin-list-more .origin-list-secondary{
+    margin-top:24px;
+    opacity:0.8;
+  }
   .origin-vision{
     margin-top:56px;
     padding-top:48px;
