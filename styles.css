@@ -5257,3 +5257,111 @@
     #jtVeil{transition:none;}
     .page.active{opacity:1; transform:none; transition:none;}
   }
+
+  /* ===== HOMEPAGE AUDIT REFINEMENT =====
+     A pacing and interaction pass only: no new visual language, content or
+     component types. The approved imagery, typography, globe material and
+     section order remain unchanged. */
+  .home-page .house-intro-body p{max-width:580px;}
+  .home-page .fluency-intro-grid{max-width:1040px; gap:56px;}
+  .home-page .jb-builder-head{max-width:580px;}
+  .home-page .standard-head{max-width:620px;}
+
+  @media(min-width:681px){
+    .home-page .house-intro{padding-top:120px; padding-bottom:120px;}
+    .home-page .house-intro-inner h2{margin-bottom:46px;}
+    .home-page .house-intro .divider{margin-top:46px;}
+    .home-page .fluency-intro{padding-top:120px; padding-bottom:110px;}
+    .home-page .fluency-intro-closing{margin-top:72px; padding-top:62px; padding-bottom:96px;}
+    .home-page .journey-timeline{padding-top:104px; padding-bottom:104px;}
+    .home-page .jt-head{margin-bottom:62px;}
+    .home-page .jt-steps{gap:44px;}
+    .home-page .inside-house{padding-top:112px; padding-bottom:112px;}
+    .home-page .inside-house-head{margin-bottom:66px;}
+    .home-page .ih-aviation{padding-bottom:68px;}
+    .home-page .ih-row{padding:52px 0;}
+    .home-page .ih-culture{padding-top:52px;}
+    .home-page .standard{padding-top:108px; padding-bottom:108px;}
+    .home-page .standard-head{margin-bottom:54px;}
+    .home-page .segments{padding-top:104px; padding-bottom:104px;}
+    .home-page .segment-row{min-height:500px;}
+    .home-page .segment-text{padding:64px;}
+    .home-page .who-for{padding-top:100px; padding-bottom:100px;}
+    .home-page .who-for-head{margin-bottom:44px;}
+    .home-page .who-for-tile{padding:28px;}
+    .home-page .editorial-preview-col{padding:88px 56px;}
+    .home-page .cta-band{padding-top:96px; padding-bottom:96px;}
+  }
+
+  @media(max-width:680px){
+    /* The full-screen index already carries Call, WhatsApp and the journey
+       action. Removing fixed controls protects every form, route and footer
+       target while keeping the page visually calm. */
+    .home-page .contact-mark,
+    .home-page .journey-mark{display:none !important;}
+
+    .home-page .house-intro{padding-top:88px; padding-bottom:88px;}
+    .home-page .house-intro-inner h2{margin-bottom:32px;}
+    .home-page .house-intro-body p{margin-bottom:20px;}
+    .home-page .house-intro-body .house-intro-emphasis{margin-top:30px;}
+    .home-page .house-intro .divider{margin:42px auto 26px;}
+
+    .home-page .fluency-intro{padding-top:84px; padding-bottom:76px;}
+    .home-page .fluency-intro-grid{gap:28px;}
+    .home-page .fluency-intro-body p{margin-bottom:18px;}
+    .home-page .fluency-intro-closing{margin-top:46px; padding:44px 0 62px;}
+
+    .home-page .journey-builder{padding-top:72px; padding-bottom:72px;}
+    .home-page .jb-builder-head{margin-bottom:34px;}
+    .home-page .jb-card{padding:30px 22px 24px;}
+    .home-page .jb-reassurance{margin-top:28px;}
+
+    .home-page .journey-timeline{padding-top:80px; padding-bottom:80px;}
+    .home-page .jt-head{margin-bottom:52px;}
+    .home-page .jt-steps{gap:42px;}
+    .home-page .jt-step{gap:18px;}
+
+    .home-page .inside-house{padding-top:88px; padding-bottom:88px;}
+    .home-page .inside-house-head{margin-bottom:44px;}
+    .home-page .ih-aviation{padding-bottom:46px;}
+    .home-page .ih-aviation h3{margin-bottom:32px;}
+    .home-page .ih-items{gap:26px; margin-bottom:32px;}
+    .home-page .ih-row{gap:40px; padding:42px 0;}
+    .home-page .ih-culture{padding-top:42px;}
+    .home-page .ih-culture h3{margin-bottom:28px;}
+
+    .home-page .route-map.jw-embed{padding-top:52px; padding-bottom:52px;}
+    .home-page .jw-embed-grid{row-gap:10px;}
+    .home-page .route-chips{gap:7px;}
+    .home-page .journey-panel{margin-top:4px;}
+
+    .home-page .standard{padding-top:80px; padding-bottom:80px;}
+    .home-page .standard-head{margin-bottom:46px;}
+    .home-page .standard-grid{gap:44px;}
+    .home-page .response-grid{gap:18px;}
+    .home-page .urgent-desk{padding-top:64px; padding-bottom:64px;}
+
+    .home-page .segments{padding-top:64px; padding-bottom:64px;}
+    .home-page .segment-img{height:300px;}
+    .home-page .segment-text{padding:44px 24px;}
+    .home-page .segment-text p{margin-bottom:22px;}
+
+    .home-page .who-for{padding-top:72px; padding-bottom:72px;}
+    .home-page .who-for-head{padding:0 24px; margin-bottom:34px;}
+    .home-page .who-for-grid{background:transparent; gap:0;}
+    .home-page .who-for-tile{padding:22px 16px; border-bottom:1px solid rgba(216,219,222,0.10);}
+    .home-page .who-for-tile:last-child{border-bottom:none;}
+
+    .home-page .editorial-preview-col{padding:68px 24px;}
+    .home-page .editorial-preview-col p{margin-bottom:30px;}
+    .home-page .cta-band{padding-top:76px; padding-bottom:76px;}
+    .home-page footer{padding-top:70px; padding-bottom:90px;}
+    .home-page .footer-grid{gap:30px; padding-bottom:46px;}
+  }
+
+  @media(prefers-reduced-motion: reduce){
+    .home-page .hero-kicker .eyebrow,
+    .home-page .hero-content h1,
+    .home-page .hero-content p,
+    .home-page .hero-content .hero-cta-row{transition:none !important;}
+  }
