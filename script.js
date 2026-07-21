@@ -631,11 +631,19 @@
       if(window.scrollY > 60){ nav.classList.add('scrolled'); }
       else{ nav.classList.remove('scrolled'); }
 
-      // journeyBar only exists on the homepage now (Chin: keep this mark
-      // off interior pages, which already have their own in-content CTAs)
+      // Keep the desktop conversion mark available between editorial chapters,
+      // but defer to the page's own actions whenever an interactive or final
+      // conversion section is in view. Mobile uses the in-content actions and
+      // full-screen index instead, so it never sacrifices reading space to a
+      // persistent overlay.
       var jb = document.getElementById('journeyBar');
       if(jb){
-        if(window.scrollY > window.innerHeight * 0.6){ jb.classList.add('is-visible'); }
+        var suppressors = document.querySelectorAll('.journey-builder, .route-map, .cta-band, footer');
+        var isNearConversion = Array.prototype.some.call(suppressors, function(section){
+          var rect = section.getBoundingClientRect();
+          return rect.top < window.innerHeight * 0.88 && rect.bottom > window.innerHeight * 0.12;
+        });
+        if(window.scrollY > window.innerHeight * 0.6 && !isNearConversion){ jb.classList.add('is-visible'); }
         else{ jb.classList.remove('is-visible'); }
       }
     });
@@ -1230,10 +1238,10 @@
       // remains stable — nothing resets when the video loops.
       if(heroFilm){
         var CUES = [
-          {cls:'r-kicker', at: 400},
-          {cls:'r-title',  at: 700},
-          {cls:'r-sub',    at:1600},
-          {cls:'r-cta',    at:2000}
+          {cls:'r-kicker', at: 250},
+          {cls:'r-title',  at: 500},
+          {cls:'r-sub',    at:1050},
+          {cls:'r-cta',    at:1450}
         ];
         var started = false;
         function revealAll(){
@@ -1256,7 +1264,7 @@
           var playAttempt = heroFilm.play();
           if(playAttempt && playAttempt.catch){ playAttempt.catch(revealAll); }
         }
-        setTimeout(revealAll, 6000); // failsafe: copy never stays hidden
+        setTimeout(revealAll, 4500); // failsafe: copy never stays hidden
       }
 
       if(reduceMotion) return;
