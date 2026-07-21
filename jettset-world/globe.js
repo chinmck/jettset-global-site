@@ -500,7 +500,7 @@ function initGlobe() {
         }
 
         if (this.phase === 'origin') {
-          const progress = Math.min(1, this.elapsed / 0.28);
+          const progress = Math.min(1, this.elapsed / 0.24);
           this.setOpacity(this.originMarker, THREE.MathUtils.smoothstep(progress, 0, 1));
           if (progress >= 1) {
             this.phase = 'arc';
@@ -510,7 +510,7 @@ function initGlobe() {
         }
 
         if (this.phase === 'arc') {
-          const progress = Math.min(1, this.elapsed / 0.68);
+          const progress = Math.min(1, this.elapsed / 0.60);
           const eased = 1 - ((1 - progress) ** 3);
           const count = Math.floor((this.arcIndexCount * eased) / 6) * 6;
           this.arc.geometry.setDrawRange(0, Math.max(6, count));
@@ -523,7 +523,7 @@ function initGlobe() {
         }
 
         if (this.phase === 'aircraft') {
-          const progress = Math.min(1, this.elapsed / 0.20);
+          const progress = Math.min(1, this.elapsed / 0.18);
           this.aircraft.material.opacity = THREE.MathUtils.smoothstep(progress, 0, 1);
           if (progress >= 1) {
             this.phase = 'destination';
@@ -533,7 +533,7 @@ function initGlobe() {
         }
 
         if (this.phase === 'destination') {
-          const progress = Math.min(1, this.elapsed / 0.30);
+          const progress = Math.min(1, this.elapsed / 0.26);
           this.setOpacity(this.destinationMarker, THREE.MathUtils.smoothstep(progress, 0, 1));
           if (progress >= 1) {
             this.phase = 'idle';
@@ -559,7 +559,7 @@ function initGlobe() {
     if (!reducedMotion && !dragging && targetQuaternion) {
       const angle = globe.quaternion.angleTo(targetQuaternion);
       if (angle > 0.006) {
-        globe.quaternion.slerp(targetQuaternion, Math.min(1, delta * 2.0));
+        globe.quaternion.slerp(targetQuaternion, Math.min(1, delta * 2.25));
         animating = true;
       } else {
         globe.quaternion.copy(targetQuaternion);
