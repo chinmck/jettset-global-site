@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jettset Global | Private Aviation & Concierge</title>
+<meta name="description" content="Operator-direct private jet charter and concierge, built around the guest, not the fleet. Discreet by design.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div id="jtVeil"></div>
+
+  <nav class="nav" id="mainNav">
+    <button class="nav-burger" id="navBurgerOpen" aria-label="Open menu" aria-expanded="false">
+      <span class="nav-burger-glyph">+</span>
+    </button>
+
+    <a class='nav-logo-center' href='/'>
+      <img src="images/nav-logo.png" alt="Jettset">
+    </a>
+  </nav>
+
+  <div class="contact-mark" id="contactMark">
+    <a href="tel:+448005999888" class="contact-mark-icon" aria-label="Call Jettset">
+      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3.654 1.328a.678.678 0 0 1 1.015-.063l2.143 2.143a.678.678 0 0 1 .063 1.015l-1.18 1.18a8.5 8.5 0 0 0 9.728 9.728l1.18-1.18a.678.678 0 0 1 1.015.063l2.143 2.143a.678.678 0 0 1-.063 1.015l-1.6 1.4a1.5 1.5 0 0 1-1.21.36C9.937 17.78 2.22 10.063.91 3.011a1.5 1.5 0 0 1 .36-1.21z"/></svg>
+    </a>
+    <a href="https://wa.me/447393171717" class="contact-mark-icon" aria-label="WhatsApp Jettset" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.12-2.9-6.99A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.19 0 4.25.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.79c0 4.52-3.68 8.2-8.2 8.2a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.15.82.84-3.07-.2-.32a8.15 8.15 0 0 1-1.25-4.35c0-4.52 3.68-8.2 8.2-8.2zm-4.5 4.6c-.15 0-.4.06-.6.29-.21.23-.8.78-.8 1.9 0 1.12.82 2.2.93 2.35.11.15 1.6 2.5 3.9 3.44 1.9.79 2.3.63 2.71.6.42-.04 1.35-.55 1.54-1.09.19-.53.19-.98.13-1.08-.06-.1-.21-.16-.44-.28-.23-.11-1.35-.67-1.56-.74-.21-.08-.36-.11-.51.11-.15.23-.58.74-.71.89-.13.15-.26.17-.49.06-.23-.11-.96-.35-1.83-1.13-.68-.6-1.13-1.35-1.27-1.58-.13-.23-.01-.35.1-.47.1-.1.23-.26.35-.4.11-.13.15-.23.23-.38.08-.15.04-.29-.02-.4-.06-.11-.51-1.25-.71-1.7-.18-.44-.37-.38-.51-.39z"/></svg>
+    </a>
+  </div>
+
+  <div class="contact-sheet-overlay" id="contactSheetOverlay">
+    <div class="contact-sheet">
+      <span class="eyebrow">Reach Us Directly</span>
+      <a href="tel:+448005999888" class="contact-sheet-option">Call</a>
+      <a href="https://wa.me/447393171717" class="contact-sheet-option">WhatsApp</a>
+      <a href="mailto:info@jettsetglobal.com" class="contact-sheet-option">Email</a>
+      <button type="button" class="contact-sheet-cancel" id="contactSheetCancel">Cancel</button>
+    </div>
+  </div>
+
+
+  <div class="side-overlay" id="sideOverlay"></div>
+  <div class="side-panel" id="sidePanel">
+    <div class="nav-index-inner">
+      <a class='nav-index-home' href='/' id='navHome'>Jettset &mdash; Private Aviation &amp; Concierge House</a>
+      <div class="nav-index-proof">Enquiries Answered In &le;10 Min</div>
+
+      <div class="nav-index-group">
+        <span class="nav-index-num">01</span>
+        <div>
+          <span class="nav-index-title">Private Aviation</span>
+          <div class="nav-index-links">
+            <a class href='/charter' id='navCharter'>Charter</a>
+            <a class href='/jet-card' id='navJetcard'>Jet Card</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">02</span>
+        <div>
+          <span class="nav-index-title"><a class href='/concierge' id='navConcierge'>Concierge</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group">
+        <span class="nav-index-num">03</span>
+        <div>
+          <span class="nav-index-title">Membership</span>
+          <div class="nav-index-links">
+            <a class href='/club' id='navClub'>Club</a>
+            <a class href='/legs' id='navLegs'>Legs</a>
+            <a class href='/editions' id='navEditions'>Editions</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">04</span>
+        <div>
+          <span class="nav-index-title"><a class href='/advisory' id='navAdvisory'>Advisory</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group">
+        <span class="nav-index-num">05</span>
+        <div>
+          <span class="nav-index-title">Partnerships</span>
+          <div class="nav-index-links">
+            <a class href='/partners' id='navPartners'>Partner With Us</a>
+            <a class href='/access-partners' id='navAccessPartners'>Access Partners</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">06</span>
+        <div>
+          <span class="nav-index-title"><a class href='/about' id='navAbout'>About</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">07</span>
+        <div>
+          <span class="nav-index-title"><a class href='/the-manifest' id='navJournal'>The Manifest</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">08</span>
+        <div>
+          <span class="nav-index-title"><a class href='/in-motion' id='navInMotion'>In Motion</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">09</span>
+        <div>
+          <span class="nav-index-title"><a class href='/contact' id='navContact'>Contact</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-footer">
+        <a class='nav-index-cta btn-ghost' href='/contact'>Begin Your Journey</a>
+        <div class="nav-index-contact">
+          <a href="tel:+448005999888">Call</a>
+          <a href="https://wa.me/447393171717">WhatsApp</a>
+          <a href="#" class="side-member-login" id="navMemberLogin"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a3.5 3.5 0 0 0-3.5 3.5V7H6a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-.5V5.5A3.5 3.5 0 0 0 10 2zm2 5H8V5.5a2 2 0 1 1 4 0V7z"/></svg>Member Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#journeyBuilderSection" class="journey-mark" id="journeyBar">
+    <span class="journey-mark-label">Begin Your Journey</span>
+  </a>
+
+  <!-- ============ HOME PAGE ============ -->
+
+  <div class="page active" id="page-home">
+
+    <section class="hero" id="heroSection">
+      <video class="hero-video" id="heroFilm" muted playsinline autoplay loop preload="auto"
+             poster="images/hero-film-poster.jpg"
+             aria-label="Private jet, cinematic studio reveal, representing Jettset Global private aviation and concierge services">
+        <source src="images/hero-film.webm" type="video/webm">
+        <source src="images/hero-film.mp4" type="video/mp4">
+      </video>
+      <img class="hero-img-main" src="images/hero-film-poster.jpg" alt="" aria-hidden="true" id="heroPosterFallback" style="display:none;">
+      <div class="hero-glow" id="heroGlow"></div>
+      <div class="hero-kicker"><span class="eyebrow">Private Aviation &amp; Concierge</span></div>
+      <div class="hero-content">
+        <h1>The World,<br>On Your Terms</h1>
+        <p>Private aviation and everything around it — brought together through one trusted relationship.</p>
+        <div class="hero-cta-row">
+          <a href="#" class="btn-ghost hero-scroll">Begin Your Journey</a>
+          <a href="#jettsetHouse" class="btn-text-gold">Discover The House</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="house-intro" id="jettsetHouse" data-reveal>
+      <div class="house-intro-inner">
+        <span class="eyebrow">The Jettset House</span>
+        <h2>Aviation is the beginning.<br>The relationship goes further.</h2>
+        <div class="house-intro-body">
+          <p>Jettset is a private aviation and concierge House built around the complete life of the journey.</p>
+          <p>We bring together private aviation, membership, concierge, destination support, specialist advisory and cultural intelligence through one trusted relationship.</p>
+          <p class="house-intro-emphasis">The result is more than a flight.<br>It is a world designed to move with you — before departure, in the air and long after arrival.</p>
+        </div>
+        <div class="divider"><span class="line"></span><span class="mark"></span><span class="line right"></span></div>
+        <p class="house-intro-closing">One House. Every part of the journey.</p>
+      </div>
+    </section>
+
+    <section class="fluency-intro" data-reveal>
+      <div class="fluency-intro-grid">
+        <div class="fluency-intro-heading">
+          <span class="eyebrow">Culturally Fluent Luxury</span>
+          <h2>The standard is timeless.<br>The understanding is modern.</h2>
+        </div>
+        <div class="fluency-intro-body">
+          <p>Private aviation has always understood aircraft.</p>
+          <p>We understand the people travelling within them.</p>
+          <p>Founders. Athletes. Artists. Families. Executives. Creators.</p>
+          <p>Every journey carries its own priorities, pressures and expectations. Understanding them is what transforms a flight into an experience.</p>
+          <p>The standards never change. The service adapts to the world each guest inhabits.</p>
+        </div>
+      </div>
+      <p class="fluency-intro-closing">We know aviation.<br>We understand your world.</p>
+    </section>
+
+    <section class="journey-builder" id="journeyBuilderSection">
+      <div class="jb-builder-head">
+        <span class="eyebrow">Begin Your Journey</span>
+        <h2>Tell us where you need to be.<br>We&rsquo;ll understand everything around it.</h2>
+        <p>Every journey begins with a destination. The difference lies in understanding the people, timing, priorities and purpose surrounding it.</p>
+      </div>
+
+      <div class="jb-card">
+        <div class="jb-ticket-header" id="jbTicketHeader">
+          <span class="jb-ticket-theme" id="jbTicketTheme"></span>
+          <div class="jb-ticket-route">
+            <span id="jbTicketFrom" class="jb-ticket-empty">Departure</span>
+            <span class="jb-ticket-glyph">&#8594;</span>
+            <span id="jbTicketTo" class="jb-ticket-empty">Destination</span>
+          </div>
+        </div>
+        <div class="jb-progress" id="jbProgress">
+          <div class="jb-progress-track"><div class="jb-progress-fill" id="jbProgressFill"></div></div>
+          <div class="jb-progress-labels">
+            <span class="jb-progress-step is-active" data-step="1">Route</span>
+            <span class="jb-progress-step" data-step="2">Date &amp; Travellers</span>
+            <span class="jb-progress-step" data-step="3">Context</span>
+            <span class="jb-progress-step" data-step="4">Summary</span>
+          </div>
+        </div>
+
+        <div class="jb-panels">
+          <div class="jb-panel is-active" data-panel="1">
+            <div class="jb-route-row">
+              <div class="jb-route-field">
+                <label for="jbFrom">From</label>
+                <input type="text" id="jbFrom" placeholder="Departure city">
+              </div>
+              <span class="jb-route-glyph">&#8594;</span>
+              <div class="jb-route-field">
+                <label for="jbTo">To</label>
+                <input type="text" id="jbTo" placeholder="Arrival city">
+              </div>
+            </div>
+            <div class="jb-quick-routes">
+              <button type="button" class="jb-chip" data-from="London" data-to="Monaco">London → Monaco</button>
+              <button type="button" class="jb-chip" data-from="London" data-to="Ibiza">London → Ibiza</button>
+              <button type="button" class="jb-chip" data-from="London" data-to="Dubai">London → Dubai</button>
+              <button type="button" class="jb-chip" data-from="Paris" data-to="Mykonos">Paris → Mykonos</button>
+              <button type="button" class="jb-chip" data-from="New York" data-to="London">New York → London</button>
+              <button type="button" class="jb-chip" data-from="Los Angeles" data-to="Aspen">Los Angeles → Aspen</button>
+              <button type="button" class="jb-chip" data-from="Dubai" data-to="Mumbai">Dubai → Mumbai</button>
+              <button type="button" class="jb-chip" data-from="Singapore" data-to="Hong Kong">Singapore → Hong Kong</button>
+              <button type="button" class="jb-chip" data-from="Lagos" data-to="London">Lagos → London</button>
+              <button type="button" class="jb-chip" data-from="Lagos" data-to="New York">Lagos → New York</button>
+            </div>
+          </div>
+
+          <div class="jb-panel" data-panel="2">
+            <div class="jb-panel-label">When, and for how many? <span style="text-transform:none; letter-spacing:0;">(optional)</span></div>
+            <div class="jb-inline-row">
+              <div class="jb-date-field">
+                <label for="jbDepart">Departure Date</label>
+                <input type="date" id="jbDepart">
+              </div>
+              <div class="jb-trip-toggle" id="jbTripToggle">
+                <button type="button" class="is-active" data-trip="oneway">One Way</button>
+                <button type="button" data-trip="roundtrip">Return</button>
+              </div>
+              <div class="jb-date-field" id="jbReturnField" style="display:none;">
+                <label for="jbReturnDate">Return Date</label>
+                <input type="date" id="jbReturnDate">
+              </div>
+            </div>
+            <div class="jb-passenger-row">
+              <div class="jb-passenger-stepper" data-counter="adults">
+                <span class="jb-passenger-label">Adults</span>
+                <div class="jb-stepper">
+                  <button type="button" data-action="dec">&minus;</button>
+                  <span>1</span>
+                  <button type="button" data-action="inc">&plus;</button>
+                </div>
+              </div>
+              <div class="jb-passenger-stepper" data-counter="children">
+                <span class="jb-passenger-label">Children</span>
+                <div class="jb-stepper">
+                  <button type="button" data-action="dec">&minus;</button>
+                  <span>0</span>
+                  <button type="button" data-action="inc">&plus;</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="jb-panel" data-panel="3">
+            <div class="jb-panel-label">What is shaping this journey? <span style="text-transform:none; letter-spacing:0;">(choose one)</span></div>
+            <div class="jb-choice-grid" id="jbOccasionGrid">
+              <button type="button" class="jb-choice" data-occasion="Business">Business</button>
+              <button type="button" class="jb-choice" data-occasion="Family &amp; Leisure">Family &amp; Leisure</button>
+              <button type="button" class="jb-choice" data-occasion="Sport &amp; Performance">Sport &amp; Performance</button>
+              <button type="button" class="jb-choice" data-occasion="Touring &amp; Production">Touring &amp; Production</button>
+              <button type="button" class="jb-choice" data-occasion="Celebration">Celebration</button>
+              <button type="button" class="jb-choice" data-occasion="Private &amp; Sensitive">Private &amp; Sensitive</button>
+              <button type="button" class="jb-choice" data-occasion="Other">Other</button>
+            </div>
+            <div class="jb-panel-label jb-panel-label-second">What should we begin arranging? <span style="text-transform:none; letter-spacing:0;">(optional, select any)</span></div>
+            <div class="jb-choice-grid" id="jbPrefGrid">
+              <button type="button" class="jb-choice" data-pref="Ground Transport">Ground Transport</button>
+              <button type="button" class="jb-choice" data-pref="Accommodation">Accommodation</button>
+              <button type="button" class="jb-choice" data-pref="Security">Security</button>
+              <button type="button" class="jb-choice" data-pref="Catering">Catering</button>
+              <button type="button" class="jb-choice" data-pref="Destination Access">Destination Access</button>
+              <button type="button" class="jb-choice" data-pref="Luggage or Equipment">Luggage or Equipment</button>
+              <button type="button" class="jb-choice" data-pref="Not Yet Decided">Not Yet Decided</button>
+            </div>
+          </div>
+
+          <div class="jb-panel" data-panel="4">
+            <div class="jb-panel-label">Your journey, as we understand it so far</div>
+            <div class="jb-summary" id="jbSummaryCard"></div>
+          </div>
+        </div>
+
+        <div class="jb-reassurance">Every enquiry is reviewed personally. Your details remain private and are never shared beyond the requirements of your journey.</div>
+
+        <div class="jb-nav">
+          <button type="button" class="jb-back" id="jbBack" disabled>Back</button>
+          <button type="button" class="btn-ghost" id="jbNextBtn">Continue</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="journey-timeline" id="journeyTimelineSection">
+      <div class="jt-head">
+        <span class="eyebrow">The Jettset Standard</span>
+        <h2>Every Journey, Step By Step</h2>
+        <p>From the first enquiry to the moment you land, here is what is happening on your behalf.</p>
+      </div>
+      <div class="jt-track" id="jtTrack">
+        <div class="jt-line-track"></div>
+        <div class="jt-line-fill" id="jtLineFill"></div>
+        <div class="jt-steps">
+          <div class="jt-step" data-step="1">
+            <span class="jt-marker">1</span>
+            <div class="jt-content">
+              <span class="eyebrow">Inquiry Received</span>
+              <h4>The First Conversation</h4>
+              <p>We begin working on your journey the moment you reach out — by phone, WhatsApp, or form.</p>
+            </div>
+          </div>
+          <div class="jt-step" data-step="2">
+            <span class="jt-marker">2</span>
+            <div class="jt-content">
+              <span class="eyebrow">Advisor Assigned</span>
+              <h4>A Single Point Of Contact</h4>
+              <p>A dedicated advisor takes ownership of your journey from here — no hand-offs, no repeating yourself.</p>
+            </div>
+          </div>
+          <div class="jt-step" data-step="3">
+            <span class="jt-marker">3</span>
+            <div class="jt-content">
+              <span class="eyebrow">Journey Curated</span>
+              <h4>Options, Sourced Fresh</h4>
+              <p>Aircraft options are selected through our partner fleets, direct operator relationships and wider global market, then matched carefully to your itinerary.</p>
+              <div class="jt-tagline">Catering · Ambience · Occasion Styling — arranged on request</div>
+            </div>
+          </div>
+          <div class="jt-step" data-step="4">
+            <span class="jt-marker">4</span>
+            <div class="jt-content">
+              <span class="eyebrow">Chauffeur Arranged</span>
+              <h4>Ground, Handled</h4>
+              <p>Transfer to departure is arranged so the journey begins before you reach the aircraft.</p>
+            </div>
+          </div>
+          <div class="jt-step" data-step="5">
+            <span class="jt-marker">5</span>
+            <div class="jt-content">
+              <span class="eyebrow">Private Terminal</span>
+              <h4>Fast-Track Departure</h4>
+              <p>FBO and terminal formalities are handled quietly, ahead of your arrival.</p>
+            </div>
+          </div>
+          <div class="jt-step" data-step="6">
+            <span class="jt-marker">6</span>
+            <div class="jt-content">
+              <span class="eyebrow">Wheels Up</span>
+              <h4>Your Journey Begins</h4>
+              <p>Departure, on your schedule — not a gate agent's.</p>
+            </div>
+          </div>
+          <div class="jt-step" data-step="7">
+            <span class="jt-marker">7</span>
+            <div class="jt-content">
+              <span class="eyebrow">Arrival Experience</span>
+              <h4>Handover, Not Goodbye</h4>
+              <p>Your advisor remains engaged through arrival, not just departure.</p>
+              <div class="jt-tagline">Ground Transfer · Accommodation · Reservations — arranged on request</div>
+            </div>
+          </div>
+          <div class="jt-step" data-step="8">
+            <span class="jt-marker">8</span>
+            <div class="jt-content">
+              <span class="eyebrow">Journey Complete</span>
+              <h4>Until The Next One</h4>
+              <p>Your advisor and preferences carry forward, so the next journey starts one step ahead.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="inside-house" data-reveal>
+      <div class="inside-house-head">
+        <span class="eyebrow">Inside The House</span>
+        <h2>One relationship.<br>A world built around it.</h2>
+        <p>Every part of Jettset begins with movement. The relationship is designed to extend far beyond the aircraft.</p>
+      </div>
+
+      <div class="ih-grid">
+
+        <a class='ih-division ih-aviation' href='/charter'>
+          <div class="ih-division-head">
+            <span class="ih-num">01</span>
+            <span class="eyebrow">Aviation</span>
+          </div>
+          <h3>The foundation of the House.</h3>
+          <ul class="ih-items">
+            <li><span>Charter</span><span class="ih-item-desc">On-demand journeys sourced around the real requirements of each itinerary.</span></li>
+            <li><span>Jet Card</span><span class="ih-item-desc">A structured aviation relationship for guests who fly regularly.</span></li>
+            <li><span>Legs</span><span class="ih-item-desc">Selected empty-leg opportunities for guests able to move flexibly.</span></li>
+          </ul>
+          <span class="ih-cta">Explore Aviation <i>&#8594;</i></span>
+        </a>
+
+        <div class="ih-row">
+          <a class='ih-division ih-membership' href='/club'>
+            <div class="ih-division-head">
+              <span class="ih-num">02</span>
+              <span class="eyebrow">Membership</span>
+            </div>
+            <h3>Club</h3>
+            <p class="ih-desc">A standing relationship for returning guests, families and offices who value continuity, priority and preference memory.</p>
+            <span class="ih-cta">Discover Club <i>&#8594;</i></span>
+          </a>
+
+          <a class='ih-division ih-concierge' href='/concierge'>
+            <div class="ih-division-head">
+              <span class="ih-num">03</span>
+              <span class="eyebrow">Concierge</span>
+            </div>
+            <h3>Beyond the aircraft door.</h3>
+            <p class="ih-desc">Everything before, around and after the flight — ground movement, accommodation, access, security, dining and destination support.</p>
+            <span class="ih-cta">Explore Concierge <i>&#8594;</i></span>
+          </a>
+
+          <a class='ih-division ih-advisory' href='/advisory'>
+            <div class="ih-division-head">
+              <span class="ih-num">04</span>
+              <span class="eyebrow">Advisory</span>
+            </div>
+            <h3>Strategic counsel.</h3>
+            <p class="ih-desc">Specialist aviation strategy and project support for owners, companies and institutions.</p>
+            <span class="ih-cta">Explore Advisory <i>&#8594;</i></span>
+          </a>
+        </div>
+
+        <a class='ih-division ih-culture' href='/the-manifest'>
+          <div class="ih-division-head">
+            <span class="ih-num">05</span>
+            <span class="eyebrow">Culture</span>
+          </div>
+          <h3>The visual and editorial language of the House.</h3>
+          <ul class="ih-items ih-items-inline">
+            <li><span>Editions</span><span class="ih-item-desc">Limited physical expressions of the Jettset world.</span></li>
+            <li><span>The Manifest</span><span class="ih-item-desc">Editorial intelligence across aviation, culture and global movement.</span></li>
+            <li><span>In Motion</span><span class="ih-item-desc">The visual language of the House.</span></li>
+          </ul>
+          <span class="ih-cta">Enter The Jettset World <i>&#8594;</i></span>
+        </a>
+
+      </div>
+    </section>
+
+    <section class="route-map jw-embed" id="routeMapSection" data-reveal>
+      <div class="jw-embed-grid">
+        <div class="jw-embed-copy">
+          <span class="eyebrow">Signature Journeys</span>
+          <h2>Wherever The World Gathers.</h2>
+          <p>Six routes our guests return to, sourced individually every time. Select one to see it in the air.</p>
+        </div>
+
+        <div class="jw-embed-stage">
+          <div class="world-stage">
+            <canvas id="globeCanvas" width="900" height="900" aria-label="Three-dimensional globe showing recognisable world geography"></canvas>
+            <span class="globe-hint" id="globeHint">Drag to rotate</span>
+            <div class="static-fallback" id="staticFallback"></div>
+          </div>
+        </div>
+
+        <div class="jw-embed-chips">
+          <div class="route-chips" id="routeChips"></div>
+        </div>
+
+        <div class="jw-embed-panel">
+          <div class="journey-panel" id="journeyPanel">
+            <h3 class="jp-route-name" id="jpRouteName">&nbsp;</h3>
+            <span class="jp-route-sub" id="jpRouteSub">&nbsp;</span>
+            <div class="jp-grid">
+              <div><span class="jp-stat-label">Flight Time</span><span class="jp-stat-value" id="jpFlightTime">&mdash;</span></div>
+              <div><span class="jp-stat-label">Suitable Category</span><span class="jp-stat-value" id="jpAircraft">&mdash;</span></div>
+              <div><span class="jp-stat-label">Local Time, Destination</span><span class="jp-stat-value" id="jpLocalTime">&mdash;</span></div>
+            </div>
+            <p class="jp-concierge" id="jpConcierge"></p>
+            <div class="jp-cultural" id="jpCultural"></div>
+            <button type="button" class="jp-cta" id="jpCta">Build This Journey</button>
+            <p class="jp-cta-note">In production, this prefills the Journey Builder above with this route.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="standard" data-reveal>
+      <div class="standard-head">
+        <span class="eyebrow">Our Commitment</span>
+        <h2>What Every Journey Is Built On — And What You Can Expect From It</h2>
+      </div>
+      <div class="standard-grid">
+        <div>
+          <span class="standard-col-label">The Standard</span>
+          <ul class="standard-list">
+            <li>Licensed operators only.</li>
+            <li>Operator-direct sourcing, wherever possible.</li>
+            <li>Worldwide access, regardless of notice.</li>
+            <li>Discreet by design — not as an afterthought.</li>
+            <li>Dedicated journey management, start to finish.</li>
+            <li>A safety-first partner network, vetted before it's ever offered.</li>
+          </ul>
+        </div>
+        <div>
+          <span class="standard-col-label">The Response Promise</span>
+          <div class="response-grid">
+            <div class="response-stat">
+              <div class="num">&le;10 min</div>
+              <p>Enquiries answered, day or night.</p>
+            </div>
+            <div class="response-stat">
+              <div class="num">&le;2 hrs</div>
+              <p>Initial aircraft options delivered, where operationally possible.</p>
+            </div>
+            <div class="response-stat">
+              <div class="num">99%</div>
+              <p>Completion target, journey after journey.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="urgent-desk" data-reveal>
+      <div class="urgent-desk-inner">
+        <p>Departing within hours? Speak directly with our aviation desk.</p>
+        <div class="urgent-desk-links">
+          <a href="tel:+448005999888">Call</a>
+          <a href="https://wa.me/447393171717">WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="segments" data-reveal>
+
+      <div class="segment-row">
+        <div class="segment-img" style="background-image:url('images/hero-charter.jpg');"></div>
+        <div class="segment-text">
+          <span class="eyebrow">For Founders &amp; Entrepreneurs</span>
+          <h3>Time is the only asset you cannot recapitalise.</h3>
+          <p>Built for principals who move fast and expect their aviation partner to move faster — without compromising on discretion.</p>
+          <a class='btn-ghost' href='/charter'>Explore Charter</a>
+        </div>
+      </div>
+
+      <div class="segment-row reverse">
+        <div class="segment-img" style="background-image:url('images/hero-club.jpg');"></div>
+        <div class="segment-text">
+          <span class="eyebrow">For Artists &amp; Touring Teams</span>
+          <h3>The stage moves. Your standard shouldn't.</h3>
+          <p>Tour-grade logistics, last-minute flexibility, and a team that understands what's actually at stake on the road.</p>
+          <a class='btn-ghost' href='/club'>Explore Club</a>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="who-for" data-reveal>
+      <div class="who-for-head">
+        <span class="eyebrow">Who We Fly</span>
+        <h2>Built For The People Moving The World Forward</h2>
+        <p>Every guest travels differently. Our role is to understand the world they move within.</p>
+      </div>
+      <div class="who-for-grid">
+        <div class="who-for-tile"><span>Families</span></div>
+        <div class="who-for-tile"><span>Family Offices</span></div>
+        <div class="who-for-tile"><span>Founders</span></div>
+        <div class="who-for-tile"><span>Artists</span></div>
+        <div class="who-for-tile"><span>Athletes</span></div>
+        <div class="who-for-tile"><span>Cultural Leaders</span></div>
+      </div>
+    </section>
+
+
+    <section class="editorial-preview" data-reveal>
+      <a class='editorial-preview-col' href='/the-manifest'>
+        <span class="eyebrow">The Manifest</span>
+        <h2>Stories From Altitude</h2>
+        <p>Editorial perspectives on aviation, culture and global movement. Written for people who travel with intention.</p>
+        <span class="btn-ghost">Read The Manifest</span>
+      </a>
+      <a class='editorial-preview-col' href='/in-motion'>
+        <span class="eyebrow">In Motion</span>
+        <h2>Journeys, Told In Motion</h2>
+        <p>Real arrivals, real departures, real moments — captured from the journeys that shape the Jettset world.</p>
+        <span class="btn-ghost">Watch In Motion</span>
+      </a>
+    </section>
+
+    <section class="cta-band" data-reveal>
+      <h2>Begin Your Journey</h2>
+      <p>Whether you're planning your next flight or looking for a long-term aviation partner, our team is ready when you are.</p>
+      <a class='btn-ghost' href='/contact'>Enquire Now</a>
+    </section>
+
+  </div>
+
+  <!-- ============ FOOTER (shared) ============ -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Jettset</div>
+        <p>A private aviation and concierge house, built for guests who expect the world to move on their terms.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Experiences</h4>
+        <ul>
+          <li><a href='/charter'>Charter</a></li>
+          <li><a href='/jet-card'>Jet Card</a></li>
+          <li><a href='/club'>Club</a></li>
+          <li><a href='/legs'>Legs</a></li>
+          <li><a href='/concierge'>Concierge</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href='/about'>About</a></li>
+          <li><a href='/guest-segments'>Guest Segments</a></li>
+          <li><a href='/the-manifest'>The Manifest</a></li>
+          <li><a href='/in-motion'>In Motion</a></li>
+          <li><a href='/advisory'>Advisory</a></li>
+          <li><a href='/editions'>Editions</a></li>
+          <li><a href='/partners'>Partner With Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href='/quote'>Enquire</a></li>
+          <li><a href="mailto:info@jettsetglobal.com">info@jettsetglobal.com</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Jettset Global</span>
+      <span><a href='/privacy'>Privacy</a> &nbsp;&middot;&nbsp; <a href='/terms'>Terms</a> &nbsp;&middot;&nbsp; <a href='/trust'>Trust</a></span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script type="module" src="./jettset-world/globe.js"></script>
+</body>
+</html>
