@@ -43,20 +43,20 @@ const ROUTES = [
     cultural: 'Lagos Seasonal Travel — December',
   },
   {
-    id: 'london-cannes', a: { name: 'London', lat: 51.5074, lon: -0.1278 },
-    b: { name: 'Cannes', lat: 43.5528, lon: 7.0174, tz: 2 },
-    label: 'London &rarr; Cannes', sub: 'Festival Route',
-    flightTime: '1h 45m', aircraft: 'Light / Midsize Jet',
-    concierge: 'Accreditation and venue movement coordinated in advance through Concierge.',
-    cultural: 'Cannes Film Festival — May',
-  },
-  {
     id: 'london-paris', a: { name: 'London', lat: 51.5074, lon: -0.1278 },
     b: { name: 'Paris', lat: 48.8566, lon: 2.3522, tz: 2 },
     label: 'London &rarr; Paris', sub: '',
     flightTime: '55m', aircraft: 'Light Jet',
     concierge: 'Show-seating and venue transfers arranged alongside the journey.',
     cultural: 'Paris Fashion Week — September',
+  },
+  {
+    id: 'london-accra', a: { name: 'London', lat: 51.5074, lon: -0.1278 },
+    b: { name: 'Accra', lat: 5.6037, lon: -0.187, tz: 0 },
+    label: 'London &rarr; Accra', sub: 'West Africa Connection',
+    flightTime: '6h 25m', aircraft: 'Heavy Jet',
+    concierge: 'Arrival handling and onward ground movement coordinated around the purpose of the journey.',
+    cultural: 'Accra in December',
   },
 ];
 
@@ -658,14 +658,8 @@ function localTimeFor(offsetHours) {
   return `${hour % 12 || 12}:${minute < 10 ? '0' : ''}${minute} ${period}`;
 }
 
-ROUTES.forEach((route) => {
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.className = 'route-chip';
-  button.dataset.id = route.id;
-  button.innerHTML = `<span class="route-chip-label">${route.label}</span><span class="route-chip-sub">${route.sub || 'Signature Journey'}</span>`;
-  button.addEventListener('click', () => selectRoute(route.id));
-  chipWrap.appendChild(button);
+chipWrap.querySelectorAll('.route-chip').forEach((button) => {
+  button.addEventListener('click', () => selectRoute(button.dataset.id));
 });
 
 let timeInterval = null;
@@ -676,6 +670,10 @@ function updateJourneyPanel(route) {
   document.getElementById('jpFlightTime').textContent = route.flightTime;
   document.getElementById('jpAircraft').textContent = route.aircraft;
   document.getElementById('jpConcierge').textContent = route.concierge;
+  document.getElementById('jvFrom').value = route.a.name;
+  document.getElementById('jvTo').value = route.b.name;
+  document.getElementById('jvDepartureLabel').textContent = route.a.name;
+  document.getElementById('jvDestinationLabel').textContent = route.b.name;
 
   const cultural = document.getElementById('jpCultural');
   cultural.textContent = route.cultural;
@@ -710,9 +708,27 @@ function selectRoute(id) {
 }
 
 document.getElementById('jpCta').addEventListener('click', () => {
-  const active = chipWrap.querySelector('.route-chip.is-active');
-  alert(`Prototype only: in production, this hands off to the Journey Builder pre-filled with ${active ? active.textContent : 'this route'}.`);
+  const from = document.getElementById('jvFrom').value.trim();
+  const to = document.getElementById('jvTo').value.trim();
+  const date = document.getElementById('jvDate').value;
+  const travellers = document.getElementById('jvTravellers').value;
+  if (from) sessionStorage.setItem('prefill_qFrom', from);
+  if (to) sessionStorage.setItem('prefill_qTo', to);
+  if (date) sessionStorage.setItem('prefill_qDepart', date);
+  sessionStorage.setItem('prefill_qAdults', travellers === '8' ? '8' : travellers);
+  window.location.href = 'quote.html';
 });
+
+const matchEnteredRoute = () => {
+  const from = document.getElementById('jvFrom').value.trim().toLowerCase();
+  const to = document.getElementById('jvTo').value.trim().toLowerCase();
+  const route = ROUTES.find((item) => item.a.name.toLowerCase() === from && item.b.name.toLowerCase() === to);
+  document.getElementById('jvDepartureLabel').textContent = document.getElementById('jvFrom').value.trim() || 'Departure';
+  document.getElementById('jvDestinationLabel').textContent = document.getElementById('jvTo').value.trim() || 'Destination';
+  if (route) selectRoute(route.id);
+};
+document.getElementById('jvFrom').addEventListener('change', matchEnteredRoute);
+document.getElementById('jvTo').addEventListener('change', matchEnteredRoute);
 
 selectRoute(ROUTES[0].id);
 initGlobe();

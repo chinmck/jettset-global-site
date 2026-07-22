@@ -134,7 +134,7 @@
     </div>
   </div>
 
-  <a href="#journeyBuilderSection" class="journey-mark" id="journeyBar">
+  <a href="#routeMapSection" class="journey-mark" id="journeyBar">
     <span class="journey-mark-label">Begin Your Journey</span>
   </a>
 
@@ -193,7 +193,7 @@
       <p class="fluency-intro-closing">We know aviation.<br>We understand your world.</p>
     </section>
 
-    <section class="journey-builder" id="journeyBuilderSection">
+    <section class="journey-builder" id="journeyBuilderSection" hidden>
       <div class="jb-builder-head">
         <span class="eyebrow">Begin Your Journey</span>
         <h2>Tell us where you need to be.<br>We&rsquo;ll understand everything around it.</h2>
@@ -473,39 +473,57 @@
       </div>
     </section>
 
-    <section class="route-map jw-embed" id="routeMapSection" data-reveal>
+    <section class="route-map jw-embed" id="routeMapSection">
       <div class="jw-embed-grid">
         <div class="jw-embed-copy">
           <span class="eyebrow">Signature Journeys</span>
-          <h2>Wherever The World Gathers.</h2>
-          <p>Six routes our guests return to, sourced individually every time. Select one to see it in the air.</p>
+          <h2>Your Journey, Visualised.</h2>
+          <p>Enter your route and see the journey take shape.</p>
+          <div class="jv-fields" aria-label="Journey details">
+            <label class="jv-field" for="jvFrom"><span>From</span><input id="jvFrom" type="text" value="London" list="jvCities" autocomplete="off"></label>
+            <span class="jv-arrow" aria-hidden="true">&#8594;</span>
+            <label class="jv-field" for="jvTo"><span>To</span><input id="jvTo" type="text" value="Monaco" list="jvCities" autocomplete="off"></label>
+            <label class="jv-field" for="jvDate"><span>Date</span><input id="jvDate" type="date"></label>
+            <label class="jv-field" for="jvTravellers"><span>Travellers</span><select id="jvTravellers"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8+</option></select></label>
+            <datalist id="jvCities"><option value="London"><option value="Monaco"><option value="Dubai"><option value="New York"><option value="Miami"><option value="Lagos"><option value="Paris"><option value="Accra"></datalist>
+          </div>
         </div>
 
         <div class="jw-embed-stage">
           <div class="world-stage">
             <canvas id="globeCanvas" width="900" height="900" aria-label="Three-dimensional globe showing recognisable world geography"></canvas>
+            <div class="jv-route-labels" aria-live="polite"><span id="jvDepartureLabel">London</span><span id="jvDestinationLabel">Monaco</span></div>
             <span class="globe-hint" id="globeHint">Drag to rotate</span>
             <div class="static-fallback" id="staticFallback"></div>
+            <noscript><div class="jv-noscript">Interactive globe unavailable. Choose a curated route below or continue with the journey enquiry.</div></noscript>
           </div>
         </div>
 
         <div class="jw-embed-chips">
-          <div class="route-chips" id="routeChips"></div>
+          <div class="route-chips" id="routeChips" aria-label="Curated routes">
+            <button type="button" class="route-chip is-active" data-id="london-monaco"><span class="route-chip-label">London &rarr; Monaco</span><span class="route-chip-sub">Riviera Escape</span></button>
+            <button type="button" class="route-chip" data-id="london-dubai"><span class="route-chip-label">London &rarr; Dubai</span><span class="route-chip-sub">Gulf Crossing</span></button>
+            <button type="button" class="route-chip" data-id="ny-london"><span class="route-chip-label">New York &rarr; London</span><span class="route-chip-sub">Atlantic Crossing</span></button>
+            <button type="button" class="route-chip" data-id="miami-newyork"><span class="route-chip-label">Miami &rarr; New York</span><span class="route-chip-sub">Fair Week Route</span></button>
+            <button type="button" class="route-chip" data-id="lagos-london"><span class="route-chip-label">Lagos &rarr; London</span><span class="route-chip-sub">Lagos Crossing</span></button>
+            <button type="button" class="route-chip" data-id="london-paris"><span class="route-chip-label">London &rarr; Paris</span><span class="route-chip-sub">City Pair</span></button>
+            <button type="button" class="route-chip" data-id="london-accra"><span class="route-chip-label">London &rarr; Accra</span><span class="route-chip-sub">West Africa Connection</span></button>
+          </div>
         </div>
 
         <div class="jw-embed-panel">
           <div class="journey-panel" id="journeyPanel">
-            <h3 class="jp-route-name" id="jpRouteName">&nbsp;</h3>
-            <span class="jp-route-sub" id="jpRouteSub">&nbsp;</span>
+            <h3 class="jp-route-name" id="jpRouteName">London &rarr; Monaco</h3>
+            <span class="jp-route-sub" id="jpRouteSub">Riviera Escape</span>
             <div class="jp-grid">
-              <div><span class="jp-stat-label">Flight Time</span><span class="jp-stat-value" id="jpFlightTime">&mdash;</span></div>
-              <div><span class="jp-stat-label">Suitable Category</span><span class="jp-stat-value" id="jpAircraft">&mdash;</span></div>
-              <div><span class="jp-stat-label">Local Time, Destination</span><span class="jp-stat-value" id="jpLocalTime">&mdash;</span></div>
+              <div><span class="jp-stat-label">Estimated Flight Time</span><span class="jp-stat-value" id="jpFlightTime">1h 40m</span></div>
+              <div><span class="jp-stat-label">Suggested Aircraft</span><span class="jp-stat-value" id="jpAircraft">Light / Midsize Jet</span></div>
+              <div><span class="jp-stat-label">Local Time, Destination</span><span class="jp-stat-value" id="jpLocalTime">UTC+2</span></div>
             </div>
-            <p class="jp-concierge" id="jpConcierge"></p>
-            <div class="jp-cultural" id="jpCultural"></div>
-            <button type="button" class="jp-cta" id="jpCta">Build This Journey</button>
-            <p class="jp-cta-note">In production, this prefills the Journey Builder above with this route.</p>
+            <p class="jp-concierge" id="jpConcierge">Ground transfer from Nice Côte d’Azur and villa coordination arranged as part of the same journey.</p>
+            <div class="jp-cultural" id="jpCultural">Monaco Grand Prix — May</div>
+            <button type="button" class="jp-cta" id="jpCta">Request This Journey</button>
+            <p class="jp-cta-note">Every enquiry is reviewed personally and handled in confidence.</p>
           </div>
         </div>
       </div>
