@@ -485,8 +485,9 @@
             <label class="jv-field" for="jvTo"><span>To</span><input id="jvTo" type="text" value="Monaco" list="jvCities" autocomplete="off"></label>
             <label class="jv-field" for="jvDate"><span>Date</span><input id="jvDate" type="date"></label>
             <label class="jv-field" for="jvTravellers"><span>Travellers</span><select id="jvTravellers"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8+</option></select></label>
-            <datalist id="jvCities"><option value="London"><option value="Monaco"><option value="Dubai"><option value="New York"><option value="Miami"><option value="Lagos"><option value="Paris"><option value="Accra"></datalist>
+            <datalist id="jvCities"><option value="London"><option value="Monaco"><option value="Dubai"><option value="New York"><option value="Miami"><option value="Lagos"><option value="Paris"><option value="Accra"><option value="Los Angeles"><option value="Toronto"><option value="Madrid"><option value="Rome"><option value="Geneva"><option value="Zurich"><option value="Johannesburg"><option value="Cape Town"><option value="Nairobi"><option value="Singapore"><option value="Hong Kong"><option value="Tokyo"><option value="Sydney"><option value="Doha"><option value="Riyadh"><option value="Istanbul"><option value="Athens"><option value="Ibiza"><option value="Mykonos"><option value="Mumbai"><option value="Delhi"><option value="São Paulo"></datalist>
           </div>
+          <p class="jv-route-status" id="jvRouteStatus" aria-live="polite">Choose a curated route or enter two cities from the suggestions.</p>
         </div>
 
         <div class="jw-embed-stage">
@@ -505,10 +506,11 @@
             <button type="button" class="route-chip" data-id="london-dubai"><span class="route-chip-label">London &rarr; Dubai</span><span class="route-chip-sub">Gulf Crossing</span></button>
             <button type="button" class="route-chip" data-id="ny-london"><span class="route-chip-label">New York &rarr; London</span><span class="route-chip-sub">Atlantic Crossing</span></button>
             <button type="button" class="route-chip" data-id="miami-newyork"><span class="route-chip-label">Miami &rarr; New York</span><span class="route-chip-sub">Fair Week Route</span></button>
-            <button type="button" class="route-chip" data-id="lagos-london"><span class="route-chip-label">Lagos &rarr; London</span><span class="route-chip-sub">Lagos Crossing</span></button>
-            <button type="button" class="route-chip" data-id="london-paris"><span class="route-chip-label">London &rarr; Paris</span><span class="route-chip-sub">City Pair</span></button>
-            <button type="button" class="route-chip" data-id="london-accra"><span class="route-chip-label">London &rarr; Accra</span><span class="route-chip-sub">West Africa Connection</span></button>
+            <button type="button" class="route-chip route-chip-more" data-id="lagos-london"><span class="route-chip-label">Lagos &rarr; London</span><span class="route-chip-sub">Lagos Crossing</span></button>
+            <button type="button" class="route-chip route-chip-more" data-id="london-paris"><span class="route-chip-label">London &rarr; Paris</span><span class="route-chip-sub">City Pair</span></button>
+            <button type="button" class="route-chip route-chip-more" data-id="london-accra"><span class="route-chip-label">London &rarr; Accra</span><span class="route-chip-sub">West Africa Connection</span></button>
           </div>
+          <button type="button" class="jv-explore-routes" id="jvExploreRoutes" aria-expanded="false">Explore more routes <span aria-hidden="true">+</span></button>
         </div>
 
         <div class="jw-embed-panel">

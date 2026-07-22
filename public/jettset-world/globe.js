@@ -60,6 +60,19 @@ const ROUTES = [
   },
 ];
 
+const CITY_CATALOG = [
+  ['London', 51.5074, -0.1278, 1], ['Monaco', 43.7384, 7.4246, 2], ['Dubai', 25.2048, 55.2708, 4],
+  ['New York', 40.7128, -74.006, -4], ['Miami', 25.7617, -80.1918, -4], ['Lagos', 6.5244, 3.3792, 1],
+  ['Paris', 48.8566, 2.3522, 2], ['Accra', 5.6037, -0.187, 0], ['Los Angeles', 34.0522, -118.2437, -7],
+  ['Toronto', 43.6532, -79.3832, -4], ['Madrid', 40.4168, -3.7038, 2], ['Rome', 41.9028, 12.4964, 2],
+  ['Geneva', 46.2044, 6.1432, 2], ['Zurich', 47.3769, 8.5417, 2], ['Johannesburg', -26.2041, 28.0473, 2],
+  ['Cape Town', -33.9249, 18.4241, 2], ['Nairobi', -1.2921, 36.8219, 3], ['Singapore', 1.3521, 103.8198, 8],
+  ['Hong Kong', 22.3193, 114.1694, 8], ['Tokyo', 35.6762, 139.6503, 9], ['Sydney', -33.8688, 151.2093, 10],
+  ['Doha', 25.2854, 51.531, 3], ['Riyadh', 24.7136, 46.6753, 3], ['Istanbul', 41.0082, 28.9784, 3],
+  ['Athens', 37.9838, 23.7275, 3], ['Ibiza', 38.9067, 1.4206, 2], ['Mykonos', 37.4467, 25.3289, 3],
+  ['Mumbai', 19.076, 72.8777, 5.5], ['Delhi', 28.6139, 77.209, 5.5], ['São Paulo', -23.5505, -46.6333, -3],
+].map(([name, lat, lon, tz]) => ({ name, lat, lon, tz }));
+
 const canvas = document.getElementById('globeCanvas');
 const chipWrap = document.getElementById('routeChips');
 const staticFallback = document.getElementById('staticFallback');
@@ -67,6 +80,7 @@ const panel = document.getElementById('journeyPanel');
 const hint = document.getElementById('globeHint');
 let fallbackReady = false;
 let activeRouteId = ROUTES[0].id;
+let activeRoute = ROUTES[0];
 let globeRouteController = null;
 
 function createFallbackRows() {
@@ -76,7 +90,7 @@ function createFallbackRows() {
     const row = document.createElement('div');
     row.className = 'static-route-row';
     row.innerHTML = `<span>${route.label}</span><span>${route.flightTime}</span>`;
-    row.addEventListener('click', () => selectRoute(route.id));
+    row.addEventListener('click', () => selectRoute(route.id, true));
     staticFallback.appendChild(row);
   });
 }
@@ -212,7 +226,7 @@ function initGlobe() {
       );
       globe.add(atmosphere);
       globeRouteController = createRouteController();
-      globeRouteController.select(activeRouteId, true);
+      globeRouteController.select(activeRoute, true);
       resize();
       start();
     }).catch((error) => {
@@ -367,8 +381,8 @@ function initGlobe() {
       elapsed: 0,
       pendingRoute: null,
       onComplete: null,
-      select(id, immediate = false, onComplete = null) {
-        const route = ROUTES.find((item) => item.id === id);
+      select(routeOrId, immediate = false, onComplete = null) {
+        const route = typeof routeOrId === 'string' ? ROUTES.find((item) => item.id === routeOrId) : routeOrId;
         if (!route) return;
         this.pendingRoute = route;
         this.onComplete = onComplete;
@@ -658,8 +672,23 @@ function localTimeFor(offsetHours) {
   return `${hour % 12 || 12}:${minute < 10 ? '0' : ''}${minute} ${period}`;
 }
 
+const routeSection = document.getElementById('routeMapSection');
+const routeStatus = document.getElementById('jvRouteStatus');
+const fromInput = document.getElementById('jvFrom');
+const toInput = document.getElementById('jvTo');
+routeSection.classList.add('journey-enhanced');
+
 chipWrap.querySelectorAll('.route-chip').forEach((button) => {
-  button.addEventListener('click', () => selectRoute(button.dataset.id));
+  button.addEventListener('click', () => selectRoute(button.dataset.id, true));
+});
+
+const exploreRoutes = document.getElementById('jvExploreRoutes');
+exploreRoutes.addEventListener('click', () => {
+  const expanded = routeSection.classList.toggle('routes-expanded');
+  exploreRoutes.setAttribute('aria-expanded', String(expanded));
+  exploreRoutes.innerHTML = expanded
+    ? 'Show fewer routes <span aria-hidden="true">−</span>'
+    : 'Explore more routes <span aria-hidden="true">+</span>';
 });
 
 let timeInterval = null;
@@ -670,8 +699,8 @@ function updateJourneyPanel(route) {
   document.getElementById('jpFlightTime').textContent = route.flightTime;
   document.getElementById('jpAircraft').textContent = route.aircraft;
   document.getElementById('jpConcierge').textContent = route.concierge;
-  document.getElementById('jvFrom').value = route.a.name;
-  document.getElementById('jvTo').value = route.b.name;
+  fromInput.value = route.a.name;
+  toInput.value = route.b.name;
   document.getElementById('jvDepartureLabel').textContent = route.a.name;
   document.getElementById('jvDestinationLabel').textContent = route.b.name;
 
@@ -690,26 +719,33 @@ function updateJourneyPanel(route) {
   panel.classList.add('is-visible');
 }
 
-function selectRoute(id) {
-  const route = ROUTES.find((item) => item.id === id);
+function selectRoute(routeOrId, userInitiated = false) {
+  const route = typeof routeOrId === 'string' ? ROUTES.find((item) => item.id === routeOrId) : routeOrId;
   if (!route) return;
-  activeRouteId = id;
+  activeRouteId = route.id;
+  activeRoute = route;
 
   chipWrap.querySelectorAll('.route-chip').forEach((chip) => {
-    chip.classList.toggle('is-active', chip.dataset.id === id);
+    chip.classList.toggle('is-active', chip.dataset.id === route.id);
   });
+  if (userInitiated) routeSection.classList.add('has-route-selection');
+  if (userInitiated) {
+    routeStatus.textContent = route.isCustom
+      ? 'Custom route visualised using approximate great-circle distance.'
+      : 'Curated journey selected.';
+  }
 
   if (globeRouteController) {
-    panel.classList.remove('is-visible');
-    globeRouteController.select(id, false, () => updateJourneyPanel(route));
+    updateJourneyPanel(route);
+    globeRouteController.select(route, false);
   } else {
     updateJourneyPanel(route);
   }
 }
 
 document.getElementById('jpCta').addEventListener('click', () => {
-  const from = document.getElementById('jvFrom').value.trim();
-  const to = document.getElementById('jvTo').value.trim();
+  const from = fromInput.value.trim();
+  const to = toInput.value.trim();
   const date = document.getElementById('jvDate').value;
   const travellers = document.getElementById('jvTravellers').value;
   if (from) sessionStorage.setItem('prefill_qFrom', from);
@@ -719,16 +755,79 @@ document.getElementById('jpCta').addEventListener('click', () => {
   window.location.href = 'quote.html';
 });
 
-const matchEnteredRoute = () => {
-  const from = document.getElementById('jvFrom').value.trim().toLowerCase();
-  const to = document.getElementById('jvTo').value.trim().toLowerCase();
-  const route = ROUTES.find((item) => item.a.name.toLowerCase() === from && item.b.name.toLowerCase() === to);
-  document.getElementById('jvDepartureLabel').textContent = document.getElementById('jvFrom').value.trim() || 'Departure';
-  document.getElementById('jvDestinationLabel').textContent = document.getElementById('jvTo').value.trim() || 'Destination';
-  if (route) selectRoute(route.id);
-};
-document.getElementById('jvFrom').addEventListener('change', matchEnteredRoute);
-document.getElementById('jvTo').addEventListener('change', matchEnteredRoute);
+const normaliseCity = (value) => value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const findCity = (value) => CITY_CATALOG.find((city) => normaliseCity(city.name) === normaliseCity(value));
 
-selectRoute(ROUTES[0].id);
+function greatCircleKilometres(a, b) {
+  const radians = (degrees) => degrees * Math.PI / 180;
+  const lat1 = radians(a.lat);
+  const lat2 = radians(b.lat);
+  const deltaLat = radians(b.lat - a.lat);
+  const deltaLon = radians(b.lon - a.lon);
+  const value = Math.sin(deltaLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(deltaLon / 2) ** 2;
+  return 6371 * 2 * Math.atan2(Math.sqrt(value), Math.sqrt(1 - value));
+}
+
+function estimatedTimeRange(a, b) {
+  const hours = (greatCircleKilometres(a, b) / 800) + 0.55;
+  const lower = Math.max(1, Math.floor(hours * 2) / 2);
+  const upper = Math.max(lower + 0.5, Math.ceil((hours + 0.5) * 2) / 2);
+  const format = (value) => Number.isInteger(value) ? String(value) : value.toFixed(1);
+  return `Approx. ${format(lower)}–${format(upper)} hours`;
+}
+
+const matchEnteredRoute = () => {
+  const from = findCity(fromInput.value);
+  const to = findCity(toInput.value);
+  document.getElementById('jvDepartureLabel').textContent = fromInput.value.trim() || 'Departure';
+  document.getElementById('jvDestinationLabel').textContent = toInput.value.trim() || 'Destination';
+
+  if (!from || !to || from.name === to.name) {
+    routeSection.classList.remove('has-route-selection');
+    chipWrap.querySelectorAll('.route-chip').forEach((chip) => chip.classList.remove('is-active'));
+    routeStatus.textContent = 'Choose two different cities from the suggestions to visualise the route.';
+    return;
+  }
+
+  const curated = ROUTES.find((item) => item.a.name === from.name && item.b.name === to.name);
+  if (curated) {
+    selectRoute(curated, true);
+    return;
+  }
+
+  const customRoute = {
+    id: 'custom-route', a: from, b: to, isCustom: true,
+    label: `${from.name} &rarr; ${to.name}`,
+    sub: 'Custom Journey',
+    flightTime: estimatedTimeRange(from, to),
+    aircraft: 'Aircraft recommendation confirmed during enquiry',
+    concierge: 'Journey requirements, operator options and destination support will be confirmed personally during enquiry.',
+    cultural: '',
+  };
+  selectRoute(customRoute, true);
+};
+fromInput.addEventListener('change', matchEnteredRoute);
+toInput.addEventListener('change', matchEnteredRoute);
+[fromInput, toInput].forEach((input) => {
+  input.addEventListener('input', () => {
+    routeSection.classList.remove('has-route-selection');
+    routeStatus.textContent = 'Choose two different cities from the suggestions to visualise the route.';
+  });
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      matchEnteredRoute();
+    }
+  });
+});
+
+const fixedJourneyAction = document.getElementById('journeyBar');
+const floatingContact = document.getElementById('contactMark');
+new IntersectionObserver((entries) => {
+  const insideJourney = entries.some((entry) => entry.isIntersecting);
+  fixedJourneyAction?.classList.toggle('is-journey-suppressed', insideJourney);
+  floatingContact?.classList.toggle('is-journey-suppressed', insideJourney);
+}, { threshold: 0.12 }).observe(routeSection);
+
+selectRoute(ROUTES[0]);
 initGlobe();
