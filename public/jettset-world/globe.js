@@ -84,6 +84,7 @@ const CITY_CATALOG = [
 ].map(([name, lat, lon, timeZone]) => ({ name, inputValue: name, markerLabel: name, lat, lon, timeZone, country: CITY_COUNTRIES[name], kind: 'city' }));
 
 const AIRPORT_CATALOG = [
+  { name: 'London City Airport', city: 'London', code: 'LCY', country: 'United Kingdom', lat: 51.5053, lon: 0.0553, timeZone: 'Europe/London' },
   { name: 'Farnborough Airport', city: 'London', code: 'FAB', country: 'United Kingdom', lat: 51.2758, lon: -0.7763, timeZone: 'Europe/London' },
   { name: 'London Luton Airport', city: 'London', code: 'LTN', country: 'United Kingdom', lat: 51.8747, lon: -0.3683, timeZone: 'Europe/London' },
   { name: 'London Biggin Hill Airport', city: 'London', code: 'BQH', country: 'United Kingdom', lat: 51.3308, lon: 0.0325, timeZone: 'Europe/London' },
