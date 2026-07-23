@@ -1164,8 +1164,8 @@
       if(!heroSection || !heroFilm) return;
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var revealWindow = 5;
-      var closingWindow = 5.3;
-      var blackHoldDuration = 0.5;
+var closingWindow = 6.5;
+var blackHoldDuration = 1.7;
       var logoWindow = 2.2;
 
       function updateCta(){
