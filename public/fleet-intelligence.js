@@ -36,6 +36,7 @@
       capacityLabel: "Up to 6 travellers",
       ideal: "Regional city pairs",
       representative: "Citation CJ3",
+      assetSlug: "light",
       cabinHeight: "Approx. 4 ft 9 in",
       luggageSummary: "Personal luggage",
       cabinLayout: "Club seating; configuration varies",
@@ -58,6 +59,7 @@
       capacityLabel: "Up to 8 travellers",
       ideal: "Longer regional journeys",
       representative: "Citation Latitude",
+      assetSlug: "midsize",
       cabinHeight: "Approx. 5 ft 8 in–6 ft",
       luggageSummary: "Standard personal luggage",
       cabinLayout: "Club seating with divan options; varies",
@@ -80,6 +82,7 @@
       capacityLabel: "Up to 10 travellers",
       ideal: "Transcontinental journeys",
       representative: "Challenger 350",
+      assetSlug: "super-midsize",
       cabinHeight: "Approx. 6 ft",
       luggageSummary: "Extended-stay luggage",
       cabinLayout: "Two-zone club and divan layouts; varies",
@@ -102,6 +105,7 @@
       capacityLabel: "Up to 14 travellers",
       ideal: "Long-haul and larger parties",
       representative: "Gulfstream G450",
+      assetSlug: "heavy",
       cabinHeight: "Approx. 6 ft 2 in",
       luggageSummary: "Generous long-stay guidance",
       cabinLayout: "Multiple cabin zones; layouts vary",
@@ -124,6 +128,7 @@
       capacityLabel: "Up to 16 travellers",
       ideal: "Intercontinental travel",
       representative: "Global 7500",
+      assetSlug: "ultra-long-range",
       cabinHeight: "Approx. 6 ft 2 in–6 ft 4 in",
       luggageSummary: "Substantial intercontinental guidance",
       cabinLayout: "Three or four cabin zones; layouts vary",
@@ -172,6 +177,12 @@
   var mediaPanel = root.querySelector("#fiMediaPanel");
   var viewLabel = root.querySelector("#fiViewLabel");
   var assetStatus = root.querySelector("#fiAssetStatus");
+  var profileImage = root.querySelector("#fiProfileImage");
+  var profileAvif = root.querySelector("#fiProfileAvif");
+  var profileAvifDesktop = root.querySelector("#fiProfileAvifDesktop");
+  var profileWebp = root.querySelector("#fiProfileWebp");
+  var profileWebpDesktop = root.querySelector("#fiProfileWebpDesktop");
+  var planImage = root.querySelector("#fiPlanImage");
   var mediaTabs = Array.prototype.slice.call(root.querySelectorAll("[data-fi-view]"));
   var categoryButtons = Array.prototype.slice.call(root.querySelectorAll("[data-fi-category]"));
   var enquire = root.querySelector("#fiEnquire");
@@ -185,12 +196,25 @@
     return selectedTab ? selectedTab.getAttribute("data-fi-view") : "exterior";
   }
 
-  function updateAssetStatus(view) {
-    if (!assetStatus) return;
-    assetStatus.textContent =
-      currentRecommendation.name === "Light Jet" && view === "exterior"
-        ? "Approved Citation CJ3 exterior master"
-        : "Temporary category placeholder / final approved asset required";
+  function updateMediaAssets(item, view) {
+    var slug = item.assetSlug;
+    var isPlan = view === "cabin";
+    var rasterView = view === "interior" ? "interior" : "exterior";
+    var stem = "images/fleet-intelligence/" + slug + "-" + rasterView;
+
+    profileAvif.srcset = stem + "-mobile.avif";
+    profileAvifDesktop.srcset = stem + "-desktop.avif";
+    profileWebp.srcset = stem + "-mobile.webp";
+    profileWebpDesktop.srcset = stem + "-desktop.webp";
+    profileImage.src = stem + "-desktop.jpg";
+    profileImage.alt = "Representative " + item.representative + " "
+      + rasterView + (rasterView === "exterior" ? " on a restrained dark apron" : " cabin interior");
+    planImage.src = "images/fleet-intelligence/" + slug + "-cabin-plan.svg";
+    planImage.alt = "Representative " + item.representative
+      + " cabin plan; configuration varies by aircraft";
+    assetStatus.textContent = isPlan
+      ? "Representative / typical plan · configuration varies"
+      : "Representative " + item.representative + " " + rasterView;
   }
 
   function normalise(value) {
@@ -245,8 +269,8 @@
 
   function render(item, message, isExploring) {
     currentRecommendation = item;
-    root.classList.toggle("fi-light-selected", item.name === "Light Jet");
-    updateAssetStatus(getCurrentMediaView());
+    root.classList.add("fi-profile-loaded");
+    updateMediaAssets(item, getCurrentMediaView());
     categoryName.textContent = item.name;
     match.textContent = isExploring ? "Category profile" : "Journey fit " + String(categories.indexOf(item) + 1).padStart(2, "0");
     reason.textContent = message;
@@ -322,7 +346,7 @@
       var view = button.getAttribute("data-fi-view");
       mediaPanel.className = "fi-media-panel fi-view-" + view;
       viewLabel.textContent = view === "cabin" ? "Cabin plan study" : view.charAt(0).toUpperCase() + view.slice(1) + " study";
-      updateAssetStatus(view);
+      updateMediaAssets(currentRecommendation, view);
       mediaTabs.forEach(function (tab) {
         tab.setAttribute("aria-selected", tab === button ? "true" : "false");
       });

@@ -339,14 +339,30 @@
 
             <div class="fi-media-panel fi-view-exterior" id="fiMediaPanel" role="tabpanel" tabindex="0">
               <div class="fi-media-atmosphere" aria-hidden="true"></div>
+              <picture class="fi-profile-picture">
+                <source id="fiProfileAvif" type="image/avif" media="(max-width: 700px)" srcset="images/fleet-intelligence/light-exterior-mobile.avif">
+                <source id="fiProfileAvifDesktop" type="image/avif" srcset="images/fleet-intelligence/light-exterior-desktop.avif">
+                <source id="fiProfileWebp" type="image/webp" media="(max-width: 700px)" srcset="images/fleet-intelligence/light-exterior-mobile.webp">
+                <source id="fiProfileWebpDesktop" type="image/webp" srcset="images/fleet-intelligence/light-exterior-desktop.webp">
+                <img
+                  class="fi-profile-image"
+                  id="fiProfileImage"
+                  src="images/fleet-intelligence/light-exterior-desktop.jpg"
+                  width="1600"
+                  height="1000"
+                  alt="Representative Citation CJ3 light jet exterior on a dark apron"
+                  decoding="async"
+                  fetchpriority="low"
+                >
+              </picture>
               <img
-                class="fi-exterior-image"
-                src="images/fleet-intelligence/citation-cj3-exterior.webp"
-                width="1800"
-                height="1600"
-                alt="Citation CJ3 light jet on a dark apron in restrained directional light"
+                class="fi-plan-image"
+                id="fiPlanImage"
+                src="images/fleet-intelligence/light-cabin-plan.svg"
+                width="1280"
+                height="420"
+                alt="Representative Citation CJ3 cabin plan; configuration varies by aircraft"
                 decoding="async"
-                fetchpriority="low"
               >
               <div class="fi-aircraft fi-aircraft-light" id="fiAircraftSilhouette" aria-hidden="true">
                 <span class="fi-fuselage"></span>
@@ -372,7 +388,7 @@
               </div>
               <div class="fi-media-caption">
                 <span id="fiViewLabel">Exterior study</span>
-                <span id="fiAssetStatus">Approved Citation CJ3 exterior master</span>
+                <span id="fiAssetStatus">Representative Citation CJ3 exterior</span>
               </div>
             </div>
           </div>
