@@ -1,0 +1,377 @@
+/* ============================================================
+   WHO WE FLY — CHAPTER
+   Standalone, isolated stylesheet. All selectors scoped under
+   .who-we-fly-section and prefixed "who-we-fly-". No bare
+   element selectors — cannot leak into or collide with
+   production styles or any other isolated chapter's CSS.
+
+   Design: an editorial index, not a five-card grid. A media
+   panel on the left, header + intro beside it, five numbered
+   audience rows as a single evidence ledger on the right
+   (hairlines, numeral spine — same family language as the
+   Jettset Standard chapter), closing line + one CTA beneath.
+   All content is visible and legible by default; hover/focus
+   only shifts emphasis, never reveals hidden content.
+   ============================================================ */
+
+.who-we-fly-section {
+  --wwf-ink: #0A0908;
+  --wwf-panel: #16140F;
+  --wwf-ivory: #F5F3EF;
+  --wwf-gold: #C9A24B;
+  --wwf-gold-muted: #8C763F;
+  --wwf-grey: #8A8782;
+
+  --wwf-serif: "Fraunces", "Iowan Old Style", "Georgia", serif;
+  --wwf-sans: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --wwf-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --wwf-unit: 8px;
+  --wwf-edge: clamp(24px, 6vw, 96px);
+
+  position: relative;
+  background: var(--wwf-ink);
+  color: var(--wwf-ivory);
+  font-family: var(--wwf-sans);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.who-we-fly-section *,
+.who-we-fly-section *::before,
+.who-we-fly-section *::after {
+  box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------------
+   GRID — media | body | index, close spans beneath body+index.
+   --------------------------------------------------------------- */
+
+.who-we-fly-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 27%) minmax(280px, 1fr) minmax(340px, 1.15fr);
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "media body  index"
+    "media close close";
+  min-height: 720px;
+}
+
+/* ---- Media panel (placeholder — see README) ---- */
+
+.who-we-fly-media {
+  grid-area: media;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(120% 130% at 20% 15%, #201c14 0%, #100f0b 45%, #0a0908 100%);
+  border-right: 1px solid rgba(201, 162, 75, 0.14);
+}
+
+.who-we-fly-media-plate {
+  position: absolute;
+  inset: 0;
+}
+
+.who-we-fly-media-plate img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.who-we-fly-arc {
+  fill: rgba(201, 162, 75, 0.05);
+  stroke: rgba(201, 162, 75, 0.3);
+  stroke-width: 1;
+}
+
+.who-we-fly-tail {
+  fill: none;
+  stroke: rgba(201, 162, 75, 0.4);
+  stroke-width: 1;
+}
+
+.who-we-fly-media-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(10,9,8,0) 55%, rgba(10,9,8,0.55) 100%);
+  pointer-events: none;
+}
+
+/* ---- Body: eyebrow, headline, intro ---- */
+
+.who-we-fly-body {
+  grid-area: body;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(var(--wwf-unit) * 7) calc(var(--wwf-unit) * 5);
+}
+
+.who-we-fly-kicker {
+  font-family: var(--wwf-mono);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--wwf-gold);
+  margin: 0 0 calc(var(--wwf-unit) * 1.5);
+}
+
+.who-we-fly-kicker-rule {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--wwf-gold-muted);
+  margin: 0 0 calc(var(--wwf-unit) * 3);
+}
+
+.who-we-fly-headline {
+  font-family: var(--wwf-serif);
+  font-weight: 500;
+  font-size: clamp(30px, 3vw, 44px);
+  line-height: 1.16;
+  letter-spacing: -0.01em;
+  margin: 0 0 calc(var(--wwf-unit) * 3);
+  max-width: 14ch;
+}
+
+.who-we-fly-intro {
+  font-family: var(--wwf-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(245, 243, 239, 0.78);
+  margin: 0;
+  max-width: 36ch;
+}
+
+/* ---- Index: five-row evidence ledger ---- */
+
+.who-we-fly-index {
+  grid-area: index;
+  border-left: 1px solid rgba(201, 162, 75, 0.16);
+  border-top: 1px solid rgba(201, 162, 75, 0.16);
+}
+
+.who-we-fly-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  align-items: start;
+  gap: calc(var(--wwf-unit) * 2.5);
+  padding: calc(var(--wwf-unit) * 3.25) calc(var(--wwf-unit) * 5) calc(var(--wwf-unit) * 3.25) calc(var(--wwf-unit) * 4);
+  border-bottom: 1px solid rgba(201, 162, 75, 0.14);
+  outline: none;
+  cursor: default;
+  transition: background 0.5s ease, padding-left 0.5s ease;
+}
+
+.who-we-fly-mark {
+  font-family: var(--wwf-mono);
+  font-size: 14px;
+  color: rgba(201, 162, 75, 0.7);
+  padding-top: 6px;
+  transition: color 0.5s ease;
+}
+
+.who-we-fly-rule {
+  display: none;
+}
+
+.who-we-fly-name {
+  font-family: var(--wwf-serif);
+  font-size: clamp(19px, 1.6vw, 23px);
+  color: rgba(245, 243, 239, 0.94);
+  margin: 0 0 calc(var(--wwf-unit) * 0.75);
+  transition: color 0.5s ease;
+}
+
+.who-we-fly-desc {
+  font-family: var(--wwf-sans);
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(245, 243, 239, 0.72);
+  margin: 0;
+  max-width: 42ch;
+  transition: color 0.5s ease;
+}
+
+.who-we-fly-row:hover,
+.who-we-fly-row:focus-visible {
+  background: rgba(201, 162, 75, 0.05);
+  padding-left: calc(var(--wwf-unit) * 4.5);
+}
+
+.who-we-fly-row:hover .who-we-fly-mark,
+.who-we-fly-row:focus-visible .who-we-fly-mark {
+  color: var(--wwf-gold);
+}
+
+.who-we-fly-row:hover .who-we-fly-name,
+.who-we-fly-row:focus-visible .who-we-fly-name {
+  color: var(--wwf-ivory);
+}
+
+.who-we-fly-row:hover .who-we-fly-desc,
+.who-we-fly-row:focus-visible .who-we-fly-desc {
+  color: rgba(245, 243, 239, 0.88);
+}
+
+.who-we-fly-row:focus-visible {
+  outline: 1px solid var(--wwf-gold);
+  outline-offset: -3px;
+}
+
+/* Scroll-driven emphasis, added only by JS; never dims below a
+   comfortably legible floor, and is purely additive. */
+.who-we-fly-index.js-has-dominance .who-we-fly-row:not(.is-dominant) .who-we-fly-mark {
+  color: rgba(201, 162, 75, 0.55);
+}
+.who-we-fly-index.js-has-dominance .who-we-fly-row:not(.is-dominant) .who-we-fly-name {
+  color: rgba(245, 243, 239, 0.82);
+}
+.who-we-fly-index.js-has-dominance .who-we-fly-row:not(.is-dominant) .who-we-fly-desc {
+  color: rgba(245, 243, 239, 0.64);
+}
+.who-we-fly-index.js-has-dominance .who-we-fly-row.is-dominant {
+  background: rgba(201, 162, 75, 0.05);
+}
+.who-we-fly-index.js-has-dominance .who-we-fly-row.is-dominant .who-we-fly-mark {
+  color: var(--wwf-gold);
+}
+.who-we-fly-index.js-has-dominance .who-we-fly-row.is-dominant .who-we-fly-name {
+  color: var(--wwf-ivory);
+}
+
+/* ---- Close: closing line + single CTA ---- */
+
+.who-we-fly-close {
+  grid-area: close;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: calc(var(--wwf-unit) * 3);
+  padding: calc(var(--wwf-unit) * 4) calc(var(--wwf-unit) * 5);
+  border-left: 1px solid rgba(201, 162, 75, 0.16);
+  border-top: 1px solid rgba(201, 162, 75, 0.14);
+}
+
+.who-we-fly-close-line {
+  font-family: var(--wwf-serif);
+  font-style: italic;
+  font-size: clamp(16px, 1.4vw, 19px);
+  color: rgba(245, 243, 239, 0.8);
+  margin: 0;
+}
+
+.who-we-fly-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--wwf-unit) * 1.25);
+  font-family: var(--wwf-sans);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--wwf-ivory);
+  text-decoration: none;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--wwf-gold-muted);
+  transition: border-color 0.4s ease, color 0.4s ease, gap 0.4s ease;
+  white-space: nowrap;
+}
+
+.who-we-fly-cta:hover,
+.who-we-fly-cta:focus-visible {
+  color: var(--wwf-gold);
+  border-color: var(--wwf-gold);
+  gap: calc(var(--wwf-unit) * 2);
+}
+
+.who-we-fly-cta-arrow {
+  transition: transform 0.4s ease;
+}
+
+.who-we-fly-cta:hover .who-we-fly-cta-arrow,
+.who-we-fly-cta:focus-visible .who-we-fly-cta-arrow {
+  transform: translateX(3px);
+}
+
+/* ---------------------------------------------------------------
+   MOBILE — 390 × 844. Stacks: media band, body, index rows,
+   close. No horizontal scroll, no cramped columns, no tiny text.
+   --------------------------------------------------------------- */
+
+@media (max-width: 780px) {
+  .who-we-fly-grid {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .who-we-fly-media {
+    height: clamp(200px, 32vh, 260px);
+    border-right: none;
+    border-bottom: 1px solid rgba(201, 162, 75, 0.16);
+  }
+
+  .who-we-fly-body {
+    padding: calc(var(--wwf-unit) * 5) var(--wwf-edge) calc(var(--wwf-unit) * 4);
+  }
+
+  .who-we-fly-headline {
+    font-size: clamp(26px, 7vw, 32px);
+    max-width: none;
+  }
+
+  .who-we-fly-intro {
+    max-width: none;
+    font-size: 15px;
+  }
+
+  .who-we-fly-index {
+    border-left: none;
+    border-top: 1px solid rgba(201, 162, 75, 0.16);
+  }
+
+  .who-we-fly-row {
+    grid-template-columns: 32px 1fr;
+    padding: calc(var(--wwf-unit) * 3) var(--wwf-edge);
+    gap: calc(var(--wwf-unit) * 2);
+  }
+
+  .who-we-fly-row:hover,
+  .who-we-fly-row:focus-visible {
+    padding-left: var(--wwf-edge);
+  }
+
+  .who-we-fly-name {
+    font-size: 19px;
+  }
+
+  .who-we-fly-desc {
+    font-size: 14.5px;
+    max-width: none;
+  }
+
+  .who-we-fly-close {
+    flex-direction: column;
+    align-items: flex-start;
+    border-left: none;
+    padding: calc(var(--wwf-unit) * 4) var(--wwf-edge) calc(var(--wwf-unit) * 6);
+  }
+}
+
+/* ---- Reduced motion ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  .who-we-fly-row,
+  .who-we-fly-mark,
+  .who-we-fly-name,
+  .who-we-fly-desc,
+  .who-we-fly-cta,
+  .who-we-fly-cta-arrow {
+    transition: none !important;
+  }
+}
