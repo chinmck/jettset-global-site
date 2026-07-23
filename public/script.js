@@ -513,7 +513,7 @@
     });
 
     var passengerCounts = { adults: 1, children: 0, pets: 0 };
-    var passengerLabels = { adults: 'Adult', children: 'Children', pets: 'Pets' };
+    var passengerLabels = { adults: 'Adults', children: 'Children', pets: 'Pets' };
     document.querySelectorAll('.stepper').forEach(function(stepper){
       var key = stepper.getAttribute('data-counter');
       var span = stepper.querySelector('span');
@@ -1517,7 +1517,7 @@
         function clickStepper(key, times){
           var stepper = document.querySelector('.stepper[data-counter="' + key + '"] button[data-action="inc"]');
           if(!stepper) return;
-          for(var i=0; i<times && i<8; i++){ stepper.click(); }
+          for(var i=0; i<times && i<20; i++){ stepper.click(); }
         }
         if(prefillAdults){
           var adultsWanted = parseInt(prefillAdults, 10) || 1;

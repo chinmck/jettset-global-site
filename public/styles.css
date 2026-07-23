@@ -2574,6 +2574,8 @@
   .jp-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; padding-bottom:12px; margin-bottom:12px; border-bottom:1px solid var(--grey-line); }
   .jp-stat-label{ font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--grey); display:block; margin-bottom:5px; }
   .jp-stat-value{ font-size:13px; color:var(--off-white); }
+  .jp-aircraft-note{font-size:10px; color:var(--grey); line-height:1.55; margin:-2px 0 10px;}
+  .jp-aircraft-note[hidden]{display:none;}
   .jp-concierge{ font-size:12px; color:var(--grey); line-height:1.6; margin-bottom:10px; }
   .jp-cultural{ display:flex; align-items:baseline; gap:8px; font-size:11.5px; color:var(--gold); margin-bottom:12px; border-left:2px solid var(--gold-dim); padding-left:11px; }
   .jp-cultural.is-empty{ display:none; }

@@ -803,6 +803,7 @@ function updateJourneyPanel(route) {
   document.getElementById('jpRouteSub').textContent = route.sub || 'Signature Journey';
   document.getElementById('jpFlightTime').textContent = route.flightTime;
   document.getElementById('jpAircraft').textContent = route.aircraft;
+  document.getElementById('jpAircraftNote').hidden = !route.isCustom;
   document.getElementById('jpConcierge').textContent = route.concierge;
   fromInput.value = route.a.inputValue || route.a.name;
   toInput.value = route.b.inputValue || route.b.name;
@@ -854,7 +855,7 @@ document.getElementById('jpCta').addEventListener('click', () => {
   if (from) sessionStorage.setItem('prefill_qFrom', from);
   if (to) sessionStorage.setItem('prefill_qTo', to);
   if (date) sessionStorage.setItem('prefill_qDepart', date);
-  sessionStorage.setItem('prefill_qAdults', travellers === '8' ? '8' : travellers);
+  sessionStorage.setItem('prefill_qAdults', travellers);
   window.location.href = 'quote.html';
 });
 
@@ -924,6 +925,25 @@ function estimatedTimeRange(a, b) {
   return `Approx. ${format(lower)}–${format(upper)} hours`;
 }
 
+const AIRCRAFT_CATEGORIES = [
+  { name: 'Light Jet', maxNauticalMiles: 1500, comfortableTravellers: 6 },
+  { name: 'Midsize Jet', maxNauticalMiles: 2500, comfortableTravellers: 8 },
+  { name: 'Super-Midsize Jet', maxNauticalMiles: 3500, comfortableTravellers: 10 },
+  { name: 'Heavy Jet', maxNauticalMiles: 5500, comfortableTravellers: 14 },
+  { name: 'Ultra Long Range', maxNauticalMiles: Infinity, comfortableTravellers: 16 },
+];
+
+function recommendedAircraftCategory(a, b, travellerCount) {
+  const nauticalMiles = greatCircleKilometres(a, b) / 1.852;
+  let categoryIndex = AIRCRAFT_CATEGORIES.findIndex((category) => nauticalMiles <= category.maxNauticalMiles);
+  if (categoryIndex < 0) categoryIndex = AIRCRAFT_CATEGORIES.length - 1;
+  while (
+    categoryIndex < AIRCRAFT_CATEGORIES.length - 1
+    && travellerCount > AIRCRAFT_CATEGORIES[categoryIndex].comfortableTravellers
+  ) categoryIndex += 1;
+  return AIRCRAFT_CATEGORIES[categoryIndex].name;
+}
+
 const matchEnteredRoute = () => {
   const from = findLocation(fromInput.value);
   const to = findLocation(toInput.value);
@@ -949,7 +969,7 @@ const matchEnteredRoute = () => {
     label: `${from.code ? `${from.city} (${from.code})` : from.name} &rarr; ${to.code ? `${to.city} (${to.code})` : to.name}`,
     sub: 'Custom Journey',
     flightTime: estimatedTimeRange(from, to),
-    aircraft: 'Aircraft recommendation confirmed during enquiry',
+    aircraft: recommendedAircraftCategory(from, to, Number(document.getElementById('jvTravellers').value) || 1),
     concierge: 'Journey requirements, operator options and destination support will be confirmed personally during enquiry.',
     cultural: '',
   };
@@ -957,6 +977,7 @@ const matchEnteredRoute = () => {
 };
 fromInput.addEventListener('change', matchEnteredRoute);
 toInput.addEventListener('change', matchEnteredRoute);
+document.getElementById('jvTravellers').addEventListener('change', matchEnteredRoute);
 [fromInput, toInput].forEach((input) => {
   input.addEventListener('input', () => {
     routeSection.classList.remove('has-route-selection');
