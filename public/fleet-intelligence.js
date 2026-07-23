@@ -151,6 +151,7 @@
   var range = root.querySelector("#fiRange");
   var capacity = root.querySelector("#fiCapacity");
   var representative = root.querySelector("#fiRepresentative");
+  var representativeNote = root.querySelector("#fiRepresentativeNote");
   var cabinHeight = root.querySelector("#fiCabinHeight");
   var cabinHeightDetail = root.querySelector("#fiCabinHeightDetail");
   var luggageSummary = root.querySelector("#fiLuggageSummary");
@@ -234,6 +235,7 @@
     range.textContent = item.range;
     capacity.textContent = item.capacityLabel;
     representative.textContent = item.representative;
+    representativeNote.textContent = item.representative;
     cabinHeight.textContent = item.cabinHeight;
     cabinHeightDetail.textContent = item.cabinHeight;
     luggageSummary.textContent = item.luggageSummary;
