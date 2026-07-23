@@ -1164,7 +1164,7 @@
       if(!heroSection || !heroFilm) return;
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var revealWindow = 5;
-      var closingWindow = 6;
+      var closingWindow = 3.5;
 
       function updateCta(){
         var duration = heroFilm.duration;
