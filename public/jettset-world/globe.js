@@ -3,58 +3,58 @@ import { RoomEnvironment } from './vendor/RoomEnvironment.js';
 
 const ROUTES = [
   {
-    id: 'london-monaco', a: { name: 'London', lat: 51.5074, lon: -0.1278 },
-    b: { name: 'Monaco', lat: 43.7384, lon: 7.4246, tz: 2 },
+    id: 'london-monaco', a: { name: 'London', lat: 51.5074, lon: -0.1278, timeZone: 'Europe/London' },
+    b: { name: 'Monaco', lat: 43.7384, lon: 7.4246, timeZone: 'Europe/Monaco' },
     label: 'London &rarr; Monaco', sub: 'Riviera Escape',
     flightTime: '1h 40m', aircraft: 'Light / Midsize Jet',
     concierge: 'Ground transfer from Nice Côte d’Azur and villa coordination arranged as part of the same journey.',
     cultural: 'Monaco Grand Prix — May',
   },
   {
-    id: 'london-dubai', a: { name: 'London', lat: 51.5074, lon: -0.1278 },
-    b: { name: 'Dubai', lat: 25.2048, lon: 55.2708, tz: 4 },
+    id: 'london-dubai', a: { name: 'London', lat: 51.5074, lon: -0.1278, timeZone: 'Europe/London' },
+    b: { name: 'Dubai', lat: 25.2048, lon: 55.2708, timeZone: 'Asia/Dubai' },
     label: 'London &rarr; Dubai', sub: 'Gulf Crossing',
     flightTime: '6h 45m', aircraft: 'Heavy Jet',
     concierge: 'Cabin and departure time selected around the arrival experience, with ground handling pre-arranged.',
     cultural: '',
   },
   {
-    id: 'ny-london', a: { name: 'New York', lat: 40.7128, lon: -74.006 },
-    b: { name: 'London', lat: 51.5074, lon: -0.1278, tz: 1 },
+    id: 'ny-london', a: { name: 'New York', lat: 40.7128, lon: -74.006, timeZone: 'America/New_York' },
+    b: { name: 'London', lat: 51.5074, lon: -0.1278, timeZone: 'Europe/London' },
     label: 'New York &rarr; London', sub: 'Atlantic Crossing',
     flightTime: '7h 15m', aircraft: 'Heavy / Ultra Long Range',
     concierge: 'Arranged for work, rest and a considered arrival into the next time zone.',
     cultural: '',
   },
   {
-    id: 'miami-newyork', a: { name: 'Miami', lat: 25.7617, lon: -80.1918, tz: -4 },
-    b: { name: 'New York', lat: 40.7128, lon: -74.006, tz: -4 },
+    id: 'miami-newyork', a: { name: 'Miami', lat: 25.7617, lon: -80.1918, timeZone: 'America/New_York' },
+    b: { name: 'New York', lat: 40.7128, lon: -74.006, timeZone: 'America/New_York' },
     label: 'Miami &rarr; New York', sub: 'Fair Week Route',
     flightTime: '2h 20m', aircraft: 'Light / Midsize Jet',
     concierge: 'Gallery and preview-day access coordinated through Concierge ahead of arrival.',
     cultural: 'Miami Art Basel — December',
   },
   {
-    id: 'lagos-london', a: { name: 'Lagos', lat: 6.5244, lon: 3.3792, tz: 1 },
-    b: { name: 'London', lat: 51.5074, lon: -0.1278, tz: 1 },
+    id: 'lagos-london', a: { name: 'Lagos', lat: 6.5244, lon: 3.3792, timeZone: 'Africa/Lagos' },
+    b: { name: 'London', lat: 51.5074, lon: -0.1278, timeZone: 'Europe/London' },
     label: 'Lagos &rarr; London', sub: '',
     flightTime: '6h 30m', aircraft: 'Heavy Jet',
     concierge: 'Ground transfer and onward arrangements held ready on both ends of the journey.',
     cultural: 'Lagos Seasonal Travel — December',
   },
   {
-    id: 'london-paris', a: { name: 'London', lat: 51.5074, lon: -0.1278 },
-    b: { name: 'Paris', lat: 48.8566, lon: 2.3522, tz: 2 },
+    id: 'london-paris', a: { name: 'London', lat: 51.5074, lon: -0.1278, timeZone: 'Europe/London' },
+    b: { name: 'Paris', lat: 48.8566, lon: 2.3522, timeZone: 'Europe/Paris' },
     label: 'London &rarr; Paris', sub: '',
     flightTime: '55m', aircraft: 'Light Jet',
     concierge: 'Show-seating and venue transfers arranged alongside the journey.',
     cultural: 'Paris Fashion Week — September',
   },
   {
-    id: 'london-accra', a: { name: 'London', lat: 51.5074, lon: -0.1278 },
-    b: { name: 'Accra', lat: 5.6037, lon: -0.187, tz: 0 },
+    id: 'london-accra', a: { name: 'London', lat: 51.5074, lon: -0.1278, timeZone: 'Europe/London' },
+    b: { name: 'Accra', lat: 5.6037, lon: -0.187, timeZone: 'Africa/Accra' },
     label: 'London &rarr; Accra', sub: 'West Africa Connection',
-    flightTime: '6h 25m', aircraft: 'Heavy Jet',
+    flightTime: '6h 25m', aircraft: 'Super-Midsize / Heavy Jet',
     concierge: 'Arrival handling and onward ground movement coordinated around the purpose of the journey.',
     cultural: 'Accra in December',
   },
@@ -71,34 +71,34 @@ const CITY_COUNTRIES = {
 };
 
 const CITY_CATALOG = [
-  ['London', 51.5074, -0.1278, 1], ['Monaco', 43.7384, 7.4246, 2], ['Dubai', 25.2048, 55.2708, 4],
-  ['New York', 40.7128, -74.006, -4], ['Miami', 25.7617, -80.1918, -4], ['Lagos', 6.5244, 3.3792, 1],
-  ['Paris', 48.8566, 2.3522, 2], ['Accra', 5.6037, -0.187, 0], ['Los Angeles', 34.0522, -118.2437, -7],
-  ['Toronto', 43.6532, -79.3832, -4], ['Madrid', 40.4168, -3.7038, 2], ['Rome', 41.9028, 12.4964, 2],
-  ['Geneva', 46.2044, 6.1432, 2], ['Zurich', 47.3769, 8.5417, 2], ['Johannesburg', -26.2041, 28.0473, 2],
-  ['Cape Town', -33.9249, 18.4241, 2], ['Nairobi', -1.2921, 36.8219, 3], ['Singapore', 1.3521, 103.8198, 8],
-  ['Hong Kong', 22.3193, 114.1694, 8], ['Tokyo', 35.6762, 139.6503, 9], ['Sydney', -33.8688, 151.2093, 10],
-  ['Doha', 25.2854, 51.531, 3], ['Riyadh', 24.7136, 46.6753, 3], ['Istanbul', 41.0082, 28.9784, 3],
-  ['Athens', 37.9838, 23.7275, 3], ['Ibiza', 38.9067, 1.4206, 2], ['Mykonos', 37.4467, 25.3289, 3],
-  ['Mumbai', 19.076, 72.8777, 5.5], ['Delhi', 28.6139, 77.209, 5.5], ['São Paulo', -23.5505, -46.6333, -3],
-].map(([name, lat, lon, tz]) => ({ name, inputValue: name, markerLabel: name, lat, lon, tz, country: CITY_COUNTRIES[name], kind: 'city' }));
+  ['London', 51.5074, -0.1278, 'Europe/London'], ['Monaco', 43.7384, 7.4246, 'Europe/Monaco'], ['Dubai', 25.2048, 55.2708, 'Asia/Dubai'],
+  ['New York', 40.7128, -74.006, 'America/New_York'], ['Miami', 25.7617, -80.1918, 'America/New_York'], ['Lagos', 6.5244, 3.3792, 'Africa/Lagos'],
+  ['Paris', 48.8566, 2.3522, 'Europe/Paris'], ['Accra', 5.6037, -0.187, 'Africa/Accra'], ['Los Angeles', 34.0522, -118.2437, 'America/Los_Angeles'],
+  ['Toronto', 43.6532, -79.3832, 'America/Toronto'], ['Madrid', 40.4168, -3.7038, 'Europe/Madrid'], ['Rome', 41.9028, 12.4964, 'Europe/Rome'],
+  ['Geneva', 46.2044, 6.1432, 'Europe/Zurich'], ['Zurich', 47.3769, 8.5417, 'Europe/Zurich'], ['Johannesburg', -26.2041, 28.0473, 'Africa/Johannesburg'],
+  ['Cape Town', -33.9249, 18.4241, 'Africa/Johannesburg'], ['Nairobi', -1.2921, 36.8219, 'Africa/Nairobi'], ['Singapore', 1.3521, 103.8198, 'Asia/Singapore'],
+  ['Hong Kong', 22.3193, 114.1694, 'Asia/Hong_Kong'], ['Tokyo', 35.6762, 139.6503, 'Asia/Tokyo'], ['Sydney', -33.8688, 151.2093, 'Australia/Sydney'],
+  ['Doha', 25.2854, 51.531, 'Asia/Qatar'], ['Riyadh', 24.7136, 46.6753, 'Asia/Riyadh'], ['Istanbul', 41.0082, 28.9784, 'Europe/Istanbul'],
+  ['Athens', 37.9838, 23.7275, 'Europe/Athens'], ['Ibiza', 38.9067, 1.4206, 'Europe/Madrid'], ['Mykonos', 37.4467, 25.3289, 'Europe/Athens'],
+  ['Mumbai', 19.076, 72.8777, 'Asia/Kolkata'], ['Delhi', 28.6139, 77.209, 'Asia/Kolkata'], ['São Paulo', -23.5505, -46.6333, 'America/Sao_Paulo'],
+].map(([name, lat, lon, timeZone]) => ({ name, inputValue: name, markerLabel: name, lat, lon, timeZone, country: CITY_COUNTRIES[name], kind: 'city' }));
 
 const AIRPORT_CATALOG = [
-  { name: 'Farnborough Airport', city: 'London', code: 'FAB', country: 'United Kingdom', lat: 51.2758, lon: -0.7763, tz: 1 },
-  { name: 'London Luton Airport', city: 'London', code: 'LTN', country: 'United Kingdom', lat: 51.8747, lon: -0.3683, tz: 1 },
-  { name: 'London Biggin Hill Airport', city: 'London', code: 'BQH', country: 'United Kingdom', lat: 51.3308, lon: 0.0325, tz: 1 },
-  { name: 'London Stansted Airport', city: 'London', code: 'STN', country: 'United Kingdom', lat: 51.885, lon: 0.235, tz: 1 },
-  { name: 'Paris Le Bourget Airport', city: 'Paris', code: 'LBG', country: 'France', lat: 48.9694, lon: 2.4414, tz: 2 },
-  { name: 'Nice Côte d’Azur Airport', city: 'Nice', code: 'NCE', country: 'France', lat: 43.6653, lon: 7.215, tz: 2 },
-  { name: 'Al Maktoum International Airport', city: 'Dubai', code: 'DWC', country: 'United Arab Emirates', lat: 24.8964, lon: 55.1614, tz: 4 },
-  { name: 'Kotoka International Airport', city: 'Accra', code: 'ACC', country: 'Ghana', lat: 5.6052, lon: -0.1668, tz: 0 },
-  { name: 'Murtala Muhammed International Airport', city: 'Lagos', code: 'LOS', country: 'Nigeria', lat: 6.5774, lon: 3.3212, tz: 1 },
-  { name: 'Teterboro Airport', city: 'New York', code: 'TEB', country: 'United States', lat: 40.8501, lon: -74.0608, tz: -4 },
-  { name: 'Opa-locka Executive Airport', city: 'Miami', code: 'OPF', country: 'United States', lat: 25.907, lon: -80.2784, tz: -4 },
-  { name: 'Toronto Pearson International Airport', city: 'Toronto', code: 'YYZ', country: 'Canada', lat: 43.6777, lon: -79.6248, tz: -4 },
-  { name: 'Mykonos International Airport', city: 'Mykonos', code: 'JMK', country: 'Greece', lat: 37.4351, lon: 25.3481, tz: 3 },
-  { name: 'Singapore Changi Airport', city: 'Singapore', code: 'SIN', country: 'Singapore', lat: 1.3644, lon: 103.9915, tz: 8 },
-  { name: 'Hong Kong International Airport', city: 'Hong Kong', code: 'HKG', country: 'Hong Kong', lat: 22.308, lon: 113.9185, tz: 8 },
+  { name: 'Farnborough Airport', city: 'London', code: 'FAB', country: 'United Kingdom', lat: 51.2758, lon: -0.7763, timeZone: 'Europe/London' },
+  { name: 'London Luton Airport', city: 'London', code: 'LTN', country: 'United Kingdom', lat: 51.8747, lon: -0.3683, timeZone: 'Europe/London' },
+  { name: 'London Biggin Hill Airport', city: 'London', code: 'BQH', country: 'United Kingdom', lat: 51.3308, lon: 0.0325, timeZone: 'Europe/London' },
+  { name: 'London Stansted Airport', city: 'London', code: 'STN', country: 'United Kingdom', lat: 51.885, lon: 0.235, timeZone: 'Europe/London' },
+  { name: 'Paris Le Bourget Airport', city: 'Paris', code: 'LBG', country: 'France', lat: 48.9694, lon: 2.4414, timeZone: 'Europe/Paris' },
+  { name: 'Nice Côte d’Azur Airport', city: 'Nice', code: 'NCE', country: 'France', lat: 43.6653, lon: 7.215, timeZone: 'Europe/Paris' },
+  { name: 'Al Maktoum International Airport', city: 'Dubai', code: 'DWC', country: 'United Arab Emirates', lat: 24.8964, lon: 55.1614, timeZone: 'Asia/Dubai' },
+  { name: 'Kotoka International Airport', city: 'Accra', code: 'ACC', country: 'Ghana', lat: 5.6052, lon: -0.1668, timeZone: 'Africa/Accra' },
+  { name: 'Murtala Muhammed International Airport', city: 'Lagos', code: 'LOS', country: 'Nigeria', lat: 6.5774, lon: 3.3212, timeZone: 'Africa/Lagos' },
+  { name: 'Teterboro Airport', city: 'New York', code: 'TEB', country: 'United States', lat: 40.8501, lon: -74.0608, timeZone: 'America/New_York' },
+  { name: 'Opa-locka Executive Airport', city: 'Miami', code: 'OPF', country: 'United States', lat: 25.907, lon: -80.2784, timeZone: 'America/New_York' },
+  { name: 'Toronto Pearson International Airport', city: 'Toronto', code: 'YYZ', country: 'Canada', lat: 43.6777, lon: -79.6248, timeZone: 'America/Toronto' },
+  { name: 'Mykonos International Airport', city: 'Mykonos', code: 'JMK', country: 'Greece', lat: 37.4351, lon: 25.3481, timeZone: 'Europe/Athens' },
+  { name: 'Singapore Changi Airport', city: 'Singapore', code: 'SIN', country: 'Singapore', lat: 1.3644, lon: 103.9915, timeZone: 'Asia/Singapore' },
+  { name: 'Hong Kong International Airport', city: 'Hong Kong', code: 'HKG', country: 'Hong Kong', lat: 22.308, lon: 113.9185, timeZone: 'Asia/Hong_Kong' },
 ].map((airport) => ({
   ...airport,
   kind: 'airport',
@@ -693,18 +693,22 @@ function initGlobe() {
   }, { once: true });
 }
 
-function timezoneLabel(offset) {
-  return `UTC${offset >= 0 ? '+' : ''}${offset}`;
+function timezoneLabel(timeZone, date = new Date()) {
+  const offsetName = new Intl.DateTimeFormat('en-GB', {
+    timeZone,
+    timeZoneName: 'longOffset',
+  }).formatToParts(date).find((part) => part.type === 'timeZoneName')?.value || 'GMT';
+  if (offsetName === 'GMT') return 'UTC+0';
+  return offsetName.replace(/^GMT/, 'UTC').replace(/:00$/, '').replace(/([+-])0(\d)/, '$1$2');
 }
 
-function localTimeFor(offsetHours) {
-  const now = new Date();
-  const utcMilliseconds = now.getTime() + (now.getTimezoneOffset() * 60000);
-  const destination = new Date(utcMilliseconds + (offsetHours * 3600000));
-  const hour = destination.getHours();
-  const minute = destination.getMinutes();
-  const period = hour >= 12 ? 'PM' : 'AM';
-  return `${hour % 12 || 12}:${minute < 10 ? '0' : ''}${minute} ${period}`;
+function localTimeFor(timeZone, date = new Date()) {
+  return new Intl.DateTimeFormat('en-GB', {
+    timeZone,
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+  }).format(date).replace(/\s(am|pm)$/i, (_, period) => ` ${period.toUpperCase()}`);
 }
 
 const routeSection = document.getElementById('routeMapSection');
@@ -752,7 +756,7 @@ function updateJourneyPanel(route) {
 
   const updateTime = () => {
     document.getElementById('jpLocalTime').textContent =
-      `${localTimeFor(route.b.tz)} (${timezoneLabel(route.b.tz)})`;
+      `${localTimeFor(route.b.timeZone)} (${timezoneLabel(route.b.timeZone)})`;
   };
   updateTime();
   if (timeInterval) clearInterval(timeInterval);
@@ -914,10 +918,12 @@ toInput.addEventListener('change', matchEnteredRoute);
 
 const fixedJourneyAction = document.getElementById('journeyBar');
 const floatingContact = document.getElementById('contactMark');
+const siteHeader = document.getElementById('mainNav');
 new IntersectionObserver((entries) => {
   const insideJourney = entries.some((entry) => entry.isIntersecting);
   fixedJourneyAction?.classList.toggle('is-journey-suppressed', insideJourney);
   floatingContact?.classList.toggle('is-journey-suppressed', insideJourney);
+  siteHeader?.classList.toggle('is-journey-suppressed', insideJourney);
 }, { threshold: 0.12 }).observe(routeSection);
 
 selectRoute(ROUTES[0]);

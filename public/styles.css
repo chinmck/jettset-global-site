@@ -2608,6 +2608,7 @@
   /* ---- mobile: natural stack per the specified order (headline > globe > routes > panel), no forced height ---- */
   @media(max-width:680px){
     .route-map.jw-embed{ padding:32px 20px 44px; }
+    .nav.is-journey-suppressed{opacity:0; pointer-events:none;}
     .world-stage{ max-width:300px; }
     .journey-panel{ padding:18px 20px; }
     .jp-grid{ grid-template-columns:1fr 1fr; }
