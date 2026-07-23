@@ -6,6 +6,7 @@
 <title>Jettset Global | Private Aviation & Concierge</title>
 <meta name="description" content="Operator-direct private jet charter and concierge, built around the guest, not the fleet. Discreet by design.">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="house-section.css">
 </head>
 <body>
 
@@ -162,35 +163,57 @@
       </div>
     </section>
 
-    <section class="house-intro" id="jettsetHouse" data-reveal>
-      <div class="house-intro-inner">
-        <span class="eyebrow">The Jettset House</span>
-        <h2>Aviation is the beginning.<br>The relationship goes further.</h2>
-        <div class="house-intro-body">
-          <p>Jettset is a private aviation and concierge House built around the complete life of the journey.</p>
-          <p>We bring together private aviation, membership, concierge, destination support, specialist advisory and cultural intelligence through one trusted relationship.</p>
-          <p class="house-intro-emphasis">The result is more than a flight.<br>It is a world designed to move with you — before departure, in the air and long after arrival.</p>
+    <section class="house-section" id="jettsetHouse" aria-labelledby="house-headline">
+      <div class="house-grid">
+        <div class="house-rail" aria-hidden="true">
+          <span class="house-rail-label">The Jettset House</span>
         </div>
-        <div class="divider"><span class="line"></span><span class="mark"></span><span class="line right"></span></div>
-        <p class="house-intro-closing">One House. Every part of the journey.</p>
-      </div>
-    </section>
 
-    <section class="fluency-intro fluency-before-journey" data-reveal>
-      <div class="fluency-intro-grid">
-        <div class="fluency-intro-heading">
-          <span class="eyebrow">Culturally Fluent Luxury</span>
-          <h2>The standard is timeless.<br>The understanding is modern.</h2>
+        <div class="house-editorial">
+          <p class="house-kicker">The Jettset House</p>
+
+          <h2 class="house-headline" id="house-headline">
+            <span class="house-headline-line"><span>Aviation is the beginning.</span></span>
+            <span class="house-headline-line"><span>The relationship goes further.</span></span>
+          </h2>
+
+          <p class="house-body">
+            Jettset brings private aviation, concierge and cultural intelligence into
+            one trusted relationship. We understand the people, places, timing and
+            expectations surrounding every journey — not only the aircraft that
+            carries it.
+          </p>
+
+          <p class="house-line">
+            Built for a new generation of founders, artists, athletes, entrepreneurs
+            and global leaders.
+          </p>
+
+          <p class="house-editorial-line">Editorial intelligence across aviation, culture and global movement.</p>
+
+          <a class="house-cta" href="/about">
+            <span>Enter the Jettset World</span>
+            <span class="house-cta-arrow" aria-hidden="true">&rarr;</span>
+          </a>
         </div>
-        <div class="fluency-intro-body">
-          <p>Private aviation has always understood aircraft.</p>
-          <p>We understand the people travelling within them.</p>
-          <p>Founders. Athletes. Artists. Families. Executives. Creators.</p>
-          <p>Every journey carries its own priorities, pressures and expectations. Understanding them is what transforms a flight into an experience.</p>
-          <p>The standards never change. The service adapts to the world each guest inhabits.</p>
+
+        <div class="house-plate">
+          <picture>
+            <source media="(max-width: 780px)" srcset="assets/house-plate-mobile.jpg">
+            <img class="house-plate-media is-active" src="assets/house-plate-desktop.jpg" width="1376" height="768" alt="A figure walks through a colonnaded stone courtyard at dusk, with the soft shadow of a private jet passing overhead on the wall behind him.">
+          </picture>
+          <div class="house-plate-veil"></div>
+
+          <div class="house-index">
+            <p class="house-index-label">Elsewhere, this week</p>
+            <div class="house-index-stage" id="house-index-stage" aria-live="off">
+              <p class="house-index-item is-current">Monaco — Grand Prix Week</p>
+            </div>
+          </div>
         </div>
+
+        <div class="house-foot" aria-hidden="true"></div>
       </div>
-      <p class="fluency-intro-closing">We know aviation.<br>We understand your world.</p>
     </section>
 
     <section class="route-map jw-embed" id="routeMapSection">
@@ -689,6 +712,7 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="house-section.js"></script>
   <script type="module" src="./jettset-world/globe.js?v=20260723-lcy"></script>
 </body>
 </html>

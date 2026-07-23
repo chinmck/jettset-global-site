@@ -1,0 +1,405 @@
+/* ============================================================
+   THE JETTSET HOUSE — CULTURAL FLUENCY CHAPTER
+   Standalone, isolated stylesheet.
+   All selectors are scoped under .house-section and prefixed
+   with "house-". No bare element selectors are used, so this
+   file cannot leak into or be overridden by production styles.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+.house-section {
+  /* ---- Design tokens (from JettSet Brand Operating System, Vol.04) ---- */
+  --house-ink: #0A0908;          /* Jet Black — ground */
+  --house-panel: #16140F;        /* Elevated Black — panels */
+  --house-ivory: #F5F3EF;        /* Warm Ivory */
+  --house-gold: #C9A24B;         /* JettSet Gold — punctuation only */
+  --house-gold-muted: #8C763F;   /* Muted Gold — quiet rules */
+  --house-grey: #8A8782;         /* Editorial Grey — supporting copy */
+
+  --house-serif: "Fraunces", "Iowan Old Style", "Georgia", serif;
+  --house-sans: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --house-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --house-unit: 8px; /* 8px base spacing logic */
+  --house-edge: clamp(24px, 6vw, 96px);
+
+  position: relative;
+  background: var(--house-ink);
+  color: var(--house-ivory);
+  font-family: var(--house-sans);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.house-section *,
+.house-section *::before,
+.house-section *::after {
+  box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------------
+   OUTER GRID — 12-column editorial spread.
+   Desktop default. Nothing here is centered: the headline column
+   sits off-axis, the visual plate takes the wider right measure.
+   --------------------------------------------------------------- */
+
+.house-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--house-unit) repeat(11, 1fr);
+  grid-template-rows: auto;
+  min-height: 900px;
+  padding: 0;
+}
+
+/* ---- Rotated kicker rail (far-left folio strip) ---- */
+
+.house-rail {
+  grid-column: 1 / 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-block: calc(var(--house-unit) * 6);
+  border-right: 1px solid rgba(201, 162, 75, 0.16);
+}
+
+.house-rail-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--house-mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--house-grey);
+  white-space: nowrap;
+}
+
+.house-rail-label em {
+  font-style: normal;
+  color: var(--house-gold);
+}
+
+/* ---- Editorial text column (asymmetric, left-weighted, lower half) ---- */
+
+.house-editorial {
+  grid-column: 2 / 8;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: calc(var(--house-unit) * 9) calc(var(--house-unit) * 6) calc(var(--house-unit) * 10) var(--house-edge);
+}
+
+.house-kicker {
+  font-family: var(--house-mono);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--house-gold);
+  margin: 0 0 calc(var(--house-unit) * 3);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.house-headline {
+  font-family: var(--house-serif);
+  font-weight: 500;
+  font-size: clamp(32px, 3.6vw, 58px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 calc(var(--house-unit) * 4);
+  max-width: 20ch;
+}
+
+.house-headline-line {
+  display: block;
+  overflow: hidden;
+}
+
+.house-headline-line span {
+  display: block;
+  opacity: 0;
+  transform: translateY(58%);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.house-headline-line:nth-child(2) span {
+  color: var(--house-grey);
+  transition-delay: 0.08s;
+}
+
+.house-body {
+  font-family: var(--house-sans);
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(245, 243, 239, 0.78);
+  max-width: 46ch;
+  margin: 0 0 calc(var(--house-unit) * 3.5);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.9s ease 0.22s, transform 0.9s ease 0.22s;
+}
+
+.house-line {
+  font-family: var(--house-serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--house-ivory);
+  border-top: 1px solid rgba(201, 162, 75, 0.3);
+  padding-top: calc(var(--house-unit) * 2.5);
+  margin: 0 0 calc(var(--house-unit) * 4);
+  max-width: 40ch;
+  opacity: 0;
+  transition: opacity 1s ease 0.34s;
+}
+
+.house-editorial-line {
+  font-family: var(--house-sans);
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(138, 135, 130, 0.85);
+  max-width: 34ch;
+  margin: 0 0 calc(var(--house-unit) * 4);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.9s ease 0.5s, transform 0.9s ease 0.5s;
+}
+
+.house-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--house-unit) * 1.25);
+  align-self: flex-start;
+  font-family: var(--house-sans);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--house-ivory);
+  text-decoration: none;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--house-gold-muted);
+  transition: border-color 0.4s ease, color 0.4s ease, gap 0.4s ease;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.9s ease 0.42s, transform 0.9s ease 0.42s;
+}
+
+.house-cta:hover {
+  color: var(--house-gold);
+  border-color: var(--house-gold);
+  gap: calc(var(--house-unit) * 2);
+}
+
+.house-cta-arrow {
+  transition: transform 0.4s ease;
+}
+
+.house-cta:hover .house-cta-arrow {
+  transform: translateX(3px);
+}
+
+/* ---- Reveal state, set by JS via IntersectionObserver ---- */
+
+.house-section.is-visible .house-kicker,
+.house-section.is-visible .house-headline-line span,
+.house-section.is-visible .house-body,
+.house-section.is-visible .house-line,
+.house-section.is-visible .house-editorial-line,
+.house-section.is-visible .house-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Content is fully readable when JavaScript is unavailable. The script adds
+   this opt-in class only when its reveal observer is ready. */
+.house-section:not(.house-reveal-ready) .house-kicker,
+.house-section:not(.house-reveal-ready) .house-headline-line span,
+.house-section:not(.house-reveal-ready) .house-body,
+.house-section:not(.house-reveal-ready) .house-line,
+.house-section:not(.house-reveal-ready) .house-editorial-line,
+.house-section:not(.house-reveal-ready) .house-cta {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------------------------------------------------------------
+   VISUAL PLATE — final approved still (motion development stopped
+   for this chapter; ships as a static plate).
+   --------------------------------------------------------------- */
+
+.house-plate {
+  grid-column: 8 / 13;
+  position: relative;
+  background: radial-gradient(120% 140% at 78% 18%, #201c14 0%, #100f0b 46%, #0a0908 100%);
+  overflow: hidden;
+  border-left: 1px solid rgba(201, 162, 75, 0.16);
+}
+
+.house-plate-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.6s ease;
+}
+
+.house-plate-media.is-active {
+  opacity: 1;
+}
+
+.house-plate-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 9, 8, 0) 55%, rgba(10, 9, 8, 0.55) 100%);
+  pointer-events: none;
+}
+
+/* ---- Running index — a cartographic ledger, not a card grid ---- */
+
+.house-index {
+  position: absolute;
+  top: calc(var(--house-unit) * 4);
+  right: calc(var(--house-unit) * 3);
+  width: 220px;
+  text-align: right;
+}
+
+.house-index-label {
+  font-family: var(--house-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(245, 243, 239, 0.45);
+  margin: 0 0 calc(var(--house-unit) * 1.5);
+}
+
+.house-index-stage {
+  position: relative;
+  height: 24px;
+  overflow: hidden;
+}
+
+.house-index-item {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  font-family: var(--house-serif);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--house-ivory);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.house-index-item.is-current {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Chapter-close hairline + attribution strip ---- */
+
+.house-foot {
+  grid-column: 2 / 13;
+  height: 1px;
+  margin: calc(var(--house-unit) * 2.5) 0;
+  border-top: 1px solid rgba(201, 162, 75, 0.16);
+}
+
+/* ---------------------------------------------------------------
+   MOBILE — 390 × 844 composition.
+   Plate moves to the top as a fixed-ratio band; the rotated rail
+   collapses into a single horizontal kicker; the running index
+   becomes a slow horizontal ledger beneath the headline instead
+   of cards or a marginal column.
+   --------------------------------------------------------------- */
+
+@media (max-width: 780px) {
+  .house-grid {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .house-rail {
+    display: none;
+  }
+
+  .house-plate {
+    order: 1;
+    height: 46vh;
+    min-height: 300px;
+  }
+
+  .house-index {
+    position: static;
+    width: auto;
+    text-align: left;
+    padding: calc(var(--house-unit) * 2) var(--house-edge) 0;
+    margin-top: calc(var(--house-unit) * -2);
+  }
+
+  .house-index-label {
+    color: rgba(245, 243, 239, 0.5);
+  }
+
+  .house-index-stage {
+    height: 22px;
+  }
+
+  .house-index-item {
+    right: auto;
+    left: 0;
+    text-align: left;
+    font-size: 15px;
+  }
+
+  .house-editorial {
+    order: 2;
+    padding: calc(var(--house-unit) * 4) var(--house-edge) calc(var(--house-unit) * 5);
+  }
+
+  .house-kicker::before {
+    content: "";
+  }
+
+  .house-headline {
+    font-size: clamp(32px, 9vw, 44px);
+    max-width: 12ch;
+  }
+
+  .house-body {
+    font-size: 16px;
+    max-width: none;
+  }
+
+  .house-line {
+    font-size: 16px;
+  }
+
+  .house-foot {
+    order: 3;
+    margin: calc(var(--house-unit) * 2) var(--house-edge);
+  }
+}
+
+/* ---- Reduced motion: hold the honoured state, drop the choreography ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  .house-section .house-kicker,
+  .house-section .house-headline-line span,
+  .house-section .house-body,
+  .house-section .house-line,
+  .house-section .house-editorial-line,
+  .house-section .house-cta,
+  .house-index-item {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
