@@ -369,16 +369,26 @@
 
   .house-headline {
     font-size: clamp(32px, 9vw, 44px);
+    line-height: 1.16;
     max-width: 12ch;
+    margin-bottom: calc(var(--house-unit) * 4.5);
+  }
+
+  .house-headline-line + .house-headline-line {
+    margin-top: 0.12em;
   }
 
   .house-body {
     font-size: 16px;
+    line-height: 1.72;
     max-width: none;
+    margin-bottom: calc(var(--house-unit) * 4);
   }
 
   .house-line {
     font-size: 16px;
+    line-height: 1.35;
+    padding-top: calc(var(--house-unit) * 3);
   }
 
   .house-foot {

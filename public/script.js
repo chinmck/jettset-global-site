@@ -1160,11 +1160,11 @@
     (function(){
       var heroSection = document.getElementById('heroSection');
       var heroFilm = document.getElementById('heroFilm');
-      var heroAudio = document.getElementById('heroFilmAudio');
       var soundToggle = document.getElementById('heroSoundToggle');
       if(!heroSection || !heroFilm) return;
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var revealWindow = 5;
+      var closingWindow = 6;
 
       function updateCta(){
         var duration = heroFilm.duration;
@@ -1172,7 +1172,10 @@
           heroSection.classList.add('hero-cta-visible');
           return;
         }
-        heroSection.classList.toggle('hero-cta-visible', heroFilm.currentTime >= duration - revealWindow);
+        if(heroFilm.currentTime >= duration - revealWindow){
+          heroSection.classList.add('hero-cta-visible');
+        }
+        heroSection.classList.toggle('hero-closing-frame', heroFilm.currentTime >= duration - closingWindow);
       }
 
       if(!reduceMotion){
@@ -1194,58 +1197,23 @@
         soundToggle.setAttribute('aria-label', soundOn ? 'Turn film sound off' : 'Turn film sound on');
       }
 
-      var soundOn = false;
-      if(heroAudio) heroAudio.muted = true;
-      setSoundState(false);
-
-      function keepAudioInSync(){
-        if(!soundOn || !heroAudio) return;
-        if(Math.abs(heroAudio.currentTime - heroFilm.currentTime) > 0.2){
-          heroAudio.currentTime = heroFilm.currentTime;
-        }
-      }
-
-      heroFilm.addEventListener('timeupdate', keepAudioInSync);
-      heroFilm.addEventListener('seeked', keepAudioInSync);
-      heroFilm.addEventListener('pause', function(){
-        if(heroAudio) heroAudio.pause();
-      });
-      heroFilm.addEventListener('playing', function(){
-        if(!soundOn || !heroAudio) return;
-        keepAudioInSync();
-        var audioPlayAttempt = heroAudio.play();
-        if(audioPlayAttempt && audioPlayAttempt.catch){
-          audioPlayAttempt.catch(function(){
-            soundOn = false;
-            heroAudio.muted = true;
-            setSoundState(false);
-          });
-        }
-      });
+      setSoundState(!heroFilm.muted);
 
       if(soundToggle){
         soundToggle.addEventListener('click', function(){
-          if(!soundOn && heroAudio){
+          if(heroFilm.muted){
             heroFilm.currentTime = 0;
-            heroFilm.muted = true;
-            heroAudio.currentTime = 0;
-            heroAudio.muted = false;
-            soundOn = true;
+            heroFilm.muted = false;
             setSoundState(true);
-            var filmPlayAttempt = heroFilm.play();
-            var soundPlayAttempt = heroAudio.play();
-            Promise.all([
-              filmPlayAttempt || Promise.resolve(),
-              soundPlayAttempt || Promise.resolve()
-            ]).catch(function(){
-                soundOn = false;
-                heroAudio.muted = true;
-                heroAudio.pause();
+            var playAttempt = heroFilm.play();
+            if(playAttempt && playAttempt.catch){
+              playAttempt.catch(function(){
+                heroFilm.muted = true;
                 setSoundState(false);
-            });
+              });
+            }
           } else {
-            soundOn = false;
-            if(heroAudio) heroAudio.muted = true;
+            heroFilm.muted = true;
             setSoundState(false);
           }
         });
