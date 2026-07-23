@@ -550,6 +550,27 @@
       object-fit:contain;
       transform:none;
     }
+    .hero.hero-slogan-frame .hero-video{
+      opacity:0;
+    }
+    .hero.hero-slogan-frame::before{
+      content:'The World Moves Differently Now. So Do We.';
+      position:absolute;
+      top:50%;
+      left:50%;
+      z-index:1;
+      width:calc(100% - 28px);
+      transform:translate(-50%,-50%);
+      color:#f3f0ea;
+      font-family:'Canela Text','Playfair Display',Georgia,serif;
+      font-size:clamp(15px,4.35vw,18px);
+      font-weight:400;
+      line-height:1.15;
+      letter-spacing:0;
+      text-align:center;
+      white-space:nowrap;
+      pointer-events:none;
+    }
     .hero .hero-img-main{
       position:absolute;
       inset:0;

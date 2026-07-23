@@ -1164,7 +1164,8 @@
       if(!heroSection || !heroFilm) return;
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var revealWindow = 5;
-      var closingWindow = 3.5;
+      var closingWindow = 5.3;
+      var logoWindow = 2.2;
 
       function updateCta(){
         var duration = heroFilm.duration;
@@ -1175,7 +1176,12 @@
         if(heroFilm.currentTime >= duration - revealWindow){
           heroSection.classList.add('hero-cta-visible');
         }
-        heroSection.classList.toggle('hero-closing-frame', heroFilm.currentTime >= duration - closingWindow);
+        var closingFrame = heroFilm.currentTime >= duration - closingWindow;
+        heroSection.classList.toggle('hero-closing-frame', closingFrame);
+        heroSection.classList.toggle(
+          'hero-slogan-frame',
+          closingFrame && heroFilm.currentTime < duration - logoWindow
+        );
       }
 
       if(!reduceMotion){
