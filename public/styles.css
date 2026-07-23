@@ -781,18 +781,22 @@
     padding:80px 56px 150px;
     border-top:1px solid rgba(201,162,75,0.18);
   }
+  .fluency-intro.fluency-before-journey{padding-bottom:48px;}
+  .fluency-before-journey .fluency-intro-closing{padding-bottom:72px;}
   @media(max-width:900px){
     .fluency-intro-grid{grid-template-columns:1fr; gap:34px;}
     .fluency-intro-heading{padding-top:0;}
   }
   @media(max-width:680px){
     .fluency-intro{padding:var(--space-immersive-m) 24px var(--space-immersive-m);}
+    .fluency-intro.fluency-before-journey{padding-bottom:32px;}
     .fluency-intro-body p{font-size:14px;}
     .fluency-intro-closing{
       font-size:clamp(24px,7vw,32px);
       margin-top:60px;
       padding:56px 24px 90px;
     }
+    .fluency-before-journey .fluency-intro-closing{padding-bottom:48px;}
   }
 
   /* ===== SECTION: INSIDE THE HOUSE (replaces .seven) ===== */
