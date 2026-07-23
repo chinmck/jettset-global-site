@@ -1,0 +1,472 @@
+/* ============================================================
+   INSIDE THE HOUSE — CHAPTER
+   Standalone, isolated stylesheet. All selectors scoped under
+   .inside-house-section and prefixed "inside-house-". No bare
+   element selectors — cannot leak into or collide with production
+   styles, or with the separate .house-section chapter's CSS.
+
+   INTERACTION MODEL: a hidden native radio group drives which
+   "room" panel is visible, using :checked ~ sibling selectors.
+   This means the whole section works with JavaScript fully
+   disabled — inside-house.js only adds a live-region announcement
+   as a progressive enhancement, never the core mechanism.
+   ============================================================ */
+
+.inside-house-section {
+  --inside-house-ink: #0A0908;
+  --inside-house-panel: #16140F;
+  --inside-house-ivory: #F5F3EF;
+  --inside-house-gold: #C9A24B;
+  --inside-house-gold-muted: #8C763F;
+  --inside-house-grey: #8A8782;
+
+  --inside-house-serif: "Fraunces", "Iowan Old Style", "Georgia", serif;
+  --inside-house-sans: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --inside-house-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --inside-house-unit: 8px;
+  --inside-house-edge: clamp(24px, 6vw, 96px);
+
+  position: relative;
+  background: var(--inside-house-ink);
+  color: var(--inside-house-ivory);
+  font-family: var(--inside-house-sans);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.inside-house-section *,
+.inside-house-section *::before,
+.inside-house-section *::after {
+  box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------------
+   HEADER BAND
+   --------------------------------------------------------------- */
+
+.inside-house-header {
+  padding: calc(var(--inside-house-unit) * 9) var(--inside-house-edge) calc(var(--inside-house-unit) * 6);
+  max-width: 62ch;
+}
+
+.inside-house-kicker {
+  font-family: var(--inside-house-mono);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--inside-house-gold);
+  margin: 0 0 calc(var(--inside-house-unit) * 2.5);
+}
+
+.inside-house-headline {
+  font-family: var(--inside-house-serif);
+  font-weight: 500;
+  font-size: clamp(30px, 3.2vw, 50px);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0 0 calc(var(--inside-house-unit) * 2.5);
+}
+
+.inside-house-headline em {
+  font-style: normal;
+  color: var(--inside-house-grey);
+}
+
+.inside-house-lead {
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(245, 243, 239, 0.72);
+  max-width: 52ch;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------
+   RADIO GROUP — visually hidden, not display:none. Standard
+   accessible-hide technique: stays focusable and keyboard-operable,
+   and screen readers still announce it as a radio group.
+   --------------------------------------------------------------- */
+
+.inside-house-radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------------------------------------------------------------
+   DIRECTORY — the floor-directory list of five divisions.
+   --------------------------------------------------------------- */
+
+.inside-house-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(320px, 34%) 1fr;
+  min-height: 560px;
+  border-top: 1px solid rgba(201, 162, 75, 0.16);
+}
+
+.inside-house-directory {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  border-right: 1px solid rgba(201, 162, 75, 0.16);
+}
+
+.inside-house-directory-legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.inside-house-item {
+  position: relative;
+  border-bottom: 1px solid rgba(201, 162, 75, 0.12);
+}
+
+.inside-house-item:last-child {
+  border-bottom: none;
+}
+
+.inside-house-item-button {
+  display: flex;
+  align-items: baseline;
+  gap: calc(var(--inside-house-unit) * 2.5);
+  width: 100%;
+  cursor: pointer;
+  padding: calc(var(--inside-house-unit) * 3.5) calc(var(--inside-house-unit) * 4) calc(var(--inside-house-unit) * 3.5) calc(var(--inside-house-unit) * 3.5);
+  border-left: 2px solid transparent;
+  transition: border-color 0.5s ease, padding-left 0.5s ease, background 0.5s ease;
+}
+
+.inside-house-item-number {
+  font-family: var(--inside-house-mono);
+  font-size: 12px;
+  color: var(--inside-house-grey);
+  transition: color 0.5s ease;
+}
+
+.inside-house-item-name {
+  font-family: var(--inside-house-serif);
+  font-size: 22px;
+  color: rgba(245, 243, 239, 0.5);
+  transition: color 0.5s ease;
+}
+
+.inside-house-item-button:hover .inside-house-item-name {
+  color: rgba(245, 243, 239, 0.8);
+}
+
+/* ---- Active-row styling, driven purely by :checked state ---- */
+
+#inside-house-tab-aviation:checked ~ .inside-house-directory label[data-for="aviation"],
+#inside-house-tab-membership:checked ~ .inside-house-directory label[data-for="membership"],
+#inside-house-tab-concierge:checked ~ .inside-house-directory label[data-for="concierge"],
+#inside-house-tab-advisory:checked ~ .inside-house-directory label[data-for="advisory"],
+#inside-house-tab-culture:checked ~ .inside-house-directory label[data-for="culture"] {
+  border-left-color: var(--inside-house-gold);
+  padding-left: calc(var(--inside-house-unit) * 5);
+  background: rgba(201, 162, 75, 0.05);
+}
+
+#inside-house-tab-aviation:checked ~ .inside-house-directory label[data-for="aviation"] .inside-house-item-number,
+#inside-house-tab-membership:checked ~ .inside-house-directory label[data-for="membership"] .inside-house-item-number,
+#inside-house-tab-concierge:checked ~ .inside-house-directory label[data-for="concierge"] .inside-house-item-number,
+#inside-house-tab-advisory:checked ~ .inside-house-directory label[data-for="advisory"] .inside-house-item-number,
+#inside-house-tab-culture:checked ~ .inside-house-directory label[data-for="culture"] .inside-house-item-number {
+  color: var(--inside-house-gold);
+}
+
+#inside-house-tab-aviation:checked ~ .inside-house-directory label[data-for="aviation"] .inside-house-item-name,
+#inside-house-tab-membership:checked ~ .inside-house-directory label[data-for="membership"] .inside-house-item-name,
+#inside-house-tab-concierge:checked ~ .inside-house-directory label[data-for="concierge"] .inside-house-item-name,
+#inside-house-tab-advisory:checked ~ .inside-house-directory label[data-for="advisory"] .inside-house-item-name,
+#inside-house-tab-culture:checked ~ .inside-house-directory label[data-for="culture"] .inside-house-item-name {
+  color: var(--inside-house-ivory);
+}
+
+/* Visible keyboard-focus ring on the corresponding row when its
+   hidden radio has focus (Tab key navigation, no mouse involved). */
+#inside-house-tab-aviation:focus-visible ~ .inside-house-directory label[data-for="aviation"],
+#inside-house-tab-membership:focus-visible ~ .inside-house-directory label[data-for="membership"],
+#inside-house-tab-concierge:focus-visible ~ .inside-house-directory label[data-for="concierge"],
+#inside-house-tab-advisory:focus-visible ~ .inside-house-directory label[data-for="advisory"],
+#inside-house-tab-culture:focus-visible ~ .inside-house-directory label[data-for="culture"] {
+  outline: 1px solid var(--inside-house-gold);
+  outline-offset: -3px;
+}
+
+/* ---------------------------------------------------------------
+   ROOMS — five panels always in the DOM; CSS shows only the one
+   matching the checked radio. This is the no-JS-required core.
+   --------------------------------------------------------------- */
+
+.inside-house-rooms {
+  position: relative;
+}
+
+.inside-house-room {
+  display: none;
+  grid-template-columns: 1.1fr 1fr;
+  animation: inside-house-fade 0.6s ease both;
+}
+
+#inside-house-tab-aviation:checked ~ .inside-house-rooms [data-room="aviation"],
+#inside-house-tab-membership:checked ~ .inside-house-rooms [data-room="membership"],
+#inside-house-tab-concierge:checked ~ .inside-house-rooms [data-room="concierge"],
+#inside-house-tab-advisory:checked ~ .inside-house-rooms [data-room="advisory"],
+#inside-house-tab-culture:checked ~ .inside-house-rooms [data-room="culture"] {
+  display: grid;
+}
+
+@keyframes inside-house-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.inside-house-room-media {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(120% 140% at 70% 20%, #201c14 0%, #100f0b 46%, #0a0908 100%);
+}
+
+.inside-house-room-media img,
+.inside-house-room-motif {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.inside-house-room-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 9, 8, 0) 55%, rgba(10, 9, 8, 0.5) 100%);
+  pointer-events: none;
+}
+
+.inside-house-room-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(var(--inside-house-unit) * 2.5);
+  padding: calc(var(--inside-house-unit) * 6) calc(var(--inside-house-unit) * 5) calc(var(--inside-house-unit) * 6) calc(var(--inside-house-unit) * 4);
+}
+
+.inside-house-room-label {
+  font-family: var(--inside-house-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--inside-house-gold);
+  margin: 0;
+}
+
+.inside-house-room-desc {
+  font-family: var(--inside-house-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(245, 243, 239, 0.82);
+  margin: 0;
+  max-width: 40ch;
+}
+
+.inside-house-room-link {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--inside-house-unit) * 1.25);
+  align-self: flex-start;
+  font-family: var(--inside-house-sans);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--inside-house-ivory);
+  text-decoration: none;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--inside-house-gold-muted);
+  transition: border-color 0.4s ease, color 0.4s ease, gap 0.4s ease;
+}
+
+.inside-house-room-link:hover {
+  color: var(--inside-house-gold);
+  border-color: var(--inside-house-gold);
+  gap: calc(var(--inside-house-unit) * 2);
+}
+
+.inside-house-room-link-arrow {
+  transition: transform 0.4s ease;
+}
+
+.inside-house-room-link:hover .inside-house-room-link-arrow {
+  transform: translateX(3px);
+}
+
+/* ---- Placeholder architectural motif: a corridor of doors.
+   TEMPORARY — stands in for the real per-division interior detail
+   shot. Not a proposed permanent visual device. See README §6/§7. ---- */
+
+.inside-house-door {
+  fill: none;
+  stroke: var(--inside-house-gold);
+  stroke-width: 1;
+}
+
+.inside-house-glow {
+  fill: var(--inside-house-gold);
+  opacity: 0.5;
+}
+
+.inside-house-corridor {
+  fill: none;
+  stroke: rgba(201, 162, 75, 0.25);
+  stroke-width: 1;
+}
+
+/* ---------------------------------------------------------------
+   MOBILE — 390 × 844
+   Deliberate mobile-specific interaction: the directory becomes a
+   horizontal, swipeable editorial tab rail (not the desktop list
+   simply stacked). Image stays prominent; total section height is
+   controlled rather than growing with five full-width rows.
+   Still driven entirely by the same native radio group — no JS
+   required, same as desktop.
+   --------------------------------------------------------------- */
+
+@media (max-width: 780px) {
+  .inside-house-header {
+    padding: calc(var(--inside-house-unit) * 5) var(--inside-house-edge) calc(var(--inside-house-unit) * 3.5);
+  }
+
+  .inside-house-kicker {
+    margin-bottom: calc(var(--inside-house-unit) * 1.5);
+  }
+
+  .inside-house-headline {
+    font-size: clamp(24px, 6.5vw, 30px);
+    margin-bottom: calc(var(--inside-house-unit) * 1.75);
+  }
+
+  .inside-house-lead {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .inside-house-grid {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    border-top: 1px solid rgba(201, 162, 75, 0.16);
+  }
+
+  /* ---- Editorial tab rail: horizontal, swipeable, compact ---- */
+
+  .inside-house-directory {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    border-right: none;
+    border-bottom: 1px solid rgba(201, 162, 75, 0.16);
+    padding: 0 calc(var(--inside-house-unit) * 2);
+    scrollbar-width: thin;
+    scrollbar-color: var(--inside-house-gold-muted) transparent;
+  }
+
+  .inside-house-directory::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  .inside-house-directory::-webkit-scrollbar-thumb {
+    background: var(--inside-house-gold-muted);
+  }
+
+  .inside-house-item {
+    flex: 0 0 auto;
+    border-bottom: none;
+    border-right: 1px solid rgba(201, 162, 75, 0.12);
+    scroll-snap-align: start;
+  }
+
+  .inside-house-item:last-child {
+    border-right: none;
+  }
+
+  .inside-house-item-button {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: calc(var(--inside-house-unit) * 0.5);
+    white-space: nowrap;
+    padding: calc(var(--inside-house-unit) * 2) calc(var(--inside-house-unit) * 2.5);
+    border-left: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.4s ease, background 0.4s ease;
+  }
+
+  .inside-house-item-name {
+    font-size: 15px;
+  }
+
+  /* Override the desktop left-border/padding-left active treatment
+     with a bottom-border indicator, appropriate for a horizontal rail. */
+  #inside-house-tab-aviation:checked ~ .inside-house-directory label[data-for="aviation"],
+  #inside-house-tab-membership:checked ~ .inside-house-directory label[data-for="membership"],
+  #inside-house-tab-concierge:checked ~ .inside-house-directory label[data-for="concierge"],
+  #inside-house-tab-advisory:checked ~ .inside-house-directory label[data-for="advisory"],
+  #inside-house-tab-culture:checked ~ .inside-house-directory label[data-for="culture"] {
+    border-left-color: transparent;
+    padding-left: calc(var(--inside-house-unit) * 2.5);
+    border-bottom-color: var(--inside-house-gold);
+  }
+
+  /* ---- Room: image prominent, fixed controlled height, compact copy ---- */
+
+  .inside-house-room {
+    grid-template-columns: 1fr;
+  }
+
+  .inside-house-room-media {
+    height: clamp(200px, 34vh, 260px);
+    min-height: 0;
+  }
+
+  .inside-house-room-copy {
+    padding: calc(var(--inside-house-unit) * 3) var(--inside-house-edge) calc(var(--inside-house-unit) * 4);
+    gap: calc(var(--inside-house-unit) * 1.5);
+  }
+
+  .inside-house-room-desc {
+    font-size: 15px;
+    max-width: none;
+  }
+}
+
+/* ---- Reduced motion ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  .inside-house-item-button,
+  .inside-house-item-number,
+  .inside-house-item-name,
+  .inside-house-room-link,
+  .inside-house-room-link-arrow {
+    transition: none !important;
+  }
+
+  .inside-house-room {
+    animation: none !important;
+  }
+}

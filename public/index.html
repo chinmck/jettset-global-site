@@ -7,6 +7,7 @@
 <meta name="description" content="Operator-direct private jet charter and concierge, built around the guest, not the fleet. Discreet by design.">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="house-section.css">
+<link rel="stylesheet" href="inside-house.css">
 </head>
 <body>
 
@@ -483,75 +484,183 @@
     </section>
 
 
-    <section class="inside-house" data-reveal>
-      <div class="inside-house-head">
-        <span class="eyebrow">Inside The House</span>
-        <h2>One relationship.<br>A world built around it.</h2>
-        <p>Every part of Jettset begins with movement. The relationship is designed to extend far beyond the aircraft.</p>
+    <section class="inside-house-section" id="inside-house-section">
+      <div class="inside-house-header">
+        <p class="inside-house-kicker">Inside The House</p>
+        <h2 class="inside-house-headline">One relationship. <em>A world built around it.</em></h2>
+        <p class="inside-house-lead">
+          Every part of Jettset begins with movement. The relationship is designed
+          to extend far beyond the aircraft.
+        </p>
       </div>
 
-      <div class="ih-grid">
+      <div class="inside-house-grid">
+        <input type="radio" name="inside-house-division" id="inside-house-tab-aviation"
+               class="inside-house-radio" checked>
+        <input type="radio" name="inside-house-division" id="inside-house-tab-membership"
+               class="inside-house-radio">
+        <input type="radio" name="inside-house-division" id="inside-house-tab-concierge"
+               class="inside-house-radio">
+        <input type="radio" name="inside-house-division" id="inside-house-tab-advisory"
+               class="inside-house-radio">
+        <input type="radio" name="inside-house-division" id="inside-house-tab-culture"
+               class="inside-house-radio">
 
-        <a class='ih-division ih-aviation' href='/charter'>
-          <div class="ih-division-head">
-            <span class="ih-num">01</span>
-            <span class="eyebrow">Aviation</span>
+        <fieldset class="inside-house-directory">
+          <legend class="inside-house-directory-legend">Choose a division of the Jettset House</legend>
+
+          <div class="inside-house-item">
+            <label class="inside-house-item-button" for="inside-house-tab-aviation" data-for="aviation">
+              <span class="inside-house-item-number">01</span>
+              <span class="inside-house-item-name">Private Aviation</span>
+            </label>
           </div>
-          <h3>The foundation of the House.</h3>
-          <ul class="ih-items">
-            <li><span>Charter</span><span class="ih-item-desc">On-demand journeys sourced around the real requirements of each itinerary.</span></li>
-            <li><span>Jet Card</span><span class="ih-item-desc">A structured aviation relationship for guests who fly regularly.</span></li>
-            <li><span>Legs</span><span class="ih-item-desc">Selected empty-leg opportunities for guests able to move flexibly.</span></li>
-          </ul>
-          <span class="ih-cta">Explore Aviation <i>&#8594;</i></span>
-        </a>
+          <div class="inside-house-item">
+            <label class="inside-house-item-button" for="inside-house-tab-membership" data-for="membership">
+              <span class="inside-house-item-number">02</span>
+              <span class="inside-house-item-name">Membership</span>
+            </label>
+          </div>
+          <div class="inside-house-item">
+            <label class="inside-house-item-button" for="inside-house-tab-concierge" data-for="concierge">
+              <span class="inside-house-item-number">03</span>
+              <span class="inside-house-item-name">Concierge</span>
+            </label>
+          </div>
+          <div class="inside-house-item">
+            <label class="inside-house-item-button" for="inside-house-tab-advisory" data-for="advisory">
+              <span class="inside-house-item-number">04</span>
+              <span class="inside-house-item-name">Advisory</span>
+            </label>
+          </div>
+          <div class="inside-house-item">
+            <label class="inside-house-item-button" for="inside-house-tab-culture" data-for="culture">
+              <span class="inside-house-item-number">05</span>
+              <span class="inside-house-item-name">Culture</span>
+            </label>
+          </div>
+        </fieldset>
 
-        <div class="ih-row">
-          <a class='ih-division ih-membership' href='/club'>
-            <div class="ih-division-head">
-              <span class="ih-num">02</span>
-              <span class="eyebrow">Membership</span>
+        <div class="inside-house-rooms">
+          <article class="inside-house-room" data-room="aviation">
+            <div class="inside-house-room-media">
+              <picture>
+                <source media="(max-width: 780px)" type="image/avif" srcset="images/inside-house/private-aviation/inside-house-private-aviation-mobile.avif">
+                <source media="(max-width: 780px)" type="image/webp" srcset="images/inside-house/private-aviation/inside-house-private-aviation-mobile.webp">
+                <source media="(max-width: 780px)" srcset="images/inside-house/private-aviation/inside-house-private-aviation-mobile.jpg">
+                <source type="image/avif" srcset="images/inside-house/private-aviation/inside-house-private-aviation-desktop.avif">
+                <source type="image/webp" srcset="images/inside-house/private-aviation/inside-house-private-aviation-desktop.webp">
+                <img src="images/inside-house/private-aviation/inside-house-private-aviation-desktop.jpg"
+                     alt="Close editorial detail of a matte black private jet's tail, engine and wing at dusk"
+                     loading="lazy" width="921" height="1152">
+              </picture>
+              <div class="inside-house-room-veil"></div>
             </div>
-            <h3>Club</h3>
-            <p class="ih-desc">A standing relationship for returning guests, families and offices who value continuity, priority and preference memory.</p>
-            <span class="ih-cta">Discover Club <i>&#8594;</i></span>
-          </a>
+            <div class="inside-house-room-copy">
+              <p class="inside-house-room-desc">Private jet charter, Jet Card and tailored aircraft access&mdash;managed through one trusted relationship.</p>
+              <a class="inside-house-room-link" href="/charter">
+                <span>Explore Private Aviation</span>
+                <span class="inside-house-room-link-arrow" aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
 
-          <a class='ih-division ih-concierge' href='/concierge'>
-            <div class="ih-division-head">
-              <span class="ih-num">03</span>
-              <span class="eyebrow">Concierge</span>
+          <article class="inside-house-room" data-room="membership">
+            <div class="inside-house-room-media">
+              <picture>
+                <source media="(max-width: 780px)" type="image/avif" srcset="images/inside-house/membership/inside-house-membership-mobile.avif">
+                <source media="(max-width: 780px)" type="image/webp" srcset="images/inside-house/membership/inside-house-membership-mobile.webp">
+                <source media="(max-width: 780px)" srcset="images/inside-house/membership/inside-house-membership-mobile.jpg">
+                <source type="image/avif" srcset="images/inside-house/membership/inside-house-membership-desktop.avif">
+                <source type="image/webp" srcset="images/inside-house/membership/inside-house-membership-desktop.webp">
+                <img src="images/inside-house/membership/inside-house-membership-desktop.jpg"
+                     alt="A reserved leather armchair in a private salon, with a doorway open to another room beyond"
+                     loading="lazy" width="1728" height="2160">
+              </picture>
+              <div class="inside-house-room-veil"></div>
             </div>
-            <h3>Beyond the aircraft door.</h3>
-            <p class="ih-desc">Everything before, around and after the flight — ground movement, accommodation, access, security, dining and destination support.</p>
-            <span class="ih-cta">Explore Concierge <i>&#8594;</i></span>
-          </a>
+            <div class="inside-house-room-copy">
+              <p class="inside-house-room-label">A Standing Relationship</p>
+              <p class="inside-house-room-desc">A standing relationship for returning guests, families and offices who value continuity, priority and preference memory.</p>
+              <a class="inside-house-room-link" href="/club">
+                <span>Discover Club</span>
+                <span class="inside-house-room-link-arrow" aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
 
-          <a class='ih-division ih-advisory' href='/advisory'>
-            <div class="ih-division-head">
-              <span class="ih-num">04</span>
-              <span class="eyebrow">Advisory</span>
+          <article class="inside-house-room" data-room="concierge">
+            <div class="inside-house-room-media">
+              <picture>
+                <source media="(max-width: 780px)" type="image/avif" srcset="images/inside-house/concierge/inside-house-concierge-mobile.avif">
+                <source media="(max-width: 780px)" type="image/webp" srcset="images/inside-house/concierge/inside-house-concierge-mobile.webp">
+                <source media="(max-width: 780px)" srcset="images/inside-house/concierge/inside-house-concierge-mobile.jpg">
+                <source type="image/avif" srcset="images/inside-house/concierge/inside-house-concierge-desktop.avif">
+                <source type="image/webp" srcset="images/inside-house/concierge/inside-house-concierge-desktop.webp">
+                <img src="images/inside-house/concierge/inside-house-concierge-desktop.jpg"
+                     alt="A private entrance console with folded linen and a bowl of keys, prepared before a guest's arrival"
+                     loading="lazy" width="1728" height="2160">
+              </picture>
+              <div class="inside-house-room-veil"></div>
             </div>
-            <h3>Strategic counsel.</h3>
-            <p class="ih-desc">Specialist aviation strategy and project support for owners, companies and institutions.</p>
-            <span class="ih-cta">Explore Advisory <i>&#8594;</i></span>
-          </a>
+            <div class="inside-house-room-copy">
+              <p class="inside-house-room-label">Beyond The Aircraft Door</p>
+              <p class="inside-house-room-desc">Everything before, around and after the flight&mdash;ground movement, accommodation, access, security, dining and destination support.</p>
+              <a class="inside-house-room-link" href="/concierge">
+                <span>Explore Concierge</span>
+                <span class="inside-house-room-link-arrow" aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="inside-house-room" data-room="advisory">
+            <div class="inside-house-room-media">
+              <picture>
+                <source media="(max-width: 780px)" type="image/avif" srcset="images/inside-house/advisory/inside-house-advisory-mobile.avif">
+                <source media="(max-width: 780px)" type="image/webp" srcset="images/inside-house/advisory/inside-house-advisory-mobile.webp">
+                <source media="(max-width: 780px)" srcset="images/inside-house/advisory/inside-house-advisory-mobile.jpg">
+                <source type="image/avif" srcset="images/inside-house/advisory/inside-house-advisory-desktop.avif">
+                <source type="image/webp" srcset="images/inside-house/advisory/inside-house-advisory-desktop.webp">
+                <img src="images/inside-house/advisory/inside-house-advisory-desktop.jpg"
+                     alt="A private study desk with a lamp-lit abstract sculptural object, suggesting quiet strategic thought"
+                     loading="lazy" width="1728" height="2160">
+              </picture>
+              <div class="inside-house-room-veil"></div>
+            </div>
+            <div class="inside-house-room-copy">
+              <p class="inside-house-room-label">Strategic Counsel</p>
+              <p class="inside-house-room-desc">Specialist aviation strategy and project support for owners, companies and institutions.</p>
+              <a class="inside-house-room-link" href="/advisory">
+                <span>Explore Advisory</span>
+                <span class="inside-house-room-link-arrow" aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="inside-house-room" data-room="culture">
+            <div class="inside-house-room-media">
+              <picture>
+                <source media="(max-width: 780px)" type="image/avif" srcset="images/inside-house/culture/inside-house-culture-mobile.avif">
+                <source media="(max-width: 780px)" type="image/webp" srcset="images/inside-house/culture/inside-house-culture-mobile.webp">
+                <source media="(max-width: 780px)" srcset="images/inside-house/culture/inside-house-culture-mobile.jpg">
+                <source type="image/avif" srcset="images/inside-house/culture/inside-house-culture-desktop.avif">
+                <source type="image/webp" srcset="images/inside-house/culture/inside-house-culture-desktop.webp">
+                <img src="images/inside-house/culture/inside-house-culture-desktop.jpg"
+                     alt="A framed editorial print, vinyl record and folded fabric on a studio table at dusk"
+                     loading="lazy" width="1728" height="2160">
+              </picture>
+              <div class="inside-house-room-veil"></div>
+            </div>
+            <div class="inside-house-room-copy">
+              <p class="inside-house-room-label">The Visual And Editorial Language Of The House</p>
+              <p class="inside-house-room-desc">Fashion, art, music, design and editorial expression&mdash;shaping the cultural world around Jettset.</p>
+              <a class="inside-house-room-link" href="/manifest">
+                <span>Enter The Jettset World</span>
+                <span class="inside-house-room-link-arrow" aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
         </div>
-
-        <a class='ih-division ih-culture' href='/the-manifest'>
-          <div class="ih-division-head">
-            <span class="ih-num">05</span>
-            <span class="eyebrow">Culture</span>
-          </div>
-          <h3>The visual and editorial language of the House.</h3>
-          <ul class="ih-items ih-items-inline">
-            <li><span>Editions</span><span class="ih-item-desc">Limited physical expressions of the Jettset world.</span></li>
-            <li><span>The Manifest</span><span class="ih-item-desc">Editorial intelligence across aviation, culture and global movement.</span></li>
-            <li><span>In Motion</span><span class="ih-item-desc">The visual language of the House.</span></li>
-          </ul>
-          <span class="ih-cta">Enter The Jettset World <i>&#8594;</i></span>
-        </a>
-
       </div>
     </section>
 
@@ -713,6 +822,7 @@
 
   <script src="script.js"></script>
   <script src="house-section.js"></script>
+  <script src="inside-house.js"></script>
   <script type="module" src="./jettset-world/globe.js?v=20260723-lcy"></script>
 </body>
 </html>
