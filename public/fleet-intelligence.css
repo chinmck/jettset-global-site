@@ -322,6 +322,7 @@
 
 .fi-profile-picture {
   display: block;
+  z-index: 1;
 }
 
 .fi-profile-image {
@@ -331,17 +332,15 @@
 }
 
 .fi-plan-image {
-  display: none;
+  display: block;
   object-fit: contain;
   padding: clamp(22px, 4vw, 54px);
+  z-index: 1;
+  background: #090909;
 }
 
-.fi-view-cabin .fi-profile-picture {
+.fi-view-asset[hidden] {
   display: none;
-}
-
-.fi-view-cabin .fi-plan-image {
-  display: block;
 }
 
 .fi-profile-loaded .fi-aircraft,

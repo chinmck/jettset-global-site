@@ -339,14 +339,14 @@
 
             <div class="fi-media-panel fi-view-exterior" id="fiMediaPanel" role="tabpanel" tabindex="0">
               <div class="fi-media-atmosphere" aria-hidden="true"></div>
-              <picture class="fi-profile-picture">
-                <source id="fiProfileAvif" type="image/avif" media="(max-width: 700px)" srcset="images/fleet-intelligence/light-exterior-mobile.avif">
-                <source id="fiProfileAvifDesktop" type="image/avif" srcset="images/fleet-intelligence/light-exterior-desktop.avif">
-                <source id="fiProfileWebp" type="image/webp" media="(max-width: 700px)" srcset="images/fleet-intelligence/light-exterior-mobile.webp">
-                <source id="fiProfileWebpDesktop" type="image/webp" srcset="images/fleet-intelligence/light-exterior-desktop.webp">
+              <picture class="fi-profile-picture fi-view-asset" data-fi-asset-view="exterior" aria-hidden="false">
+                <source id="fiExteriorAvif" type="image/avif" media="(max-width: 700px)" srcset="images/fleet-intelligence/light-exterior-mobile.avif">
+                <source id="fiExteriorAvifDesktop" type="image/avif" srcset="images/fleet-intelligence/light-exterior-desktop.avif">
+                <source id="fiExteriorWebp" type="image/webp" media="(max-width: 700px)" srcset="images/fleet-intelligence/light-exterior-mobile.webp">
+                <source id="fiExteriorWebpDesktop" type="image/webp" srcset="images/fleet-intelligence/light-exterior-desktop.webp">
                 <img
                   class="fi-profile-image"
-                  id="fiProfileImage"
+                  id="fiExteriorImage"
                   src="images/fleet-intelligence/light-exterior-desktop.jpg"
                   width="1600"
                   height="1000"
@@ -355,13 +355,32 @@
                   fetchpriority="low"
                 >
               </picture>
+              <picture class="fi-profile-picture fi-view-asset" data-fi-asset-view="interior" aria-hidden="true" hidden>
+                <source id="fiInteriorAvif" type="image/avif" media="(max-width: 700px)" srcset="images/fleet-intelligence/light-interior-mobile.avif">
+                <source id="fiInteriorAvifDesktop" type="image/avif" srcset="images/fleet-intelligence/light-interior-desktop.avif">
+                <source id="fiInteriorWebp" type="image/webp" media="(max-width: 700px)" srcset="images/fleet-intelligence/light-interior-mobile.webp">
+                <source id="fiInteriorWebpDesktop" type="image/webp" srcset="images/fleet-intelligence/light-interior-desktop.webp">
+                <img
+                  class="fi-profile-image"
+                  id="fiInteriorImage"
+                  src="images/fleet-intelligence/light-interior-desktop.jpg"
+                  width="1600"
+                  height="1000"
+                  alt="Representative Citation CJ3 cabin interior"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </picture>
               <img
-                class="fi-plan-image"
+                class="fi-plan-image fi-view-asset"
                 id="fiPlanImage"
+                data-fi-asset-view="cabin"
                 src="images/fleet-intelligence/light-cabin-plan.svg"
                 width="1280"
                 height="420"
                 alt="Representative Citation CJ3 cabin plan; configuration varies by aircraft"
+                aria-hidden="true"
+                hidden
                 decoding="async"
               >
               <div class="fi-aircraft fi-aircraft-light" id="fiAircraftSilhouette" aria-hidden="true">

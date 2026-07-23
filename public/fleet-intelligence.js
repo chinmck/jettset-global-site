@@ -177,12 +177,18 @@
   var mediaPanel = root.querySelector("#fiMediaPanel");
   var viewLabel = root.querySelector("#fiViewLabel");
   var assetStatus = root.querySelector("#fiAssetStatus");
-  var profileImage = root.querySelector("#fiProfileImage");
-  var profileAvif = root.querySelector("#fiProfileAvif");
-  var profileAvifDesktop = root.querySelector("#fiProfileAvifDesktop");
-  var profileWebp = root.querySelector("#fiProfileWebp");
-  var profileWebpDesktop = root.querySelector("#fiProfileWebpDesktop");
+  var exteriorImage = root.querySelector("#fiExteriorImage");
+  var exteriorAvif = root.querySelector("#fiExteriorAvif");
+  var exteriorAvifDesktop = root.querySelector("#fiExteriorAvifDesktop");
+  var exteriorWebp = root.querySelector("#fiExteriorWebp");
+  var exteriorWebpDesktop = root.querySelector("#fiExteriorWebpDesktop");
+  var interiorImage = root.querySelector("#fiInteriorImage");
+  var interiorAvif = root.querySelector("#fiInteriorAvif");
+  var interiorAvifDesktop = root.querySelector("#fiInteriorAvifDesktop");
+  var interiorWebp = root.querySelector("#fiInteriorWebp");
+  var interiorWebpDesktop = root.querySelector("#fiInteriorWebpDesktop");
   var planImage = root.querySelector("#fiPlanImage");
+  var viewAssets = Array.prototype.slice.call(root.querySelectorAll("[data-fi-asset-view]"));
   var mediaTabs = Array.prototype.slice.call(root.querySelectorAll("[data-fi-view]"));
   var categoryButtons = Array.prototype.slice.call(root.querySelectorAll("[data-fi-category]"));
   var enquire = root.querySelector("#fiEnquire");
@@ -196,25 +202,37 @@
     return selectedTab ? selectedTab.getAttribute("data-fi-view") : "exterior";
   }
 
+  function setRasterSources(view, image, avifMobile, avifDesktop, webpMobile, webpDesktop, item) {
+    var slug = item.assetSlug;
+    var stem = "images/fleet-intelligence/" + slug + "-" + view;
+    avifMobile.srcset = stem + "-mobile.avif";
+    avifDesktop.srcset = stem + "-desktop.avif";
+    webpMobile.srcset = stem + "-mobile.webp";
+    webpDesktop.srcset = stem + "-desktop.webp";
+    image.src = stem + "-desktop.jpg";
+    image.alt = "Representative " + item.representative + " "
+      + (view === "exterior" ? "exterior on a restrained dark apron" : "cabin interior");
+  }
+
+  function setActiveMediaView(view) {
+    viewAssets.forEach(function (asset) {
+      var active = asset.getAttribute("data-fi-asset-view") === view;
+      asset.hidden = !active;
+      asset.setAttribute("aria-hidden", active ? "false" : "true");
+    });
+  }
+
   function updateMediaAssets(item, view) {
     var slug = item.assetSlug;
-    var isPlan = view === "cabin";
-    var rasterView = view === "interior" ? "interior" : "exterior";
-    var stem = "images/fleet-intelligence/" + slug + "-" + rasterView;
-
-    profileAvif.srcset = stem + "-mobile.avif";
-    profileAvifDesktop.srcset = stem + "-desktop.avif";
-    profileWebp.srcset = stem + "-mobile.webp";
-    profileWebpDesktop.srcset = stem + "-desktop.webp";
-    profileImage.src = stem + "-desktop.jpg";
-    profileImage.alt = "Representative " + item.representative + " "
-      + rasterView + (rasterView === "exterior" ? " on a restrained dark apron" : " cabin interior");
+    setRasterSources("exterior", exteriorImage, exteriorAvif, exteriorAvifDesktop, exteriorWebp, exteriorWebpDesktop, item);
+    setRasterSources("interior", interiorImage, interiorAvif, interiorAvifDesktop, interiorWebp, interiorWebpDesktop, item);
     planImage.src = "images/fleet-intelligence/" + slug + "-cabin-plan.svg";
     planImage.alt = "Representative " + item.representative
       + " cabin plan; configuration varies by aircraft";
-    assetStatus.textContent = isPlan
+    setActiveMediaView(view);
+    assetStatus.textContent = view === "cabin"
       ? "Representative / typical plan · configuration varies"
-      : "Representative " + item.representative + " " + rasterView;
+      : "Representative " + item.representative + " " + view;
   }
 
   function normalise(value) {
