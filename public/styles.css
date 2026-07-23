@@ -2496,6 +2496,13 @@
   .jv-field:nth-of-type(3),.jv-field:nth-of-type(4){grid-column:span 1;}
   .jv-arrow{color:var(--gold); padding-bottom:10px;}
   .jv-route-status{font-size:10.5px; color:var(--grey); line-height:1.5; margin-top:10px; min-height:16px;}
+  .jv-location-suggestions{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;}
+  .jv-location-suggestions:empty{display:none;}
+  .jv-location-suggestion{
+    border:1px solid var(--grey-line); background:none; color:var(--grey); padding:7px 9px;
+    font:500 9.5px 'General Sans','Inter',sans-serif; text-align:left; cursor:pointer;
+  }
+  .jv-location-suggestion:hover,.jv-location-suggestion:focus-visible{color:var(--off-white); border-color:var(--gold-dim);}
 
   /* ---- globe stage (sized to hit the target section height) ---- */
   .world-stage{
@@ -2517,11 +2524,6 @@
     position:absolute; bottom:3%; left:50%; transform:translateX(-50%);
     color:rgba(245,243,239,0.46);
     font-size:9px; letter-spacing:0.18em; text-transform:uppercase;
-  }
-  .jv-route-labels{
-    position:absolute; inset:50% 3% auto; display:flex; justify-content:space-between;
-    pointer-events:none; color:var(--off-white); font-size:10px; letter-spacing:0.12em;
-    text-transform:uppercase; text-shadow:0 2px 8px #000;
   }
   .static-fallback{ display:none; }
   .static-fallback.is-shown{ display:block; }
@@ -2614,7 +2616,6 @@
     .jv-field:nth-of-type(4){grid-column:3;}
     .route-chips{display:grid; grid-template-columns:1fr 1fr;}
     .route-chip{padding:9px 10px;}
-    .jv-route-labels{inset:50% 0 auto; font-size:8.5px;}
     .journey-enhanced:not(.has-route-selection) .jw-embed-panel{display:none;}
     .journey-enhanced .jv-explore-routes{margin-top:8px;}
   }

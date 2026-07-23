@@ -60,6 +60,16 @@ const ROUTES = [
   },
 ];
 
+const CITY_COUNTRIES = {
+  London: 'United Kingdom', Monaco: 'Monaco', Dubai: 'United Arab Emirates', 'New York': 'United States',
+  Miami: 'United States', Lagos: 'Nigeria', Paris: 'France', Accra: 'Ghana', 'Los Angeles': 'United States',
+  Toronto: 'Canada', Madrid: 'Spain', Rome: 'Italy', Geneva: 'Switzerland', Zurich: 'Switzerland',
+  Johannesburg: 'South Africa', 'Cape Town': 'South Africa', Nairobi: 'Kenya', Singapore: 'Singapore',
+  'Hong Kong': 'Hong Kong', Tokyo: 'Japan', Sydney: 'Australia', Doha: 'Qatar', Riyadh: 'Saudi Arabia',
+  Istanbul: 'Turkey', Athens: 'Greece', Ibiza: 'Spain', Mykonos: 'Greece', Mumbai: 'India', Delhi: 'India',
+  'São Paulo': 'Brazil',
+};
+
 const CITY_CATALOG = [
   ['London', 51.5074, -0.1278, 1], ['Monaco', 43.7384, 7.4246, 2], ['Dubai', 25.2048, 55.2708, 4],
   ['New York', 40.7128, -74.006, -4], ['Miami', 25.7617, -80.1918, -4], ['Lagos', 6.5244, 3.3792, 1],
@@ -71,7 +81,32 @@ const CITY_CATALOG = [
   ['Doha', 25.2854, 51.531, 3], ['Riyadh', 24.7136, 46.6753, 3], ['Istanbul', 41.0082, 28.9784, 3],
   ['Athens', 37.9838, 23.7275, 3], ['Ibiza', 38.9067, 1.4206, 2], ['Mykonos', 37.4467, 25.3289, 3],
   ['Mumbai', 19.076, 72.8777, 5.5], ['Delhi', 28.6139, 77.209, 5.5], ['São Paulo', -23.5505, -46.6333, -3],
-].map(([name, lat, lon, tz]) => ({ name, lat, lon, tz }));
+].map(([name, lat, lon, tz]) => ({ name, inputValue: name, markerLabel: name, lat, lon, tz, country: CITY_COUNTRIES[name], kind: 'city' }));
+
+const AIRPORT_CATALOG = [
+  { name: 'Farnborough Airport', city: 'London', code: 'FAB', country: 'United Kingdom', lat: 51.2758, lon: -0.7763, tz: 1 },
+  { name: 'London Luton Airport', city: 'London', code: 'LTN', country: 'United Kingdom', lat: 51.8747, lon: -0.3683, tz: 1 },
+  { name: 'London Biggin Hill Airport', city: 'London', code: 'BQH', country: 'United Kingdom', lat: 51.3308, lon: 0.0325, tz: 1 },
+  { name: 'London Stansted Airport', city: 'London', code: 'STN', country: 'United Kingdom', lat: 51.885, lon: 0.235, tz: 1 },
+  { name: 'Paris Le Bourget Airport', city: 'Paris', code: 'LBG', country: 'France', lat: 48.9694, lon: 2.4414, tz: 2 },
+  { name: 'Nice Côte d’Azur Airport', city: 'Nice', code: 'NCE', country: 'France', lat: 43.6653, lon: 7.215, tz: 2 },
+  { name: 'Al Maktoum International Airport', city: 'Dubai', code: 'DWC', country: 'United Arab Emirates', lat: 24.8964, lon: 55.1614, tz: 4 },
+  { name: 'Kotoka International Airport', city: 'Accra', code: 'ACC', country: 'Ghana', lat: 5.6052, lon: -0.1668, tz: 0 },
+  { name: 'Murtala Muhammed International Airport', city: 'Lagos', code: 'LOS', country: 'Nigeria', lat: 6.5774, lon: 3.3212, tz: 1 },
+  { name: 'Teterboro Airport', city: 'New York', code: 'TEB', country: 'United States', lat: 40.8501, lon: -74.0608, tz: -4 },
+  { name: 'Opa-locka Executive Airport', city: 'Miami', code: 'OPF', country: 'United States', lat: 25.907, lon: -80.2784, tz: -4 },
+  { name: 'Toronto Pearson International Airport', city: 'Toronto', code: 'YYZ', country: 'Canada', lat: 43.6777, lon: -79.6248, tz: -4 },
+  { name: 'Mykonos International Airport', city: 'Mykonos', code: 'JMK', country: 'Greece', lat: 37.4351, lon: 25.3481, tz: 3 },
+  { name: 'Singapore Changi Airport', city: 'Singapore', code: 'SIN', country: 'Singapore', lat: 1.3644, lon: 103.9915, tz: 8 },
+  { name: 'Hong Kong International Airport', city: 'Hong Kong', code: 'HKG', country: 'Hong Kong', lat: 22.308, lon: 113.9185, tz: 8 },
+].map((airport) => ({
+  ...airport,
+  kind: 'airport',
+  inputValue: `${airport.city} — ${airport.name} (${airport.code})`,
+  markerLabel: airport.code,
+}));
+
+const LOCATION_CATALOG = [...CITY_CATALOG, ...AIRPORT_CATALOG];
 
 const canvas = document.getElementById('globeCanvas');
 const chipWrap = document.getElementById('routeChips');
@@ -286,9 +321,9 @@ function initGlobe() {
     });
     const texture = new THREE.CanvasTexture(labelCanvas);
     texture.colorSpace = THREE.SRGBColorSpace;
-    const material = new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false });
+    const material = new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false, depthTest: true });
     const sprite = new THREE.Sprite(material);
-    sprite.scale.set(0.68, 0.128, 1);
+    sprite.scale.set(0.58, 0.109, 1);
     sprite.center.set(side < 0 ? 1 : 0, 0.5);
     sprite.userData.dispose = () => texture.dispose();
     return sprite;
@@ -323,7 +358,7 @@ function initGlobe() {
     halo.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), position.clone().normalize());
     group.add(halo);
 
-    const label = makeLabel(point.name, side);
+    const label = makeLabel(point.markerLabel || point.name, side);
     label.position.copy(position.clone().normalize().multiplyScalar(0.15));
     label.position.y += 0.075;
     group.add(label);
@@ -676,7 +711,16 @@ const routeSection = document.getElementById('routeMapSection');
 const routeStatus = document.getElementById('jvRouteStatus');
 const fromInput = document.getElementById('jvFrom');
 const toInput = document.getElementById('jvTo');
+const locationSuggestions = document.getElementById('jvLocationSuggestions');
 routeSection.classList.add('journey-enhanced');
+
+const cityDatalist = document.getElementById('jvCities');
+AIRPORT_CATALOG.forEach((airport) => {
+  const option = document.createElement('option');
+  option.value = airport.inputValue;
+  option.label = `${airport.country} · ${airport.code}`;
+  cityDatalist.appendChild(option);
+});
 
 chipWrap.querySelectorAll('.route-chip').forEach((button) => {
   button.addEventListener('click', () => selectRoute(button.dataset.id, true));
@@ -699,10 +743,8 @@ function updateJourneyPanel(route) {
   document.getElementById('jpFlightTime').textContent = route.flightTime;
   document.getElementById('jpAircraft').textContent = route.aircraft;
   document.getElementById('jpConcierge').textContent = route.concierge;
-  fromInput.value = route.a.name;
-  toInput.value = route.b.name;
-  document.getElementById('jvDepartureLabel').textContent = route.a.name;
-  document.getElementById('jvDestinationLabel').textContent = route.b.name;
+  fromInput.value = route.a.inputValue || route.a.name;
+  toInput.value = route.b.inputValue || route.b.name;
 
   const cultural = document.getElementById('jpCultural');
   cultural.textContent = route.cultural;
@@ -755,8 +797,53 @@ document.getElementById('jpCta').addEventListener('click', () => {
   window.location.href = 'quote.html';
 });
 
-const normaliseCity = (value) => value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-const findCity = (value) => CITY_CATALOG.find((city) => normaliseCity(city.name) === normaliseCity(value));
+const normaliseLocation = (value) => value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const COUNTRY_ALIASES = {
+  uk: 'united kingdom', britain: 'united kingdom', england: 'united kingdom',
+  uae: 'united arab emirates', emirates: 'united arab emirates',
+  usa: 'united states', us: 'united states', america: 'united states',
+};
+const normaliseCountry = (value) => COUNTRY_ALIASES[normaliseLocation(value)] || normaliseLocation(value);
+const findLocation = (value) => {
+  const query = normaliseLocation(value);
+  return LOCATION_CATALOG.find((location) => [
+    location.inputValue, location.name, location.city, location.code,
+  ].filter(Boolean).some((candidate) => normaliseLocation(candidate) === query));
+};
+
+function countryLocations(value) {
+  const country = normaliseCountry(value);
+  if (!country) return [];
+  const airportMatches = AIRPORT_CATALOG.filter((location) => normaliseCountry(location.country) === country);
+  if (airportMatches.length) return airportMatches.slice(0, 4);
+  return CITY_CATALOG.filter((location) => normaliseCountry(location.country) === country).slice(0, 4);
+}
+
+function clearLocationSuggestions() {
+  locationSuggestions.replaceChildren();
+}
+
+function showCountrySuggestions(input, value) {
+  const matches = countryLocations(value);
+  clearLocationSuggestions();
+  if (!matches.length) return false;
+  routeStatus.textContent = `Select a city or airport in ${matches[0].country}.`;
+  matches.forEach((location) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'jv-location-suggestion';
+    button.textContent = location.kind === 'airport'
+      ? `${location.city} / ${location.name} (${location.code})`
+      : location.name;
+    button.addEventListener('click', () => {
+      input.value = location.inputValue;
+      clearLocationSuggestions();
+      matchEnteredRoute();
+    });
+    locationSuggestions.appendChild(button);
+  });
+  return true;
+}
 
 function greatCircleKilometres(a, b) {
   const radians = (degrees) => degrees * Math.PI / 180;
@@ -777,10 +864,11 @@ function estimatedTimeRange(a, b) {
 }
 
 const matchEnteredRoute = () => {
-  const from = findCity(fromInput.value);
-  const to = findCity(toInput.value);
-  document.getElementById('jvDepartureLabel').textContent = fromInput.value.trim() || 'Departure';
-  document.getElementById('jvDestinationLabel').textContent = toInput.value.trim() || 'Destination';
+  const from = findLocation(fromInput.value);
+  const to = findLocation(toInput.value);
+  if (!from && showCountrySuggestions(fromInput, fromInput.value)) return;
+  if (!to && showCountrySuggestions(toInput, toInput.value)) return;
+  clearLocationSuggestions();
 
   if (!from || !to || from.name === to.name) {
     routeSection.classList.remove('has-route-selection');
@@ -789,7 +877,7 @@ const matchEnteredRoute = () => {
     return;
   }
 
-  const curated = ROUTES.find((item) => item.a.name === from.name && item.b.name === to.name);
+  const curated = ROUTES.find((item) => item.a.name === from.name && item.b.name === to.name && from.kind === 'city' && to.kind === 'city');
   if (curated) {
     selectRoute(curated, true);
     return;
@@ -797,7 +885,7 @@ const matchEnteredRoute = () => {
 
   const customRoute = {
     id: 'custom-route', a: from, b: to, isCustom: true,
-    label: `${from.name} &rarr; ${to.name}`,
+    label: `${from.code ? `${from.city} (${from.code})` : from.name} &rarr; ${to.code ? `${to.city} (${to.code})` : to.name}`,
     sub: 'Custom Journey',
     flightTime: estimatedTimeRange(from, to),
     aircraft: 'Aircraft recommendation confirmed during enquiry',
@@ -811,7 +899,10 @@ toInput.addEventListener('change', matchEnteredRoute);
 [fromInput, toInput].forEach((input) => {
   input.addEventListener('input', () => {
     routeSection.classList.remove('has-route-selection');
-    routeStatus.textContent = 'Choose two different cities from the suggestions to visualise the route.';
+    if (!showCountrySuggestions(input, input.value)) {
+      clearLocationSuggestions();
+      routeStatus.textContent = 'Choose two different cities or airports from the suggestions to visualise the route.';
+    }
   });
   input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
