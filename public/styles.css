@@ -544,11 +544,11 @@
       height:100%;
       object-fit:cover;
       object-position:center center;
-      transform:scale(1.001);
-      transform-origin:center center;
+      transform:none;
     }
     .hero.hero-closing-frame .hero-video{
-      transform:scale(0.26);
+      object-fit:contain;
+      transform:none;
     }
     .hero .hero-img-main{
       position:absolute;
