@@ -278,6 +278,7 @@ function initGlobe() {
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
+    updateRouteLabels();
     renderer.render(scene, camera);
   }
 
@@ -304,7 +305,7 @@ function initGlobe() {
     );
   }
 
-  function makeLabel(text, side) {
+  function makeLabel(text) {
     const labelCanvas = document.createElement('canvas');
     labelCanvas.width = 512;
     labelCanvas.height = 96;
@@ -324,12 +325,12 @@ function initGlobe() {
     const material = new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false, depthTest: true });
     const sprite = new THREE.Sprite(material);
     sprite.scale.set(0.58, 0.109, 1);
-    sprite.center.set(side < 0 ? 1 : 0, 0.5);
+    sprite.center.set(0.5, 0.5);
     sprite.userData.dispose = () => texture.dispose();
     return sprite;
   }
 
-  function makeMarker(point, side) {
+  function makeMarker(point, role) {
     const group = new THREE.Group();
     const position = latLonVector(point, 1.665);
     group.position.copy(position);
@@ -358,11 +359,64 @@ function initGlobe() {
     halo.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), position.clone().normalize());
     group.add(halo);
 
-    const label = makeLabel(point.markerLabel || point.name, side);
-    label.position.copy(position.clone().normalize().multiplyScalar(0.15));
-    label.position.y += 0.075;
+    const label = makeLabel(point.markerLabel || point.name);
+    label.userData.markerRole = role;
+    group.userData.label = label;
     group.add(label);
     return group;
+  }
+
+  const markerWorld = new THREE.Vector3();
+  const otherMarkerWorld = new THREE.Vector3();
+  const globeWorld = new THREE.Vector3();
+  const projectedMarker = new THREE.Vector3();
+  const projectedOtherMarker = new THREE.Vector3();
+  const projectedLabel = new THREE.Vector3();
+
+  function updateMarkerLabel(marker, otherMarker) {
+    const label = marker?.userData.label;
+    if (!label) return;
+
+    marker.getWorldPosition(markerWorld);
+    otherMarker?.getWorldPosition(otherMarkerWorld);
+    projectedMarker.copy(markerWorld).project(camera);
+    projectedOtherMarker.copy(otherMarkerWorld).project(camera);
+
+    globe.getWorldPosition(globeWorld);
+    const outward = markerWorld.clone().sub(globeWorld).normalize();
+    const towardCamera = camera.position.clone().sub(markerWorld).normalize();
+    label.visible = projectedMarker.z >= -1 && projectedMarker.z <= 1 && outward.dot(towardCamera) > 0.015;
+    if (!label.visible) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const width = Math.max(1, rect.width);
+    const height = Math.max(1, rect.height);
+    const markerX = (projectedMarker.x + 1) * width * 0.5;
+    const markerY = (1 - projectedMarker.y) * height * 0.5;
+    const otherX = (projectedOtherMarker.x + 1) * width * 0.5;
+    const otherY = (1 - projectedOtherMarker.y) * height * 0.5;
+    const markersAreClose = otherMarker && Math.hypot(markerX - otherX, markerY - otherY) < Math.min(150, width * 0.38);
+    const role = label.userData.markerRole;
+    const horizontalSide = markersAreClose
+      ? (role === 'origin' ? -1 : 1)
+      : (projectedMarker.x < -0.1 ? -1 : projectedMarker.x > 0.1 ? 1 : (role === 'origin' ? -1 : 1));
+    const horizontalOffset = (width <= 390 ? 8 : width <= 680 ? 10 : 14) * horizontalSide;
+    const verticalOffset = markersAreClose ? (role === 'origin' ? -12 : 10) : -10;
+
+    label.center.set(horizontalSide < 0 ? 1 : 0, 0.5);
+    projectedLabel.copy(projectedMarker);
+    projectedLabel.x += (horizontalOffset * 2) / width;
+    projectedLabel.y -= (verticalOffset * 2) / height;
+    projectedLabel.unproject(camera);
+    marker.worldToLocal(projectedLabel);
+    label.position.copy(projectedLabel);
+  }
+
+  function updateRouteLabels() {
+    if (!globeRouteController?.originMarker || !globeRouteController?.destinationMarker) return;
+    scene.updateMatrixWorld(true);
+    updateMarkerLabel(globeRouteController.originMarker, globeRouteController.destinationMarker);
+    updateMarkerLabel(globeRouteController.destinationMarker, globeRouteController.originMarker);
   }
 
   function makeAircraft() {
@@ -477,8 +531,8 @@ function initGlobe() {
         const arcIndexCount = arc.geometry.index?.count || 0;
         arc.geometry.setDrawRange(0, visible ? arcIndexCount : 0);
         arc.renderOrder = 3;
-        const originMarker = makeMarker(route.a, -1);
-        const destinationMarker = makeMarker(route.b, 1);
+        const originMarker = makeMarker(route.a, 'origin');
+        const destinationMarker = makeMarker(route.b, 'destination');
         [originMarker, destinationMarker].forEach((marker) => {
           marker.traverse((object) => {
             if (!object.material) return;
@@ -629,7 +683,10 @@ function initGlobe() {
       animating = true;
     }
 
-    if (needsRender || animating || dragging) renderer.render(scene, camera);
+    if (needsRender || animating || dragging) {
+      updateRouteLabels();
+      renderer.render(scene, camera);
+    }
     needsRender = false;
     if (!reducedMotion || dragging || animating) frame = requestAnimationFrame(tick);
   }
