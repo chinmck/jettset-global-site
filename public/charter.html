@@ -6,6 +6,7 @@
 <title>Charter | Jettset Global</title>
 <meta name="description" content="On-demand private jet charter, sourced operator-direct for transparency, speed, and discretion.">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="fleet-intelligence.css">
 </head>
 <body>
 
@@ -246,51 +247,138 @@
       </div>
     </section>
 
-    <section class="category-guide">
-      <div class="category-guide-head" data-reveal>
-        <span class="eyebrow">The Fleet Question</span>
-        <h2>One Network. Every Category.</h2>
-        <p>The Jettset fleet is a global network made available through our partner fleets, direct operator relationships and the wider international charter market — one trusted relationship, with access across multiple categories, regions and operators.</p>
+    <section class="fleet-intelligence" id="fleetIntelligence" aria-labelledby="fleetIntelligenceTitle">
+      <div class="fi-heading">
+        <div>
+          <span class="fi-kicker">Fleet Intelligence / Private Consultation</span>
+          <h2 id="fleetIntelligenceTitle">The right category begins with the journey.</h2>
+        </div>
+        <p>Share the route, the people travelling and what matters most in the cabin. We will translate those priorities into considered, indicative guidance.</p>
       </div>
-      <div class="category-grid" data-reveal-group>
-        <div class="category-card" data-category="vlj-light" data-reveal>
-          <span class="eyebrow">Category</span>
-          <h4>VLJ &amp; Light Jets</h4>
-          <div class="category-meta">~4&ndash;6 Guests &middot; Up To ~3h</div>
-          <p>Well suited to regional journeys and short city pairs where efficient access and speed matter more than cabin scale. Selected models can operate longer sectors depending on load and conditions.</p>
-        </div>
-        <div class="category-card" data-category="midsize" data-reveal>
-          <span class="eyebrow">Category</span>
-          <h4>Midsize &amp; Super-Midsize Jets</h4>
-          <div class="category-meta">~7&ndash;10 Guests &middot; Regional &amp; Transcontinental</div>
-          <p>More cabin space, greater baggage capacity and increased range for longer regional travel, multi-city itineraries and selected transatlantic routes.</p>
-        </div>
-        <div class="category-card" data-category="heavy" data-reveal>
-          <span class="eyebrow">Category</span>
-          <h4>Heavy Jets</h4>
-          <div class="category-meta">~10&ndash;16 Guests &middot; Long-Haul Comfort</div>
-          <p>Designed for longer sectors with generous cabin space, enhanced baggage capacity and onboard amenities suited to work, rest and extended travel.</p>
-        </div>
-        <div class="category-card" data-category="ulr" data-reveal>
-          <span class="eyebrow">Category</span>
-          <h4>Ultra Long Range</h4>
-          <div class="category-meta">~12&ndash;18 Guests &middot; Intercontinental</div>
-          <p>Built for nonstop long-haul and intercontinental journeys, with the range, cabin comfort and performance required for genuine global travel.</p>
-        </div>
-        <div class="category-card" data-category="group-charter" data-reveal>
-          <span class="eyebrow">Category</span>
-          <h4>Group Charter</h4>
-          <div class="category-meta">Whole Aircraft &middot; Larger Groups</div>
-          <p>Aircraft arranged for teams, delegations, touring parties, corporate groups and larger families travelling together on one coordinated itinerary.</p>
-        </div>
-        <div class="category-card" data-category="helicopter" data-reveal>
-          <span class="eyebrow">Category</span>
-          <h4>Helicopter</h4>
-          <div class="category-meta">Point-To-Point &middot; Short Transfer</div>
-          <p>Direct transfers where road travel or a runway isn't the most efficient route — arranged with the same discretion and journey management as every fixed-wing charter.</p>
-        </div>
+
+      <div class="fi-consultation">
+        <form class="fi-controls" id="fleetIntelligenceForm">
+          <div class="fi-control-index" aria-hidden="true">01 / Journey</div>
+
+          <div class="fi-route-fields">
+            <label class="fi-field" for="fiOrigin">
+              <span>Origin</span>
+              <input id="fiOrigin" name="origin" type="text" value="London" list="fiLocations" autocomplete="off">
+            </label>
+            <span class="fi-route-line" aria-hidden="true"></span>
+            <label class="fi-field" for="fiDestination">
+              <span>Destination</span>
+              <input id="fiDestination" name="destination" type="text" value="Monaco" list="fiLocations" autocomplete="off">
+            </label>
+          </div>
+
+          <datalist id="fiLocations">
+            <option value="London"></option>
+            <option value="Monaco"></option>
+            <option value="Paris"></option>
+            <option value="Milan"></option>
+            <option value="Geneva"></option>
+            <option value="Dubai"></option>
+            <option value="Doha"></option>
+            <option value="Lagos"></option>
+            <option value="Accra"></option>
+            <option value="New York"></option>
+            <option value="Miami"></option>
+            <option value="Toronto"></option>
+            <option value="Los Angeles"></option>
+            <option value="Singapore"></option>
+            <option value="Hong Kong"></option>
+            <option value="Tokyo"></option>
+            <option value="Cape Town"></option>
+            <option value="Johannesburg"></option>
+          </datalist>
+
+          <label class="fi-field fi-travellers" for="fiTravellers">
+            <span>Travellers</span>
+            <select id="fiTravellers" name="travellers">
+              <option value="1">1 traveller</option>
+              <option value="2">2 travellers</option>
+              <option value="4" selected>4 travellers</option>
+              <option value="6">6 travellers</option>
+              <option value="8">8 travellers</option>
+              <option value="10">10 travellers</option>
+              <option value="12">12 travellers</option>
+              <option value="14">14 travellers</option>
+              <option value="16">16 travellers</option>
+            </select>
+          </label>
+
+          <fieldset class="fi-priorities">
+            <legend>Journey priority <span>Optional</span></legend>
+            <div class="fi-priority-options">
+              <label><input type="radio" name="priority" value="Efficiency" checked><span>Efficiency</span></label>
+              <label><input type="radio" name="priority" value="Cabin Space"><span>Cabin Space</span></label>
+              <label><input type="radio" name="priority" value="Long-Range Comfort"><span>Long-Range Comfort</span></label>
+            </div>
+          </fieldset>
+
+          <p class="fi-route-status" id="fiRouteStatus" aria-live="polite">London to Monaco · approximately 560 nautical miles</p>
+        </form>
+
+        <article class="fi-recommendation" id="fiRecommendation" aria-live="polite">
+          <div class="fi-recommendation-head">
+            <div>
+              <span class="fi-label">Indicative recommendation</span>
+              <h3 id="fiCategoryName">Light Jet</h3>
+            </div>
+            <span class="fi-match" id="fiMatch">Journey fit 01</span>
+          </div>
+
+          <div class="fi-visual" aria-hidden="true">
+            <div class="fi-axis fi-axis-horizontal"></div>
+            <div class="fi-axis fi-axis-vertical"></div>
+            <div class="fi-aircraft fi-aircraft-light" id="fiAircraftSilhouette">
+              <span class="fi-fuselage"></span>
+              <span class="fi-wing fi-wing-left"></span>
+              <span class="fi-wing fi-wing-right"></span>
+              <span class="fi-tail fi-tail-left"></span>
+              <span class="fi-tail fi-tail-right"></span>
+            </div>
+            <span class="fi-visual-note">Technical silhouette placeholder / category scale</span>
+          </div>
+
+          <p class="fi-reason" id="fiReason">A considered fit for a short regional sector with four travellers, prioritising efficient access without unnecessary cabin scale.</p>
+
+          <div class="fi-spec-line">
+            <div><span>Indicative range</span><strong id="fiRange">Up to 1,500 nm</strong></div>
+            <div><span>Typical capacity</span><strong id="fiCapacity">Up to 6 travellers</strong></div>
+            <div><span>Ideal journey</span><strong id="fiIdeal">Regional city pairs</strong></div>
+          </div>
+
+          <div class="fi-editorial-details">
+            <div>
+              <span>Cabin character</span>
+              <p id="fiCabin">An intimate, composed cabin for focused short-haul travel and efficient movement between regional airports.</p>
+            </div>
+            <div>
+              <span>Luggage guidance</span>
+              <p id="fiLuggage">Best suited to considered personal luggage. Larger or specialist baggage should be reviewed before aircraft selection.</p>
+            </div>
+          </div>
+
+          <div class="fi-category-index" aria-label="Explore aircraft categories">
+            <button type="button" class="is-active" data-fi-category="Light Jet">Light</button>
+            <button type="button" data-fi-category="Midsize Jet">Midsize</button>
+            <button type="button" data-fi-category="Super-Midsize Jet">Super-Midsize</button>
+            <button type="button" data-fi-category="Heavy Jet">Heavy</button>
+            <button type="button" data-fi-category="Ultra Long Range">Ultra Long Range</button>
+          </div>
+
+          <div class="fi-actions">
+            <button type="button" class="fi-enquire" id="fiEnquire">Continue with this journey <span aria-hidden="true">&rarr;</span></button>
+            <p>Indicative guidance only. Final aircraft selection is confirmed personally after reviewing routing, payload, baggage and operational requirements.</p>
+          </div>
+        </article>
       </div>
-      <p class="category-note">Figures are indicative rather than guaranteed. Passenger capacity, range, baggage allowance, cabin configuration and operational suitability are confirmed against the specific aircraft sourced for each journey.</p>
+
+      <noscript>
+        <p class="fi-noscript">The Light Jet profile above is an indicative example for London to Monaco with four travellers. Contact Jettset for a personal category review for any other journey.</p>
+      </noscript>
     </section>
 
     <section class="route-preview">
@@ -376,5 +464,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="fleet-intelligence.js"></script>
 </body>
 </html>
