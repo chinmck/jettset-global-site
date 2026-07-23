@@ -325,39 +325,65 @@
             <div>
               <span class="fi-label">Indicative recommendation</span>
               <h3 id="fiCategoryName">Light Jet</h3>
+              <p class="fi-representative">Representative aircraft: <span id="fiRepresentative">Citation CJ3</span></p>
             </div>
             <span class="fi-match" id="fiMatch">Journey fit 01</span>
           </div>
 
-          <div class="fi-visual" aria-hidden="true">
-            <div class="fi-axis fi-axis-horizontal"></div>
-            <div class="fi-axis fi-axis-vertical"></div>
-            <div class="fi-aircraft fi-aircraft-light" id="fiAircraftSilhouette">
-              <span class="fi-fuselage"></span>
-              <span class="fi-wing fi-wing-left"></span>
-              <span class="fi-wing fi-wing-right"></span>
-              <span class="fi-tail fi-tail-left"></span>
-              <span class="fi-tail fi-tail-right"></span>
+          <div class="fi-media">
+            <div class="fi-media-tabs" role="tablist" aria-label="Aircraft profile views">
+              <button type="button" role="tab" aria-selected="true" aria-controls="fiMediaPanel" data-fi-view="exterior">Exterior</button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="fiMediaPanel" data-fi-view="interior">Interior</button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="fiMediaPanel" data-fi-view="cabin">Cabin</button>
             </div>
-            <span class="fi-visual-note">Technical silhouette placeholder / category scale</span>
+
+            <div class="fi-media-panel fi-view-exterior" id="fiMediaPanel" role="tabpanel" tabindex="0">
+              <div class="fi-media-atmosphere" aria-hidden="true"></div>
+              <div class="fi-aircraft fi-aircraft-light" id="fiAircraftSilhouette" aria-hidden="true">
+                <span class="fi-fuselage"></span>
+                <span class="fi-wing fi-wing-left"></span>
+                <span class="fi-wing fi-wing-right"></span>
+                <span class="fi-tail fi-tail-left"></span>
+                <span class="fi-tail fi-tail-right"></span>
+              </div>
+              <div class="fi-interior-placeholder" aria-hidden="true">
+                <span class="fi-cabin-wall"></span>
+                <span class="fi-window fi-window-one"></span>
+                <span class="fi-window fi-window-two"></span>
+                <span class="fi-window fi-window-three"></span>
+                <span class="fi-seat fi-seat-one"></span>
+                <span class="fi-seat fi-seat-two"></span>
+              </div>
+              <div class="fi-plan-placeholder" aria-hidden="true">
+                <span class="fi-plan-body"></span>
+                <span class="fi-plan-seat fi-plan-seat-one"></span>
+                <span class="fi-plan-seat fi-plan-seat-two"></span>
+                <span class="fi-plan-seat fi-plan-seat-three"></span>
+                <span class="fi-plan-seat fi-plan-seat-four"></span>
+              </div>
+              <div class="fi-media-caption">
+                <span id="fiViewLabel">Exterior study</span>
+                <span>Temporary neutral placeholder / final approved imagery required</span>
+              </div>
+            </div>
           </div>
 
           <p class="fi-reason" id="fiReason">A considered fit for a short regional sector with four travellers, prioritising efficient access without unnecessary cabin scale.</p>
 
-          <div class="fi-spec-line">
-            <div><span>Indicative range</span><strong id="fiRange">Up to 1,500 nm</strong></div>
-            <div><span>Typical capacity</span><strong id="fiCapacity">Up to 6 travellers</strong></div>
-            <div><span>Ideal journey</span><strong id="fiIdeal">Regional city pairs</strong></div>
+          <div class="fi-journey-summary">
+            <span>Journey considered</span>
+            <div><strong id="fiJourneyDistance">Approximately 560 nm</strong><small>Distance</small></div>
+            <div><strong id="fiJourneyTravellers">4 travellers</strong><small>Travellers</small></div>
+            <div><strong id="fiJourneyPriority">Efficiency</strong><small>Priority</small></div>
           </div>
 
-          <div class="fi-editorial-details">
-            <div>
-              <span>Cabin character</span>
-              <p id="fiCabin">An intimate, composed cabin for focused short-haul travel and efficient movement between regional airports.</p>
-            </div>
-            <div>
-              <span>Luggage guidance</span>
-              <p id="fiLuggage">Best suited to considered personal luggage. Larger or specialist baggage should be reviewed before aircraft selection.</p>
+          <div class="fi-guidance">
+            <span class="fi-guidance-title">Typical category guidance</span>
+            <div class="fi-guidance-grid">
+              <div><span>Passenger capacity</span><strong id="fiCapacity">Up to 6 travellers</strong></div>
+              <div><span>Indicative range</span><strong id="fiRange">Up to 1,500 nm</strong></div>
+              <div><span>Typical cabin height</span><strong id="fiCabinHeight">Approx. 4 ft 9 in</strong></div>
+              <div><span>Typical luggage</span><strong id="fiLuggageSummary">Personal luggage</strong></div>
             </div>
           </div>
 
@@ -369,9 +395,33 @@
             <button type="button" data-fi-category="Ultra Long Range">Ultra Long Range</button>
           </div>
 
+          <details class="fi-dossier" id="fiDossier">
+            <summary>View cabin &amp; specifications <span aria-hidden="true">+</span></summary>
+            <div class="fi-dossier-content">
+              <div class="fi-cabin-note">
+                <span>Cabin character</span>
+                <p id="fiCabin">An intimate, composed cabin for focused short-haul travel and efficient movement between regional airports.</p>
+              </div>
+              <dl class="fi-specifications">
+                <div><dt>Cabin layout</dt><dd id="fiCabinLayout">Club seating; configuration varies</dd></div>
+                <div><dt>Typical cabin length</dt><dd id="fiCabinLength">Approx. 15–18 ft</dd></div>
+                <div><dt>Typical cabin width</dt><dd id="fiCabinWidth">Approx. 4 ft 10 in</dd></div>
+                <div><dt>Typical cabin height</dt><dd id="fiCabinHeightDetail">Approx. 4 ft 9 in</dd></div>
+                <div><dt>Typical range</dt><dd id="fiRangeDetail">Up to 1,500 nm</dd></div>
+                <div><dt>Indicative cruise speed</dt><dd id="fiCruise">Category estimate; validation required</dd></div>
+                <div><dt>Luggage guidance</dt><dd id="fiLuggage">Best suited to considered personal luggage. Larger or specialist baggage should be reviewed before aircraft selection.</dd></div>
+                <div><dt>Catering</dt><dd id="fiCatering">Light catering; confirmed during aircraft sourcing</dd></div>
+                <div><dt>Wi-Fi</dt><dd id="fiWifi">Available on selected aircraft</dd></div>
+                <div><dt>Enclosed WC</dt><dd id="fiWc">Varies by aircraft and configuration</dd></div>
+                <div><dt>Flight attendant</dt><dd id="fiAttendant">Not typically included; confirmed during sourcing</dd></div>
+              </dl>
+              <p class="fi-validation-note">Prototype category values are working guidance only and require broker validation before production approval.</p>
+            </div>
+          </details>
+
           <div class="fi-actions">
             <button type="button" class="fi-enquire" id="fiEnquire">Continue with this journey <span aria-hidden="true">&rarr;</span></button>
-            <p>Indicative guidance only. Final aircraft selection is confirmed personally after reviewing routing, payload, baggage and operational requirements.</p>
+            <p>Indicative guidance only. Final aircraft selection is confirmed personally after reviewing routing, payload, baggage and operational requirements. Representative aircraft are examples, not guaranteed assignments.</p>
           </div>
         </article>
       </div>
