@@ -1102,52 +1102,6 @@
       selectRoute('r3');
     })();
 
-    // ===== SIGNATURE JOURNEY TIMELINE =====
-    (function(){
-      var track = document.getElementById('jtTrack');
-      var lineFill = document.getElementById('jtLineFill');
-      if(!track || !lineFill) return;
-
-      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var steps = track.querySelectorAll('.jt-step');
-
-      if(reduceMotion){
-        lineFill.style.height = '100%';
-        steps.forEach(function(s){ s.classList.add('is-revealed'); });
-        return;
-      }
-
-      // Scroll-linked line draw
-      var ticking = false;
-      function updateLineFill(){
-        var rect = track.getBoundingClientRect();
-        var viewH = window.innerHeight;
-        var progress = (viewH * 0.75 - rect.top) / rect.height;
-        progress = Math.max(0, Math.min(1, progress));
-        lineFill.style.height = (progress * 100) + '%';
-        ticking = false;
-      }
-      window.addEventListener('scroll', function(){
-        if(!ticking){ requestAnimationFrame(updateLineFill); ticking = true; }
-      }, {passive:true});
-      updateLineFill();
-
-      // Step-by-step reveal
-      if('IntersectionObserver' in window){
-        var observer = new IntersectionObserver(function(entries){
-          entries.forEach(function(entry){
-            if(entry.isIntersecting){
-              entry.target.classList.add('is-revealed');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, {threshold:0.35});
-        steps.forEach(function(s){ observer.observe(s); });
-      } else {
-        steps.forEach(function(s){ s.classList.add('is-revealed'); });
-      }
-    })();
-
     // ===== POLISH: MAGNETIC BUTTONS =====
     (function(){
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
