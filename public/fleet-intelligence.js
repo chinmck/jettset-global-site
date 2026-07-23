@@ -334,5 +334,27 @@
     window.location.href = "/quote";
   });
 
+  /* Keep the persistent contact channels available around the consultation,
+     while preventing them from covering the mobile visual or recommendation. */
+  (function manageMobileContactMark() {
+    var contactMark = document.getElementById("contactMark");
+    var mobileQuery = window.matchMedia("(max-width: 620px)");
+    if (!contactMark) return;
+
+    function setSuppressed(insideFleet) {
+      contactMark.classList.toggle("is-fleet-suppressed", mobileQuery.matches && insideFleet);
+    }
+
+    if ("IntersectionObserver" in window) {
+      var insideFleet = false;
+      var contactObserver = new IntersectionObserver(function (entries) {
+        insideFleet = entries.some(function (entry) { return entry.isIntersecting; });
+        setSuppressed(insideFleet);
+      }, { threshold: 0.01, rootMargin: "-4% 0px -4% 0px" });
+      contactObserver.observe(root);
+      mobileQuery.addEventListener("change", function () { setSuppressed(insideFleet); });
+    }
+  })();
+
   updateRecommendation();
 })();
