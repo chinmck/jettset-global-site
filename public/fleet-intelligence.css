@@ -311,6 +311,25 @@
   outline-offset: -2px;
 }
 
+.fi-exterior-image {
+  position: absolute;
+  inset: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.fi-light-selected .fi-view-exterior .fi-exterior-image {
+  display: block;
+}
+
+.fi-light-selected .fi-view-exterior .fi-aircraft,
+.fi-light-selected .fi-view-exterior .fi-media-atmosphere {
+  display: none;
+}
+
 .fi-media-atmosphere {
   position: absolute;
   inset: 0;
@@ -332,6 +351,7 @@
   font: 500 8px/1.4 "General Sans", "Inter", sans-serif;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  z-index: 2;
 }
 
 .fi-media-caption span:first-child {
@@ -1109,6 +1129,7 @@
   .fi-route-status { margin-top: 20px; }
   .fi-media { min-height: 0; margin: 16px 0 22px; }
   .fi-media-panel { height: auto; min-height: 0; aspect-ratio: 4 / 3; }
+  .fi-exterior-image { object-position: 50% 50%; }
   .fi-media-tabs {
     justify-content: space-between;
     gap: 12px;

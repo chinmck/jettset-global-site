@@ -171,11 +171,27 @@
   var journeyPriority = root.querySelector("#fiJourneyPriority");
   var mediaPanel = root.querySelector("#fiMediaPanel");
   var viewLabel = root.querySelector("#fiViewLabel");
+  var assetStatus = root.querySelector("#fiAssetStatus");
   var mediaTabs = Array.prototype.slice.call(root.querySelectorAll("[data-fi-view]"));
   var categoryButtons = Array.prototype.slice.call(root.querySelectorAll("[data-fi-category]"));
   var enquire = root.querySelector("#fiEnquire");
   var currentRecommendation = categories[0];
   var currentDistance = 0;
+
+  function getCurrentMediaView() {
+    var selectedTab = mediaTabs.find(function (tab) {
+      return tab.getAttribute("aria-selected") === "true";
+    });
+    return selectedTab ? selectedTab.getAttribute("data-fi-view") : "exterior";
+  }
+
+  function updateAssetStatus(view) {
+    if (!assetStatus) return;
+    assetStatus.textContent =
+      currentRecommendation.name === "Light Jet" && view === "exterior"
+        ? "Approved Citation CJ3 exterior master"
+        : "Temporary category placeholder / final approved asset required";
+  }
 
   function normalise(value) {
     return value.trim().toLowerCase().replace(/\s+/g, " ");
@@ -229,6 +245,8 @@
 
   function render(item, message, isExploring) {
     currentRecommendation = item;
+    root.classList.toggle("fi-light-selected", item.name === "Light Jet");
+    updateAssetStatus(getCurrentMediaView());
     categoryName.textContent = item.name;
     match.textContent = isExploring ? "Category profile" : "Journey fit " + String(categories.indexOf(item) + 1).padStart(2, "0");
     reason.textContent = message;
@@ -304,6 +322,7 @@
       var view = button.getAttribute("data-fi-view");
       mediaPanel.className = "fi-media-panel fi-view-" + view;
       viewLabel.textContent = view === "cabin" ? "Cabin plan study" : view.charAt(0).toUpperCase() + view.slice(1) + " study";
+      updateAssetStatus(view);
       mediaTabs.forEach(function (tab) {
         tab.setAttribute("aria-selected", tab === button ? "true" : "false");
       });
