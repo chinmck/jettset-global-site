@@ -510,22 +510,10 @@
   .hero{
     position:relative;
     height:100vh;
-    height:100svh; /* mobile browsers resize the viewport as the address bar shows/hides; 100vh can misjudge this and push content under the fixed nav. svh is the stable equivalent. */
+    height:100svh;
     width:100%;
-    display:flex;
-    align-items:flex-end;
     overflow:hidden;
-  }
-  @media(max-width:680px){
-    .hero{
-      height:auto;
-      display:block;
-      overflow:visible;
-    }
-    .hero-content{
-      position:static;
-      padding:40px 24px 40px;
-    }
+    background:#050505;
   }
   .hero img{
     position:absolute;
@@ -543,139 +531,113 @@
     top:0;left:0;
     width:100%;height:100%;
     object-fit:cover;
-    object-position:center 42%;
-    filter:contrast(1.05) brightness(0.95);
+    object-position:center center;
+    filter:none;
   }
   @media(max-width:680px){
     .hero .hero-video{
-      position:relative;
-      top:auto;left:auto;
+      position:absolute;
+      inset:0;
       width:100%;
-      height:38vh;
+      height:100%;
       object-fit:cover;
-      object-position:center 40%;
-      display:block;
+      object-position:center center;
     }
-  }
-  .hero-kicker .eyebrow,
-  .hero-content h1,
-  .hero-content p,
-  .hero-content .hero-cta-row{
-    animation:none !important;   /* staggered film-start timers own the entrance */
-    opacity:0;
-    transform:translateY(10px);
-    transition:opacity 0.8s ease, transform 0.8s ease;
-  }
-  /* one-way latches — set by JS at 0.5s / 0.9s / 1.5s / 2.1s after playback
-     starts; copy remains stable while the film loops behind it */
-  .hero.r-kicker .hero-kicker .eyebrow{opacity:1;transform:none;}
-  .hero.r-title .hero-content h1{opacity:1;transform:none;
-    transition-duration:0.6s;}  /* begins 0.7s, fully visible 1.3s */
-  .hero.r-sub .hero-content p{opacity:1;transform:none;}
-  .hero.r-cta .hero-content .hero-cta-row{opacity:1;transform:none;}
-  @media(max-width:680px){
-    .hero-kicker .eyebrow,.hero-content h1,.hero-content p,.hero-content .hero-cta-row{
-      opacity:1 !important;transform:none !important;filter:none !important;
-    }
-  }
-
-  .hero-cta-row{display:flex; align-items:center; justify-content:center; gap:28px; flex-wrap:wrap;}
-  .btn-text-gold{
-    font-size:11px;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    color:var(--gold);
-    border-bottom:1px solid rgba(201,162,75,0.35);
-    padding-bottom:2px;
-    transition:border-color 0.3s, color 0.3s;
-  }
-  .btn-text-gold:hover{border-color:var(--gold); color:var(--off-white);}
-  @media(max-width:680px){
-    .hero-cta-row{flex-direction:column; gap:16px;}
-  }
-  @media(max-width:680px){
-    .hero::after{display:none;}
-  }
-  @media(max-width:680px){
     .hero .hero-img-main{
-      position:relative;
-      top:auto; left:auto;
+      position:absolute;
+      inset:0;
       width:100%;
-      height:38vh;
+      height:100%;
       object-fit:cover;
-      object-position:center 40%;
-      display:block;
+      object-position:center center;
     }
-    .hero-glow{display:none;}
   }
+  /* A restrained edge gradient keeps navigation and controls legible without
+     competing with the film's own closing message and mark. */
   .hero::after{
     content:'';
     position:absolute;
     inset:0;
-    background:linear-gradient(to bottom, rgba(10,9,8,0.1) 0%, rgba(10,9,8,0) 22%, rgba(10,9,8,0) 60%, rgba(10,9,8,0.5) 72%, rgba(10,9,8,0.88) 85%, rgba(10,9,8,0.98) 100%);
-  }
-  /* Ambient cursor glow — desktop only, disabled under reduced motion */
-  .hero-glow{
-    position:absolute;
-    inset:0;
-    z-index:1;
     pointer-events:none;
-    background:radial-gradient(480px circle at var(--gx,50%) var(--gy,38%), rgba(201,162,75,0.14), transparent 62%);
-    opacity:0;
-    transition:opacity 0.7s ease;
+    z-index:1;
+    background:
+      linear-gradient(to bottom, rgba(5,5,5,0.34) 0%, transparent 18%),
+      linear-gradient(to top, rgba(5,5,5,0.38) 0%, transparent 18%);
   }
-  .hero-glow.is-active{opacity:1;}
-  @media (prefers-reduced-motion: reduce){
-    .hero img{transform:none !important;}
-    .hero-glow{display:none;}
-    .hero-kicker .eyebrow,.hero-content h1,.hero-content p,.hero-content .hero-scroll{
-      opacity:1 !important;transform:none !important;filter:none !important;
-    }
-  }
-  .hero-content{
-    position:relative;
-    z-index:2;
-    width:100%;
-    text-align:center;
-    padding:0 24px 80px;
-  }
-  .hero-kicker{
+  .hero-film-controls{
     position:absolute;
-    top:170px;
-    left:0; right:0;
+    left:clamp(24px,4vw,64px);
+    right:clamp(24px,4vw,64px);
+    bottom:clamp(26px,4.5vh,52px);
     z-index:2;
-    text-align:center;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:24px;
+    pointer-events:none;
+  }
+  .hero-film-cta,
+  .hero-sound-toggle{
+    pointer-events:auto;
+    color:#f3efe6;
+    font-family:var(--font-sans);
+    font-size:10px;
+    font-weight:500;
+    text-transform:uppercase;
+    letter-spacing:0.2em;
+    line-height:1;
+    text-decoration:none;
+  }
+  .hero-film-cta{
+    opacity:1;
+    transform:none;
+    transition:opacity 1.2s ease, transform 1.2s ease;
+  }
+  .hero.js-hero-timing .hero-film-cta{
     opacity:0;
-    animation:fadeUp 1s ease 0.3s forwards;
+    transform:translateY(6px);
+    pointer-events:none;
+  }
+  .hero.js-hero-timing.hero-cta-visible .hero-film-cta{
+    opacity:1;
+    transform:none;
+    pointer-events:auto;
+  }
+  .hero-sound-toggle{
+    min-width:88px;
+    min-height:44px;
+    margin:-14px -14px -14px 0;
+    padding:14px;
+    border:0;
+    background:transparent;
+    text-align:right;
+    cursor:pointer;
+  }
+  .hero-film-cta:hover,
+  .hero-sound-toggle:hover{
+    color:#fff;
+  }
+  .hero-film-cta:focus-visible,
+  .hero-sound-toggle:focus-visible{
+    outline:1px solid rgba(243,239,230,0.8);
+    outline-offset:6px;
   }
   @media(max-width:680px){
-    .hero-kicker{top:78px;}
+    .hero-film-controls{
+      left:20px;
+      right:20px;
+      bottom:max(22px,env(safe-area-inset-bottom));
+      gap:18px;
+    }
+    .hero-film-cta,
+    .hero-sound-toggle{
+      font-size:9px;
+      letter-spacing:0.16em;
+    }
   }
-  .hero-content h1{
-    font-size:clamp(36px,5.6vw,80px);
-    line-height:1.12;
-    text-transform:uppercase;
-    letter-spacing:0.04em;
-    margin-bottom:28px;
-    opacity:0;
-    animation:fadeUp 1.1s ease 0.55s forwards;
-  }
-  .hero-content p{
-    font-size:15px;
-    color:var(--grey);
-    max-width:450px;
-    margin:0 auto 36px;
-    line-height:1.75;
-    opacity:0;
-    animation:fadeUp 1.1s ease 0.8s forwards;
-  }
-  .hero-scroll{
-    opacity:0;
-    animation:fadeUp 1s ease 1.1s forwards;
-  }
-  @keyframes fadeUp{
-    from{opacity:0; transform:translateY(18px);}
-    to{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .hero img{transform:none !important;}
+    .hero-film-cta{transition:none;}
   }
 
   .btn-ghost{

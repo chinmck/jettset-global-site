@@ -640,20 +640,6 @@
       }
     });
 
-    // ===== HERO VIDEOS: respect reduced motion =====
-    (function(){
-      var videos = document.querySelectorAll('.hero-video');
-      if(!videos.length) return;
-      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(reduceMotion){
-        videos.forEach(function(video){
-          video.removeAttribute('autoplay');
-          video.pause();
-          video.currentTime = 0;
-        });
-      }
-    })();
-
     // ===== CONCIERGE: GROUND FLEET SELECTOR =====
     (function(){
       var tabsWrap = document.getElementById('fleetTabs');
@@ -1170,64 +1156,62 @@
       }
     })();
 
-    // ===== CINEMATIC HERO: film reveal + ambient cursor glow =====
+    // ===== CINEMATIC HERO: late CTA + sound control =====
     (function(){
-      var heroSection = document.querySelector('.hero');
+      var heroSection = document.getElementById('heroSection');
       var heroFilm = document.getElementById('heroFilm');
-      var heroGlow = document.getElementById('heroGlow');
-      if(!heroSection) return;
-
+      var soundToggle = document.getElementById('heroSoundToggle');
+      if(!heroSection || !heroFilm) return;
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var revealWindow = 5;
 
-      // Film loops continuously; copy enters early on staggered one-way
-      // latches (0.5s / 0.9s / 1.5s / 2.1s after playback starts) and then
-      // remains stable — nothing resets when the video loops.
-      if(heroFilm){
-        var CUES = [
-          {cls:'r-kicker', at: 400},
-          {cls:'r-title',  at: 700},
-          {cls:'r-sub',    at:1600},
-          {cls:'r-cta',    at:2000}
-        ];
-        var started = false;
-        function revealAll(){
-          CUES.forEach(function(c){ heroSection.classList.add(c.cls); });
+      function updateCta(){
+        var duration = heroFilm.duration;
+        if(!Number.isFinite(duration) || duration <= revealWindow){
+          heroSection.classList.add('hero-cta-visible');
+          return;
         }
-        function startCues(){
-          if(started) return;
-          started = true;
-          CUES.forEach(function(c){
-            setTimeout(function(){ heroSection.classList.add(c.cls); }, c.at);
-          });
-        }
-        heroFilm.addEventListener('playing', startCues);
-        if(reduceMotion){
-          heroFilm.removeAttribute('autoplay');
-          heroFilm.removeAttribute('loop');
-          heroFilm.pause();
-          revealAll();
-        } else {
-          var playAttempt = heroFilm.play();
-          if(playAttempt && playAttempt.catch){ playAttempt.catch(revealAll); }
-        }
-        setTimeout(revealAll, 6000); // failsafe: copy never stays hidden
+        heroSection.classList.toggle('hero-cta-visible', heroFilm.currentTime >= duration - revealWindow);
       }
 
-      if(reduceMotion) return;
-
-      // Ambient gold glow follows cursor — desktop pointer devices only
-      var isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-      if(isFinePointer && heroGlow){
-        heroSection.addEventListener('mousemove', function(e){
-          var rect = heroSection.getBoundingClientRect();
-          var x = ((e.clientX - rect.left) / rect.width) * 100;
-          var y = ((e.clientY - rect.top) / rect.height) * 100;
-          heroGlow.style.setProperty('--gx', x + '%');
-          heroGlow.style.setProperty('--gy', y + '%');
-          heroGlow.classList.add('is-active');
+      if(!reduceMotion){
+        heroSection.classList.add('js-hero-timing');
+        heroFilm.addEventListener('loadedmetadata', updateCta);
+        heroFilm.addEventListener('timeupdate', updateCta);
+        heroFilm.addEventListener('seeked', updateCta);
+        heroFilm.addEventListener('ended', function(){
+          heroSection.classList.add('hero-cta-visible');
         });
-        heroSection.addEventListener('mouseleave', function(){
-          heroGlow.classList.remove('is-active');
+      } else {
+        heroSection.classList.add('hero-cta-visible');
+      }
+
+      function setSoundState(soundOn){
+        if(!soundToggle) return;
+        soundToggle.textContent = soundOn ? 'Sound Off' : 'Sound On';
+        soundToggle.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
+        soundToggle.setAttribute('aria-label', soundOn ? 'Turn film sound off' : 'Turn film sound on');
+      }
+
+      setSoundState(!heroFilm.muted);
+
+      if(soundToggle){
+        soundToggle.addEventListener('click', function(){
+          if(heroFilm.muted){
+            heroFilm.currentTime = 0;
+            heroFilm.muted = false;
+            setSoundState(true);
+            var playAttempt = heroFilm.play();
+            if(playAttempt && playAttempt.catch){
+              playAttempt.catch(function(){
+                heroFilm.muted = true;
+                setSoundState(false);
+              });
+            }
+          } else {
+            heroFilm.muted = true;
+            setSoundState(false);
+          }
         });
       }
     })();
