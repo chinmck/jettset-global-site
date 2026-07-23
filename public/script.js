@@ -1160,6 +1160,7 @@
     (function(){
       var heroSection = document.getElementById('heroSection');
       var heroFilm = document.getElementById('heroFilm');
+      var heroAudio = document.getElementById('heroFilmAudio');
       var soundToggle = document.getElementById('heroSoundToggle');
       if(!heroSection || !heroFilm) return;
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1193,23 +1194,58 @@
         soundToggle.setAttribute('aria-label', soundOn ? 'Turn film sound off' : 'Turn film sound on');
       }
 
-      setSoundState(!heroFilm.muted);
+      var soundOn = false;
+      if(heroAudio) heroAudio.muted = true;
+      setSoundState(false);
+
+      function keepAudioInSync(){
+        if(!soundOn || !heroAudio) return;
+        if(Math.abs(heroAudio.currentTime - heroFilm.currentTime) > 0.2){
+          heroAudio.currentTime = heroFilm.currentTime;
+        }
+      }
+
+      heroFilm.addEventListener('timeupdate', keepAudioInSync);
+      heroFilm.addEventListener('seeked', keepAudioInSync);
+      heroFilm.addEventListener('pause', function(){
+        if(heroAudio) heroAudio.pause();
+      });
+      heroFilm.addEventListener('playing', function(){
+        if(!soundOn || !heroAudio) return;
+        keepAudioInSync();
+        var audioPlayAttempt = heroAudio.play();
+        if(audioPlayAttempt && audioPlayAttempt.catch){
+          audioPlayAttempt.catch(function(){
+            soundOn = false;
+            heroAudio.muted = true;
+            setSoundState(false);
+          });
+        }
+      });
 
       if(soundToggle){
         soundToggle.addEventListener('click', function(){
-          if(heroFilm.muted){
+          if(!soundOn && heroAudio){
             heroFilm.currentTime = 0;
-            heroFilm.muted = false;
-            setSoundState(true);
-            var playAttempt = heroFilm.play();
-            if(playAttempt && playAttempt.catch){
-              playAttempt.catch(function(){
-                heroFilm.muted = true;
-                setSoundState(false);
-              });
-            }
-          } else {
             heroFilm.muted = true;
+            heroAudio.currentTime = 0;
+            heroAudio.muted = false;
+            soundOn = true;
+            setSoundState(true);
+            var filmPlayAttempt = heroFilm.play();
+            var soundPlayAttempt = heroAudio.play();
+            Promise.all([
+              filmPlayAttempt || Promise.resolve(),
+              soundPlayAttempt || Promise.resolve()
+            ]).catch(function(){
+                soundOn = false;
+                heroAudio.muted = true;
+                heroAudio.pause();
+                setSoundState(false);
+            });
+          } else {
+            soundOn = false;
+            if(heroAudio) heroAudio.muted = true;
             setSoundState(false);
           }
         });
