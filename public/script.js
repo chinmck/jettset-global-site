@@ -1165,6 +1165,7 @@
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var revealWindow = 5;
       var closingWindow = 5.3;
+      var blackHoldDuration = 0.5;
       var logoWindow = 2.2;
 
       function updateCta(){
@@ -1177,10 +1178,13 @@
           heroSection.classList.add('hero-cta-visible');
         }
         var closingFrame = heroFilm.currentTime >= duration - closingWindow;
+        var blackHold = closingFrame
+          && heroFilm.currentTime < duration - closingWindow + blackHoldDuration;
         heroSection.classList.toggle('hero-closing-frame', closingFrame);
+        heroSection.classList.toggle('hero-black-hold', blackHold);
         heroSection.classList.toggle(
           'hero-slogan-frame',
-          closingFrame && heroFilm.currentTime < duration - logoWindow
+          closingFrame && !blackHold && heroFilm.currentTime < duration - logoWindow
         );
       }
 

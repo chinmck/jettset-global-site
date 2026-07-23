@@ -550,6 +550,9 @@
       object-fit:contain;
       transform:none;
     }
+    .hero.hero-black-hold .hero-video{
+      opacity:0;
+    }
     .hero.hero-slogan-frame .hero-video{
       opacity:0;
     }
