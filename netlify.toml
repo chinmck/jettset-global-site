@@ -1,0 +1,3 @@
+[build]
+  command = "echo 'Publishing Jettset static site from public/'"
+  publish = "public"
