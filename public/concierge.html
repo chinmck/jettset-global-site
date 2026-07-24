@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concierge | Jettset Global</title>
+<meta name="description" content="Destination logistics, security, and lifestyle coordination — the experience around the journey.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div id="jtVeil"></div>
+
+  <nav class="nav" id="mainNav">
+    <button class="nav-burger" id="navBurgerOpen" aria-label="Open menu" aria-expanded="false">
+      <span class="nav-burger-glyph">+</span>
+    </button>
+
+    <a href="index.html" class="nav-logo-center" >
+      <img src="images/nav-logo.png" alt="Jettset">
+    </a>
+  </nav>
+
+  <div class="contact-mark" id="contactMark">
+    <a href="tel:+448005999888" class="contact-mark-icon" aria-label="Call Jettset">
+      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3.654 1.328a.678.678 0 0 1 1.015-.063l2.143 2.143a.678.678 0 0 1 .063 1.015l-1.18 1.18a8.5 8.5 0 0 0 9.728 9.728l1.18-1.18a.678.678 0 0 1 1.015.063l2.143 2.143a.678.678 0 0 1-.063 1.015l-1.6 1.4a1.5 1.5 0 0 1-1.21.36C9.937 17.78 2.22 10.063.91 3.011a1.5 1.5 0 0 1 .36-1.21z"/></svg>
+    </a>
+    <a href="https://wa.me/447393171717" class="contact-mark-icon" aria-label="WhatsApp Jettset" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.12-2.9-6.99A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.19 0 4.25.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.79c0 4.52-3.68 8.2-8.2 8.2a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.15.82.84-3.07-.2-.32a8.15 8.15 0 0 1-1.25-4.35c0-4.52 3.68-8.2 8.2-8.2zm-4.5 4.6c-.15 0-.4.06-.6.29-.21.23-.8.78-.8 1.9 0 1.12.82 2.2.93 2.35.11.15 1.6 2.5 3.9 3.44 1.9.79 2.3.63 2.71.6.42-.04 1.35-.55 1.54-1.09.19-.53.19-.98.13-1.08-.06-.1-.21-.16-.44-.28-.23-.11-1.35-.67-1.56-.74-.21-.08-.36-.11-.51.11-.15.23-.58.74-.71.89-.13.15-.26.17-.49.06-.23-.11-.96-.35-1.83-1.13-.68-.6-1.13-1.35-1.27-1.58-.13-.23-.01-.35.1-.47.1-.1.23-.26.35-.4.11-.13.15-.23.23-.38.08-.15.04-.29-.02-.4-.06-.11-.51-1.25-.71-1.7-.18-.44-.37-.38-.51-.39z"/></svg>
+    </a>
+  </div>
+
+  <div class="contact-sheet-overlay" id="contactSheetOverlay">
+    <div class="contact-sheet">
+      <span class="eyebrow">Reach Us Directly</span>
+      <a href="tel:+448005999888" class="contact-sheet-option">Call</a>
+      <a href="https://wa.me/447393171717" class="contact-sheet-option">WhatsApp</a>
+      <a href="mailto:info@jettsetglobal.com" class="contact-sheet-option">Email</a>
+      <button type="button" class="contact-sheet-cancel" id="contactSheetCancel">Cancel</button>
+    </div>
+  </div>
+
+
+  <div class="side-overlay" id="sideOverlay"></div>
+  <div class="side-panel" id="sidePanel">
+    <div class="nav-index-inner">
+      <a href="index.html" class="nav-index-home" id="navHome">Jettset &mdash; Private Aviation &amp; Concierge House</a>
+      <div class="nav-index-proof">Enquiries Answered In &le;10 Min</div>
+
+      <div class="nav-index-group">
+        <span class="nav-index-num">01</span>
+        <div>
+          <span class="nav-index-title">Private Aviation</span>
+          <div class="nav-index-links">
+            <a href="charter.html" class="" id="navCharter">Charter</a>
+            <a href="jet-card.html" class="" id="navJetcard">Jet Card</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">02</span>
+        <div>
+          <span class="nav-index-title"><a href="concierge.html" class="active" id="navConcierge">Concierge</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group">
+        <span class="nav-index-num">03</span>
+        <div>
+          <span class="nav-index-title">Membership</span>
+          <div class="nav-index-links">
+            <a href="club.html" class="" id="navClub">Club</a>
+            <a href="legs.html" class="" id="navLegs">Legs</a>
+            <a href="editions.html" class="" id="navEditions">Editions</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">04</span>
+        <div>
+          <span class="nav-index-title"><a href="advisory.html" class="" id="navAdvisory">Advisory</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group">
+        <span class="nav-index-num">05</span>
+        <div>
+          <span class="nav-index-title">Partnerships</span>
+          <div class="nav-index-links">
+            <a href="partners.html" class="" id="navPartners">Partner With Us</a>
+            <a href="access-partners.html" class="" id="navAccessPartners">Access Partners</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">06</span>
+        <div>
+          <span class="nav-index-title"><a href="about.html" class="" id="navAbout">About</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">07</span>
+        <div>
+          <span class="nav-index-title"><a href="the-manifest.html" class="" id="navJournal">The Manifest</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">08</span>
+        <div>
+          <span class="nav-index-title"><a href="in-motion.html" class="" id="navInMotion">In Motion</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">09</span>
+        <div>
+          <span class="nav-index-title"><a href="contact.html" class="" id="navContact">Contact</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-footer">
+        <a href="contact.html" class="nav-index-cta btn-ghost">Begin Your Journey</a>
+        <div class="nav-index-contact">
+          <a href="tel:+448005999888">Call</a>
+          <a href="https://wa.me/447393171717">WhatsApp</a>
+          <a href="#" class="side-member-login" id="navMemberLogin"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a3.5 3.5 0 0 0-3.5 3.5V7H6a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-.5V5.5A3.5 3.5 0 0 0 10 2zm2 5H8V5.5a2 2 0 1 1 4 0V7z"/></svg>Member Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HOME PAGE ============ -->
+
+  <div class="page active" id="page-concierge">
+
+    <section class="chapter-hero">
+      <div class="chapter-hero-parallax">
+        <video class="chapter-hero-img" autoplay muted loop playsinline preload="auto" poster="images/hero-concierge.jpg">
+          <source src="videos/hero-concierge.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="chapter-hero-content">
+        <span class="c-reveal eyebrow" style="animation-delay:0.2s">02 — Concierge</span>
+        <h1 class="c-reveal" style="animation-delay:0.4s">Concierge</h1>
+        <p class="c-reveal" style="animation-delay:0.65s">The journey rarely ends at the aircraft door. Concierge is everything that happens before, around, and after the flight — handled with the same discretion.</p>
+      </div>
+      <div class="chapter-hero-scroll c-reveal" style="animation-delay:1.1s">
+        <span></span>
+      </div>
+    </section>
+
+    <section class="intro-block" data-reveal>
+      <div class="divider"><span class="line"></span><span class="mark"></span><span class="line right"></span></div>
+      <p>Concierge is a connected ecosystem of transport, hospitality, access and personal support, built around the complete life of the journey. For an individual, a family, a principal or an entire touring party, one team coordinates the people, vehicles, timings and arrangements that need to move together. Touring teams and creative entourages typically pair this with <a href="club.html"  style="color:var(--gold);text-decoration:underline;">Club</a>, our dedicated structure for continuity across every traveller and city.</p>
+    </section>
+
+    <section class="pillars">
+      <div class="pillars-head" data-reveal>
+        <span class="eyebrow">Six Pillars</span>
+        <h2>Everything Around The Journey</h2>
+      </div>
+      <div class="pillar-grid" data-reveal-group>
+        <div class="pillar-card" data-reveal>
+          <span class="eyebrow">01 — Global Ground Transport</span>
+          <h3>Movement, End To End</h3>
+          <p>Chauffeur-driven transport worldwide for airport transfers, full-day hire, touring schedules, productions, roadshows and secure principal travel. One itinerary, one operations team.</p>
+        </div>
+        <div class="pillar-card" data-reveal>
+          <span class="eyebrow">02 — Airport VIP Experience</span>
+          <h3>The Jet Experience, Through The Terminal</h3>
+          <p>A door-to-door VIP airport experience around commercial travel — chauffeur collection, meet and assist, fast-track formalities and arrival-side handover, subject to availability.</p>
+        </div>
+        <div class="pillar-card" data-reveal>
+          <span class="eyebrow">03 — Touring, Production &amp; Events</span>
+          <h3>Complex Movement, Quietly Managed</h3>
+          <p>Multi-city transport programmes, vehicle fleets and driver schedules coordinated through one central operations team — from a single vehicle to an entire touring convoy.</p>
+        </div>
+        <div class="pillar-card" data-reveal>
+          <span class="eyebrow">04 — Lifestyle Services</span>
+          <h3>Personal &amp; Discreet</h3>
+          <p>Personal shopping, fine art acquisition, wellness and specialist requests, arranged around the individual — never treated as a standard package.</p>
+        </div>
+        <div class="pillar-card" data-reveal>
+          <span class="eyebrow">05 — Travel &amp; Accommodation</span>
+          <h3>Beyond The Listed Suite</h3>
+          <p>From globally recognised hotels to unlisted villas, private residences and chalets, selected to match the purpose and standard of the journey.</p>
+        </div>
+        <div class="pillar-card" data-reveal>
+          <span class="eyebrow">06 — Access, Dining &amp; Entertainment</span>
+          <h3>The Right Door, Opened Properly</h3>
+          <p>Official hospitality, priority dining, private chefs and venue arrangements secured through trusted, accredited channels — never grey-market promises.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="category-guide">
+      <div class="category-guide-head" data-reveal>
+        <span class="eyebrow">Global Ground Transport</span>
+        <h2>The Journey On The Ground</h2>
+        <p>From a single airport transfer to an international touring programme, Jettset coordinates the vehicles, drivers, schedules and live changes that keep every traveller moving.</p>
+      </div>
+      <div class="fleet-selector" data-reveal>
+        <div class="fleet-tabs" id="fleetTabs">
+          <button type="button" class="fleet-tab is-active" data-use="individuals">Individuals &amp; Families</button>
+          <button type="button" class="fleet-tab" data-use="touring">Touring &amp; Production</button>
+          <button type="button" class="fleet-tab" data-use="events">Events &amp; Roadshows</button>
+          <button type="button" class="fleet-tab" data-use="aviation">Aviation Connections</button>
+        </div>
+        <div class="fleet-panel" id="fleetPanel"></div>
+      </div>
+      <p class="category-note">Vehicle models and availability vary by city. Each fleet is confirmed against passenger numbers, luggage, security, accessibility and schedule requirements.</p>
+    </section>
+
+    <section class="moments-solve">
+      <div class="moments-solve-head" data-reveal>
+        <span class="eyebrow">Airport VIP Experience</span>
+        <h2>The Jet Experience, Without The Jet</h2>
+        <p class="moments-solve-sub">A commercial itinerary doesn't have to feel commercial.</p>
+      </div>
+      <div class="moments-solve-list" data-reveal-group>
+        <div class="moment-row" data-reveal>
+          <span class="moment-num">01</span>
+          <div class="moment-text">
+            <div class="moment-headline">Home Collection</div>
+            <div class="moment-resolution">A chauffeur collects you and coordinates arrival with the airport team.</div>
+          </div>
+        </div>
+        <div class="moment-row" data-reveal>
+          <span class="moment-num">02</span>
+          <div class="moment-text">
+            <div class="moment-headline">Meet &amp; Assist</div>
+            <div class="moment-resolution">A dedicated airport host meets you and manages the path through the terminal.</div>
+          </div>
+        </div>
+        <div class="moment-row" data-reveal>
+          <span class="moment-num">03</span>
+          <div class="moment-text">
+            <div class="moment-headline">Fast-Track Formalities</div>
+            <div class="moment-resolution">Priority security, immigration and check-in support, arranged where available.</div>
+          </div>
+        </div>
+        <div class="moment-row" data-reveal>
+          <span class="moment-num">04</span>
+          <div class="moment-text">
+            <div class="moment-headline">Lounge &amp; Duty-Free</div>
+            <div class="moment-resolution">Lounge access, porter support and duty-free assistance around the available time.</div>
+          </div>
+        </div>
+        <div class="moment-row" data-reveal>
+          <span class="moment-num">05</span>
+          <div class="moment-text">
+            <div class="moment-headline">Gate Escort</div>
+            <div class="moment-resolution">Your host manages the final movement to the gate, including timing changes.</div>
+          </div>
+        </div>
+        <div class="moment-row" data-reveal>
+          <span class="moment-num">06</span>
+          <div class="moment-text">
+            <div class="moment-headline">Arrival Handover</div>
+            <div class="moment-resolution">Meet and assist, baggage support and onward chauffeur, aligned without a break.</div>
+          </div>
+        </div>
+      </div>
+      <p class="category-note">Airport VIP services are subject to local airport, airline, immigration and security rules. Available elements are confirmed clearly before travel.</p>
+    </section>
+
+    <section class="pillars">
+      <div class="pillars-head" data-reveal>
+        <span class="eyebrow">Touring, Production &amp; Event Logistics</span>
+        <h2>One Schedule. Every Movement.</h2>
+      </div>
+      <ul class="portal-grid" data-reveal>
+        <li>Multi-city transport planning and live schedule management</li>
+        <li>Principal, talent, executive, crew and guest vehicle allocation</li>
+        <li>VIP Sprinters, V-Class fleets, executive saloons and luggage support</li>
+        <li>Airport, hotel, venue, rehearsal and hospitality movements</li>
+        <li>Driver manifests, contact sheets, call times and live amendments</li>
+        <li>Central 24/7 operational communication for organisers and teams</li>
+      </ul>
+    </section>
+
+    <section class="global-access">
+      <div class="global-access-head" data-reveal>
+        <span class="eyebrow">Global Access &amp; Experiences</span>
+        <h2>Where The World Gathers</h2>
+        <p>There is a calendar that runs alongside the ordinary one — a handful of weeks each year when a handful of cities matter more than the rest. Where official tickets and hospitality exist, we secure them directly.</p>
+      </div>
+      <div class="global-access-list" data-reveal-group>
+        <div class="access-row" data-reveal>
+          <span class="access-num">01</span>
+          <div class="access-text">
+            <div class="access-headline">Awards Season</div>
+            <div class="access-resolution">Los Angeles, in the weeks the industry turns its attention there — premiere and industry-event access arranged where official channels exist, alongside the journey itself.</div>
+          </div>
+        </div>
+        <div class="access-row" data-reveal>
+          <span class="access-num">02</span>
+          <div class="access-text">
+            <div class="access-headline">Fashion Month</div>
+            <div class="access-resolution">Paris, Milan, London, New York, in sequence — show seating secured where tickets are available, built around the circuit rather than a single date.</div>
+          </div>
+        </div>
+        <div class="access-row" data-reveal>
+          <span class="access-num">03</span>
+          <div class="access-text">
+            <div class="access-headline">The Grand Prix Calendar</div>
+            <div class="access-resolution">Monaco in May, and the handful of races that matter beyond it — official race-weekend hospitality and ticket packages arranged alongside the journey.</div>
+          </div>
+        </div>
+        <div class="access-row" data-reveal>
+          <span class="access-num">04</span>
+          <div class="access-text">
+            <div class="access-headline">Wimbledon &amp; The Sporting Calendar</div>
+            <div class="access-resolution">Debenture-holder hospitality and official ticket packages, secured through accredited channels — for Wimbledon and the calendar's other defining weekends.</div>
+          </div>
+        </div>
+        <div class="access-row" data-reveal>
+          <span class="access-num">05</span>
+          <div class="access-text">
+            <div class="access-headline">Art &amp; Auction Season</div>
+            <div class="access-resolution">Basel, Frieze, and the major sale weeks — VIP preview access and auction-house appointments arranged through official channels.</div>
+          </div>
+        </div>
+        <div class="access-row" data-reveal>
+          <span class="access-num">06</span>
+          <div class="access-text">
+            <div class="access-headline">The Festival Circuit</div>
+            <div class="access-resolution">Cannes, Venice, and the events built around film — market accreditation and premiere access secured where official channels exist.</div>
+          </div>
+        </div>
+        <div class="access-row" data-reveal>
+          <span class="access-num">07</span>
+          <div class="access-text">
+            <div class="access-headline">Concerts &amp; The Touring Circuit</div>
+            <div class="access-resolution">VIP packages and official hospitality for major tour dates and residencies, secured the same way as everything else here.</div>
+          </div>
+        </div>
+      </div>
+      <p class="access-note">Tickets and hospitality are arranged exclusively through official, accredited channels — never resale or grey-market sources. Availability varies by event and season, and is confirmed as part of planning your journey.</p>
+    </section>
+
+    <p class="charter-crosslink">Curious how this fits around the flight itself? <a href="index.html#journeyTimelineSection">See how every journey is arranged, step by step</a>.</p>
+
+    <section class="in-motion-link" data-reveal>
+      <span class="eyebrow">In Motion</span>
+      <h3>Concierge, In Practice</h3>
+      <p>Arrivals, arrangements, and the hospitality around them — <a href="in-motion.html">see it for yourself</a>.</p>
+    </section>
+
+    <section class="pull-statement" data-reveal>
+      <div class="divider"><span class="line"></span><span class="mark"></span><span class="line right"></span></div>
+      <h2>The flight was never the hard part. Everything around it is what we're actually built for.</h2>
+    </section>
+
+    <section class="cta-band" data-reveal>
+      <h2>Extend Your Journey</h2>
+      <p>Tell us what the rest of the journey needs to look like — on the ground, at the destination, or beyond — and we'll take it from there.</p>
+      <a href="contact.html" class="btn-ghost" >Tell Us What You Need</a>
+    </section>
+
+  </div>
+
+  <!-- ============ FOOTER (shared) ============ -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Jettset</div>
+        <p>A private aviation and concierge house, built for guests who expect the world to move on their terms.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Experiences</h4>
+        <ul>
+          <li><a href="charter.html" >Charter</a></li>
+          <li><a href="jet-card.html" >Jet Card</a></li>
+          <li><a href="club.html" >Club</a></li>
+          <li><a href="legs.html" >Legs</a></li>
+          <li><a href="concierge.html" >Concierge</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html" >About</a></li>
+          <li><a href="guest-segments.html" >Guest Segments</a></li>
+          <li><a href="the-manifest.html" >The Manifest</a></li>
+          <li><a href="in-motion.html" >In Motion</a></li>
+          <li><a href="advisory.html" >Advisory</a></li>
+          <li><a href="editions.html" >Editions</a></li>
+          <li><a href="partners.html" >Partner With Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="quote.html" >Enquire</a></li>
+          <li><a href="mailto:info@jettsetglobal.com">info@jettsetglobal.com</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Jettset Global</span>
+      <span><a href="privacy.html" >Privacy</a> &nbsp;&middot;&nbsp; <a href="terms.html" >Terms</a> &nbsp;&middot;&nbsp; <a href="trust.html" >Trust</a></span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

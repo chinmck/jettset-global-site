@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charter | Jettset Global</title>
+<meta name="description" content="On-demand private jet charter, sourced operator-direct for transparency, speed, and discretion.">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="fleet-intelligence.css">
+</head>
+<body>
+
+  <div id="jtVeil"></div>
+
+  <nav class="nav" id="mainNav">
+    <button class="nav-burger" id="navBurgerOpen" aria-label="Open menu" aria-expanded="false">
+      <span class="nav-burger-glyph">+</span>
+    </button>
+
+    <a href="index.html" class="nav-logo-center" >
+      <img src="images/nav-logo.png" alt="Jettset">
+    </a>
+  </nav>
+
+  <div class="contact-mark" id="contactMark">
+    <a href="tel:+448005999888" class="contact-mark-icon" aria-label="Call Jettset">
+      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3.654 1.328a.678.678 0 0 1 1.015-.063l2.143 2.143a.678.678 0 0 1 .063 1.015l-1.18 1.18a8.5 8.5 0 0 0 9.728 9.728l1.18-1.18a.678.678 0 0 1 1.015.063l2.143 2.143a.678.678 0 0 1-.063 1.015l-1.6 1.4a1.5 1.5 0 0 1-1.21.36C9.937 17.78 2.22 10.063.91 3.011a1.5 1.5 0 0 1 .36-1.21z"/></svg>
+    </a>
+    <a href="https://wa.me/447393171717" class="contact-mark-icon" aria-label="WhatsApp Jettset" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.12-2.9-6.99A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.19 0 4.25.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.79c0 4.52-3.68 8.2-8.2 8.2a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.15.82.84-3.07-.2-.32a8.15 8.15 0 0 1-1.25-4.35c0-4.52 3.68-8.2 8.2-8.2zm-4.5 4.6c-.15 0-.4.06-.6.29-.21.23-.8.78-.8 1.9 0 1.12.82 2.2.93 2.35.11.15 1.6 2.5 3.9 3.44 1.9.79 2.3.63 2.71.6.42-.04 1.35-.55 1.54-1.09.19-.53.19-.98.13-1.08-.06-.1-.21-.16-.44-.28-.23-.11-1.35-.67-1.56-.74-.21-.08-.36-.11-.51.11-.15.23-.58.74-.71.89-.13.15-.26.17-.49.06-.23-.11-.96-.35-1.83-1.13-.68-.6-1.13-1.35-1.27-1.58-.13-.23-.01-.35.1-.47.1-.1.23-.26.35-.4.11-.13.15-.23.23-.38.08-.15.04-.29-.02-.4-.06-.11-.51-1.25-.71-1.7-.18-.44-.37-.38-.51-.39z"/></svg>
+    </a>
+  </div>
+
+  <div class="contact-sheet-overlay" id="contactSheetOverlay">
+    <div class="contact-sheet">
+      <span class="eyebrow">Reach Us Directly</span>
+      <a href="tel:+448005999888" class="contact-sheet-option">Call</a>
+      <a href="https://wa.me/447393171717" class="contact-sheet-option">WhatsApp</a>
+      <a href="mailto:info@jettsetglobal.com" class="contact-sheet-option">Email</a>
+      <button type="button" class="contact-sheet-cancel" id="contactSheetCancel">Cancel</button>
+    </div>
+  </div>
+
+  <div class="fleet-modal-overlay" id="fleetModalOverlay">
+    <div class="fleet-modal">
+      <button type="button" class="fleet-modal-close" id="fleetModalClose" aria-label="Close">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L8.94 10l-4.72 4.72a.75.75 0 1 0 1.06 1.06L10 11.06l4.72 4.72a.75.75 0 1 0 1.06-1.06L11.06 10l4.72-4.72a.75.75 0 0 0-1.06-1.06L10 8.94z"/></svg>
+      </button>
+      <div class="fleet-modal-head">
+        <span class="eyebrow">Category</span>
+        <h3 id="fleetModalTitle">&nbsp;</h3>
+        <div class="fleet-modal-meta" id="fleetModalMeta">&nbsp;</div>
+        <p id="fleetModalDesc">&nbsp;</p>
+      </div>
+      <div class="fleet-modal-aircraft" id="fleetModalAircraft"></div>
+      <p class="fleet-modal-empty" id="fleetModalEmpty">Fleet imagery for this category is being finalised — every journey is still sourced operator-direct against the specific aircraft available.</p>
+    </div>
+  </div>
+
+
+  <div class="side-overlay" id="sideOverlay"></div>
+  <div class="side-panel" id="sidePanel">
+    <div class="nav-index-inner">
+      <a href="index.html" class="nav-index-home" id="navHome">Jettset &mdash; Private Aviation &amp; Concierge House</a>
+      <div class="nav-index-proof">Enquiries Answered In &le;10 Min</div>
+
+      <div class="nav-index-group">
+        <span class="nav-index-num">01</span>
+        <div>
+          <span class="nav-index-title">Private Aviation</span>
+          <div class="nav-index-links">
+            <a href="charter.html" class="active" id="navCharter">Charter</a>
+            <a href="jet-card.html" class="" id="navJetcard">Jet Card</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">02</span>
+        <div>
+          <span class="nav-index-title"><a href="concierge.html" class="" id="navConcierge">Concierge</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group">
+        <span class="nav-index-num">03</span>
+        <div>
+          <span class="nav-index-title">Membership</span>
+          <div class="nav-index-links">
+            <a href="club.html" class="" id="navClub">Club</a>
+            <a href="legs.html" class="" id="navLegs">Legs</a>
+            <a href="editions.html" class="" id="navEditions">Editions</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">04</span>
+        <div>
+          <span class="nav-index-title"><a href="advisory.html" class="" id="navAdvisory">Advisory</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group">
+        <span class="nav-index-num">05</span>
+        <div>
+          <span class="nav-index-title">Partnerships</span>
+          <div class="nav-index-links">
+            <a href="partners.html" class="" id="navPartners">Partner With Us</a>
+            <a href="access-partners.html" class="" id="navAccessPartners">Access Partners</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">06</span>
+        <div>
+          <span class="nav-index-title"><a href="about.html" class="" id="navAbout">About</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">07</span>
+        <div>
+          <span class="nav-index-title"><a href="the-manifest.html" class="" id="navJournal">The Manifest</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">08</span>
+        <div>
+          <span class="nav-index-title"><a href="in-motion.html" class="" id="navInMotion">In Motion</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">09</span>
+        <div>
+          <span class="nav-index-title"><a href="contact.html" class="" id="navContact">Contact</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-footer">
+        <a href="contact.html" class="nav-index-cta btn-ghost">Begin Your Journey</a>
+        <div class="nav-index-contact">
+          <a href="tel:+448005999888">Call</a>
+          <a href="https://wa.me/447393171717">WhatsApp</a>
+          <a href="#" class="side-member-login" id="navMemberLogin"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a3.5 3.5 0 0 0-3.5 3.5V7H6a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-.5V5.5A3.5 3.5 0 0 0 10 2zm2 5H8V5.5a2 2 0 1 1 4 0V7z"/></svg>Member Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HOME PAGE ============ -->
+
+  <div class="page active" id="page-charter">
+
+    <section class="chapter-hero" id="charterChapterHero">
+      <div class="chapter-hero-parallax">
+        <img class="chapter-hero-img" src="images/hero-charter.jpg" alt="Close-up of a Bombardier Challenger 350 wing and winglet, Jettset Global on-demand private jet charter service">
+      </div>
+      <div class="chapter-hero-content">
+        <span class="eyebrow c-reveal" style="animation-delay:.2s">01 — Private Aviation</span>
+        <h1 class="c-reveal" style="animation-delay:.4s">Charter</h1>
+        <p class="c-reveal" style="animation-delay:.65s">Private journeys, sourced through Jettset's global fleet network — combining our partner fleets, direct operator relationships and access to the wider international charter market.</p>
+      </div>
+      <div class="chapter-hero-scroll c-reveal" style="animation-delay:1s">
+        <span></span>
+      </div>
+    </section>
+
+    <section class="intro-block" data-reveal>
+      <div class="divider"><span class="line"></span><span class="mark"></span><span class="line right"></span></div>
+      <p>Every Charter journey begins with you. Jettset brings together established partner fleets, direct relationships with licensed operators and the wider global charter marketplace — the consistency of trusted fleet partnerships with the reach of an international operator network. Rather than limiting a journey to one source, we identify the aircraft best suited to your itinerary. For guests who fly more regularly, our <a href="jet-card.html"  style="color:var(--gold);text-decoration:underline;">Jet Card</a> offers the same considered sourcing with the structure of pre-purchased hours.</p>
+    </section>
+
+    <section class="feature-grid" data-reveal-group>
+      <div class="feature-card" data-reveal>
+        <span class="eyebrow">Partner Fleet</span>
+        <h4>Trusted By Relationship</h4>
+        <p>Established fleet partnerships give Jettset access to aircraft and operators with whom we have built direct working relationships.</p>
+      </div>
+      <div class="feature-card" data-reveal>
+        <span class="eyebrow">Operator-Direct</span>
+        <h4>Sourced At Source</h4>
+        <p>We work directly with licensed operators, creating clearer communication, faster answers and greater visibility throughout the journey.</p>
+      </div>
+      <div class="feature-card" data-reveal>
+        <span class="eyebrow">Worldwide Market</span>
+        <h4>Choice Without Limitation</h4>
+        <p>When the journey requires it, we extend the search across the wider international charter market to identify the right aircraft, location and schedule.</p>
+      </div>
+      <div class="feature-card" data-reveal>
+        <span class="eyebrow">Discretion</span>
+        <h4>Quiet By Design</h4>
+        <p>From FBO selection to ground transition, every detail is managed to protect your privacy and keep the journey out of unnecessary view.</p>
+      </div>
+      <div class="feature-card" data-reveal>
+        <span class="eyebrow">Speed</span>
+        <h4>Short Notice, Handled</h4>
+        <p>Access to live fleet availability and an international operator network allows time-sensitive journeys to be met with suitable options within hours, wherever operationally possible.</p>
+      </div>
+    </section>
+
+    <section class="moments-solve">
+      <div class="moments-solve-head" data-reveal>
+        <span class="eyebrow">Not What We Sell</span>
+        <h2>Moments We Solve</h2>
+        <p class="moments-solve-sub">The aircraft matters. The reason for the journey matters more.</p>
+      </div>
+      <div class="moments-solve-list" data-reveal-group>
+        <div class="moment-row" data-reveal>
+          <span class="moment-num">01</span>
+          <div class="moment-text">
+            <div class="moment-headline">A board meeting moved forward by twenty-four hours.</div>
+            <div class="moment-resolution">Three cities. One afternoon. No room for delay.</div>
+          </div>
+        </div>
+        <div class="moment-row" data-reveal>
+          <span class="moment-num">02</span>
+          <div class="moment-text">
+            <div class="moment-headline">A family matter unfolding somewhere else entirely.</div>
+            <div class="moment-resolution">The next suitable aircraft, not the next available commercial flight.</div>
+          </div>
+        </div>
+        <div class="moment-row" data-reveal>
+          <span class="moment-num">03</span>
+          <div class="moment-text">
+            <div class="moment-headline">A missed connection, hours before it became a larger problem.</div>
+            <div class="moment-resolution">Recovered before the wider itinerary had to change.</div>
+          </div>
+        </div>
+        <div class="moment-row" data-reveal>
+          <span class="moment-num">04</span>
+          <div class="moment-text">
+            <div class="moment-headline">An invitation arriving with forty-eight hours' notice.</div>
+            <div class="moment-resolution">Confirmed, coordinated and airborne before the opportunity passed.</div>
+          </div>
+        </div>
+        <div class="moment-row" data-reveal>
+          <span class="moment-num">05</span>
+          <div class="moment-text">
+            <div class="moment-headline">A negotiation that could not wait for tomorrow's schedule.</div>
+            <div class="moment-resolution">Concluded in one city and carried forward in another, the same day.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="fleet-intelligence" id="fleetIntelligence" aria-labelledby="fleetIntelligenceTitle">
+      <div class="fi-heading">
+        <div>
+          <span class="fi-kicker">Fleet Intelligence / Private Consultation</span>
+          <h2 id="fleetIntelligenceTitle">The right category begins with the journey.</h2>
+        </div>
+        <p>Share the route, the people travelling and what matters most in the cabin. We will translate those priorities into considered, indicative guidance.</p>
+      </div>
+
+      <div class="fi-consultation">
+        <form class="fi-controls" id="fleetIntelligenceForm">
+          <div class="fi-control-index" aria-hidden="true">01 / Journey</div>
+
+          <div class="fi-route-fields">
+            <label class="fi-field" for="fiOrigin">
+              <span>Origin</span>
+              <input id="fiOrigin" name="origin" type="text" value="London" list="fiLocations" autocomplete="off">
+            </label>
+            <span class="fi-route-line" aria-hidden="true"></span>
+            <label class="fi-field" for="fiDestination">
+              <span>Destination</span>
+              <input id="fiDestination" name="destination" type="text" value="Monaco" list="fiLocations" autocomplete="off">
+            </label>
+          </div>
+
+          <datalist id="fiLocations">
+            <option value="London"></option>
+            <option value="Monaco"></option>
+            <option value="Paris"></option>
+            <option value="Milan"></option>
+            <option value="Geneva"></option>
+            <option value="Dubai"></option>
+            <option value="Doha"></option>
+            <option value="Lagos"></option>
+            <option value="Accra"></option>
+            <option value="New York"></option>
+            <option value="Miami"></option>
+            <option value="Toronto"></option>
+            <option value="Los Angeles"></option>
+            <option value="Singapore"></option>
+            <option value="Hong Kong"></option>
+            <option value="Tokyo"></option>
+            <option value="Cape Town"></option>
+            <option value="Johannesburg"></option>
+          </datalist>
+
+          <label class="fi-field fi-travellers" for="fiTravellers">
+            <span>Travellers</span>
+            <select id="fiTravellers" name="travellers">
+              <option value="1">1 traveller</option>
+              <option value="2">2 travellers</option>
+              <option value="4" selected>4 travellers</option>
+              <option value="6">6 travellers</option>
+              <option value="8">8 travellers</option>
+              <option value="10">10 travellers</option>
+              <option value="12">12 travellers</option>
+              <option value="14">14 travellers</option>
+              <option value="16">16 travellers</option>
+            </select>
+          </label>
+
+          <fieldset class="fi-priorities">
+            <legend>Journey priority <span>Optional</span></legend>
+            <div class="fi-priority-options">
+              <label><input type="radio" name="priority" value="Efficiency" checked><span>Efficiency</span></label>
+              <label><input type="radio" name="priority" value="Cabin Space"><span>Cabin Space</span></label>
+              <label><input type="radio" name="priority" value="Long-Range Comfort"><span>Long-Range Comfort</span></label>
+            </div>
+          </fieldset>
+
+          <p class="fi-route-status" id="fiRouteStatus" aria-live="polite">London to Monaco · approximately 560 nautical miles</p>
+        </form>
+
+        <article class="fi-recommendation" id="fiRecommendation" aria-live="polite">
+          <div class="fi-recommendation-head">
+            <div>
+              <span class="fi-label">Indicative recommendation</span>
+              <h3 id="fiCategoryName">Light Jet</h3>
+              <p class="fi-representative">Representative aircraft: <span id="fiRepresentative">Citation CJ3</span></p>
+            </div>
+            <span class="fi-match" id="fiMatch">Journey fit 01</span>
+          </div>
+
+          <div class="fi-media">
+            <div class="fi-media-tabs" role="tablist" aria-label="Aircraft profile views">
+              <button type="button" role="tab" aria-selected="true" aria-controls="fiMediaPanel" data-fi-view="exterior">Exterior</button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="fiMediaPanel" data-fi-view="interior">Interior</button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="fiMediaPanel" data-fi-view="cabin">Cabin</button>
+            </div>
+
+            <div class="fi-media-panel fi-view-exterior" id="fiMediaPanel" role="tabpanel" tabindex="0">
+              <div class="fi-media-atmosphere" aria-hidden="true"></div>
+              <picture class="fi-profile-picture fi-view-asset" data-fi-asset-view="exterior" aria-hidden="false">
+                <source id="fiExteriorAvif" type="image/avif" media="(max-width: 700px)" srcset="images/fleet-intelligence/light-exterior-mobile.avif">
+                <source id="fiExteriorAvifDesktop" type="image/avif" srcset="images/fleet-intelligence/light-exterior-desktop.avif">
+                <source id="fiExteriorWebp" type="image/webp" media="(max-width: 700px)" srcset="images/fleet-intelligence/light-exterior-mobile.webp">
+                <source id="fiExteriorWebpDesktop" type="image/webp" srcset="images/fleet-intelligence/light-exterior-desktop.webp">
+                <img
+                  class="fi-profile-image"
+                  id="fiExteriorImage"
+                  src="images/fleet-intelligence/light-exterior-desktop.jpg"
+                  width="1600"
+                  height="1000"
+                  alt="Representative Citation CJ3 light jet exterior on a dark apron"
+                  decoding="async"
+                  fetchpriority="low"
+                >
+              </picture>
+              <picture class="fi-profile-picture fi-view-asset" data-fi-asset-view="interior" aria-hidden="true" hidden>
+                <source id="fiInteriorAvif" type="image/avif" media="(max-width: 700px)" srcset="images/fleet-intelligence/light-interior-mobile.avif">
+                <source id="fiInteriorAvifDesktop" type="image/avif" srcset="images/fleet-intelligence/light-interior-desktop.avif">
+                <source id="fiInteriorWebp" type="image/webp" media="(max-width: 700px)" srcset="images/fleet-intelligence/light-interior-mobile.webp">
+                <source id="fiInteriorWebpDesktop" type="image/webp" srcset="images/fleet-intelligence/light-interior-desktop.webp">
+                <img
+                  class="fi-profile-image"
+                  id="fiInteriorImage"
+                  src="images/fleet-intelligence/light-interior-desktop.jpg"
+                  width="1600"
+                  height="1000"
+                  alt="Representative Citation CJ3 cabin interior"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </picture>
+              <img
+                class="fi-plan-image fi-view-asset"
+                id="fiPlanImage"
+                data-fi-asset-view="cabin"
+                src="images/fleet-intelligence/light-cabin-plan.svg"
+                width="1280"
+                height="420"
+                alt="Representative Citation CJ3 cabin plan; configuration varies by aircraft"
+                aria-hidden="true"
+                hidden
+                decoding="async"
+              >
+              <div class="fi-aircraft fi-aircraft-light" id="fiAircraftSilhouette" aria-hidden="true">
+                <span class="fi-fuselage"></span>
+                <span class="fi-wing fi-wing-left"></span>
+                <span class="fi-wing fi-wing-right"></span>
+                <span class="fi-tail fi-tail-left"></span>
+                <span class="fi-tail fi-tail-right"></span>
+              </div>
+              <div class="fi-interior-placeholder" aria-hidden="true">
+                <span class="fi-cabin-wall"></span>
+                <span class="fi-window fi-window-one"></span>
+                <span class="fi-window fi-window-two"></span>
+                <span class="fi-window fi-window-three"></span>
+                <span class="fi-seat fi-seat-one"></span>
+                <span class="fi-seat fi-seat-two"></span>
+              </div>
+              <div class="fi-plan-placeholder" aria-hidden="true">
+                <span class="fi-plan-body"></span>
+                <span class="fi-plan-seat fi-plan-seat-one"></span>
+                <span class="fi-plan-seat fi-plan-seat-two"></span>
+                <span class="fi-plan-seat fi-plan-seat-three"></span>
+                <span class="fi-plan-seat fi-plan-seat-four"></span>
+              </div>
+              <div class="fi-media-caption">
+                <span id="fiViewLabel">Exterior study</span>
+                <span id="fiAssetStatus">Representative Citation CJ3 exterior</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="fi-reason" id="fiReason">A considered fit for a short regional sector with four travellers, prioritising efficient access without unnecessary cabin scale.</p>
+
+          <div class="fi-journey-summary">
+            <span>Journey considered</span>
+            <div><strong id="fiJourneyDistance">Approximately 560 nm</strong><small>Distance</small></div>
+            <div><strong id="fiJourneyTravellers">4 travellers</strong><small>Travellers</small></div>
+            <div><strong id="fiJourneyPriority">Efficiency</strong><small>Priority</small></div>
+          </div>
+
+          <div class="fi-guidance">
+            <span class="fi-guidance-title">Typical category guidance</span>
+            <div class="fi-guidance-grid">
+              <div><span>Passenger capacity</span><strong id="fiCapacity">Up to 6 travellers</strong></div>
+              <div><span>Indicative range</span><strong id="fiRange">Up to 1,500 nm</strong></div>
+              <div><span>Typical cabin height</span><strong id="fiCabinHeight">Approx. 4 ft 9 in</strong></div>
+              <div><span>Typical luggage</span><strong id="fiLuggageSummary">Personal luggage</strong></div>
+            </div>
+          </div>
+
+          <div class="fi-category-index" aria-label="Explore aircraft categories">
+            <button type="button" class="is-active" data-fi-category="Light Jet">Light</button>
+            <button type="button" data-fi-category="Midsize Jet">Midsize</button>
+            <button type="button" data-fi-category="Super-Midsize Jet">Super-Midsize</button>
+            <button type="button" data-fi-category="Heavy Jet">Heavy</button>
+            <button type="button" data-fi-category="Ultra Long Range">Ultra Long Range</button>
+          </div>
+
+          <details class="fi-dossier" id="fiDossier">
+            <summary>View cabin &amp; specifications <span aria-hidden="true">+</span></summary>
+            <div class="fi-dossier-content">
+              <div class="fi-dossier-intro">
+                <span>Cabin character</span>
+                <p id="fiCabin">An intimate, composed cabin for focused short-haul travel and efficient movement between regional airports.</p>
+              </div>
+              <div class="fi-dossier-groups">
+                <section>
+                  <h4>Cabin</h4>
+                  <dl>
+                    <div><dt>Layout</dt><dd id="fiCabinLayout">Club seating; configuration varies</dd></div>
+                    <div><dt>Length</dt><dd id="fiCabinLength">Approx. 15–18 ft</dd></div>
+                    <div><dt>Width</dt><dd id="fiCabinWidth">Approx. 4 ft 10 in</dd></div>
+                    <div><dt>Height</dt><dd id="fiCabinHeightDetail">Approx. 4 ft 9 in</dd></div>
+                  </dl>
+                </section>
+                <section>
+                  <h4>Comfort</h4>
+                  <dl>
+                    <div><dt>Luggage</dt><dd id="fiLuggage">Best suited to considered personal luggage. Larger or specialist baggage should be reviewed before aircraft selection.</dd></div>
+                    <div><dt>Enclosed WC</dt><dd id="fiWc">Varies by aircraft and configuration</dd></div>
+                  </dl>
+                </section>
+                <section>
+                  <h4>Service</h4>
+                  <dl>
+                    <div><dt>Catering</dt><dd id="fiCatering">Light catering; confirmed during aircraft sourcing</dd></div>
+                    <div><dt>Wi-Fi</dt><dd id="fiWifi">Available on selected aircraft</dd></div>
+                    <div><dt>Flight attendant</dt><dd id="fiAttendant">Not typically included; confirmed during sourcing</dd></div>
+                  </dl>
+                </section>
+                <section>
+                  <h4>Operational guidance</h4>
+                  <dl>
+                    <div><dt>Typical range</dt><dd id="fiRangeDetail">Up to 1,500 nm</dd></div>
+                    <div><dt>Indicative cruise</dt><dd id="fiCruise">Category estimate; validation required</dd></div>
+                  </dl>
+                </section>
+              </div>
+              <p class="fi-validation-note">Prototype category values are working guidance only and require broker validation before production approval.</p>
+            </div>
+          </details>
+
+          <div class="fi-actions">
+            <button type="button" class="fi-enquire" id="fiEnquire">Continue with this journey <span aria-hidden="true">&rarr;</span></button>
+            <p>Representative aircraft: <span id="fiRepresentativeNote">Citation CJ3</span>. Final aircraft selection is confirmed personally according to routing, availability and operational requirements.</p>
+          </div>
+        </article>
+      </div>
+
+      <noscript>
+        <p class="fi-noscript">The Light Jet profile above is an indicative example for London to Monaco with four travellers. Contact Jettset for a personal category review for any other journey.</p>
+      </noscript>
+    </section>
+
+    <section class="route-preview">
+      <div class="route-preview-head" data-reveal>
+        <span class="eyebrow">Signature Journeys</span>
+        <h2>A Few Routes, In The Air</h2>
+        <p>A glimpse of the journeys Jettset guests return to — each sourced individually around the people, timing and purpose behind it.</p>
+      </div>
+      <div class="route-preview-grid" id="routePreviewGrid"></div>
+    </section>
+
+    <section class="in-motion-link" data-reveal>
+      <span class="eyebrow">In Motion</span>
+      <h3>What It Actually Looks Like</h3>
+      <p>Real arrivals. Real departures. Real moments from inside the Jettset world — <a href="in-motion.html">see them for yourself</a>.</p>
+    </section>
+
+    <p class="charter-crosslink">These are a few of many. <a href="index.html#routeMapSection">Explore the full route map</a>, or <a href="index.html#journeyBuilderSection">begin planning a journey of your own</a>.</p>
+
+    <section class="founder-note" data-reveal>
+      <div class="divider"><span class="line"></span><span class="mark"></span><span class="line right"></span></div>
+      <blockquote>&ldquo;We are building Jettset around access, relationships and choice. Our partner fleets give us strength and consistency. Our direct operator relationships and global market access give us reach. Together, they allow us to select the right aircraft around each journey while continuing to build the Jettset fleet of the future.&rdquo;</blockquote>
+      <p class="founder-sig"><strong>Founder &amp; CEO</strong>, Jettset</p>
+    </section>
+
+    <section class="payment-note" data-reveal>
+      <span class="eyebrow">Settlement</span>
+      <p>Settle in the way that suits the journey — by traditional bank transfer or, where available, through cryptocurrency settlement supported by MoonPay.</p>
+      <div class="payment-methods">Bitcoin &middot; Ethereum &middot; Major Currencies &middot; Traditional Bank Transfer</div>
+    </section>
+
+    <section class="cta-band" data-reveal>
+      <h2>Begin Your Charter Journey</h2>
+      <p>Share your itinerary and a member of the Jettset team will return a carefully curated set of aircraft options, selected around your journey. Discreetly. Personally. Without obligation.</p>
+      <a href="#" class="btn-ghost">Enquire Now</a>
+    </section>
+
+  </div>
+
+  <!-- ============ FOOTER (shared) ============ -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Jettset</div>
+        <p>A private aviation and concierge house, built for guests who expect the world to move on their terms.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Experiences</h4>
+        <ul>
+          <li><a href="charter.html" >Charter</a></li>
+          <li><a href="jet-card.html" >Jet Card</a></li>
+          <li><a href="club.html" >Club</a></li>
+          <li><a href="legs.html" >Legs</a></li>
+          <li><a href="concierge.html" >Concierge</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html" >About</a></li>
+          <li><a href="guest-segments.html" >Guest Segments</a></li>
+          <li><a href="the-manifest.html" >The Manifest</a></li>
+          <li><a href="in-motion.html" >In Motion</a></li>
+          <li><a href="advisory.html" >Advisory</a></li>
+          <li><a href="editions.html" >Editions</a></li>
+          <li><a href="partners.html" >Partner With Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="quote.html" >Enquire</a></li>
+          <li><a href="mailto:info@jettsetglobal.com">info@jettsetglobal.com</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Jettset Global</span>
+      <span><a href="privacy.html" >Privacy</a> &nbsp;&middot;&nbsp; <a href="terms.html" >Terms</a> &nbsp;&middot;&nbsp; <a href="trust.html" >Trust</a></span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="fleet-intelligence.js"></script>
+</body>
+</html>

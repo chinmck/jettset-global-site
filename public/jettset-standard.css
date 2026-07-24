@@ -1,0 +1,299 @@
+/* ============================================================
+   THE JETTSET STANDARD — CHAPTER
+   Standalone, isolated stylesheet. All selectors scoped under
+   .jettset-standard-section and prefixed "jettset-standard-".
+   No bare element selectors — cannot leak into or collide with
+   production styles, or with any other isolated chapter's CSS.
+
+   Design: an "editorial proof ledger" — one headline, four
+   standards as full-width rows separated by hairlines and a
+   numeral spine, not cards and not a step-by-step timeline.
+   Hover/focus/scroll only shift emphasis between rows; every
+   row is fully legible in its default state with no JavaScript
+   and no reveal-on-interaction content.
+   ============================================================ */
+
+.jettset-standard-section {
+  --js-ink: #0A0908;
+  --js-panel: #16140F;
+  --js-ivory: #F5F3EF;
+  --js-gold: #C9A24B;
+  --js-gold-muted: #8C763F;
+  --js-grey: #8A8782;
+
+  --js-serif: "Fraunces", "Iowan Old Style", "Georgia", serif;
+  --js-sans: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --js-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --js-unit: 8px;
+  --js-edge: clamp(24px, 6vw, 96px);
+
+  position: relative;
+  background: var(--js-ink);
+  color: var(--js-ivory);
+  font-family: var(--js-sans);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.jettset-standard-section *,
+.jettset-standard-section *::before,
+.jettset-standard-section *::after {
+  box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------------
+   HEADER — eyebrow + large single-statement headline. Left-
+   weighted, generous negative space, not centred.
+   --------------------------------------------------------------- */
+
+.jettset-standard-header {
+  padding: calc(var(--js-unit) * 6) var(--js-edge) calc(var(--js-unit) * 4.5);
+  max-width: min(90%, 660px);
+}
+
+.jettset-standard-kicker {
+  font-family: var(--js-mono);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--js-gold);
+  margin: 0 0 calc(var(--js-unit) * 1.75);
+}
+
+.jettset-standard-kicker-rule {
+  display: block;
+  width: 56px;
+  height: 1px;
+  background: var(--js-gold-muted);
+  margin: 0 0 calc(var(--js-unit) * 3.5);
+}
+
+.jettset-standard-headline {
+  font-family: var(--js-serif);
+  font-weight: 500;
+  font-size: clamp(34px, 3.4vw, 50px);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.jettset-standard-headline-line {
+  display: block;
+}
+
+/* ---------------------------------------------------------------
+   LEDGER — four full-width rows, hairline rules, a numeral
+   spine. No card borders, no boxes, no grid of equal tiles.
+   --------------------------------------------------------------- */
+
+.jettset-standard-ledger {
+  border-top: 1px solid rgba(201, 162, 75, 0.18);
+}
+
+.jettset-standard-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: clamp(72px, 9vw, 140px) 1fr;
+  align-items: baseline;
+  gap: calc(var(--js-unit) * 3);
+  padding: calc(var(--js-unit) * 4.5) var(--js-edge);
+  border-bottom: 1px solid rgba(201, 162, 75, 0.14);
+  cursor: default;
+  outline: none;
+  transition: background 0.5s ease;
+}
+
+.jettset-standard-mark {
+  font-family: var(--js-mono);
+  font-size: clamp(20px, 2.4vw, 30px);
+  color: rgba(201, 162, 75, 0.7);
+  transition: color 0.5s ease, transform 0.5s ease;
+}
+
+.jettset-standard-name {
+  font-family: var(--js-serif);
+  font-size: clamp(22px, 2.4vw, 32px);
+  color: rgba(245, 243, 239, 0.94);
+  margin: 0 0 calc(var(--js-unit) * 1);
+  transition: color 0.5s ease;
+}
+
+.jettset-standard-desc {
+  font-family: var(--js-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(245, 243, 239, 0.78);
+  margin: 0;
+  max-width: 54ch;
+  transition: color 0.5s ease;
+}
+
+/* ---- Emphasis state: hover, keyboard focus, or JS scroll-dominance.
+   Pure CSS for hover/focus — no script required. Brightens the
+   active row; dims siblings, but never below a readable floor. ---- */
+
+.jettset-standard-row:hover,
+.jettset-standard-row:focus-visible,
+.jettset-standard-row.is-dominant {
+  background: rgba(201, 162, 75, 0.05);
+}
+
+.jettset-standard-row:hover .jettset-standard-mark,
+.jettset-standard-row:focus-visible .jettset-standard-mark,
+.jettset-standard-row.is-dominant .jettset-standard-mark {
+  color: var(--js-gold);
+  transform: translateX(2px);
+}
+
+.jettset-standard-row:hover .jettset-standard-name,
+.jettset-standard-row:focus-visible .jettset-standard-name,
+.jettset-standard-row.is-dominant .jettset-standard-name {
+  color: var(--js-ivory);
+}
+
+.jettset-standard-row:hover .jettset-standard-desc,
+.jettset-standard-row:focus-visible .jettset-standard-desc,
+.jettset-standard-row.is-dominant .jettset-standard-desc {
+  color: rgba(245, 243, 239, 0.85);
+}
+
+/* Sibling dimming only applies once JS has established which row is
+   dominant via scroll; it never drops below a comfortably legible
+   opacity, and is skipped entirely under reduced motion (see below). */
+.jettset-standard-ledger.js-has-dominance .jettset-standard-row:not(.is-dominant) .jettset-standard-mark {
+  color: rgba(201, 162, 75, 0.55);
+}
+.jettset-standard-ledger.js-has-dominance .jettset-standard-row:not(.is-dominant) .jettset-standard-name {
+  color: rgba(245, 243, 239, 0.8);
+}
+.jettset-standard-ledger.js-has-dominance .jettset-standard-row:not(.is-dominant) .jettset-standard-desc {
+  color: rgba(245, 243, 239, 0.64);
+}
+
+.jettset-standard-row:focus-visible {
+  outline: 1px solid var(--js-gold);
+  outline-offset: -4px;
+}
+
+/* ---------------------------------------------------------------
+   CLOSE — closing line + single CTA. Quiet, not a second headline.
+   --------------------------------------------------------------- */
+
+.jettset-standard-close {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: calc(var(--js-unit) * 3);
+  padding: calc(var(--js-unit) * 6) var(--js-edge) calc(var(--js-unit) * 9);
+}
+
+.jettset-standard-close-line {
+  font-family: var(--js-serif);
+  font-style: italic;
+  font-size: clamp(17px, 1.6vw, 20px);
+  color: rgba(245, 243, 239, 0.78);
+  margin: 0;
+}
+
+.jettset-standard-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--js-unit) * 1.25);
+  font-family: var(--js-sans);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--js-ivory);
+  text-decoration: none;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--js-gold-muted);
+  transition: border-color 0.4s ease, color 0.4s ease, gap 0.4s ease;
+  white-space: nowrap;
+}
+
+.jettset-standard-cta:hover,
+.jettset-standard-cta:focus-visible {
+  color: var(--js-gold);
+  border-color: var(--js-gold);
+  gap: calc(var(--js-unit) * 2);
+}
+
+.jettset-standard-cta-arrow {
+  transition: transform 0.4s ease;
+}
+
+.jettset-standard-cta:hover .jettset-standard-cta-arrow,
+.jettset-standard-cta:focus-visible .jettset-standard-cta-arrow {
+  transform: translateX(3px);
+}
+
+/* ---------------------------------------------------------------
+   MOBILE — 390 × 844. Same ledger idea, compact rhythm, numeral
+   moves above the row's text instead of beside it so nothing
+   feels like a cramped four-column layout.
+   --------------------------------------------------------------- */
+
+@media (max-width: 780px) {
+  .jettset-standard-header {
+    padding: calc(var(--js-unit) * 6) var(--js-edge) calc(var(--js-unit) * 4);
+  }
+
+  .jettset-standard-headline {
+    font-size: clamp(26px, 7.5vw, 34px);
+    max-width: none;
+    line-height: 1.15;
+  }
+
+  .jettset-standard-headline-line {
+    display: inline;
+  }
+
+  .jettset-standard-row {
+    grid-template-columns: 1fr;
+    gap: calc(var(--js-unit) * 1);
+    padding: calc(var(--js-unit) * 3.5) var(--js-edge);
+  }
+
+  .jettset-standard-mark {
+    font-size: 15px;
+  }
+
+  .jettset-standard-name {
+    font-size: 20px;
+  }
+
+  .jettset-standard-desc {
+    font-size: 15px;
+    max-width: none;
+  }
+
+  .jettset-standard-close {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: calc(var(--js-unit) * 5) var(--js-edge) calc(var(--js-unit) * 7);
+  }
+}
+
+/* ---- Reduced motion: keep all rows at an equally legible resting
+   state; drop the transitions and skip scroll-driven dominance. ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  .jettset-standard-row,
+  .jettset-standard-mark,
+  .jettset-standard-name,
+  .jettset-standard-desc,
+  .jettset-standard-cta,
+  .jettset-standard-cta-arrow {
+    transition: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jettset-standard-ledger.js-has-dominance .jettset-standard-row:not(.is-dominant) .jettset-standard-mark,
+  .jettset-standard-ledger.js-has-dominance .jettset-standard-row:not(.is-dominant) .jettset-standard-name,
+  .jettset-standard-ledger.js-has-dominance .jettset-standard-row:not(.is-dominant) .jettset-standard-desc {
+    color: inherit;
+  }
+}
