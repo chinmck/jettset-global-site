@@ -608,6 +608,28 @@
       this.reset();
     });
 
+    var editionsWaitlistFormEl = document.getElementById('editionsWaitlistForm');
+    if(editionsWaitlistFormEl) editionsWaitlistFormEl.addEventListener('submit', function(e){
+      e.preventDefault();
+      var consent = document.getElementById('ewConsent').checked;
+      var name = document.getElementById('ewName').value.trim();
+      var email = document.getElementById('ewEmail').value.trim();
+      var success = document.getElementById('editionsWaitlistSuccess');
+      if(!consent){
+        alert('Please confirm you are happy to be contacted about Editions before submitting.');
+        return;
+      }
+      if(!name || !email){
+        alert('Please share your name and email so we can register your interest.');
+        return;
+      }
+      if(success){
+        success.textContent = 'Thank you, ' + name + '. Your interest in Jettset Editions has been registered. We will be in touch when early access opens.';
+        success.hidden = false;
+      }
+      this.reset();
+    });
+
     var jetCardFormEl = document.getElementById('jetCardForm');
     if(jetCardFormEl) jetCardFormEl.addEventListener('submit', function(e){
       e.preventDefault();

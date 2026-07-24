@@ -676,16 +676,22 @@
   }
 
   .btn-ghost{
+    appearance:none;
+    -webkit-appearance:none;
     display:inline-block;
     font-size:11px;
     letter-spacing:0.18em;
     text-transform:uppercase;
     color:var(--off-white);
+    background:transparent;
     border:1px solid var(--grey-line);
     padding:14px 32px;
+    font-family:inherit;
+    text-decoration:none;
     transition:border-color 0.3s, color 0.3s, transform 0.2s ease;
     will-change:transform;
   }
+  .btn-ghost:visited{color:var(--off-white);}
   .btn-ghost:hover{
     border-color:var(--gold);
     color:var(--gold);
@@ -1155,6 +1161,10 @@
   .c-reveal{
     opacity:0;
     animation:fadeUp 1s cubic-bezier(0.22,0.61,0.21,1) forwards;
+  }
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(24px);}
+    to{opacity:1; transform:translateY(0);}
   }
   @media(max-width:680px){
     .chapter-hero{height:88vh; min-height:560px;}
@@ -4015,12 +4025,29 @@
   .waitlist-form .btn-ghost{
     align-self:flex-start;
     margin-top:4px;
-    background:none;
+    background:transparent;
     border:1px solid var(--grey-line);
     cursor:pointer;
   }
+  .waitlist-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    align-items:center;
+  }
+  .waitlist-actions .btn-ghost{margin-top:4px;}
+  .waitlist-success{
+    max-width:none;
+    margin:0;
+    padding-top:18px;
+    border-top:1px solid var(--grey-line);
+    color:var(--off-white);
+    text-align:left;
+  }
   @media(max-width:560px){
     .waitlist-row{flex-direction:column;}
+    .waitlist-actions{align-items:stretch;}
+    .waitlist-actions .btn-ghost{width:100%; text-align:center;}
   }
 
   /* ===== PILLAR GRID (Concierge, 2x2) ===== */
