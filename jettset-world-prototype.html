@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Jettset World — Prototype</title>
+<style>
+  :root{
+    --black:#0A0908;
+    --black-elevated:#16140F;
+    --off-white:#F5F3EF;
+    --gold:#C9A24B;
+    --gold-dim:#8C763F;
+    --grey:#8A8782;
+    --grey-line:rgba(245,243,239,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:var(--black); color:var(--off-white); font-family:'General Sans','Inter',sans-serif;}
+  h1,h2,h3{font-family:'Canela Text','Playfair Display',Georgia,serif; font-weight:400;}
+
+  .proto-banner{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:var(--gold); color:var(--black);
+    text-align:center; font-size:11px; letter-spacing:0.14em;
+    text-transform:uppercase; padding:8px 12px; font-weight:600;
+  }
+
+  .world-section{
+    min-height:100vh;
+    padding:64px 24px 80px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .world-section::before{
+    content:'';
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse 70% 50% at 50% 38%, rgba(201,162,75,0.05), transparent 65%);
+    pointer-events:none;
+  }
+
+  .world-head{ text-align:center; max-width:620px; margin:0 auto 8px; position:relative; z-index:2; }
+  .world-eyebrow{
+    font-size:11px; letter-spacing:0.28em; text-transform:uppercase;
+    color:var(--grey); font-weight:500; display:block; margin-bottom:20px;
+  }
+  .world-head h1{ font-size:clamp(32px,5vw,56px); line-height:1.1; margin-bottom:18px; }
+  .world-head p{ font-size:15px; color:var(--grey); line-height:1.75; max-width:520px; margin:0 auto; }
+
+  .world-stage{
+    position:relative;
+    width:100%;
+    max-width:1040px;
+    margin:16px auto 0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  #globeCanvas{
+    display:block;
+    width:100%;
+    max-width:720px;
+    aspect-ratio:1/1;
+    filter:drop-shadow(0 38px 44px rgba(0,0,0,0.42));
+    cursor:grab;
+  }
+  #globeCanvas:active{cursor:grabbing;}
+  #globeCanvas[hidden]{display:none;}
+  .globe-hint{
+    position:absolute;
+    bottom:2.5%;
+    left:50%;
+    transform:translateX(-50%);
+    color:rgba(245,243,239,0.46);
+    font-size:9px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    pointer-events:none;
+    z-index:2;
+  }
+
+  /* ===== ROUTE CHIPS ===== */
+  .route-chips{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:8px;
+    max-width:720px; margin:36px auto 0; position:relative; z-index:2;
+  }
+  .route-chip{
+    font-size:12px; letter-spacing:0.02em;
+    border:1px solid var(--grey-line);
+    color:var(--grey);
+    background:none;
+    padding:10px 18px;
+    cursor:pointer;
+    transition:color 0.25s, border-color 0.25s, background 0.25s;
+    font-family:'General Sans','Inter',sans-serif;
+  }
+  .route-chip-sub{display:none;}
+  .route-chip:hover{color:var(--off-white); border-color:var(--gold-dim);}
+  .route-chip.is-active{
+    color:var(--gold);
+    background:rgba(201,162,75,0.055);
+    border-color:var(--gold);
+    box-shadow:inset 0 0 28px rgba(201,162,75,0.035);
+  }
+
+  /* ===== INFO PANEL ===== */
+  .journey-panel{
+    width:100%; max-width:720px;
+    margin:44px auto 0;
+    background:var(--black-elevated);
+    border:1px solid var(--grey-line);
+    padding:40px 44px;
+    position:relative; z-index:2;
+    opacity:0; transform:translateY(14px);
+    transition:opacity 0.6s cubic-bezier(.22,.61,.21,1), transform 0.6s cubic-bezier(.22,.61,.21,1);
+  }
+  .journey-panel.is-visible{ opacity:1; transform:translateY(0); }
+
+  .jp-route-name{
+    font-size:clamp(20px,2.4vw,28px);
+    margin-bottom:6px;
+  }
+  .jp-route-sub{ font-size:12px; color:var(--gold-dim); letter-spacing:0.06em; margin-bottom:28px; }
+
+  .jp-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:28px;
+    padding-bottom:24px; margin-bottom:24px; border-bottom:1px solid var(--grey-line);
+  }
+  .jp-stat-label{ font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--grey); display:block; margin-bottom:8px; }
+  .jp-stat-value{ font-size:16px; color:var(--off-white); }
+
+  .jp-concierge{ font-size:13.5px; color:var(--grey); line-height:1.8; margin-bottom:20px; }
+
+  .jp-cultural{
+    display:flex; align-items:baseline; gap:10px;
+    font-size:12.5px; color:var(--gold); margin-bottom:28px;
+    border-left:2px solid var(--gold-dim); padding-left:14px;
+  }
+  .jp-cultural.is-empty{ display:none; }
+
+  .jp-cta{
+    display:inline-block;
+    font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--off-white); border:1px solid var(--gold); padding:15px 34px;
+    transition:background 0.3s, color 0.3s;
+    cursor:pointer; background:none; font-family:'General Sans','Inter',sans-serif;
+  }
+  .jp-cta:hover{ background:var(--gold); color:var(--black); }
+
+  .jp-cta-note{ font-size:11.5px; color:var(--grey); margin-top:14px; }
+
+  /* ===== STATIC / NO-CANVAS FALLBACK ===== */
+  .static-fallback{ display:none; width:100%; max-width:720px; margin:0 auto; }
+  .static-fallback.is-shown{ display:block; }
+  .static-route-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 4px; border-bottom:1px solid var(--grey-line);
+    cursor:pointer; font-size:14px;
+  }
+  .static-route-row:hover{ color:var(--gold); }
+
+  @media(min-width:1100px){
+    .world-section{
+      min-height:1180px;
+      padding:118px clamp(30px,3vw,54px) 72px;
+      display:grid;
+      grid-template-columns:minmax(350px,430px) minmax(0,1fr);
+      grid-template-rows:auto auto auto;
+      column-gap:clamp(8px,1.4vw,24px);
+      row-gap:28px;
+      align-items:start;
+    }
+    .world-section::before{
+      background:
+        radial-gradient(circle at 88% 28%, rgba(231,181,92,0.14), transparent 24%),
+        radial-gradient(ellipse 50% 42% at 70% 44%, rgba(201,162,75,0.055), transparent 72%);
+    }
+    .world-head{
+      grid-column:1;
+      grid-row:1;
+      text-align:left;
+      max-width:390px;
+      margin:0;
+      padding-top:22px;
+    }
+    .world-eyebrow{color:var(--gold); margin-bottom:26px;}
+    .world-head h1{
+      max-width:360px;
+      font-size:clamp(54px,4.75vw,72px);
+      line-height:0.98;
+      letter-spacing:-0.025em;
+      margin-bottom:28px;
+    }
+    .world-head p{
+      max-width:310px;
+      margin:0;
+      padding-top:22px;
+      border-top:1px solid rgba(245,243,239,0.34);
+      font-size:14px;
+      line-height:1.65;
+    }
+    .world-stage{
+      grid-column:2;
+      grid-row:1 / span 3;
+      width:calc(100% + clamp(24px,4vw,70px));
+      max-width:none;
+      margin:-28px clamp(-70px,-4vw,-24px) 0 0;
+      align-self:start;
+      justify-self:end;
+      z-index:1;
+    }
+    #globeCanvas{
+      width:min(76vw,1040px);
+      max-width:none;
+      filter:drop-shadow(-24px 46px 54px rgba(0,0,0,0.64));
+    }
+    .globe-hint{bottom:4.5%;}
+    .route-chips{
+      grid-column:1;
+      grid-row:2;
+      counter-reset:route;
+      display:flex;
+      flex-direction:column;
+      flex-wrap:nowrap;
+      justify-content:flex-start;
+      gap:6px;
+      width:100%;
+      max-width:355px;
+      margin:0;
+    }
+    .route-chip{
+      counter-increment:route;
+      display:grid;
+      grid-template-columns:34px minmax(0,1fr);
+      align-items:center;
+      width:100%;
+      min-height:58px;
+      padding:15px 18px;
+      text-align:left;
+      text-transform:uppercase;
+      letter-spacing:0.13em;
+      background:rgba(10,9,8,0.68);
+      backdrop-filter:blur(10px);
+    }
+    .route-chip::before{
+      content:counter(route, decimal-leading-zero);
+      min-width:34px;
+      grid-column:1;
+      grid-row:1 / span 2;
+      color:#716e68;
+      font-size:10px;
+      letter-spacing:0.08em;
+    }
+    .route-chip-label{grid-column:2;}
+    .route-chip-sub{
+      grid-column:2;
+      display:block;
+      max-height:0;
+      overflow:hidden;
+      color:#77736b;
+      font-size:9px;
+      line-height:1.3;
+      letter-spacing:0.14em;
+      opacity:0;
+      transition:max-height 0.35s ease, margin-top 0.35s ease, opacity 0.35s ease;
+    }
+    .route-chip.is-active .route-chip-sub{
+      max-height:18px;
+      margin-top:5px;
+      opacity:1;
+    }
+    .route-chip.is-active::before{color:var(--gold);}
+    .journey-panel{
+      grid-column:1;
+      grid-row:3;
+      width:560px;
+      max-width:none;
+      margin:0;
+      padding:30px 32px;
+      background:rgba(15,14,11,0.92);
+      backdrop-filter:blur(16px);
+      border-color:rgba(201,162,75,0.34);
+      z-index:3;
+    }
+    .journey-panel .jp-grid{gap:20px;}
+    .journey-panel .jp-stat-value{font-size:14px;}
+  }
+
+  @media(max-width:680px){
+    .world-section{ padding:100px 20px 64px; }
+    .world-stage{ margin-top:20px; }
+    #globeCanvas{ width:min(128vw,540px); max-width:none; }
+    .jp-grid{ grid-template-columns:1fr 1fr; }
+    .journey-panel{ padding:32px 26px; }
+  }
+
+  @media(prefers-reduced-motion: reduce){
+    .journey-panel{ transition:none; }
+    .globe-hint{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="proto-banner">Prototype — The Jettset World — not integrated into the live site</div>
+
+<section class="world-section">
+  <div class="world-head">
+    <span class="world-eyebrow">The Jettset World</span>
+    <h1>Wherever The World Gathers.</h1>
+    <p>Six routes our guests return to, sourced individually every time. Select one to see it in the air.</p>
+  </div>
+
+  <div class="world-stage">
+    <canvas id="globeCanvas" width="1000" height="1000" aria-label="Three-dimensional globe showing recognisable world geography"></canvas>
+    <span class="globe-hint" id="globeHint">Drag to rotate</span>
+
+    <div class="static-fallback" id="staticFallback">
+      <!-- populated by JS only if canvas is unavailable -->
+    </div>
+  </div>
+
+  <div class="route-chips" id="routeChips"></div>
+
+  <div class="journey-panel" id="journeyPanel">
+    <h3 class="jp-route-name" id="jpRouteName">&nbsp;</h3>
+    <span class="jp-route-sub" id="jpRouteSub">&nbsp;</span>
+
+    <div class="jp-grid">
+      <div>
+        <span class="jp-stat-label">Flight Time</span>
+        <span class="jp-stat-value" id="jpFlightTime">&mdash;</span>
+      </div>
+      <div>
+        <span class="jp-stat-label">Suitable Category</span>
+        <span class="jp-stat-value" id="jpAircraft">&mdash;</span>
+      </div>
+      <div>
+        <span class="jp-stat-label">Local Time, Destination</span>
+        <span class="jp-stat-value" id="jpLocalTime">&mdash;</span>
+      </div>
+    </div>
+
+    <p class="jp-concierge" id="jpConcierge"></p>
+    <div class="jp-cultural" id="jpCultural"></div>
+
+    <button type="button" class="jp-cta" id="jpCta">Build This Journey</button>
+    <p class="jp-cta-note">Prototype only &mdash; in production, this prefills the Journey Builder with this route.</p>
+  </div>
+</section>
+
+<script type="module" src="./jettset-world/globe.js"></script>
+</body>
+</html>
