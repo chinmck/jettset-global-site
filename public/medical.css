@@ -220,6 +220,7 @@
 
 .medical-responsibility { background: var(--medical-ivory); color: var(--medical-ink); }
 .medical-responsibility .medical-kicker { color: #80672f; }
+.medical-responsibility h2 { max-width: 850px; font-size: clamp(42px, 5.1vw, 76px); }
 .medical-responsibility-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 56px; background: rgba(10,9,8,.22); }
 .medical-responsibility-panel { padding: clamp(30px, 4vw, 56px); background: var(--medical-ivory); }
 .medical-responsibility-panel h3 { margin-bottom: 28px; font-family: 'Canela Text','Playfair Display',Georgia,serif; font-size: 32px; font-weight: 400; }
@@ -262,7 +263,7 @@
 .medical-submit { border: 0; background: transparent; cursor: pointer; font-family: inherit; }
 .medical-form-notice { margin-top: 18px; color: var(--medical-steel); font-size: 12px; line-height: 1.65; }
 
-.medical-closing { padding: clamp(110px, 15vw, 210px) clamp(24px, 6vw, 96px); border-top: 1px solid var(--medical-line); }
+.medical-closing { padding: clamp(110px, 15vw, 210px) clamp(24px, 6vw, 96px) clamp(82px, 10vw, 132px); border-top: 1px solid var(--medical-line); }
 .medical-closing > div { width: min(950px,100%); margin: 0 auto; text-align: center; }
 .medical-closing > div > p { margin-right: auto; margin-left: auto; }
 .medical-closing-actions { justify-content: center; }
@@ -317,6 +318,11 @@
   .medical-form-actions { grid-column: 1; }
   .medical-closing { padding: 100px 24px; }
   .medical-closing-actions { display: grid; justify-items: center; gap: 8px; }
+}
+
+@media (min-width: 681px) and (max-height: 760px) {
+  .medical-page ~ .contact-mark,
+  body:has(.medical-page) .contact-mark { bottom: 92px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

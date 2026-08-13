@@ -222,7 +222,7 @@
 
     <section class="medical-section" id="medical-transfer-enquiry">
       <div class="medical-section-inner">
-        <header class="medical-section-head"><span class="medical-kicker">Medical Transfer Enquiry</span><h2>Tell us where support is needed.</h2><p>This initial enquiry opens the conversation. Clinical records must not be uploaded through this form.</p></header>
+        <header class="medical-section-head"><span class="medical-kicker">Medical Transfer Enquiry</span><h2>Tell us where the patient is and where they need to be.</h2><p>This initial enquiry opens the conversation. Clinical records must not be uploaded through this form.</p></header>
         <form class="medical-form-shell" id="medicalTransferForm">
           <div class="medical-form-field"><label for="medicalName">Your name</label><input id="medicalName" name="name" autocomplete="name" required></div>
           <div class="medical-form-field"><label for="medicalRelationship">Relationship to patient</label><input id="medicalRelationship" name="relationship" required></div>
@@ -233,7 +233,7 @@
           <div class="medical-form-field"><label for="medicalLocation">Current location</label><select id="medicalLocation" name="currentLocation" required><option value="">Select</option><option>Hospital</option><option>Clinic</option><option>Home</option><option>Other</option></select></div>
           <div class="medical-form-field"><label for="medicalDestination">Requested destination city / country</label><input id="medicalDestination" name="destination" required></div>
           <div class="medical-form-field"><label for="medicalFacility">Receiving facility confirmed?</label><select id="medicalFacility" name="receivingFacility" required><option value="">Select</option><option>Yes</option><option>No</option><option>In progress</option></select></div>
-          <div class="medical-form-field"><label for="medicalTiming">When is the transfer required?</label><input id="medicalTiming" name="timing" required></div>
+          <div class="medical-form-field"><label for="medicalTiming">When is the transfer required?</label><input id="medicalTiming" name="timing" type="datetime-local" required></div>
           <div class="medical-form-field"><label for="medicalLanguage">Preferred callback language</label><input id="medicalLanguage" name="language"></div>
           <fieldset class="medical-form-group"><legend>Preferred contact method</legend><div class="medical-form-options"><label><input type="radio" name="contactMethod" value="Telephone" required> Telephone</label><label><input type="radio" name="contactMethod" value="WhatsApp"> WhatsApp</label><label><input type="radio" name="contactMethod" value="Email"> Email</label></div></fieldset>
           <label class="medical-consent"><input type="checkbox" name="consent" required><span>I consent to Jettset contacting me regarding this medical-transfer enquiry and acknowledge the Medical Aviation privacy notice.</span></label>
