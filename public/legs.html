@@ -295,25 +295,26 @@
       <h2>Join The Legs Waitlist</h2>
       <p>Legs is opening to Jettset members in phases. Register your interest and tell us where you travel most often — existing members receive priority access.</p>
 
-      <form class="waitlist-form" id="legsWaitlistForm">
+      <form class="waitlist-form" id="legsWaitlistForm" name="jettset-legs" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="jettset-legs">
         <div class="waitlist-row">
           <div class="quote-field">
             <label for="lwName">Full Name</label>
-            <input type="text" id="lwName" placeholder="Your full name" required>
+            <input type="text" id="lwName" name="name" placeholder="Your full name" required>
           </div>
           <div class="quote-field">
             <label for="lwEmail">Email Address</label>
-            <input type="email" id="lwEmail" placeholder="you@example.com" required>
+            <input type="email" id="lwEmail" name="email" placeholder="you@example.com" required>
           </div>
         </div>
         <div class="waitlist-row">
           <div class="quote-field">
             <label for="lwPhone">Phone</label>
-            <input type="tel" id="lwPhone" placeholder="With country code">
+            <input type="tel" id="lwPhone" name="phone" placeholder="With country code">
           </div>
           <div class="quote-field">
             <label for="lwRegion">Primary Region</label>
-            <select id="lwRegion" required>
+            <select id="lwRegion" name="region" required>
               <option value="">Select region</option>
               <option>Europe</option>
               <option>United Kingdom</option>
@@ -326,7 +327,7 @@
           </div>
         </div>
         <div class="waitlist-consent">
-          <input type="checkbox" id="lwConsent">
+          <input type="checkbox" id="lwConsent" name="consent" value="agreed">
           <label for="lwConsent">I agree to be contacted by Jettset as Legs access opens for my region.</label>
         </div>
         <button type="submit" class="btn-ghost">Register Interest</button>

@@ -508,6 +508,7 @@
         document.querySelectorAll('#quoteTripToggle button').forEach(function(b){ b.classList.remove('active'); });
         this.classList.add('active');
         tripType = this.getAttribute('data-trip');
+        document.getElementById('qTripType').value = tripType;
         document.getElementById('qReturnField').style.display = (tripType === 'roundtrip') ? 'flex' : 'none';
       });
     });
@@ -524,14 +525,27 @@
           if(action === 'inc') passengerCounts[key]++;
           else passengerCounts[key] = Math.max(min, passengerCounts[key] - 1);
           var n = passengerCounts[key];
+          var countField = document.getElementById('q' + key.charAt(0).toUpperCase() + key.slice(1));
+          if(countField) countField.value = n;
           var label = (key === 'adults' && n === 1) ? 'Adult' : passengerLabels[key];
           span.textContent = n + ' ' + label;
         });
       });
     });
 
+    function submitNetlifyForm(form){
+      return fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
+      }).then(function(response){
+        if(!response.ok) throw new Error('Form submission failed');
+        return response;
+      });
+    }
+
     var quoteFormEl = document.getElementById('quoteForm');
-    if(quoteFormEl) quoteFormEl.addEventListener('submit', function(e){
+    if(quoteFormEl) quoteFormEl.addEventListener('submit', async function(e){
       e.preventDefault();
       var consent = document.getElementById('qConsent').checked;
       var name = document.getElementById('qName').value.trim();
@@ -544,6 +558,8 @@
         alert('Please share at least your name and email so we can respond.');
         return;
       }
+      try { await submitNetlifyForm(this); }
+      catch(error){ alert('We could not send your request. Please try again or contact Jettset directly.'); return; }
       alert('Thank you, ' + name + '. Your request has been received, and a member of our team will be in touch shortly to discuss your journey.');
       this.reset();
       document.querySelectorAll('.stepper span').forEach(function(span, i){
@@ -554,7 +570,7 @@
     });
 
     var partnerFormEl = document.getElementById('partnerForm');
-    if(partnerFormEl) partnerFormEl.addEventListener('submit', function(e){
+    if(partnerFormEl) partnerFormEl.addEventListener('submit', async function(e){
       e.preventDefault();
       var consent = document.getElementById('pConsent').checked;
       var name = document.getElementById('pName').value.trim();
@@ -567,12 +583,14 @@
         alert('Please share at least your name and email so we can respond.');
         return;
       }
+      try { await submitNetlifyForm(this); }
+      catch(error){ alert('We could not send your request. Please try again or contact Jettset directly.'); return; }
       alert('Thank you, ' + name + '. Your message has been received, and a member of our team will be in touch shortly to continue the conversation.');
       this.reset();
     });
 
     var enquiryFormEl = document.getElementById('enquiryForm');
-    if(enquiryFormEl) enquiryFormEl.addEventListener('submit', function(e){
+    if(enquiryFormEl) enquiryFormEl.addEventListener('submit', async function(e){
       e.preventDefault();
       var consent = document.getElementById('eConsent').checked;
       var name = document.getElementById('eName').value.trim();
@@ -585,12 +603,14 @@
         alert('Please share at least your name and email so we can respond.');
         return;
       }
+      try { await submitNetlifyForm(this); }
+      catch(error){ alert('We could not send your request. Please try again or contact Jettset directly.'); return; }
       alert('Thank you, ' + name + '. We\'ve received your message, and a member of our team will be in touch shortly to understand how we can help.');
       this.reset();
     });
 
     var legsWaitlistFormEl = document.getElementById('legsWaitlistForm');
-    if(legsWaitlistFormEl) legsWaitlistFormEl.addEventListener('submit', function(e){
+    if(legsWaitlistFormEl) legsWaitlistFormEl.addEventListener('submit', async function(e){
       e.preventDefault();
       var consent = document.getElementById('lwConsent').checked;
       var name = document.getElementById('lwName').value.trim();
@@ -604,12 +624,14 @@
         alert('Please share your name, email, and region so we can notify you at the right time.');
         return;
       }
+      try { await submitNetlifyForm(this); }
+      catch(error){ alert('We could not register your interest. Please try again or contact Jettset directly.'); return; }
       alert('Thank you, ' + name + '. You\'re on the Legs waitlist — we\'ll be in touch as soon as access opens for ' + region + '.');
       this.reset();
     });
 
     var editionsWaitlistFormEl = document.getElementById('editionsWaitlistForm');
-    if(editionsWaitlistFormEl) editionsWaitlistFormEl.addEventListener('submit', function(e){
+    if(editionsWaitlistFormEl) editionsWaitlistFormEl.addEventListener('submit', async function(e){
       e.preventDefault();
       var consent = document.getElementById('ewConsent').checked;
       var name = document.getElementById('ewName').value.trim();
@@ -623,6 +645,8 @@
         alert('Please share your name and email so we can register your interest.');
         return;
       }
+      try { await submitNetlifyForm(this); }
+      catch(error){ alert('We could not register your interest. Please try again or contact Jettset directly.'); return; }
       if(success){
         success.textContent = 'Thank you, ' + name + '. Your interest in Jettset Editions has been registered. We will be in touch when early access opens.';
         success.hidden = false;
@@ -631,7 +655,7 @@
     });
 
     var jetCardFormEl = document.getElementById('jetCardForm');
-    if(jetCardFormEl) jetCardFormEl.addEventListener('submit', function(e){
+    if(jetCardFormEl) jetCardFormEl.addEventListener('submit', async function(e){
       e.preventDefault();
       var consent = document.getElementById('jcConsent').checked;
       var name = document.getElementById('jcName').value.trim();
@@ -644,6 +668,8 @@
         alert('Please share at least your name and email so we can respond.');
         return;
       }
+      try { await submitNetlifyForm(this); }
+      catch(error){ alert('We could not send your request. Please try again or contact Jettset directly.'); return; }
       alert('Thank you, ' + name + '. A member of our Jet Card team will be in touch shortly.');
       this.reset();
     });
