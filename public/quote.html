@@ -153,27 +153,32 @@
         <button data-trip="roundtrip">Round-Trip</button>
       </div>
 
-      <form class="quote-form" id="quoteForm">
+      <form class="quote-form" id="quoteForm" name="jettset-charter" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="jettset-charter">
+        <input type="hidden" id="qTripType" name="tripType" value="oneway">
+        <input type="hidden" id="qAdults" name="adults" value="1">
+        <input type="hidden" id="qChildren" name="children" value="0">
+        <input type="hidden" id="qPets" name="pets" value="0">
 
         <div class="quote-row">
           <div class="quote-field">
             <label for="qFrom">From</label>
-            <input type="text" id="qFrom" placeholder="Departure city or airport">
+            <input type="text" id="qFrom" name="from" placeholder="Departure city or airport">
           </div>
           <div class="quote-field">
             <label for="qTo">To</label>
-            <input type="text" id="qTo" placeholder="Arrival city or airport">
+            <input type="text" id="qTo" name="to" placeholder="Arrival city or airport">
           </div>
         </div>
 
         <div class="quote-row" id="quoteDateRow">
           <div class="quote-field">
             <label for="qDepart">Departure</label>
-            <input type="date" id="qDepart">
+            <input type="date" id="qDepart" name="departureDate">
           </div>
           <div class="quote-field" id="qReturnField" style="display:none;">
             <label for="qReturn">Return</label>
-            <input type="date" id="qReturn">
+            <input type="date" id="qReturn" name="returnDate">
           </div>
         </div>
 
@@ -201,7 +206,7 @@
         <div class="quote-row">
           <div class="quote-field">
             <label for="qExperience">Experience</label>
-            <select id="qExperience">
+            <select id="qExperience" name="experience">
               <option value="">Not sure yet</option>
               <option>Charter</option>
               <option>Jet Card</option>
@@ -212,7 +217,7 @@
           </div>
           <div class="quote-field">
             <label for="qContactMethod">Preferred Contact</label>
-            <select id="qContactMethod">
+            <select id="qContactMethod" name="preferredContact">
               <option>Email</option>
               <option>Phone</option>
               <option>WhatsApp</option>
@@ -223,32 +228,32 @@
         <div class="quote-row">
           <div class="quote-field">
             <label for="qName">Full Name</label>
-            <input type="text" id="qName" placeholder="Your name">
+            <input type="text" id="qName" name="name" placeholder="Your name">
           </div>
           <div class="quote-field">
             <label for="qEmail">Email Address</label>
-            <input type="email" id="qEmail" placeholder="you@email.com">
+            <input type="email" id="qEmail" name="email" placeholder="you@email.com">
           </div>
         </div>
 
         <div class="quote-row">
           <div class="quote-field">
             <label for="qPhone">Phone Number</label>
-            <input type="tel" id="qPhone" placeholder="With country code">
+            <input type="tel" id="qPhone" name="phone" placeholder="With country code">
           </div>
           <div class="quote-field">
             <label for="qReferral">How Did You Hear About Us</label>
-            <input type="text" id="qReferral" placeholder="Optional">
+            <input type="text" id="qReferral" name="referral" placeholder="Optional">
           </div>
         </div>
 
         <div class="quote-field">
           <label for="qNotes">Anything Else We Should Know</label>
-          <textarea id="qNotes" placeholder="Special requests, preferences, or context for your journey"></textarea>
+          <textarea id="qNotes" name="notes" placeholder="Special requests, preferences, or context for your journey"></textarea>
         </div>
 
         <div class="quote-consent">
-          <input type="checkbox" id="qConsent">
+          <input type="checkbox" id="qConsent" name="consent" value="agreed">
           <label for="qConsent">I agree to be contacted by Jettset regarding this enquiry. Your information remains private and confidential, used solely by Jettset.</label>
         </div>
 

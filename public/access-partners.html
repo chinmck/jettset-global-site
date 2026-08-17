@@ -262,23 +262,24 @@
         <p>If you sit beside clients who expect more than commercial travel can offer, we'd like to know you. Tell us a little about your world and we'll continue the conversation from there.</p>
       </div>
 
-      <form class="quote-form" id="partnerForm">
+      <form class="quote-form" id="partnerForm" name="jettset-access-partners" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="jettset-access-partners">
 
         <div class="quote-row">
           <div class="quote-field">
             <label for="pName">Full Name</label>
-            <input type="text" id="pName" placeholder="Your name">
+            <input type="text" id="pName" name="name" placeholder="Your name">
           </div>
           <div class="quote-field">
             <label for="pOrg">Company / Practice</label>
-            <input type="text" id="pOrg" placeholder="Where you work">
+            <input type="text" id="pOrg" name="organisation" placeholder="Where you work">
           </div>
         </div>
 
         <div class="quote-row">
           <div class="quote-field">
             <label for="pRole">How You Know Exceptional Clients</label>
-            <select id="pRole">
+            <select id="pRole" name="role">
               <option value="">Select the closest fit</option>
               <option>Family Office</option>
               <option>Luxury Travel Advisor</option>
@@ -296,7 +297,7 @@
           </div>
           <div class="quote-field">
             <label for="pContactMethod">Preferred Contact</label>
-            <select id="pContactMethod">
+            <select id="pContactMethod" name="preferredContact">
               <option>Email</option>
               <option>Phone</option>
               <option>WhatsApp</option>
@@ -307,21 +308,21 @@
         <div class="quote-row">
           <div class="quote-field">
             <label for="pEmail">Email Address</label>
-            <input type="email" id="pEmail" placeholder="you@email.com">
+            <input type="email" id="pEmail" name="email" placeholder="you@email.com">
           </div>
           <div class="quote-field">
             <label for="pPhone">Phone Number</label>
-            <input type="tel" id="pPhone" placeholder="With country code">
+            <input type="tel" id="pPhone" name="phone" placeholder="With country code">
           </div>
         </div>
 
         <div class="quote-field">
           <label for="pNotes">Tell Us A Little About Your World</label>
-          <textarea id="pNotes" placeholder="The clients you work alongside, and what an introduction might look like"></textarea>
+          <textarea id="pNotes" name="notes" placeholder="The clients you work alongside, and what an introduction might look like"></textarea>
         </div>
 
         <div class="quote-consent">
-          <input type="checkbox" id="pConsent">
+          <input type="checkbox" id="pConsent" name="consent" value="agreed">
           <label for="pConsent">I agree to be contacted by Jettset regarding this enquiry. Your information remains private and confidential, used solely by Jettset.</label>
         </div>
 

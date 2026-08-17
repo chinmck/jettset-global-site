@@ -148,27 +148,28 @@
     </section>
 
     <section class="quote-section" data-reveal>
-      <form class="quote-form" id="enquiryForm">
+      <form class="quote-form" id="enquiryForm" name="jettset-general-enquiry" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="jettset-general-enquiry">
 
         <div class="quote-row">
           <div class="quote-field">
             <label for="eName">Full Name</label>
-            <input type="text" id="eName" placeholder="Your name">
+            <input type="text" id="eName" name="name" placeholder="Your name">
           </div>
           <div class="quote-field">
             <label for="eEmail">Email Address</label>
-            <input type="email" id="eEmail" placeholder="you@email.com">
+            <input type="email" id="eEmail" name="email" placeholder="you@email.com">
           </div>
         </div>
 
         <div class="quote-row">
           <div class="quote-field">
             <label for="ePhone">Phone Number</label>
-            <input type="tel" id="ePhone" placeholder="With country code">
+            <input type="tel" id="ePhone" name="phone" placeholder="With country code">
           </div>
           <div class="quote-field">
             <label for="eContactMethod">Preferred Contact</label>
-            <select id="eContactMethod">
+            <select id="eContactMethod" name="preferredContact">
               <option>Email</option>
               <option>Phone</option>
               <option>WhatsApp</option>
@@ -178,7 +179,7 @@
 
         <div class="quote-field">
           <label for="eInterest">What Brings You To Jettset</label>
-          <select id="eInterest">
+          <select id="eInterest" name="interest">
             <option value="">Not sure yet — that's fine</option>
             <option>Private Charter</option>
             <option>Jet Card / Membership</option>
@@ -192,11 +193,11 @@
 
         <div class="quote-field">
           <label for="eMessage">Tell Us About Your World</label>
-          <textarea id="eMessage" placeholder="However you'd like to describe how you move — we'll take it from there"></textarea>
+          <textarea id="eMessage" name="message" placeholder="However you'd like to describe how you move — we'll take it from there"></textarea>
         </div>
 
         <div class="quote-consent">
-          <input type="checkbox" id="eConsent">
+          <input type="checkbox" id="eConsent" name="consent" value="agreed">
           <label for="eConsent">I agree to be contacted by Jettset regarding this enquiry. Your information remains private and confidential, used solely by Jettset.</label>
         </div>
 
