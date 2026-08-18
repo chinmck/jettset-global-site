@@ -609,9 +609,12 @@
       this.reset();
     });
 
+    var legsSubmissionInProgress = false;
     var legsWaitlistFormEl = document.getElementById('legsWaitlistForm');
     if(legsWaitlistFormEl) legsWaitlistFormEl.addEventListener('submit', async function(e){
       e.preventDefault();
+      if(legsSubmissionInProgress) return;
+
       var consent = document.getElementById('lwConsent').checked;
       var name = document.getElementById('lwName').value.trim();
       var email = document.getElementById('lwEmail').value.trim();
@@ -624,10 +627,42 @@
         alert('Please share your name, email, and region so we can notify you at the right time.');
         return;
       }
-      try { await submitNetlifyForm(this); }
-      catch(error){ alert('We could not register your interest. Please try again or contact Jettset directly.'); return; }
+
+      var form = this;
+      var formData = new FormData(form);
+      var webhookPayload = {};
+      formData.forEach(function(value, key){
+        if(Object.prototype.hasOwnProperty.call(webhookPayload, key)){
+          webhookPayload[key] = Array.isArray(webhookPayload[key])
+            ? webhookPayload[key].concat(value)
+            : [webhookPayload[key], value];
+        } else {
+          webhookPayload[key] = value;
+        }
+      });
+      webhookPayload.form_name = 'jettset-legs';
+
+      legsSubmissionInProgress = true;
+      try {
+        var results = await Promise.all([
+          submitNetlifyForm(form),
+          fetch('/.netlify/functions/jettset-legs-webhook', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(webhookPayload)
+          })
+        ]);
+        if(!results[1].ok) throw new Error('Webhook submission failed');
+      }
+      catch(error){
+        legsSubmissionInProgress = false;
+        alert('We could not register your interest. Please try again or contact Jettset directly.');
+        return;
+      }
+
+      legsSubmissionInProgress = false;
       alert('Thank you, ' + name + '. You\'re on the Legs waitlist — we\'ll be in touch as soon as access opens for ' + region + '.');
-      this.reset();
+      form.reset();
     });
 
     var editionsWaitlistFormEl = document.getElementById('editionsWaitlistForm');
