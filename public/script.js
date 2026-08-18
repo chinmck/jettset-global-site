@@ -544,9 +544,12 @@
       });
     }
 
+    var quoteSubmissionInProgress = false;
     var quoteFormEl = document.getElementById('quoteForm');
     if(quoteFormEl) quoteFormEl.addEventListener('submit', async function(e){
       e.preventDefault();
+      if(quoteSubmissionInProgress) return;
+
       var consent = document.getElementById('qConsent').checked;
       var name = document.getElementById('qName').value.trim();
       var email = document.getElementById('qEmail').value.trim();
@@ -558,10 +561,42 @@
         alert('Please share at least your name and email so we can respond.');
         return;
       }
-      try { await submitNetlifyForm(this); }
-      catch(error){ alert('We could not send your request. Please try again or contact Jettset directly.'); return; }
+
+      var form = this;
+      var formData = new FormData(form);
+      var webhookPayload = {};
+      formData.forEach(function(value, key){
+        if(Object.prototype.hasOwnProperty.call(webhookPayload, key)){
+          webhookPayload[key] = Array.isArray(webhookPayload[key])
+            ? webhookPayload[key].concat(value)
+            : [webhookPayload[key], value];
+        } else {
+          webhookPayload[key] = value;
+        }
+      });
+      webhookPayload.form_name = 'jettset-charter';
+
+      quoteSubmissionInProgress = true;
+      try {
+        var results = await Promise.all([
+          submitNetlifyForm(form),
+          fetch('/.netlify/functions/jettset-charter-webhook', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(webhookPayload)
+          })
+        ]);
+        if(!results[1].ok) throw new Error('Webhook submission failed');
+      }
+      catch(error){
+        quoteSubmissionInProgress = false;
+        alert('We could not send your request. Please try again or contact Jettset directly.');
+        return;
+      }
+
+      quoteSubmissionInProgress = false;
       alert('Thank you, ' + name + '. Your request has been received, and a member of our team will be in touch shortly to discuss your journey.');
-      this.reset();
+      form.reset();
       document.querySelectorAll('.stepper span').forEach(function(span, i){
         var keys = ['adults','children','pets'];
         passengerCounts[keys[i]] = (keys[i] === 'adults') ? 1 : 0;
