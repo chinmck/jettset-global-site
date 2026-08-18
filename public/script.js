@@ -589,9 +589,12 @@
       this.reset();
     });
 
+    var enquirySubmissionInProgress = false;
     var enquiryFormEl = document.getElementById('enquiryForm');
     if(enquiryFormEl) enquiryFormEl.addEventListener('submit', async function(e){
       e.preventDefault();
+      if(enquirySubmissionInProgress) return;
+
       var consent = document.getElementById('eConsent').checked;
       var name = document.getElementById('eName').value.trim();
       var email = document.getElementById('eEmail').value.trim();
@@ -603,10 +606,42 @@
         alert('Please share at least your name and email so we can respond.');
         return;
       }
-      try { await submitNetlifyForm(this); }
-      catch(error){ alert('We could not send your request. Please try again or contact Jettset directly.'); return; }
+
+      var form = this;
+      var formData = new FormData(form);
+      var webhookPayload = {};
+      formData.forEach(function(value, key){
+        if(Object.prototype.hasOwnProperty.call(webhookPayload, key)){
+          webhookPayload[key] = Array.isArray(webhookPayload[key])
+            ? webhookPayload[key].concat(value)
+            : [webhookPayload[key], value];
+        } else {
+          webhookPayload[key] = value;
+        }
+      });
+      webhookPayload.form_name = 'jettset-general-enquiry';
+
+      enquirySubmissionInProgress = true;
+      try {
+        var results = await Promise.all([
+          submitNetlifyForm(form),
+          fetch('/.netlify/functions/jettset-general-enquiry-webhook', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(webhookPayload)
+          })
+        ]);
+        if(!results[1].ok) throw new Error('Webhook submission failed');
+      }
+      catch(error){
+        enquirySubmissionInProgress = false;
+        alert('We could not send your request. Please try again or contact Jettset directly.');
+        return;
+      }
+
+      enquirySubmissionInProgress = false;
       alert('Thank you, ' + name + '. We\'ve received your message, and a member of our team will be in touch shortly to understand how we can help.');
-      this.reset();
+      form.reset();
     });
 
     var legsWaitlistFormEl = document.getElementById('legsWaitlistForm');
