@@ -654,9 +654,12 @@
       this.reset();
     });
 
+    var jetCardSubmissionInProgress = false;
     var jetCardFormEl = document.getElementById('jetCardForm');
     if(jetCardFormEl) jetCardFormEl.addEventListener('submit', async function(e){
       e.preventDefault();
+      if(jetCardSubmissionInProgress) return;
+
       var consent = document.getElementById('jcConsent').checked;
       var name = document.getElementById('jcName').value.trim();
       var email = document.getElementById('jcEmail').value.trim();
@@ -668,10 +671,42 @@
         alert('Please share at least your name and email so we can respond.');
         return;
       }
-      try { await submitNetlifyForm(this); }
-      catch(error){ alert('We could not send your request. Please try again or contact Jettset directly.'); return; }
+
+      var form = this;
+      var formData = new FormData(form);
+      var webhookPayload = {};
+      formData.forEach(function(value, key){
+        if(Object.prototype.hasOwnProperty.call(webhookPayload, key)){
+          webhookPayload[key] = Array.isArray(webhookPayload[key])
+            ? webhookPayload[key].concat(value)
+            : [webhookPayload[key], value];
+        } else {
+          webhookPayload[key] = value;
+        }
+      });
+      webhookPayload.form_name = 'jettset-jet-card';
+
+      jetCardSubmissionInProgress = true;
+      try {
+        var results = await Promise.all([
+          submitNetlifyForm(form),
+          fetch('/.netlify/functions/jettset-jet-card-webhook', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(webhookPayload)
+          })
+        ]);
+        if(!results[1].ok) throw new Error('Webhook submission failed');
+      }
+      catch(error){
+        jetCardSubmissionInProgress = false;
+        alert('We could not send your request. Please try again or contact Jettset directly.');
+        return;
+      }
+
+      jetCardSubmissionInProgress = false;
       alert('Thank you, ' + name + '. A member of our Jet Card team will be in touch shortly.');
-      this.reset();
+      form.reset();
     });
 
     window.addEventListener('scroll', function(){
