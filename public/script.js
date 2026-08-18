@@ -630,9 +630,12 @@
       this.reset();
     });
 
+    var editionsSubmissionInProgress = false;
     var editionsWaitlistFormEl = document.getElementById('editionsWaitlistForm');
     if(editionsWaitlistFormEl) editionsWaitlistFormEl.addEventListener('submit', async function(e){
       e.preventDefault();
+      if(editionsSubmissionInProgress) return;
+
       var consent = document.getElementById('ewConsent').checked;
       var name = document.getElementById('ewName').value.trim();
       var email = document.getElementById('ewEmail').value.trim();
@@ -645,13 +648,45 @@
         alert('Please share your name and email so we can register your interest.');
         return;
       }
-      try { await submitNetlifyForm(this); }
-      catch(error){ alert('We could not register your interest. Please try again or contact Jettset directly.'); return; }
+
+      var form = this;
+      var formData = new FormData(form);
+      var webhookPayload = {};
+      formData.forEach(function(value, key){
+        if(Object.prototype.hasOwnProperty.call(webhookPayload, key)){
+          webhookPayload[key] = Array.isArray(webhookPayload[key])
+            ? webhookPayload[key].concat(value)
+            : [webhookPayload[key], value];
+        } else {
+          webhookPayload[key] = value;
+        }
+      });
+      webhookPayload.form_name = 'jettset-editions';
+
+      editionsSubmissionInProgress = true;
+      try {
+        var results = await Promise.all([
+          submitNetlifyForm(form),
+          fetch('/.netlify/functions/jettset-editions-webhook', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(webhookPayload)
+          })
+        ]);
+        if(!results[1].ok) throw new Error('Webhook submission failed');
+      }
+      catch(error){
+        editionsSubmissionInProgress = false;
+        alert('We could not register your interest. Please try again or contact Jettset directly.');
+        return;
+      }
+
+      editionsSubmissionInProgress = false;
       if(success){
         success.textContent = 'Thank you, ' + name + '. Your interest in Jettset Editions has been registered. We will be in touch when early access opens.';
         success.hidden = false;
       }
-      this.reset();
+      form.reset();
     });
 
     var jetCardFormEl = document.getElementById('jetCardForm');
