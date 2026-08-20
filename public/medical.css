@@ -15,3 +15,5 @@
 @media(prefers-reduced-motion:reduce){.medical-page *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 
 @media(min-width:701px){.medical-journey-visual img{object-fit:contain}}
+
+.medical-link-quiet{display:inline;min-height:0;padding:0 0 3px;color:var(--medical-steel);font-size:13px;line-height:1.6;letter-spacing:0;text-transform:none;border-bottom:1px solid var(--medical-line)}.medical-link-quiet:hover,.medical-link-quiet:focus-visible{color:var(--medical-ivory);border-bottom-color:var(--medical-gold)}
