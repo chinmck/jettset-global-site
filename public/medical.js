@@ -9,12 +9,14 @@
     if (!form.reportValidity()) return;
 
     try {
+      if (window.JettsetMetaTracking) window.JettsetMetaTracking.enrichForm(form);
       var response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(new FormData(form)).toString()
       });
       if (!response.ok) throw new Error('Form submission failed');
+      if (window.JettsetMetaTracking) window.JettsetMetaTracking.trackLead(form);
     } catch (error) {
       var failedStatus = document.getElementById('medicalFormStatus');
       if (failedStatus) {

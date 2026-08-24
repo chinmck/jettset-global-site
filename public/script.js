@@ -1,3 +1,140 @@
+(function () {
+  'use strict';
+
+  var META_PIXEL_ID = '1377605307888175';
+  var ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'];
+  var STORAGE_KEY = 'jettset_campaign_attribution';
+
+  function readCookie(name) {
+    var prefix = name + '=';
+    var cookies = document.cookie ? document.cookie.split(';') : [];
+    for (var i = 0; i < cookies.length; i += 1) {
+      var cookie = cookies[i].trim();
+      if (cookie.indexOf(prefix) === 0) return decodeURIComponent(cookie.slice(prefix.length));
+    }
+    return '';
+  }
+
+  function readStoredAttribution() {
+    try {
+      return JSON.parse(window.sessionStorage.getItem(STORAGE_KEY) || '{}');
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function collectAttribution() {
+    var attribution = readStoredAttribution();
+    var params = new URLSearchParams(window.location.search);
+
+    ATTRIBUTION_KEYS.forEach(function (key) {
+      var value = params.get(key);
+      if (value) attribution[key] = value;
+    });
+
+    var fbc = readCookie('_fbc');
+    var fbp = readCookie('_fbp');
+    if (fbc) attribution.fbc = fbc;
+    if (fbp) attribution.fbp = fbp;
+
+    try {
+      window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(attribution));
+    } catch (error) {
+      // Tracking must never interrupt the enquiry experience.
+    }
+    return attribution;
+  }
+
+  function setHiddenField(form, name, value) {
+    if (!value) return;
+    var field = form.querySelector('input[name="' + name + '"]');
+    if (!field) {
+      field = document.createElement('input');
+      field.type = 'hidden';
+      field.name = name;
+      form.appendChild(field);
+    }
+    field.value = value;
+  }
+
+  function enrichForm(form) {
+    if (!form) return;
+    var attribution = collectAttribution();
+    Object.keys(attribution).forEach(function (key) {
+      setHiddenField(form, key, attribution[key]);
+    });
+  }
+
+  function metaEvent(method, eventName, parameters) {
+    if (typeof window.fbq !== 'function') return;
+    window.fbq(method, eventName, parameters || {});
+  }
+
+  if (!window.__jettsetMetaPixelInstalled) {
+    window.__jettsetMetaPixelInstalled = true;
+    (function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = true;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = true;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js'));
+
+    window.fbq('init', META_PIXEL_ID);
+    window.fbq('track', 'PageView');
+  }
+
+  window.JettsetMetaTracking = {
+    enrichForm: enrichForm,
+    trackLead: function (form) {
+      var formName = form && form.getAttribute ? form.getAttribute('name') : '';
+      metaEvent('track', 'Lead', {
+        content_name: formName || 'jettset-enquiry',
+        enquiry_type: formName || 'jettset-enquiry'
+      });
+    }
+  };
+
+  function initialiseTracking() {
+    collectAttribution();
+    document.querySelectorAll('form[name^="jettset-"]').forEach(enrichForm);
+
+    document.addEventListener('click', function (event) {
+      var target = event.target;
+      if (!target || !target.closest) return;
+      var link = target.closest('a[href]');
+      if (!link) return;
+
+      var href = link.getAttribute('href') || '';
+      var eventData = {
+        link_url: href,
+        page_path: window.location.pathname
+      };
+
+      if (/^tel:/i.test(href)) {
+        metaEvent('trackCustom', 'PhoneClick', eventData);
+      } else if (/^(?:https?:)?\/\/(?:wa\.me|(?:api\.)?whatsapp\.com)\//i.test(href)) {
+        metaEvent('trackCustom', 'WhatsAppClick', eventData);
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialiseTracking, { once: true });
+  } else {
+    initialiseTracking();
+  }
+}());
+
 
     var manifestArticles = {
       'founders-quarter': {
@@ -534,12 +671,14 @@
     });
 
     function submitNetlifyForm(form){
+      if(window.JettsetMetaTracking) window.JettsetMetaTracking.enrichForm(form);
       return fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(new FormData(form)).toString()
       }).then(function(response){
         if(!response.ok) throw new Error('Form submission failed');
+        if(window.JettsetMetaTracking) window.JettsetMetaTracking.trackLead(form);
         return response;
       });
     }
