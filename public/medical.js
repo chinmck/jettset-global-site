@@ -73,7 +73,7 @@
 
     var status = document.getElementById('medicalFormStatus');
     if (status) {
-      status.textContent = 'Thank you. This enquiry shell is not yet connected. Please call or WhatsApp the Jettset team for immediate assistance.';
+      status.textContent = 'Thank you. Your Medical Aviation request has been received. A member of the Jettset team will be in touch to coordinate the appropriate next steps.';
       status.focus();
     }
   });
