@@ -96,9 +96,10 @@
   window.JettsetMetaTracking = {
     enrichForm: enrichForm,
     trackLead: function (form) {
+      var formName = form && form.getAttribute ? form.getAttribute('name') : '';
       metaEvent('track', 'Lead', {
-        content_name: form && form.name ? form.name : 'jettset-enquiry',
-        enquiry_type: form && form.name ? form.name : 'jettset-enquiry'
+        content_name: formName || 'jettset-enquiry',
+        enquiry_type: formName || 'jettset-enquiry'
       });
     }
   };
