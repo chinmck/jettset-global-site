@@ -683,9 +683,12 @@
       });
     }
 
+    var quoteSubmissionInProgress = false;
     var quoteFormEl = document.getElementById('quoteForm');
     if(quoteFormEl) quoteFormEl.addEventListener('submit', async function(e){
       e.preventDefault();
+      if(quoteSubmissionInProgress) return;
+
       var consent = document.getElementById('qConsent').checked;
       var name = document.getElementById('qName').value.trim();
       var email = document.getElementById('qEmail').value.trim();
@@ -697,10 +700,42 @@
         alert('Please share at least your name and email so we can respond.');
         return;
       }
-      try { await submitNetlifyForm(this); }
-      catch(error){ alert('We could not send your request. Please try again or contact Jettset directly.'); return; }
+
+      var form = this;
+      var formData = new FormData(form);
+      var webhookPayload = {};
+      formData.forEach(function(value, key){
+        if(Object.prototype.hasOwnProperty.call(webhookPayload, key)){
+          webhookPayload[key] = Array.isArray(webhookPayload[key])
+            ? webhookPayload[key].concat(value)
+            : [webhookPayload[key], value];
+        } else {
+          webhookPayload[key] = value;
+        }
+      });
+      webhookPayload.form_name = 'jettset-charter';
+
+      quoteSubmissionInProgress = true;
+      try {
+        var results = await Promise.all([
+          submitNetlifyForm(form),
+          fetch('/.netlify/functions/jettset-charter-webhook', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(webhookPayload)
+          })
+        ]);
+        if(!results[1].ok) throw new Error('Webhook submission failed');
+      }
+      catch(error){
+        quoteSubmissionInProgress = false;
+        alert('We could not send your request. Please try again or contact Jettset directly.');
+        return;
+      }
+
+      quoteSubmissionInProgress = false;
       alert('Thank you, ' + name + '. Your request has been received, and a member of our team will be in touch shortly to discuss your journey.');
-      this.reset();
+      form.reset();
       document.querySelectorAll('.stepper span').forEach(function(span, i){
         var keys = ['adults','children','pets'];
         passengerCounts[keys[i]] = (keys[i] === 'adults') ? 1 : 0;
@@ -708,9 +743,12 @@
       });
     });
 
+    var partnerSubmissionInProgress = false;
     var partnerFormEl = document.getElementById('partnerForm');
     if(partnerFormEl) partnerFormEl.addEventListener('submit', async function(e){
       e.preventDefault();
+      if(partnerSubmissionInProgress) return;
+
       var consent = document.getElementById('pConsent').checked;
       var name = document.getElementById('pName').value.trim();
       var email = document.getElementById('pEmail').value.trim();
@@ -722,10 +760,42 @@
         alert('Please share at least your name and email so we can respond.');
         return;
       }
-      try { await submitNetlifyForm(this); }
-      catch(error){ alert('We could not send your request. Please try again or contact Jettset directly.'); return; }
+
+      var form = this;
+      var formData = new FormData(form);
+      var webhookPayload = {};
+      formData.forEach(function(value, key){
+        if(Object.prototype.hasOwnProperty.call(webhookPayload, key)){
+          webhookPayload[key] = Array.isArray(webhookPayload[key])
+            ? webhookPayload[key].concat(value)
+            : [webhookPayload[key], value];
+        } else {
+          webhookPayload[key] = value;
+        }
+      });
+      webhookPayload.form_name = 'jettset-access-partners';
+
+      partnerSubmissionInProgress = true;
+      try {
+        var results = await Promise.all([
+          submitNetlifyForm(form),
+          fetch('/.netlify/functions/jettset-access-partners-webhook', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(webhookPayload)
+          })
+        ]);
+        if(!results[1].ok) throw new Error('Webhook submission failed');
+      }
+      catch(error){
+        partnerSubmissionInProgress = false;
+        alert('We could not send your request. Please try again or contact Jettset directly.');
+        return;
+      }
+
+      partnerSubmissionInProgress = false;
       alert('Thank you, ' + name + '. Your message has been received, and a member of our team will be in touch shortly to continue the conversation.');
-      this.reset();
+      form.reset();
     });
 
     var enquirySubmissionInProgress = false;
@@ -806,9 +876,12 @@
       form.reset();
     });
 
+    var legsSubmissionInProgress = false;
     var legsWaitlistFormEl = document.getElementById('legsWaitlistForm');
     if(legsWaitlistFormEl) legsWaitlistFormEl.addEventListener('submit', async function(e){
       e.preventDefault();
+      if(legsSubmissionInProgress) return;
+
       var consent = document.getElementById('lwConsent').checked;
       var name = document.getElementById('lwName').value.trim();
       var email = document.getElementById('lwEmail').value.trim();
@@ -821,15 +894,50 @@
         alert('Please share your name, email, and region so we can notify you at the right time.');
         return;
       }
-      try { await submitNetlifyForm(this); }
-      catch(error){ alert('We could not register your interest. Please try again or contact Jettset directly.'); return; }
+
+      var form = this;
+      var formData = new FormData(form);
+      var webhookPayload = {};
+      formData.forEach(function(value, key){
+        if(Object.prototype.hasOwnProperty.call(webhookPayload, key)){
+          webhookPayload[key] = Array.isArray(webhookPayload[key])
+            ? webhookPayload[key].concat(value)
+            : [webhookPayload[key], value];
+        } else {
+          webhookPayload[key] = value;
+        }
+      });
+      webhookPayload.form_name = 'jettset-legs';
+
+      legsSubmissionInProgress = true;
+      try {
+        var results = await Promise.all([
+          submitNetlifyForm(form),
+          fetch('/.netlify/functions/jettset-legs-webhook', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(webhookPayload)
+          })
+        ]);
+        if(!results[1].ok) throw new Error('Webhook submission failed');
+      }
+      catch(error){
+        legsSubmissionInProgress = false;
+        alert('We could not register your interest. Please try again or contact Jettset directly.');
+        return;
+      }
+
+      legsSubmissionInProgress = false;
       alert('Thank you, ' + name + '. You\'re on the Legs waitlist — we\'ll be in touch as soon as access opens for ' + region + '.');
-      this.reset();
+      form.reset();
     });
 
+    var editionsSubmissionInProgress = false;
     var editionsWaitlistFormEl = document.getElementById('editionsWaitlistForm');
     if(editionsWaitlistFormEl) editionsWaitlistFormEl.addEventListener('submit', async function(e){
       e.preventDefault();
+      if(editionsSubmissionInProgress) return;
+
       var consent = document.getElementById('ewConsent').checked;
       var name = document.getElementById('ewName').value.trim();
       var email = document.getElementById('ewEmail').value.trim();
@@ -842,18 +950,53 @@
         alert('Please share your name and email so we can register your interest.');
         return;
       }
-      try { await submitNetlifyForm(this); }
-      catch(error){ alert('We could not register your interest. Please try again or contact Jettset directly.'); return; }
+
+      var form = this;
+      var formData = new FormData(form);
+      var webhookPayload = {};
+      formData.forEach(function(value, key){
+        if(Object.prototype.hasOwnProperty.call(webhookPayload, key)){
+          webhookPayload[key] = Array.isArray(webhookPayload[key])
+            ? webhookPayload[key].concat(value)
+            : [webhookPayload[key], value];
+        } else {
+          webhookPayload[key] = value;
+        }
+      });
+      webhookPayload.form_name = 'jettset-editions';
+
+      editionsSubmissionInProgress = true;
+      try {
+        var results = await Promise.all([
+          submitNetlifyForm(form),
+          fetch('/.netlify/functions/jettset-editions-webhook', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(webhookPayload)
+          })
+        ]);
+        if(!results[1].ok) throw new Error('Webhook submission failed');
+      }
+      catch(error){
+        editionsSubmissionInProgress = false;
+        alert('We could not register your interest. Please try again or contact Jettset directly.');
+        return;
+      }
+
+      editionsSubmissionInProgress = false;
       if(success){
         success.textContent = 'Thank you, ' + name + '. Your interest in Jettset Editions has been registered. We will be in touch when early access opens.';
         success.hidden = false;
       }
-      this.reset();
+      form.reset();
     });
 
+    var jetCardSubmissionInProgress = false;
     var jetCardFormEl = document.getElementById('jetCardForm');
     if(jetCardFormEl) jetCardFormEl.addEventListener('submit', async function(e){
       e.preventDefault();
+      if(jetCardSubmissionInProgress) return;
+
       var consent = document.getElementById('jcConsent').checked;
       var name = document.getElementById('jcName').value.trim();
       var email = document.getElementById('jcEmail').value.trim();
@@ -865,10 +1008,42 @@
         alert('Please share at least your name and email so we can respond.');
         return;
       }
-      try { await submitNetlifyForm(this); }
-      catch(error){ alert('We could not send your request. Please try again or contact Jettset directly.'); return; }
+
+      var form = this;
+      var formData = new FormData(form);
+      var webhookPayload = {};
+      formData.forEach(function(value, key){
+        if(Object.prototype.hasOwnProperty.call(webhookPayload, key)){
+          webhookPayload[key] = Array.isArray(webhookPayload[key])
+            ? webhookPayload[key].concat(value)
+            : [webhookPayload[key], value];
+        } else {
+          webhookPayload[key] = value;
+        }
+      });
+      webhookPayload.form_name = 'jettset-jet-card';
+
+      jetCardSubmissionInProgress = true;
+      try {
+        var results = await Promise.all([
+          submitNetlifyForm(form),
+          fetch('/.netlify/functions/jettset-jet-card-webhook', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(webhookPayload)
+          })
+        ]);
+        if(!results[1].ok) throw new Error('Webhook submission failed');
+      }
+      catch(error){
+        jetCardSubmissionInProgress = false;
+        alert('We could not send your request. Please try again or contact Jettset directly.');
+        return;
+      }
+
+      jetCardSubmissionInProgress = false;
       alert('Thank you, ' + name + '. A member of our Jet Card team will be in touch shortly.');
-      this.reset();
+      form.reset();
     });
 
     window.addEventListener('scroll', function(){
