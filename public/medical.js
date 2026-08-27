@@ -73,7 +73,13 @@
 
     var status = document.getElementById('medicalFormStatus');
     if (status) {
-      status.textContent = 'Thank you. Your Medical Aviation request has been received. A member of the Jettset team will be in touch to coordinate the appropriate next steps.';
+      form.hidden = true;
+      var enquirySection = form.closest('#medical-transfer-enquiry');
+      if (enquirySection) enquirySection.classList.add('medical-enquiry-complete');
+      status.classList.add('is-success');
+      status.innerHTML = '<span class="medical-success-heading">YOUR REQUEST HAS BEEN RECEIVED</span>' +
+        '<span class="medical-success-copy">Your Medical Aviation request has been received.</span>' +
+        '<span class="medical-success-copy">A member of the Jettset team will be in touch to coordinate the appropriate next steps.</span>';
       status.focus();
     }
   });
