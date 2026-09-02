@@ -1070,12 +1070,24 @@
         individuals: {
           title:'Door-To-Door, Discreetly',
           text:'Door-to-door airport transfers, full-day chauffeur hire, discreet principal transport, family travel and multi-stop itineraries.',
-          vehicles:['Rolls-Royce Cullinan','Range Rover Autobiography','Mercedes-Benz S-Class']
+          vehicles:['Rolls-Royce Cullinan','Range Rover Autobiography','Mercedes-Benz S-Class'],
+          cards:[
+            {name:'Rolls-Royce Cullinan', descriptor:'Elevated arrival, composed city movement.', image:'images/concierge-cullinan-front'},
+            {name:'Range Rover Autobiography', descriptor:'Discreet capability for family and multi-stop journeys.', image:'images/concierge-range-rover'},
+            {name:'Mercedes-Benz S-Class', descriptor:'Refined executive travel between home, terminal and destination.', image:'images/concierge-s-class'},
+            {name:'Mercedes-Maybach V-Class', descriptor:'Considered space for families and smaller travelling parties.', image:'images/concierge-maybach-v-class'}
+          ]
         },
         touring: {
           title:'City-By-City, Coordinated',
           text:'City-by-city movement plans, VIP Sprinters, V-Class fleets, luggage vehicles, driver manifests, call-time coordination and live operational support.',
-          vehicles:['Mercedes-Maybach V-Class','Custom VIP Sprinters','Executive Minibuses','Luggage Support Vehicles']
+          vehicles:['Mercedes-Maybach V-Class','Custom VIP Sprinters','Executive Minibuses','Luggage Support Vehicles'],
+          cards:[
+            {name:'V-Class Fleet', descriptor:'Consistent presentation for coordinated touring schedules.', image:'images/concierge-v-class-fleet'},
+            {name:'Mercedes-Maybach V-Class', descriptor:'Discreet boarding and considered movement between calls.', image:'images/concierge-v-class-night'},
+            {name:'VIP Sprinter', descriptor:'Lounge-style group transport between hotels, rehearsals and venues.', image:'images/concierge-vip-sprinter'},
+            {name:'Tourismo Coach', descriptor:'Comfortable movement for larger travelling parties.', image:'images/concierge-tourismo-coach'}
+          ]
         },
         events: {
           title:'Guest Movement, At Scale',
@@ -1091,8 +1103,11 @@
 
       function render(use){
         var u = uses[use];
-        panel.innerHTML = '<h4>' + u.title + '</h4><p>' + u.text + '</p>' +
-          '<div class="fleet-panel-vehicles">' + u.vehicles.map(function(v){ return '<span class="fleet-vehicle-chip">' + v + '</span>'; }).join('') + '</div>';
+        var cards = u.cards ? '<div class="fleet-card-grid">' + u.cards.map(function(card){
+          return '<article class="fleet-card"><picture><source srcset="' + card.image + '.webp" type="image/webp"><img src="' + card.image + '.jpg" alt="' + card.name + '" width="800" height="600" loading="lazy" decoding="async"></picture><div class="fleet-card-copy"><h5>' + card.name + '</h5><p>' + card.descriptor + '</p></div></article>';
+        }).join('') + '</div>' : '';
+        panel.innerHTML = '<h4>' + u.title + '</h4><p>' + u.text + '</p>' + cards +
+          (!u.cards ? '<div class="fleet-panel-vehicles">' + u.vehicles.map(function(v){ return '<span class="fleet-vehicle-chip">' + v + '</span>'; }).join('') + '</div>' : '');
       }
 
       tabsWrap.querySelectorAll('.fleet-tab').forEach(function(tab){
