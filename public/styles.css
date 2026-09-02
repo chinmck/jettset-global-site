@@ -3548,6 +3548,43 @@
     line-height:1.8;
     margin-bottom:20px;
   }
+  .fleet-card-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:22px;
+    margin-top:30px;
+  }
+  .fleet-card{
+    min-width:0;
+    border-top:1px solid var(--gold-dim);
+    background:var(--black);
+  }
+  .fleet-card picture{
+    display:block;
+    aspect-ratio:4 / 3;
+    overflow:hidden;
+    background:var(--black);
+  }
+  .fleet-card img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+  }
+  .fleet-card-copy{padding:20px 18px 22px;}
+  .fleet-card-copy h5{
+    margin:0 0 8px;
+    color:var(--off-white);
+    font-family:'Canela Text','Playfair Display',serif;
+    font-size:17px;
+    font-weight:400;
+  }
+  .fleet-card-copy p{
+    margin:0;
+    font-size:12px;
+    line-height:1.65;
+  }
   .fleet-panel-vehicles{
     display:flex;
     flex-wrap:wrap;
@@ -3562,6 +3599,8 @@
   @media(max-width:700px){
     .fleet-tabs{flex-direction:column; gap:0;}
     .fleet-tab{border-bottom:1px solid var(--grey-line);}
+    .fleet-panel{padding:34px 20px;}
+    .fleet-card-grid{grid-template-columns:1fr; gap:18px;}
   }
 
   /* ===== JET CARD: REGION SELECTOR ===== */
