@@ -8,6 +8,5 @@
 [functions]
   node_bundler = "esbuild"
 
-[[scheduled.functions]]
-  name = "partner-stale-sweep"
-  cron = "*/15 * * * *"
+[functions."partner-stale-sweep"]
+  schedule = "*/15 * * * *"
