@@ -7,3 +7,6 @@
 
 [functions."partner-stale-sweep"]
   schedule = "*/15 * * * *"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
