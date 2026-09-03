@@ -12,3 +12,5 @@ body {
   height: 100%;
   border: 0;
 }
+
+body:has(.partner-shell), body:has(.partner-login) { height:auto; min-height:100%; overflow:auto; background:#080808; }
