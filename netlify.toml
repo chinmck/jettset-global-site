@@ -1,5 +1,5 @@
 [build]
-  command = "npx drizzle-kit migrate --config drizzle.config.ts && npm run build"
+  command = "npm run build"
   publish = ".next"
 
 [functions]
