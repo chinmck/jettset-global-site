@@ -5,6 +5,7 @@ import { getDb } from "@/db";
 import { accounts, partnerUsers, sessions, verificationTokens } from "@/db/schema";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  trustHost: true,
   adapter: DrizzleAdapter(getDb(), {
     usersTable: partnerUsers,
     accountsTable: accounts,
