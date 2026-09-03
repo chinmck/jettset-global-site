@@ -1,5 +1,5 @@
 [build]
-  command = "node scripts/bootstrap-preview-admin.mjs && npm run build"
+  command = "npm run build"
   publish = ".next"
 
 [functions]
