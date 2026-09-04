@@ -68,7 +68,7 @@ export async function POST(request: Request) {
 
       const safeName = manifest.fileName.replace(/[^a-zA-Z0-9._-]/g, "-");
       const fileKey = `${manifest.visibility}/${manifest.partnerId ?? "library"}/${crypto.randomUUID()}-${safeName}`;
-      await store.set(fileKey, completeFile, { metadata: { contentType: manifest.mimeType } });
+      await store.set(fileKey, completeFile.buffer as ArrayBuffer, { metadata: { contentType: manifest.mimeType } });
       const [record] = await getDb().insert(documents).values({ partnerId: manifest.partnerId, category: manifest.category, fileKey, fileName: manifest.fileName, fileSize: manifest.fileSize, mimeType: manifest.mimeType, uploadedBy: authResult.user.id, visibility: manifest.visibility }).returning();
       await writeAudit({ actorId: authResult.user.id, action: "document.uploaded", entityType: "document", entityId: record.id, after: { fileName: manifest.fileName, visibility: manifest.visibility, partnerId: manifest.partnerId } });
       await Promise.all([...Array.from({ length: manifest.chunkCount }, (_, index) => store.delete(`${uploadPrefix(authResult.user.id, uploadId)}/chunk-${index}`)), store.delete(`${uploadPrefix(authResult.user.id, uploadId)}/manifest.json`)]);
