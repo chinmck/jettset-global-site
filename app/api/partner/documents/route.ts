@@ -24,7 +24,7 @@ async function requireUploader() {
 function uploadPrefix(userId: string, uploadId: string) { return `_uploads/${userId}/${uploadId}`; }
 
 async function readManifest(userId: string, uploadId: string) {
-  const value = await getStore({ name: "partner-resources", consistency: "strong" }).get(`${uploadPrefix(userId, uploadId)}/manifest.json`);
+  const value = await getStore({ name: "partner-resources", consistency: "strong" }).get(`${uploadPrefix(userId, uploadId)}/manifest.json`, { type: "text" });
   if (!value) return null;
   try { return JSON.parse(value) as UploadManifest; } catch { return null; }
 }
