@@ -13,4 +13,13 @@ body {
   border: 0;
 }
 
-body:has(.partner-shell), body:has(.partner-login) { height:auto; min-height:100%; overflow:auto; background:#080808; }
+html:has(.partner-shell),
+html:has(.partner-login),
+body:has(.partner-shell),
+body:has(.partner-login) {
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #080808;
+}
