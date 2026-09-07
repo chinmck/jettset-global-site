@@ -88,19 +88,29 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: true, idempotent: true });
     }
 
+    // Note: the Neon HTTP driver (@neondatabase/serverless over neon-http)
+    // does not support db.transaction() — each query is its own request, so
+    // a transaction() call throws at runtime ("No transactions support in
+    // neon-http driver"), which silently kept every enquiry stuck on
+    // "pending" even once the payload validated correctly. Do the update
+    // and the audit write as two sequential statements instead. The audit
+    // write is best-effort logging, not something the confirmation should
+    // fail over, so a failure there is caught and logged rather than
+    // thrown — the enquiry's status is already updated by that point.
     const now = new Date();
-    await db.transaction(async (tx) => {
-      await tx
-        .update(enquiries)
-        .set({
-          status: "synced",
-          ghlOpportunityId: parsed.data.ghl_opportunity_id ?? null,
-          ghlPipelineId: parsed.data.ghl_pipeline_id ?? null,
-          confirmedAt: now,
-          updatedAt: now,
-        })
-        .where(eq(enquiries.id, existing.id));
-      await tx.insert(auditLog).values({
+    await db
+      .update(enquiries)
+      .set({
+        status: "synced",
+        ghlOpportunityId: parsed.data.ghl_opportunity_id ?? null,
+        ghlPipelineId: parsed.data.ghl_pipeline_id ?? null,
+        confirmedAt: now,
+        updatedAt: now,
+      })
+      .where(eq(enquiries.id, existing.id));
+
+    try {
+      await db.insert(auditLog).values({
         action: "enquiry.crm_confirmed",
         entityType: "enquiry",
         entityId: existing.id,
@@ -110,7 +120,13 @@ export async function POST(request: Request) {
           ghlOpportunityId: parsed.data.ghl_opportunity_id ?? null,
         },
       });
-    });
+    } catch (auditError) {
+      console.error("Partner GHL confirmation audit log failed", {
+        correlation_id: parsed.data.correlation_id,
+        error_name: auditError instanceof Error ? auditError.name : "UnknownError",
+        error_message: auditError instanceof Error ? auditError.message : "Unknown error",
+      });
+    }
 
     console.info("Partner GHL confirmation accepted", {
       correlation_id: parsed.data.correlation_id,
