@@ -6,7 +6,11 @@ import { enquiries, auditLog } from "@/db/schema";
 
 const bodySchema = z.object({
   correlation_id: z.string().uuid(),
-  ghl_opportunity_id: z.string().min(1),
+  // GHL's workflow builder has no merge field for the ID of an Opportunity
+  // just created in the same workflow, so the confirmation callback can
+  // only ever reliably carry correlation_id. Keep this optional rather than
+  // required, or every real GHL confirmation fails validation here.
+  ghl_opportunity_id: z.string().min(1).optional(),
   ghl_pipeline_id: z.string().optional(),
 });
 
@@ -78,7 +82,7 @@ export async function POST(request: Request) {
       console.info("Partner GHL confirmation accepted", {
         correlation_id: parsed.data.correlation_id,
         idempotent: true,
-        ghl_opportunity_id_present: true,
+        ghl_opportunity_id_present: Boolean(parsed.data.ghl_opportunity_id),
         ghl_pipeline_id_present: Boolean(parsed.data.ghl_pipeline_id),
       });
       return NextResponse.json({ ok: true, idempotent: true });
@@ -90,7 +94,7 @@ export async function POST(request: Request) {
         .update(enquiries)
         .set({
           status: "synced",
-          ghlOpportunityId: parsed.data.ghl_opportunity_id,
+          ghlOpportunityId: parsed.data.ghl_opportunity_id ?? null,
           ghlPipelineId: parsed.data.ghl_pipeline_id ?? null,
           confirmedAt: now,
           updatedAt: now,
@@ -103,7 +107,7 @@ export async function POST(request: Request) {
         before: { status: existing.status },
         after: {
           status: "synced",
-          ghlOpportunityId: parsed.data.ghl_opportunity_id,
+          ghlOpportunityId: parsed.data.ghl_opportunity_id ?? null,
         },
       });
     });
@@ -111,7 +115,7 @@ export async function POST(request: Request) {
     console.info("Partner GHL confirmation accepted", {
       correlation_id: parsed.data.correlation_id,
       idempotent: false,
-      ghl_opportunity_id_present: true,
+      ghl_opportunity_id_present: Boolean(parsed.data.ghl_opportunity_id),
       ghl_pipeline_id_present: Boolean(parsed.data.ghl_pipeline_id),
     });
     return NextResponse.json({ ok: true });
