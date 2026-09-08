@@ -1,0 +1,2 @@
+import {requirePartner} from "@/lib/partner-auth";import {HubNav} from "@/components/partner/hub-nav";import {EnquiryForm} from "@/components/partner/enquiry-form";
+export default async function NewEnquiry(){const{user}=await requirePartner();return <div className="partner-shell"><HubNav role={user.role}/><main className="hub-main"><span className="hub-eyebrow">New introduction</span><h1 className="hub-title">Submit an enquiry.</h1><p className="hub-lede">Share what is known. Jettset will handle the next conversation personally.</p><EnquiryForm/></main></div>}
