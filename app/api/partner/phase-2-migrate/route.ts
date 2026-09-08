@@ -2,9 +2,9 @@ import { sql } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { getDb } from "@/db";
 
-export async function POST(request: Request) {
+export async function GET(request: Request) {
   const expected = process.env.GHL_CONFIRM_SECRET;
-  if (!expected || request.headers.get("x-migration-secret") !== expected) {
+  if (!expected || new URL(request.url).searchParams.get("secret") !== expected) {
     return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
   }
   const db = getDb();
