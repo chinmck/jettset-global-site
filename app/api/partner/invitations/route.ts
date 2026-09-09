@@ -64,6 +64,10 @@ export async function POST(request: NextRequest) {
       .returning();
   }
 
+  if (!partner) {
+    return NextResponse.json({ error: "The partner organisation could not be created." }, { status: 500 });
+  }
+
   let invitedUser = existingUser;
   if (invitedUser) {
     [invitedUser] = await db
@@ -88,6 +92,10 @@ export async function POST(request: NextRequest) {
         status: "pending",
       })
       .returning();
+  }
+
+  if (!invitedUser) {
+    return NextResponse.json({ error: "The partner account could not be created." }, { status: 500 });
   }
 
   await writeAudit({
