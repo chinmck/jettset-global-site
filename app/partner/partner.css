@@ -12,3 +12,7 @@
 @media(max-width:1000px){.hub-directory-tools{grid-template-columns:repeat(2,minmax(0,1fr))}.hub-directory-tools .hub-button{min-height:48px}.hub-guest-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.hub-summary-notes{grid-column:1/-1}}
 @media(max-width:850px){.hub-relationship-grid{grid-template-columns:1fr}.hub-follow-up{grid-template-columns:1fr;gap:5px}.hub-follow-ups{padding:22px}.hub-follow-ups .hub-section-head{align-items:flex-start}}
 @media(max-width:560px){.hub-directory-tools{grid-template-columns:1fr}.hub-guest-summary{grid-template-columns:1fr}.hub-summary-notes{grid-column:auto}.hub-relationship-section{padding:22px}.hub-relationship-message{padding:15px 22px}}
+
+
+.hub-invite-panel{border:1px solid var(--hub-line);background:var(--hub-panel);padding:clamp(24px,4vw,42px)}.hub-invite-panel .hub-section-head{align-items:flex-start;margin-bottom:0}.hub-invite-panel .hub-section-head .hub-muted{max-width:360px;margin:3px 0 0;line-height:1.5}.hub-invite-form{max-width:none;margin-top:32px}.hub-invite-actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap}.hub-invite-actions .hub-button:disabled{cursor:wait;opacity:.55}.hub-invite-message{margin:0;color:var(--hub-gold);font-size:13px}.hub-invite-message.is-error{color:#d99586}
+@media(max-width:850px){.hub-invite-panel .hub-section-head{gap:12px}}
