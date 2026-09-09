@@ -1,6 +1,22 @@
 (function () {
   'use strict';
 
+
+  // Google Ads base tag. Conversion-specific events are fired separately after confirmed outcomes.
+  if (window.top === window.self && !window.__jettsetGoogleAdsLoaded) {
+    window.__jettsetGoogleAdsLoaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+
+    var googleAdsScript = document.createElement('script');
+    googleAdsScript.async = true;
+    googleAdsScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18409587176';
+    document.head.appendChild(googleAdsScript);
+
+    window.gtag('js', new Date());
+    window.gtag('config', 'AW-18409587176');
+  }
+
   var META_PIXEL_ID = '1377605307888175';
   var ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'];
   var STORAGE_KEY = 'jettset_campaign_attribution';
