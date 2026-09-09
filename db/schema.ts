@@ -1,4 +1,4 @@
-import { jsonb, numeric, pgEnum, pgTable, primaryKey, text, timestamp, uniqueIndex, uuid, integer } from "drizzle-orm/pg-core";
+import { boolean, date, index, jsonb, numeric, pgEnum, pgTable, primaryKey, text, timestamp, uniqueIndex, uuid, integer } from "drizzle-orm/pg-core";
 
 export const partnerStatus = pgEnum("partner_status", ["active", "inactive", "pending"]);
 export const userRole = pgEnum("partner_user_role", ["partner", "admin", "executive"]);
@@ -69,6 +69,33 @@ export const documents = pgTable("documents", {
   fileSize: integer("file_size"), mimeType: text("mime_type"), uploadedBy: uuid("uploaded_by").notNull().references(() => partnerUsers.id),
   visibility: documentVisibility("visibility").notNull(), createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
+
+export const partnerNotes = pgTable("partner_notes", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  enquiryId: uuid("enquiry_id").notNull().references(() => enquiries.id, { onDelete: "cascade" }),
+  partnerId: uuid("partner_id").notNull().references(() => partners.id, { onDelete: "cascade" }),
+  authorId: uuid("author_id").notNull().references(() => partnerUsers.id),
+  body: text("body").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+}, (t) => [
+  index("partner_notes_partner_enquiry_idx").on(t.partnerId, t.enquiryId),
+  index("partner_notes_created_at_idx").on(t.createdAt),
+]);
+
+export const partnerTasks = pgTable("partner_tasks", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  enquiryId: uuid("enquiry_id").notNull().references(() => enquiries.id, { onDelete: "cascade" }),
+  partnerId: uuid("partner_id").notNull().references(() => partners.id, { onDelete: "cascade" }),
+  authorId: uuid("author_id").notNull().references(() => partnerUsers.id),
+  body: text("body").notNull(),
+  dueDate: date("due_date"),
+  done: boolean("done").notNull().default(false),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+}, (t) => [
+  index("partner_tasks_partner_enquiry_idx").on(t.partnerId, t.enquiryId),
+  index("partner_tasks_partner_open_due_idx").on(t.partnerId, t.done, t.dueDate),
+]);
 
 export const auditLog = pgTable("audit_log", {
   id: uuid("id").defaultRandom().primaryKey(), actorId: uuid("actor_id").references(() => partnerUsers.id), action: text("action").notNull(),
