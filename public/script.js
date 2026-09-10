@@ -731,7 +731,6 @@
         body: new URLSearchParams(new FormData(form)).toString()
       }).then(function(response){
         if(!response.ok) throw new Error('Form submission failed');
-        if(window.JettsetMetaTracking) window.JettsetMetaTracking.trackLead(form);
         return response;
       });
     }
@@ -755,6 +754,7 @@
       }
 
       var form = this;
+      if(window.JettsetMetaTracking) window.JettsetMetaTracking.enrichForm(form);
       var formData = new FormData(form);
       var webhookPayload = {};
       formData.forEach(function(value, key){
@@ -779,6 +779,7 @@
           })
         ]);
         if(!results[1].ok) throw new Error('Webhook submission failed');
+        if(window.JettsetMetaTracking) window.JettsetMetaTracking.trackLead(form);
       }
       catch(error){
         quoteSubmissionInProgress = false;
@@ -815,6 +816,7 @@
       }
 
       var form = this;
+      if(window.JettsetMetaTracking) window.JettsetMetaTracking.enrichForm(form);
       var formData = new FormData(form);
       var webhookPayload = {};
       formData.forEach(function(value, key){
@@ -839,6 +841,7 @@
           })
         ]);
         if(!results[1].ok) throw new Error('Webhook submission failed');
+        if(window.JettsetMetaTracking) window.JettsetMetaTracking.trackLead(form);
       }
       catch(error){
         partnerSubmissionInProgress = false;
@@ -871,6 +874,7 @@
 
       var form = this;
       var submitButton = form.querySelector('[type="submit"]');
+      if(window.JettsetMetaTracking) window.JettsetMetaTracking.enrichForm(form);
       var formData = new FormData(form);
       var webhookPayload = {};
       formData.forEach(function(value, key){
@@ -949,6 +953,7 @@
       }
 
       var form = this;
+      if(window.JettsetMetaTracking) window.JettsetMetaTracking.enrichForm(form);
       var formData = new FormData(form);
       var webhookPayload = {};
       formData.forEach(function(value, key){
@@ -973,6 +978,7 @@
           })
         ]);
         if(!results[1].ok) throw new Error('Webhook submission failed');
+        if(window.JettsetMetaTracking) window.JettsetMetaTracking.trackLead(form);
       }
       catch(error){
         legsSubmissionInProgress = false;
@@ -1005,6 +1011,7 @@
       }
 
       var form = this;
+      if(window.JettsetMetaTracking) window.JettsetMetaTracking.enrichForm(form);
       var formData = new FormData(form);
       var webhookPayload = {};
       formData.forEach(function(value, key){
@@ -1029,6 +1036,7 @@
           })
         ]);
         if(!results[1].ok) throw new Error('Webhook submission failed');
+        if(window.JettsetMetaTracking) window.JettsetMetaTracking.trackLead(form);
       }
       catch(error){
         editionsSubmissionInProgress = false;
@@ -1063,6 +1071,7 @@
       }
 
       var form = this;
+      if(window.JettsetMetaTracking) window.JettsetMetaTracking.enrichForm(form);
       var formData = new FormData(form);
       var webhookPayload = {};
       formData.forEach(function(value, key){
@@ -1087,6 +1096,7 @@
           })
         ]);
         if(!results[1].ok) throw new Error('Webhook submission failed');
+        if(window.JettsetMetaTracking) window.JettsetMetaTracking.trackLead(form);
       }
       catch(error){
         jetCardSubmissionInProgress = false;
