@@ -10,6 +10,10 @@
   overflow: hidden;
 }
 
+#page-aviation-wellness {
+  --aw-serif: 'Canela Text','Playfair Display',Georgia,serif;
+}
+
 #page-aviation-wellness h1,
 #page-aviation-wellness h2,
 #page-aviation-wellness h3,
@@ -61,7 +65,7 @@
 #page-aviation-wellness .aw-text-link:focus-visible { color: #7f692f; }
 
 #page-aviation-wellness .aw-hero {
-  min-height: 900px;
+  min-height: clamp(580px, 44vw, 680px);
   position: relative;
 }
 
@@ -83,10 +87,10 @@
 
 #page-aviation-wellness .aw-hero-content {
   left: clamp(28px, 6vw, 94px);
-  max-width: 560px;
+  max-width: 520px;
   position: absolute;
   top: 50%;
-  transform: translateY(-44%);
+  transform: translateY(-42%);
   z-index: 1;
 }
 
@@ -103,8 +107,8 @@
 #page-aviation-wellness .aw-partnership b { color: var(--aw-gold); font-weight: 400; }
 
 #page-aviation-wellness .aw-hero h1 {
-  font-family: var(--font-serif);
-  font-size: clamp(58px, 6.4vw, 102px);
+  font-family: var(--aw-serif);
+  font-size: clamp(56px, 5.4vw, 82px);
   font-weight: 400;
   letter-spacing: -.035em;
   line-height: .91;
@@ -113,8 +117,8 @@
 #page-aviation-wellness .aw-hero-content > p {
   color: rgba(241,238,231,.84);
   font-size: 16px;
-  line-height: 1.7;
-  margin: 28px 0 34px;
+  line-height: 1.55;
+  margin: 22px 0 27px;
   max-width: 500px;
 }
 
@@ -139,12 +143,12 @@
 #page-aviation-wellness .aw-collection {
   display: grid;
   grid-template-columns: minmax(320px, .72fr) minmax(0, 1.28fr);
-  min-height: 690px;
+  min-height: 470px;
 }
 
 #page-aviation-wellness .aw-collection-copy {
   align-self: center;
-  padding: clamp(64px, 8vw, 128px) clamp(30px, 6vw, 92px);
+  padding: clamp(48px, 5vw, 78px) clamp(30px, 5vw, 76px);
 }
 
 #page-aviation-wellness .aw-collection h2,
@@ -152,15 +156,15 @@
 #page-aviation-wellness .aw-cycle h2,
 #page-aviation-wellness .aw-partner h2,
 #page-aviation-wellness .aw-london h2 {
-  font-family: var(--font-serif);
+  font-family: var(--aw-serif);
   font-weight: 400;
   letter-spacing: -.025em;
   line-height: .98;
 }
 
 #page-aviation-wellness .aw-collection h2 {
-  font-size: clamp(48px, 5.3vw, 82px);
-  margin: 26px 0 28px;
+  font-size: clamp(46px, 4.4vw, 66px);
+  margin: 20px 0 22px;
 }
 
 #page-aviation-wellness .aw-collection-copy p,
@@ -176,7 +180,7 @@
 
 #page-aviation-wellness .aw-product-composition {
   background: #d8d4cc;
-  min-height: 690px;
+  min-height: 470px;
   overflow: hidden;
   position: relative;
 }
@@ -217,17 +221,17 @@
   transform: scale(1.14);
 }
 
-#page-aviation-wellness .aw-treatments { padding: clamp(70px, 8vw, 124px) clamp(24px, 4.8vw, 76px); }
+#page-aviation-wellness .aw-treatments { padding: clamp(48px, 5vw, 72px) clamp(24px, 4.8vw, 76px); }
 
 #page-aviation-wellness .aw-section-heading {
   align-items: end;
   display: grid;
   gap: 40px;
   grid-template-columns: 1.2fr .8fr;
-  margin-bottom: 52px;
+  margin-bottom: 32px;
 }
 
-#page-aviation-wellness .aw-section-heading h2 { font-size: clamp(45px, 4.8vw, 76px); margin-top: 22px; }
+#page-aviation-wellness .aw-section-heading h2 { font-size: clamp(42px, 4vw, 60px); margin-top: 16px; }
 
 #page-aviation-wellness .aw-treatment-grid {
   border-bottom: 1px solid rgba(17,19,22,.2);
@@ -239,19 +243,19 @@
 
 #page-aviation-wellness .aw-treatment-grid article {
   border-right: 1px solid rgba(17,19,22,.16);
-  min-height: 330px;
-  padding: 35px 25px 28px;
+  min-height: 230px;
+  padding: 26px 20px 22px;
   position: relative;
 }
 
 #page-aviation-wellness .aw-treatment-grid article:last-child { border-right: 0; }
 
 #page-aviation-wellness .aw-treatment-grid h3 {
-  font-family: var(--font-serif);
-  font-size: 25px;
+  font-family: var(--aw-serif);
+  font-size: 21px;
   font-weight: 400;
   line-height: 1.08;
-  margin-top: 72px;
+  margin-top: 42px;
 }
 
 #page-aviation-wellness .aw-treatment-grid p {
@@ -269,7 +273,7 @@
   border-radius: 50%;
   color: #806c3c;
   display: flex;
-  font-family: var(--font-serif);
+  font-family: var(--aw-serif);
   font-size: 22px;
   height: 52px;
   justify-content: center;
@@ -291,35 +295,45 @@
 #page-aviation-wellness .aw-treatment-photo h3 { margin: 0; }
 #page-aviation-wellness .aw-treatment-photo p { color: rgba(241,238,231,.7); }
 
-#page-aviation-wellness .aw-cycle { background: #080a0c; padding-top: clamp(74px, 8vw, 118px); }
-#page-aviation-wellness .aw-cycle-heading { padding: 0 clamp(24px, 5vw, 76px) 44px; }
-#page-aviation-wellness .aw-cycle h2 { font-size: clamp(52px, 6vw, 92px); margin-top: 18px; }
+#page-aviation-wellness .aw-treatment-product { overflow: hidden; padding: 0; }
+#page-aviation-wellness .aw-treatment-product img { height: 100%; object-fit: cover; }
+#page-aviation-wellness .aw-treatment-product::after { background: linear-gradient(0deg, rgba(241,238,231,.97), rgba(241,238,231,.1) 72%); content: ""; inset: 0; position: absolute; }
+#page-aviation-wellness .aw-treatment-product div { bottom: 20px; left: 18px; position: absolute; right: 14px; z-index: 1; }
+#page-aviation-wellness .aw-treatment-product h3 { margin: 0; }
+#page-aviation-wellness .aw-treatment-product p { margin-top: 9px; }
+#page-aviation-wellness .aw-treatment-product img { object-position: 4% center; transform: scale(1.7); }
+#page-aviation-wellness .aw-treatment-product-glutathione img { object-position: 4% center; }
+#page-aviation-wellness .aw-treatment-product-energy img { object-position: 48% center; transform: scale(1.8); }
+
+#page-aviation-wellness .aw-cycle { background: #080a0c; padding-top: 0; position: relative; }
+#page-aviation-wellness .aw-cycle-heading { left: clamp(24px, 5vw, 76px); padding: 0; position: absolute; top: 28px; z-index: 3; }
+#page-aviation-wellness .aw-cycle h2 { font-size: clamp(46px, 4.4vw, 66px); margin-top: 10px; }
 #page-aviation-wellness .aw-cycle-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
-#page-aviation-wellness .aw-cycle-grid article { min-height: 650px; overflow: hidden; position: relative; }
+#page-aviation-wellness .aw-cycle-grid article { min-height: 430px; overflow: hidden; position: relative; }
 #page-aviation-wellness .aw-cycle-grid article::after { background: linear-gradient(0deg, rgba(4,5,6,.94), rgba(4,5,6,.06) 65%); content: ""; inset: 0; position: absolute; }
 #page-aviation-wellness .aw-cycle-grid img { height: 100%; object-fit: cover; position: absolute; }
 #page-aviation-wellness .aw-cycle-grid article:nth-child(1) img { object-position: 55% center; }
 #page-aviation-wellness .aw-cycle-grid article:nth-child(2) img { object-position: 48% center; }
 #page-aviation-wellness .aw-cycle-grid article:nth-child(3) img { object-position: 43% center; }
-#page-aviation-wellness .aw-cycle-grid article div { bottom: 44px; left: 38px; position: absolute; right: 28px; z-index: 1; }
+#page-aviation-wellness .aw-cycle-grid article div { bottom: 30px; left: 30px; position: absolute; right: 24px; z-index: 1; }
 #page-aviation-wellness .aw-cycle-grid span { color: var(--aw-gold); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; }
-#page-aviation-wellness .aw-cycle-grid h3 { font-family: var(--font-serif); font-size: clamp(38px, 3.5vw, 58px); font-weight: 400; margin: 10px 0 12px; }
+#page-aviation-wellness .aw-cycle-grid h3 { font-family: var(--aw-serif); font-size: clamp(34px, 3vw, 46px); font-weight: 400; margin: 7px 0 9px; }
 #page-aviation-wellness .aw-cycle-grid p { color: rgba(241,238,231,.72); font-size: 14px; line-height: 1.55; max-width: 280px; }
 
 #page-aviation-wellness .aw-partner { display: grid; grid-template-columns: 1fr 1fr 1fr; }
 #page-aviation-wellness .aw-partner-copy,
-#page-aviation-wellness .aw-vision { padding: clamp(62px, 6vw, 100px) clamp(28px, 4.3vw, 68px); }
-#page-aviation-wellness .aw-partner h2 { font-size: clamp(45px, 4.3vw, 68px); margin: 22px 0 26px; }
+#page-aviation-wellness .aw-vision { padding: clamp(44px, 4vw, 62px) clamp(28px, 3.4vw, 50px); }
+#page-aviation-wellness .aw-partner h2 { font-size: clamp(42px, 3.8vw, 56px); margin: 15px 0 18px; }
 #page-aviation-wellness .aw-partner-copy > p + p { margin-top: 18px; }
-#page-aviation-wellness .aw-partner .aw-partner-signoff { color: #222428; font-family: var(--font-serif); font-size: 28px; margin: 30px 0; }
-#page-aviation-wellness .aw-partner-aviation { background: #070809; min-height: 660px; overflow: hidden; }
+#page-aviation-wellness .aw-partner .aw-partner-signoff { color: #222428; font-family: var(--aw-serif); font-size: 25px; margin: 20px 0; }
+#page-aviation-wellness .aw-partner-aviation { background: #070809; min-height: 470px; overflow: hidden; }
 #page-aviation-wellness .aw-partner-aviation img { height: 100%; object-fit: cover; object-position: center; }
 #page-aviation-wellness .aw-vision ul { display: grid; gap: 20px 12px; grid-template-columns: 1fr 1fr; list-style: none; margin: 34px 0 0; padding: 0; }
 #page-aviation-wellness .aw-vision li { align-items: center; display: flex; font-size: 11px; gap: 11px; letter-spacing: .08em; line-height: 1.3; text-transform: uppercase; }
 #page-aviation-wellness .aw-vision li span { color: #806c3c; font-size: 23px; }
 
 #page-aviation-wellness .aw-london,
-#page-aviation-wellness .aw-final { min-height: 500px; overflow: hidden; position: relative; }
+#page-aviation-wellness .aw-final { min-height: 330px; overflow: hidden; position: relative; }
 #page-aviation-wellness .aw-london img,
 #page-aviation-wellness .aw-final img { height: 100%; inset: 0; object-fit: cover; position: absolute; }
 #page-aviation-wellness .aw-london::after,
@@ -328,13 +342,13 @@
 #page-aviation-wellness .aw-final > div { max-width: 650px; padding: clamp(82px, 9vw, 140px) clamp(28px, 7vw, 110px); position: relative; z-index: 1; }
 #page-aviation-wellness .aw-london h2 { font-size: clamp(48px, 5.2vw, 80px); margin: 20px 0 24px; }
 #page-aviation-wellness .aw-london p { color: rgba(241,238,231,.74); }
-#page-aviation-wellness .aw-final { min-height: 460px; text-align: center; }
+#page-aviation-wellness .aw-final { min-height: 310px; text-align: center; }
 #page-aviation-wellness .aw-final::after { background: rgba(3,4,5,.76); }
 #page-aviation-wellness .aw-final > div { margin: 0 auto; max-width: 850px; padding-left: 28px; padding-right: 28px; }
-#page-aviation-wellness .aw-final p { font-family: var(--font-serif); font-size: clamp(30px, 3.6vw, 54px); line-height: 1.15; margin: 22px auto 32px; }
+#page-aviation-wellness .aw-final p { font-family: var(--aw-serif); font-size: clamp(28px, 3vw, 42px); line-height: 1.15; margin: 16px auto 24px; }
 #page-aviation-wellness .aw-compliance { background: #08090a; color: rgba(241,238,231,.46); font-size: 11px; letter-spacing: .04em; line-height: 1.6; padding: 22px clamp(24px, 5vw, 76px); text-align: center; }
 
-@media (max-width: 1100px) {
+@media (max-width: 900px) {
   #page-aviation-wellness .aw-treatment-grid { grid-template-columns: repeat(3, 1fr); }
   #page-aviation-wellness .aw-treatment-grid article:nth-child(3) { border-right: 0; }
   #page-aviation-wellness .aw-treatment-grid article:nth-child(-n+3) { border-bottom: 1px solid rgba(17,19,22,.16); }
