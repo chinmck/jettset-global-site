@@ -2,8 +2,43 @@
   'use strict';
 
   var META_PIXEL_ID = '1377605307888175';
-  var ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'];
+  var GOOGLE_ADS_ID = 'AW-18409587176';
+  var GOOGLE_ADS_CONVERSIONS = {
+    quoteRequest: 'q426CJiPjPMcEOiDsMpE',
+    telephoneClick: 'YZE1CJuPjPMcEOiDsMpE',
+    whatsappClick: 'cy1XCJ6PjPMcEOiDsMpE'
+  };
+  var ATTRIBUTION_KEYS = [
+    'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
+    'gclid', 'gbraid', 'wbraid', 'fbclid', 'partner', 'partner_id'
+  ];
   var STORAGE_KEY = 'jettset_campaign_attribution';
+  var googleTrackedForms = typeof WeakSet === 'function' ? new WeakSet() : null;
+
+  function installGoogleAdsTag() {
+    if (window.__jettsetGoogleAdsInstalled) return;
+    window.__jettsetGoogleAdsInstalled = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () {
+      window.dataLayer.push(arguments);
+    };
+
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GOOGLE_ADS_ID);
+    document.head.appendChild(script);
+
+    window.gtag('js', new Date());
+    window.gtag('config', GOOGLE_ADS_ID);
+  }
+
+  function googleAdsConversion(label, parameters) {
+    if (typeof window.gtag !== 'function' || !label) return;
+    var eventData = parameters || {};
+    eventData.send_to = GOOGLE_ADS_ID + '/' + label;
+    eventData.event_timeout = 2000;
+    window.gtag('event', 'conversion', eventData);
+  }
 
   function readCookie(name) {
     var prefix = name + '=';
@@ -31,6 +66,13 @@
       var value = params.get(key);
       if (value) attribution[key] = value;
     });
+
+    if (!attribution.landing_page) {
+      attribution.landing_page = window.location.pathname + window.location.search;
+    }
+    if (!attribution.referrer && document.referrer) {
+      attribution.referrer = document.referrer;
+    }
 
     var fbc = readCookie('_fbc');
     var fbp = readCookie('_fbp');
@@ -101,10 +143,19 @@
         content_name: formName || 'jettset-enquiry',
         enquiry_type: formName || 'jettset-enquiry'
       });
+
+      if (!form || !googleTrackedForms || !googleTrackedForms.has(form)) {
+        if (form && googleTrackedForms) googleTrackedForms.add(form);
+        googleAdsConversion(GOOGLE_ADS_CONVERSIONS.quoteRequest, {
+          form_name: formName || 'jettset-enquiry',
+          page_path: window.location.pathname
+        });
+      }
     }
   };
 
   function initialiseTracking() {
+    installGoogleAdsTag();
     collectAttribution();
     document.querySelectorAll('form[name^="jettset-"]').forEach(enrichForm);
 
@@ -122,8 +173,10 @@
 
       if (/^tel:/i.test(href)) {
         metaEvent('trackCustom', 'PhoneClick', eventData);
+        googleAdsConversion(GOOGLE_ADS_CONVERSIONS.telephoneClick, eventData);
       } else if (/^(?:https?:)?\/\/(?:wa\.me|(?:api\.)?whatsapp\.com)\//i.test(href)) {
         metaEvent('trackCustom', 'WhatsAppClick', eventData);
+        googleAdsConversion(GOOGLE_ADS_CONVERSIONS.whatsappClick, eventData);
       }
     });
   }
@@ -678,7 +731,6 @@
         body: new URLSearchParams(new FormData(form)).toString()
       }).then(function(response){
         if(!response.ok) throw new Error('Form submission failed');
-        if(window.JettsetMetaTracking) window.JettsetMetaTracking.trackLead(form);
         return response;
       });
     }
@@ -702,6 +754,7 @@
       }
 
       var form = this;
+      if(window.JettsetMetaTracking) window.JettsetMetaTracking.enrichForm(form);
       var formData = new FormData(form);
       var webhookPayload = {};
       formData.forEach(function(value, key){
@@ -726,6 +779,7 @@
           })
         ]);
         if(!results[1].ok) throw new Error('Webhook submission failed');
+        if(window.JettsetMetaTracking) window.JettsetMetaTracking.trackLead(form);
       }
       catch(error){
         quoteSubmissionInProgress = false;
@@ -762,6 +816,7 @@
       }
 
       var form = this;
+      if(window.JettsetMetaTracking) window.JettsetMetaTracking.enrichForm(form);
       var formData = new FormData(form);
       var webhookPayload = {};
       formData.forEach(function(value, key){
@@ -786,6 +841,7 @@
           })
         ]);
         if(!results[1].ok) throw new Error('Webhook submission failed');
+        if(window.JettsetMetaTracking) window.JettsetMetaTracking.trackLead(form);
       }
       catch(error){
         partnerSubmissionInProgress = false;
@@ -818,6 +874,7 @@
 
       var form = this;
       var submitButton = form.querySelector('[type="submit"]');
+      if(window.JettsetMetaTracking) window.JettsetMetaTracking.enrichForm(form);
       var formData = new FormData(form);
       var webhookPayload = {};
       formData.forEach(function(value, key){
@@ -896,6 +953,7 @@
       }
 
       var form = this;
+      if(window.JettsetMetaTracking) window.JettsetMetaTracking.enrichForm(form);
       var formData = new FormData(form);
       var webhookPayload = {};
       formData.forEach(function(value, key){
@@ -920,6 +978,7 @@
           })
         ]);
         if(!results[1].ok) throw new Error('Webhook submission failed');
+        if(window.JettsetMetaTracking) window.JettsetMetaTracking.trackLead(form);
       }
       catch(error){
         legsSubmissionInProgress = false;
@@ -952,6 +1011,7 @@
       }
 
       var form = this;
+      if(window.JettsetMetaTracking) window.JettsetMetaTracking.enrichForm(form);
       var formData = new FormData(form);
       var webhookPayload = {};
       formData.forEach(function(value, key){
@@ -976,6 +1036,7 @@
           })
         ]);
         if(!results[1].ok) throw new Error('Webhook submission failed');
+        if(window.JettsetMetaTracking) window.JettsetMetaTracking.trackLead(form);
       }
       catch(error){
         editionsSubmissionInProgress = false;
@@ -1010,6 +1071,7 @@
       }
 
       var form = this;
+      if(window.JettsetMetaTracking) window.JettsetMetaTracking.enrichForm(form);
       var formData = new FormData(form);
       var webhookPayload = {};
       formData.forEach(function(value, key){
@@ -1034,6 +1096,7 @@
           })
         ]);
         if(!results[1].ok) throw new Error('Webhook submission failed');
+        if(window.JettsetMetaTracking) window.JettsetMetaTracking.trackLead(form);
       }
       catch(error){
         jetCardSubmissionInProgress = false;
