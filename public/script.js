@@ -1,6 +1,11 @@
 (function () {
   'use strict';
 
+  // Keep the tracking runtime singleton-safe when a page or deployment layer
+  // evaluates the shared script more than once.
+  if (window.__jettsetTrackingRuntimeInstalled) return;
+  window.__jettsetTrackingRuntimeInstalled = true;
+
   var META_PIXEL_ID = '1377605307888175';
   var GOOGLE_ADS_ID = 'AW-18409587176';
   var GOOGLE_ADS_CONVERSIONS = {
@@ -15,6 +20,12 @@
   var STORAGE_KEY = 'jettset_campaign_attribution';
   var googleTrackedForms = typeof WeakSet === 'function' ? new WeakSet() : null;
 
+  function hasGoogleTagCommand(command, id) {
+    return window.dataLayer.some(function (entry) {
+      return entry && entry[0] === command && (!id || entry[1] === id);
+    });
+  }
+
   function installGoogleAdsTag() {
     if (window.__jettsetGoogleAdsInstalled) return;
     window.__jettsetGoogleAdsInstalled = true;
@@ -23,18 +34,36 @@
       window.dataLayer.push(arguments);
     };
 
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GOOGLE_ADS_ID);
-    document.head.appendChild(script);
+    var existingScript = document.querySelector(
+      'script[src*="googletagmanager.com/gtag/js"][src*="' + GOOGLE_ADS_ID + '"]'
+    );
+    if (!existingScript) {
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GOOGLE_ADS_ID);
+      document.head.appendChild(script);
+    }
 
-    window.gtag('js', new Date());
-    window.gtag('config', GOOGLE_ADS_ID);
+    if (!hasGoogleTagCommand('js')) {
+      window.gtag('js', new Date());
+    }
+    if (!hasGoogleTagCommand('config', GOOGLE_ADS_ID)) {
+      window.gtag('config', GOOGLE_ADS_ID);
+    }
   }
 
   function googleAdsConversion(label, parameters) {
     if (typeof window.gtag !== 'function' || !label) return;
-    var eventData = parameters || {};
+
+    // A shared, short-lived guard prevents the same physical action from being
+    // counted twice if another deployment layer has attached the runtime too.
+    var now = Date.now();
+    var guard = window.__jettsetGoogleAdsConversionGuard
+      || (window.__jettsetGoogleAdsConversionGuard = {});
+    if (guard[label] && now - guard[label] < 1500) return;
+    guard[label] = now;
+
+    var eventData = Object.assign({}, parameters || {});
     eventData.send_to = GOOGLE_ADS_ID + '/' + label;
     eventData.event_timeout = 2000;
     window.gtag('event', 'conversion', eventData);
