@@ -83,25 +83,9 @@
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
   transform-origin:center 40%; will-change:transform, filter;
 }
-.ba-page .ba-placeholder-badge{
-  /* Cleared below the sitewide fixed nav (.nav, z-index:400, ~80px tall
-     with its logo) so the two don't visually collide. Constrained to a
-     readable measure so it wraps to at most two lines even on narrow
-     phones, keeping it clear of the Jettset mark below. */
-  position:absolute; top:104px; left:50%; transform:translateX(-50%); z-index:3;
-  max-width:min(78vw, 360px);
-  font-family:'Inter', sans-serif; font-size:0.65rem; letter-spacing:0.1em;
-  text-transform:uppercase; color:var(--ba-titanium); text-align:center;
-  border:1px dashed var(--ba-line); padding:8px 16px; background:rgba(10,10,10,0.55);
-}
 .ba-page .ba-grade-cool{ position:absolute; inset:0; background:#12202b; mix-blend-mode:color; opacity:0.28; }
 .ba-page .ba-grade-accent{ position:absolute; inset:0; background:var(--ba-coral); mix-blend-mode:color; opacity:0; }
 .ba-page .ba-vignette{ position:absolute; inset:0; background:radial-gradient(ellipse at 50% 55%, transparent 35%, rgba(0,0,0,0.75) 100%); }
-.ba-page .ba-brand-mark{
-  position:absolute; top:29%; left:50%; transform:translateX(-50%);
-  font-family:'EB Garamond', serif; font-size:0.95rem; letter-spacing:0.18em;
-  text-transform:uppercase; color:var(--ba-titanium);
-}
 .ba-page .ba-partner-mark{
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
   font-family:'EB Garamond', serif; font-weight:500; font-size:clamp(1.8rem,4.2vw,3rem);

@@ -10,7 +10,6 @@
   var plate = document.getElementById('baHeroPlate');
   var gradeCool = document.getElementById('baGradeCool');
   var gradeAccent = document.getElementById('baGradeAccent');
-  var jettsetMark = document.getElementById('baJettsetMark');
   var bioMark = document.getElementById('baBioMark');
   var reveal = document.getElementById('baReveal');
   var cue = document.getElementById('baCue');
@@ -18,7 +17,7 @@
   var reducedMotion = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if(wrap && plate && gradeCool && gradeAccent && jettsetMark && bioMark && reveal && cue && !reducedMotion){
+  if(wrap && plate && gradeCool && gradeAccent && bioMark && reveal && cue && !reducedMotion){
     // Smoothstep, so the grade shift doesn't feel linear/mechanical.
     function ease(t){ return t*t*(3-2*t); }
 
@@ -37,15 +36,12 @@
       var accentP = ease(Math.min(Math.max((p - 0.35) / 0.45, 0), 1));
       gradeAccent.style.opacity = accentP * 0.5;
 
-      // Phase 3: the Jettset mark recedes.
-      jettsetMark.style.opacity = 1 - Math.min(Math.max((p - 0.15) / 0.3, 0), 1);
-
-      // Phase 4: Bio Atelier resolves in its accent colour at the threshold.
+      // Phase 3: Bio Atelier resolves in its accent colour at the threshold.
       var bioP = Math.min(Math.max((p - 0.6) / 0.35, 0), 1);
       bioMark.style.opacity = bioP;
       bioMark.style.transform = 'translate(-50%,-50%) scale(' + (0.9 + bioP*0.1) + ')';
 
-      // Phase 5: thesis + CTA.
+      // Phase 4: thesis + CTA.
       var revealP = Math.min(Math.max((p - 0.75) / 0.25, 0), 1);
       reveal.style.opacity = revealP;
       reveal.style.transform = 'translateY(' + ((1-revealP)*16) + 'px)';
