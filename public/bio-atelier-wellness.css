@@ -1,0 +1,188 @@
+/* ==========================================================================
+   Jettset × Bio Atelier — Wellness Partnership
+   Page-specific styles. Every new selector here is prefixed `.ba-` so it
+   cannot collide with sitewide rules in styles.css or with other page
+   stylesheets (medical.css, house-section.css, etc). Shared chrome — the
+   nav, side panel, contact mark and footer — is left untouched and keeps
+   inheriting its look from styles.css.
+
+   Typography: this page intentionally uses EB Garamond (display) / Inter
+   (body) per locked brand type for this partnership campaign. That is a
+   deliberate departure from the sitewide Canela Text / General Sans pairing
+   in styles.css — scoped to `.ba-page` only, so the shared nav/footer chrome
+   is unaffected and still matches the rest of the site.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+
+.ba-page{
+  /* Palette mapped onto the site's existing tokens (Near Black / Warm Ivory /
+     Champagne Gold / Titanium / Smoke) so a future palette update in
+     styles.css propagates here automatically. --ba-coral is the one addition:
+     a Bio Atelier partner accent, used only to distinguish the co-brand
+     moments (partner mark, active destination, protocol value) — it is not
+     part of the five locked Jettset tones and is scoped to this page only. */
+  --ba-ink: var(--black, #0A0908);
+  --ba-ivory: var(--off-white, #F5F3EF);
+  --ba-gold: var(--gold, #C9A24B);
+  --ba-titanium: var(--platinum, #D8DBDE);
+  --ba-smoke: var(--grey, #8A8782);
+  --ba-line: var(--grey-line, rgba(245,243,239,0.14));
+  --ba-coral: #B9705C;
+
+  background: var(--ba-ink);
+  color: var(--ba-ivory);
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.ba-page .ba-serif{ font-family:'EB Garamond', serif; }
+
+.ba-page .ba-tag{
+  font-size:0.68rem; letter-spacing:0.14em; color:var(--ba-smoke);
+  text-transform:uppercase; display:block; margin-bottom:14px;
+}
+
+.ba-page .ba-section{ padding:110px 8vw; }
+@media (max-width:768px){ .ba-page .ba-section{ padding:70px 6vw; } }
+
+.ba-page h1,
+.ba-page h2.ba-h,
+.ba-page h3.ba-serif{ font-family:'EB Garamond', serif; font-weight:500; }
+
+.ba-page h2.ba-h{ font-size:clamp(1.7rem,3.2vw,2.6rem); line-height:1.15; }
+
+.ba-page .ba-cta{
+  display:inline-block; margin-top:28px; padding:14px 30px;
+  border:1px solid var(--ba-gold); color:var(--ba-gold); text-decoration:none;
+  font-family:'Inter', sans-serif; font-size:0.78rem; letter-spacing:0.08em;
+  transition:background .25s, color .25s;
+}
+.ba-page .ba-cta:hover{ background:var(--ba-gold); color:var(--ba-ink); }
+.ba-page .ba-cta:visited{ color:var(--ba-gold); }
+
+.ba-page .ba-grid2{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+.ba-page .ba-grid2-top{ align-items:flex-start; }
+@media (max-width:820px){ .ba-page .ba-grid2{ grid-template-columns:1fr; } }
+
+.ba-page .ba-body-copy{
+  color:var(--ba-titanium); line-height:1.8; font-size:0.94rem; max-width:44ch;
+}
+
+/* ================= HERO — SCROLL-PINNED DOOR-PUSH + GRADE-SHIFT =================
+   Placement image only: `#baHeroPlate` is a single, swappable <img src> with
+   no width/height baked into the markup — sizing comes entirely from this
+   CSS (object-fit: cover), so dropping in the final hero film asset later
+   only means changing the src. See the HTML comment above the <img> in
+   bio-atelier-wellness.html. */
+.ba-page .ba-doorway-wrap{ position:relative; height:300vh; padding:0; }
+.ba-page .ba-doorway-sticky{ position:sticky; top:0; height:100vh; overflow:hidden; background:#000; }
+.ba-page .ba-hero-plate{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  transform-origin:center 40%; will-change:transform, filter;
+}
+.ba-page .ba-placeholder-badge{
+  /* Cleared below the sitewide fixed nav (.nav, z-index:400, ~80px tall
+     with its logo) so the two don't visually collide. Constrained to a
+     readable measure so it wraps to at most two lines even on narrow
+     phones, keeping it clear of the Jettset mark below. */
+  position:absolute; top:104px; left:50%; transform:translateX(-50%); z-index:3;
+  max-width:min(78vw, 360px);
+  font-family:'Inter', sans-serif; font-size:0.65rem; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--ba-titanium); text-align:center;
+  border:1px dashed var(--ba-line); padding:8px 16px; background:rgba(10,10,10,0.55);
+}
+.ba-page .ba-grade-cool{ position:absolute; inset:0; background:#12202b; mix-blend-mode:color; opacity:0.28; }
+.ba-page .ba-grade-accent{ position:absolute; inset:0; background:var(--ba-coral); mix-blend-mode:color; opacity:0; }
+.ba-page .ba-vignette{ position:absolute; inset:0; background:radial-gradient(ellipse at 50% 55%, transparent 35%, rgba(0,0,0,0.75) 100%); }
+.ba-page .ba-brand-mark{
+  position:absolute; top:29%; left:50%; transform:translateX(-50%);
+  font-family:'EB Garamond', serif; font-size:0.95rem; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--ba-titanium);
+}
+.ba-page .ba-partner-mark{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  font-family:'EB Garamond', serif; font-weight:500; font-size:clamp(1.8rem,4.2vw,3rem);
+  letter-spacing:0.04em; color:var(--ba-coral); opacity:0; text-align:center;
+}
+.ba-page .ba-hero-reveal{
+  position:absolute; inset:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:flex-end; text-align:center;
+  opacity:0; padding:0 10vw 10vh;
+}
+.ba-page .ba-hero-reveal h1{ font-size:clamp(1.9rem,4vw,3.2rem); line-height:1.15; }
+.ba-page .ba-hero-reveal p{ margin-top:16px; max-width:520px; color:var(--ba-titanium); font-size:0.94rem; line-height:1.7; }
+.ba-page .ba-scroll-cue{
+  position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+  font-family:'Inter', sans-serif; font-size:0.65rem; letter-spacing:0.14em;
+  color:var(--ba-smoke); text-transform:uppercase;
+}
+
+/* Reduced motion: no scroll-jacked scale/wash, hero content shown at rest. */
+@media (prefers-reduced-motion: reduce){
+  .ba-page .ba-doorway-wrap{ height:auto; }
+  .ba-page .ba-doorway-sticky{ position:relative; height:100vh; }
+  .ba-page .ba-hero-plate{ transform:none !important; }
+  .ba-page .ba-grade-cool{ opacity:0 !important; }
+  .ba-page .ba-hero-reveal{ opacity:1 !important; transform:none !important; }
+  .ba-page .ba-scroll-cue{ display:none; }
+}
+
+/* ================= CHAPTER 2 — ROUTE ================= */
+.ba-page .ba-route{ border-top:1px solid var(--ba-line); }
+.ba-page .ba-globe-plate{
+  position:relative; border:1px solid var(--ba-line); overflow:hidden; min-height:340px;
+  background: radial-gradient(ellipse at 50% 45%, rgba(185,112,92,0.14), transparent 60%), linear-gradient(135deg,#101010,#060606);
+}
+.ba-page .ba-origin-badge{
+  position:absolute; top:20px; left:20px; z-index:2;
+  font-family:'Inter', sans-serif; font-size:0.65rem; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--ba-titanium);
+  border:1px solid var(--ba-line); padding:8px 14px; background:rgba(10,10,10,0.6);
+}
+.ba-page .ba-dot{ display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--ba-coral); margin-right:8px; }
+.ba-page .ba-destselect{ display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
+.ba-page .ba-destselect button{
+  background:none; border:1px solid var(--ba-line); color:var(--ba-titanium);
+  font-family:'Inter', sans-serif; font-size:0.75rem; letter-spacing:0.04em;
+  padding:9px 16px; cursor:pointer; transition:border-color .2s, color .2s;
+}
+.ba-page .ba-destselect button.is-active{ border-color:var(--ba-coral); color:var(--ba-coral); }
+.ba-page .ba-destselect button:focus-visible{ outline:1px solid var(--ba-coral); outline-offset:2px; }
+.ba-page .ba-routebar{ display:flex; border:1px solid var(--ba-line); margin-top:36px; }
+.ba-page .ba-routebar > div{ flex:1; padding:20px 22px; border-right:1px solid var(--ba-line); }
+.ba-page .ba-routebar > div:last-child{ border-right:none; }
+.ba-page .ba-label{ display:block; font-family:'Inter', sans-serif; font-size:0.63rem; letter-spacing:0.1em; color:var(--ba-smoke); margin-bottom:8px; }
+.ba-page .ba-val{ font-family:'EB Garamond', serif; font-size:1rem; }
+.ba-page .ba-val-accent{ color:var(--ba-coral); }
+@media (max-width:768px){
+  .ba-page .ba-routebar{ flex-direction:column; }
+  .ba-page .ba-routebar > div{ border-right:none; border-bottom:1px solid var(--ba-line); }
+}
+
+/* ================= CHAPTER 3 — PRODUCT =================
+   `.ba-case-plate` is a placeholder plate, not final product photography —
+   Bio Atelier packshot rights are pending. See the HTML comment beside it
+   in bio-atelier-wellness.html; do not replace it with an invented photo. */
+.ba-page .ba-product{ border-top:1px solid var(--ba-line); }
+.ba-page .ba-case-plate{
+  border:1px solid var(--ba-line); overflow:hidden; min-height:280px;
+  background: linear-gradient(160deg,#151515,#0a0a0a);
+  display:flex; align-items:center; justify-content:center;
+}
+.ba-page .ba-case-plate span{
+  font-family:'Inter', sans-serif; font-size:0.68rem; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--ba-smoke);
+  border:1px dashed var(--ba-line); padding:8px 16px; text-align:center;
+}
+.ba-page .ba-price{ color:var(--ba-coral); font-family:'EB Garamond', serif; font-size:1.2rem; margin-top:18px; }
+
+/* ================= CHAPTER 4 — STANDARD + CLOSING ================= */
+.ba-page .ba-standard{ border-top:1px solid var(--ba-line); }
+.ba-page .ba-standard h3{ font-size:1.15rem; margin-bottom:16px; }
+.ba-page .ba-list{ color:var(--ba-titanium); line-height:2; font-size:0.9rem; font-family:'Inter', sans-serif; }
+.ba-page .ba-closing{ border-top:1px solid var(--ba-line); text-align:center; padding:130px 8vw; }
+.ba-page .ba-closing h2.ba-h{ max-width:20ch; margin:0 auto; }
+@media (max-width:768px){ .ba-page .ba-closing{ padding:80px 6vw; } }
