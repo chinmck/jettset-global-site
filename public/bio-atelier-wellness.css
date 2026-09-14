@@ -79,99 +79,35 @@
   color:var(--ba-titanium); line-height:1.8; font-size:0.94rem; max-width:44ch;
 }
 
-/* ================= HERO — CINEMATIC SCROLL SEQUENCE =================
+/* ================= HERO =================
    `#baHeroPlate` is a single, swappable <img src> with no width/height
    baked into the markup — sizing comes entirely from this CSS
-   (object-fit: cover). The sticky wrapper is scrubbed by
-   bio-atelier-wellness.js as the guest scrolls: a slow push toward her
-   face, then the window light behind her broadens into a soft ivory wash,
-   a minimal brand card resolves on it, holds, then fades back to dark so
-   the hand-off into Chapter Two never feels like a hard cut. The runway
-   is tall (420vh) purely to give the scrub room to breathe at a normal
-   scroll speed — the perceived sequence is the ~6-8s in the brief, not a
-   fixed timer. */
-.ba-page .ba-doorway-wrap{ position:relative; height:420vh; padding:0; }
+   (object-fit: cover). Full viewport, no copy, no overlay. The only
+   motion is a barely-perceptible scale drift (1 -> 1.025) as the guest
+   begins scrolling, applied directly to the image by
+   bio-atelier-wellness.js. The wrap is only slightly taller than one
+   viewport (140vh) — just enough room for that drift to play out — after
+   which the sticky image is simply covered by Chapter Two rising over it
+   in ordinary page flow. No pinned sequence, no reveal. */
+.ba-page .ba-doorway-wrap{ position:relative; height:140vh; padding:0; }
 .ba-page .ba-doorway-sticky{ position:sticky; top:0; height:100vh; overflow:hidden; background:var(--ba-ink); }
-
-/* .ba-hero-frame carries a small, one-time, non-scroll-linked "breathing"
-   push (~2.5% scale) so the opening frame reads as alive before the guest
-   scrolls at all — arrival / stillness, not a static photo. It is a
-   separate layer from `.ba-hero-plate` (which JS animates directly) so
-   the two transforms never fight over the same property. */
-.ba-page .ba-hero-frame{
-  position:absolute; inset:0; overflow:hidden;
-  animation: baHeroIdlePush 5s cubic-bezier(0.16,1,0.3,1) 0.3s both;
-}
-@keyframes baHeroIdlePush{ from{ transform:scale(1); } to{ transform:scale(1.025); } }
 
 .ba-page .ba-hero-plate{
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
   object-position:32% 30%; /* keeps her in frame, negative space to the right, across aspect ratios */
-  transform-origin:36% 20%; /* roughly her eyeline, so the close-in reads as toward her face, not the frame centre */
-  will-change:transform, filter;
-  filter:brightness(1) blur(0px);
+  will-change:transform;
 }
 @media (max-width:640px){
   /* Portrait phones crop far more off the sides than desktop does, so the
      focal point is nudged to keep her fully in frame rather than clipped. */
-  .ba-page .ba-hero-plate{ object-position:22% 26%; transform-origin:30% 16%; }
+  .ba-page .ba-hero-plate{ object-position:22% 26%; }
 }
 
-/* The reveal: the window light blooms across her cheek/eye and broadens
-   until it IS the frame — not a flash, and not a separate fade-to-black
-   step. This overlay sits in front of the (by now heavily zoomed) photo,
-   so its centre is placed relative to the viewport, near where her face
-   sits once close-in (close to `.ba-hero-plate`'s transform-origin) but
-   offset toward screen-right — the direction she's looking, and where the
-   window light would fall across her. */
-.ba-page .ba-hero-lightwash{
-  position:absolute; inset:0; opacity:0; pointer-events:none;
-  background:
-    radial-gradient(ellipse 80% 68% at 58% 30%, rgba(245,238,220,0.97) 0%, rgba(245,238,220,0.62) 48%, transparent 74%),
-    var(--ba-ivory);
-}
-.ba-page .ba-vignette{ position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse at 50% 55%, transparent 40%, rgba(0,0,0,0.6) 100%); }
-
-/* Brand reveal: minimal ivory/near-black card. Only opacity and, on the
-   eyebrow label, letter-spacing move — no position or scale animation. */
-.ba-page .ba-brand-frame{
-  position:absolute; inset:0; display:flex; flex-direction:column;
-  align-items:center; justify-content:center; text-align:center;
-  opacity:0; padding:0 8vw; pointer-events:none;
-}
-.ba-page .ba-brand-title{
-  font-family:'EB Garamond', serif; font-weight:500; color:var(--ba-ink);
-  font-size:clamp(1.6rem,4vw,2.75rem); letter-spacing:0.01em; margin:0 0 16px;
-}
-.ba-page .ba-brand-title .ba-brand-x{ color:var(--ba-gold); padding:0 0.28em; font-style:italic; }
-.ba-page .ba-brand-eyebrow{
-  font-family:'Inter', sans-serif; font-weight:500; font-size:0.72rem;
-  color:var(--ba-ink); text-transform:uppercase; letter-spacing:0.08em;
-}
-
-.ba-page .ba-scroll-cue{
-  position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
-  font-family:'Inter', sans-serif; font-size:0.65rem; letter-spacing:0.14em;
-  color:var(--ba-smoke); text-transform:uppercase;
-}
-
-/* Exit: crossfades the ivory card straight to near-black (never back to
-   the photo) so unpinning into Chapter Two's dark background is seamless. */
-.ba-page .ba-hero-fadeout{
-  position:absolute; inset:0; opacity:0; pointer-events:none; background:var(--ba-ink);
-}
-
-/* Reduced motion: no scroll-jacked scale/filter/wash — a calm static
-   hero photo, full stop, and straight on into the next section. */
+/* Reduced motion: no drift at all — a calm static hero photo. */
 @media (prefers-reduced-motion: reduce){
   .ba-page .ba-doorway-wrap{ height:auto; }
   .ba-page .ba-doorway-sticky{ position:relative; height:100vh; }
-  .ba-page .ba-hero-frame{ animation:none; }
-  .ba-page .ba-hero-plate{ transform:none !important; filter:none !important; }
-  .ba-page .ba-hero-lightwash,
-  .ba-page .ba-brand-frame,
-  .ba-page .ba-hero-fadeout{ display:none; }
-  .ba-page .ba-scroll-cue{ display:none; }
+  .ba-page .ba-hero-plate{ transform:none !important; }
 }
 
 /* ================= CHAPTER 2 — ROUTE ================= */
