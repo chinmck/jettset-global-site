@@ -1,57 +1,90 @@
 /* Jettset × Bio Atelier — Wellness Partnership
-   Page-specific behaviour only: the scroll-pinned door-push hero and the
-   destination selector. Shared nav / side-panel / contact-sheet wiring
-   lives in script.js and is untouched by this file. All ids are `ba*` /
-   `baDest*` so nothing here can collide with another page's script. */
+   Page-specific behaviour only: the cinematic scroll-pinned hero sequence
+   and the destination selector. Shared nav / side-panel / contact-sheet
+   wiring lives in script.js and is untouched by this file. All ids are
+   `ba*` so nothing here can collide with another page's script.
+
+   Hero sequence (mapped over scroll progress p, 0 -> 1, while the section
+   is pinned):
+     1. Opening   — p 0.00-0.05: at rest; the CSS idle push in
+                    bio-atelier-wellness.css carries the "feels alive" beat.
+     2. Zoom      — p 0.05-0.55: slow cinematic push toward her face.
+     3. Light     — p 0.42-0.72: the window light broadens into a soft
+                    ivory wash (brightness + a little blur on the photo,
+                    the wash's own opacity rising) — never a hard flash.
+     4. Brand     — p 0.62-0.80: the ivory card resolves; opacity and the
+                    eyebrow's letter-spacing are the only things that move.
+     5. Hold/Exit — p 0.80-0.90 holds, 0.90-1.0 crossfades to near-black so
+                    unpinning into Chapter Two is never a hard cut. */
 (function(){
   'use strict';
 
   var wrap = document.getElementById('baDoorwayWrap');
   var plate = document.getElementById('baHeroPlate');
-  var gradeCool = document.getElementById('baGradeCool');
-  var gradeAccent = document.getElementById('baGradeAccent');
-  var bioMark = document.getElementById('baBioMark');
-  var reveal = document.getElementById('baReveal');
+  var lightwash = document.getElementById('baLightwash');
+  var brandFrame = document.getElementById('baBrandFrame');
+  var brandEyebrow = document.getElementById('baBrandEyebrow');
+  var fadeout = document.getElementById('baFadeout');
   var cue = document.getElementById('baCue');
 
   var reducedMotion = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if(wrap && plate && gradeCool && gradeAccent && bioMark && reveal && cue && !reducedMotion){
-    // Smoothstep, so the grade shift doesn't feel linear/mechanical.
+  if(wrap && plate && lightwash && brandFrame && brandEyebrow && fadeout && cue && !reducedMotion){
+    // Smoothstep — every phase below eases through this rather than
+    // moving linearly, so nothing in the sequence feels mechanical.
     function ease(t){ return t*t*(3-2*t); }
+    // Maps p onto a [from, to] window and eases it to 0..1.
+    function phase(p, from, to){ return ease(Math.min(Math.max((p - from) / (to - from), 0), 1)); }
 
-    function onScroll(){
+    var ticking = false;
+
+    function render(){
       var rect = wrap.getBoundingClientRect();
       var total = wrap.offsetHeight - window.innerHeight;
       var scrolled = Math.min(Math.max(-rect.top, 0), total);
-      var p = total > 0 ? scrolled / total : 0; // 0 -> 1
+      var p = total > 0 ? scrolled / total : 0; // 0 -> 1 across the whole pinned run
 
-      // Phase 1: slow push into the cabin — cool wash holds briefly then fades.
-      var pushP = Math.min(p / 0.7, 1);
-      plate.style.transform = 'scale(' + (1 + ease(pushP) * 0.16) + ')';
-      gradeCool.style.opacity = Math.max(0.28 - ease(Math.min(p/0.5,1)) * 0.28, 0);
+      // ---- 2. ZOOM: a controlled push toward her face, not a flat scale ----
+      var zoomP = phase(p, 0.05, 0.55);
+      var scale = 1 + zoomP * 0.42; // cinematic push, capped well short of distortion
+      var driftY = zoomP * -14; // a couple of px of upward drift, like a slow dolly rather than a static zoom
+      plate.style.transform = 'scale(' + scale.toFixed(4) + ') translateY(' + driftY.toFixed(2) + 'px)';
 
-      // Phase 2: partner accent wash rises as the threshold is crossed.
-      var accentP = ease(Math.min(Math.max((p - 0.35) / 0.45, 0), 1));
-      gradeAccent.style.opacity = accentP * 0.5;
+      // A faint lift in contrast/saturation as she comes into focus — kept
+      // subtle; this is restraint, not a filter effect.
+      var richness = 1 + zoomP * 0.08;
 
-      // Phase 3: Bio Atelier resolves in its accent colour at the threshold.
-      var bioP = Math.min(Math.max((p - 0.6) / 0.35, 0), 1);
-      bioMark.style.opacity = bioP;
-      bioMark.style.transform = 'translate(-50%,-50%) scale(' + (0.9 + bioP*0.1) + ')';
+      // ---- 3. LIGHT: the window light broadens to overtake the frame ----
+      var lightP = phase(p, 0.42, 0.72);
+      var brightness = 1 + lightP * 0.55;
+      var blur = lightP * 7; // px
+      plate.style.filter = 'brightness(' + brightness.toFixed(3) + ') saturate(' + richness.toFixed(3) + ') blur(' + blur.toFixed(2) + 'px)';
+      lightwash.style.opacity = lightP;
 
-      // Phase 4: thesis + CTA.
-      var revealP = Math.min(Math.max((p - 0.75) / 0.25, 0), 1);
-      reveal.style.opacity = revealP;
-      reveal.style.transform = 'translateY(' + ((1-revealP)*16) + 'px)';
+      // ---- 4. BRAND: minimal ivory card — opacity + letter-spacing only ----
+      var brandP = phase(p, 0.62, 0.80);
+      brandFrame.style.opacity = brandP;
+      brandEyebrow.style.letterSpacing = (0.08 + brandP * 0.24).toFixed(3) + 'em';
 
-      cue.style.opacity = p < 0.05 ? 1 : 0;
+      // ---- 5. HOLD (0.80-0.90 implicit) / EXIT: crossfade to near-black ----
+      var exitP = phase(p, 0.90, 1.0);
+      fadeout.style.opacity = exitP;
+      // The brand card recedes with the fade rather than sitting on top of
+      // flat black, so the text disappears rather than clipping.
+      brandFrame.style.opacity = brandP * (1 - exitP);
+
+      cue.style.opacity = p < 0.04 ? 1 : 0;
+      ticking = false;
     }
 
-    document.addEventListener('scroll', onScroll, {passive:true});
-    window.addEventListener('resize', onScroll, {passive:true});
-    onScroll();
+    document.addEventListener('scroll', function(){
+      if(!ticking){ requestAnimationFrame(render); ticking = true; }
+    }, {passive:true});
+    window.addEventListener('resize', function(){
+      if(!ticking){ requestAnimationFrame(render); ticking = true; }
+    }, {passive:true});
+    render();
   }
 
   // Destination selector — London stays fixed as the origin; only the

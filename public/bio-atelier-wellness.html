@@ -82,23 +82,25 @@
 
   <main class="ba-page">
 
-    <!-- ============ HERO — SCROLL-PINNED DOOR-PUSH ============
-         Working hero image: `jettset-bio-atelier-hero-placement.png`. It is
-         a single, swappable <img src> with no width/height baked into the
-         markup, so replacing it later is still a one-line change. -->
+    <!-- ============ HERO — CINEMATIC SCROLL SEQUENCE ============
+         Working hero image: `jettset-bio-atelier-hero-placement.png`, a
+         single swappable <img src> with no width/height baked into the
+         markup. Sequence (driven by bio-atelier-wellness.js as the guest
+         scrolls): slow push-in on her face -> the window light overtakes
+         the frame -> a minimal ivory brand card resolves -> holds -> fades
+         back to dark for a clean hand-off into Chapter Two below. -->
     <section class="ba-doorway-wrap" id="baDoorwayWrap">
       <div class="ba-doorway-sticky" id="baDoorwaySticky">
-        <img class="ba-hero-plate" id="baHeroPlate" src="images/bio-atelier/jettset-bio-atelier-hero-placement.png" alt="Guest resting in a Jettset cabin at golden hour, ahead of a Bio Atelier wellness protocol">
-        <div class="ba-grade-cool" id="baGradeCool"></div>
-        <div class="ba-grade-accent" id="baGradeAccent"></div>
-        <div class="ba-vignette"></div>
-        <div class="ba-partner-mark" id="baBioMark">Bio Atelier</div>
-        <div class="ba-hero-reveal" id="baReveal">
-          <span class="ba-tag">One Door. Two Standards.</span>
-          <h1 class="ba-serif">Arrive already recovered.</h1>
-          <p>Jettset and Bio Atelier — a single relationship, considered before, during and after the journey.</p>
-          <a class="ba-cta" href="#ba-route">Enter The World <span aria-hidden="true">&nbsp;&rarr;</span></a>
+        <div class="ba-hero-frame">
+          <img class="ba-hero-plate" id="baHeroPlate" src="images/bio-atelier/jettset-bio-atelier-hero-placement.png" alt="Guest resting in a Jettset cabin at golden hour, ahead of a Bio Atelier wellness protocol">
         </div>
+        <div class="ba-hero-lightwash" id="baLightwash"></div>
+        <div class="ba-vignette"></div>
+        <div class="ba-brand-frame" id="baBrandFrame">
+          <p class="ba-brand-title ba-serif" id="baBrandTitle">Jettset <span class="ba-brand-x">&times;</span> Bio Atelier</p>
+          <span class="ba-brand-eyebrow" id="baBrandEyebrow">Jettset Wellness</span>
+        </div>
+        <div class="ba-hero-fadeout" id="baFadeout"></div>
         <div class="ba-scroll-cue" id="baCue">Scroll to step through</div>
       </div>
     </section>
