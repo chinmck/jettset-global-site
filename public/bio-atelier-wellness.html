@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jettset × Bio Atelier — Wellness Partnership | Jettset Global</title>
-<meta name="description" content="Jettset and Bio Atelier: a single relationship around the guest's journey, from departure to recovery. Available first from London.">
+<title>Aviation Wellness | Jettset × Bio Atelier</title>
+<meta name="description" content="Jettset and its Official Wellness Partner, Bio Atelier, present Aviation Wellness — supporting how travellers prepare, perform and recover before, during and after every journey.">
 <link rel="stylesheet" href="styles.css?v=cta-hero-1">
 <link rel="stylesheet" href="bio-atelier-wellness.css?v=1">
 </head>
@@ -82,94 +82,238 @@
 
   <main class="ba-page">
 
-    <!-- ============ HERO ============
-         Working hero image: `jettset-bio-atelier-hero-placement.png`, a
-         single swappable <img src> with no width/height baked into the
-         markup. Full-viewport, no copy, no logo reveal, no scroll-jacked
-         sequence — the only motion is a barely-perceptible scale drift
+    <!-- ============ SECTION 01 — HERO ============
+         LOCKED, approved image: `jettset-bio-atelier-hero-placement.png`.
+         Do not replace, regenerate, recolour or heavily crop it. Single
+         swappable <img src>, no width/height baked into the markup.
+         Full-viewport, minimal copy over the calmer lower portion of the
+         frame. The only motion is a barely-perceptible scale drift
          (1 -> 1.025) as the guest begins scrolling, driven by
-         bio-atelier-wellness.js. Chapter Two then rises naturally over it
-         in normal page flow; there is nothing else to hand off. -->
+         bio-atelier-wellness.js. Section 02 then rises naturally over the
+         sticky image in ordinary page flow — no scroll-jacked sequence,
+         no logo reveal, no brand-card takeover. -->
     <section class="ba-doorway-wrap" id="baDoorwayWrap">
       <div class="ba-doorway-sticky" id="baDoorwaySticky">
-        <img class="ba-hero-plate" id="baHeroPlate" src="images/bio-atelier/jettset-bio-atelier-hero-placement.png" alt="Guest resting in a Jettset cabin at golden hour, ahead of a Bio Atelier wellness protocol">
+        <img class="ba-hero-plate" id="baHeroPlate" src="images/bio-atelier/jettset-bio-atelier-hero-placement.png" alt="Guest seated in a Jettset cabin, looking out of the window">
+        <div class="ba-hero-scrim"></div>
+        <div class="ba-hero-copy">
+          <span class="ba-eyebrow">Jettset &times; Bio Atelier</span>
+          <h1>Aviation Wellness</h1>
+          <p class="ba-hero-sub">The Journey, Reimagined.</p>
+          <p class="ba-hero-body">Jettset and its Official Wellness Partner, Bio Atelier, have created Aviation Wellness, a new approach to supporting how travellers prepare, perform and recover before, during and after every journey.</p>
+          <a class="ba-cta" href="#ba-idea">Explore Aviation Wellness</a>
+        </div>
       </div>
     </section>
 
-    <!-- ============ CHAPTER TWO — THE JOURNEY, RECALIBRATED ============
-         London is the fixed single origin: this offer launches from London
-         only. The selector below lets the guest choose a destination, not
-         an origin — that is intentional positioning, not an oversight. -->
-    <section class="ba-section ba-route" id="ba-route">
-      <span class="ba-tag">Chapter Two — The Journey</span>
-      <h2 class="ba-h">One departure point. Every destination recalibrated.</h2>
-      <div class="ba-grid2" style="margin-top:48px;">
-        <div class="ba-globe-plate">
-          <div class="ba-origin-badge"><span class="ba-dot"></span>Departing London — available first, more cities to follow</div>
+    <!-- ============ SECTION 02 — THE BIG IDEA ============ -->
+    <section class="ba-section ba-idea" id="ba-idea">
+      <div class="ba-container">
+        <h2 class="ba-h" data-reveal>Time in the air doesn&rsquo;t have to be lost time.</h2>
+        <p class="ba-lede" data-reveal>Long journeys, demanding schedules, changing time zones and the pace of modern life can place very different demands on the body.</p>
+        <p class="ba-lede" data-reveal>Aviation Wellness has been created around a simple idea: the journey itself can become part of how you prepare, reset and arrive.</p>
+        <p class="ba-lede" data-reveal>From personalised supplementation and recovery support to selected wellness treatments and technologies, each experience can be considered around the traveller, the journey and what comes next.</p>
+        <div class="ba-idea-statement" data-reveal>Arrive Ready.</div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 03 — PREPARE / RESET / ARRIVE ============ -->
+    <section class="ba-section ba-phases" id="ba-phases">
+      <div class="ba-container">
+        <div class="ba-phase-list" data-reveal-group>
+          <article class="ba-phase" data-reveal>
+            <span class="ba-phase-num">01</span>
+            <div class="ba-phase-body">
+              <h3>Prepare</h3>
+              <p>Before departure, wellness can be considered around the journey ahead — from hydration and supplementation to selected treatments designed around individual priorities.</p>
+            </div>
+          </article>
+          <article class="ba-phase" data-reveal>
+            <span class="ba-phase-num">02</span>
+            <div class="ba-phase-body">
+              <h3>Reset</h3>
+              <p>In the air, the focus shifts to comfort, recovery and intelligent use of time — with selected supplementation, recovery technologies and wellness rituals incorporated into the journey where appropriate.</p>
+            </div>
+          </article>
+          <article class="ba-phase" data-reveal>
+            <span class="ba-phase-num">03</span>
+            <div class="ba-phase-body">
+              <h3>Arrive</h3>
+              <p>The objective is simple: to arrive feeling more considered, more prepared and better placed for whatever is waiting on the other side.</p>
+            </div>
+          </article>
         </div>
-        <div>
-          <p class="ba-body-copy">Every journey begins from London. Choose where you're going, and the protocol adjusts to meet you there — calibrated to flight time and time-zone shift, arranged in the same enquiry as the aircraft.</p>
-          <div class="ba-destselect" role="group" aria-label="Choose a destination from London">
-            <button type="button" class="is-active" aria-pressed="true" data-ba-dest="Dubai" data-ba-time="6h 40m" data-ba-tz="+4h" data-ba-protocol="Full Recalibration">Dubai</button>
-            <button type="button" aria-pressed="false" data-ba-dest="New York" data-ba-time="7h 55m" data-ba-tz="&minus;5h" data-ba-protocol="Full Recalibration">New York</button>
-            <button type="button" aria-pressed="false" data-ba-dest="Nice" data-ba-time="1h 45m" data-ba-tz="+1h" data-ba-protocol="Light Reset">Nice</button>
-            <button type="button" aria-pressed="false" data-ba-dest="Aspen" data-ba-time="9h 50m" data-ba-tz="&minus;7h" data-ba-protocol="Full Recalibration">Aspen</button>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 04 — THE JOURNEY RECOVERY COLLECTION ============
+         Product: only exact, approved Bio Atelier product imagery may ever
+         replace the placeholder below. Do not invent bottles, packaging,
+         hydration products, labels or medical devices. -->
+    <section class="ba-section ba-collection" id="ba-collection">
+      <div class="ba-container">
+        <div class="ba-collection-grid">
+          <div data-reveal>
+            <span class="ba-eyebrow">The Journey Recovery Collection</span>
+            <h2 class="ba-h">The Journey Recovery Collection</h2>
+            <p class="ba-hero-sub-line">Built for the journey.</p>
+            <p class="ba-lede">The Journey Recovery Collection brings together NAD+, TMG, electrolytes and hydrogen alongside sleep, comfort and cellular recovery essentials for use throughout the travel experience.</p>
+            <p class="ba-lede">Rather than treating wellness as an afterthought, the collection is designed to sit naturally within the journey — from preparation before departure through to time onboard and arrival.</p>
+            <div class="ba-label-row">
+              <span class="ba-label">NAD+</span>
+              <span class="ba-label">TMG</span>
+              <span class="ba-label">Electrolytes</span>
+              <span class="ba-label">Hydrogen</span>
+              <span class="ba-label">Sleep</span>
+              <span class="ba-label">Recovery</span>
+            </div>
           </div>
-          <div class="ba-routebar">
-            <div><span class="ba-label">Route</span><span class="ba-val" id="baRoute">London &rarr; Dubai</span></div>
-            <div><span class="ba-label">Flight Time</span><span class="ba-val" id="baTime">6h 40m</span></div>
-            <div><span class="ba-label">Recommended Protocol</span><span class="ba-val ba-val-accent" id="baProtocol">Full Recalibration</span></div>
+          <figure class="ba-placeholder" style="aspect-ratio:4/3;" data-reveal>
+            <span class="ba-placeholder-tag">Image Placeholder</span>
+            <span class="ba-placeholder-title">Journey Recovery Collection</span>
+            <span class="ba-placeholder-desc">Exact Bio Atelier products in premium editorial still-life</span>
+            <span class="ba-placeholder-dims">1800 &times; 1350 &middot; 4:3</span>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 05 — PERSONALISED WELLNESS ============
+         Ground-based clinical treatments are clearly separated from
+         onboard wellness. No IV drips, invasive injections or medical
+         procedures are shown or implied as happening onboard aircraft. -->
+    <section class="ba-section ba-personal" id="ba-personal">
+      <div class="ba-container">
+        <h2 class="ba-h" data-reveal>Not a package. A personal protocol.</h2>
+        <p class="ba-personal-scenarios" data-reveal>
+          Every traveller arrives with different priorities.<br>
+          Some are preparing for a meeting.<br>
+          Some are recovering from performance.<br>
+          Some are crossing time zones before an event.<br>
+          Some simply want to arrive feeling better than they normally do.
+        </p>
+        <p class="ba-lede" data-reveal>Aviation Wellness can be curated around those priorities, with access to a wider wellness menu including:</p>
+        <ul class="ba-menu" data-reveal-group>
+          <li data-reveal>NAD+ Infusions</li>
+          <li data-reveal>Hydration Support</li>
+          <li data-reveal>Recovery Infusions</li>
+          <li data-reveal>Glutathione Infusions</li>
+          <li data-reveal>Energy Injections</li>
+          <li data-reveal>Recovery Injections</li>
+          <li data-reveal>Skin Glow Support</li>
+          <li data-reveal>Red Light Therapy</li>
+          <li data-reveal>Compression Therapy</li>
+        </ul>
+        <p class="ba-lede" data-reveal>The right combination is considered around the individual, the journey, timing and suitability.</p>
+        <div class="ba-split">
+          <div class="ba-split-panel" data-reveal>
+            <span class="ba-eyebrow">On The Ground</span>
+            <p>Selected clinical wellness treatments can be coordinated around departure or arrival.</p>
           </div>
-          <a class="ba-cta" href="#ba-product">See The Kit <span aria-hidden="true">&nbsp;&rarr;</span></a>
+          <div class="ba-split-panel" data-reveal>
+            <span class="ba-eyebrow">In The Air</span>
+            <p>Supplementation, comfort, recovery technology and non-invasive wellness rituals can be incorporated into the cabin experience where appropriate.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ CHAPTER THREE — ON BOARD ============
-         Aircraft: the approved copy below does not name an aircraft type at
-         all. Per the brief, the only approved aircraft for this offer is the
-         Bombardier Challenger 850 — nothing else should ever be referenced
-         here — but no aircraft mention was added on this pass rather than
-         guessing at wording; flag if a specific aircraft callout is wanted.
-         Product: the Bio Atelier Liposomal NAD+ Capsules bottle is the only
-         approved product depicted or referenced here — no injection-pen or
-         IV imagery or copy. -->
-    <section class="ba-section ba-product" id="ba-product">
-      <span class="ba-tag">Chapter Three — On Board</span>
-      <div class="ba-grid2">
-        <div>
-          <h2 class="ba-h">Bio Atelier<br>Liposomal NAD+ Capsules.</h2>
-          <p class="ba-body-copy">Presented on board for guests travelling on routes over four hours — the same EU GMP-certified formulation Bio Atelier sells direct, in a quiet Jettset-liveried presentation case.</p>
-          <div class="ba-price">Complimentary for Jettset Club members</div>
-          <a class="ba-cta" href="#ba-standard">The Standard, Shared <span aria-hidden="true">&nbsp;&rarr;</span></a>
-        </div>
-        <!-- Product photography pending: Bio Atelier packshot rights for the
-             Liposomal NAD+ Capsules bottle are still being cleared. This is a
-             placeholder plate, not a stand-in product photo — swap the plate
-             below for the approved packshot once rights are confirmed. -->
-        <div class="ba-case-plate"><span>Product still &mdash; pending Bio Atelier packshot rights</span></div>
-      </div>
-    </section>
-
-    <!-- ============ CHAPTER FOUR — THE STANDARD, SHARED + CLOSE ============ -->
-    <section class="ba-section ba-standard" id="ba-standard">
-      <span class="ba-tag">Chapter Four — The Standard, Shared</span>
-      <div class="ba-grid2 ba-grid2-top">
-        <div>
-          <h3 class="ba-serif">What Jettset brings</h3>
-          <p class="ba-list">Licensed operators only.<br>Dedicated journey management.<br>Discreet by design.</p>
-        </div>
-        <div>
-          <h3 class="ba-serif">What Bio Atelier brings</h3>
-          <p class="ba-list">EU GMP-certified formulation.<br>Verified purity, no fillers.<br>Physician-advised protocols.</p>
+    <!-- ============ SECTION 06 — RECOVERY TECHNOLOGY ============
+         Category labels only — no unconfirmed third-party brand names. -->
+    <section class="ba-section ba-recovery-tech" id="ba-recovery-tech">
+      <div class="ba-container">
+        <div class="ba-recovery-grid">
+          <div data-reveal>
+            <h2 class="ba-h">More than supplementation.</h2>
+            <p class="ba-lede">Aviation Wellness is being developed to incorporate carefully selected recovery and wellness technologies — from compression and red light to beauty and recovery rituals — where they are appropriate to the journey.</p>
+            <div class="ba-cat-list">
+              <span>Compression Therapy</span>
+              <span>Red Light Therapy</span>
+              <span>Beauty &amp; Recovery Rituals</span>
+            </div>
+          </div>
+          <figure class="ba-placeholder" style="aspect-ratio:8/5;" data-reveal>
+            <span class="ba-placeholder-tag">Image Placeholder</span>
+            <span class="ba-placeholder-title">Recovery Technology</span>
+            <span class="ba-placeholder-desc">Premium human recovery moment using approved non-invasive technology</span>
+            <span class="ba-placeholder-dims">2000 &times; 1250 &middot; 8:5</span>
+          </figure>
         </div>
       </div>
     </section>
 
-    <section class="ba-closing" id="ba-closing">
-      <span class="ba-tag">Begin The Partnership</span>
-      <h2 class="ba-h">One relationship. Every journey recovered.</h2>
-      <a class="ba-cta" href="/quote">Speak To The Aviation Desk <span aria-hidden="true">&nbsp;&rarr;</span></a>
+    <!-- ============ SECTION 07 — WELLNESS THAT MOVES WITH YOU ============
+         Kept image-free intentionally: the flow is a process, not a
+         moment, and reads more calmly as pure typography than with a
+         lifestyle image competing for attention. See report for note. -->
+    <section class="ba-section ba-moves" id="ba-moves">
+      <div class="ba-container">
+        <h2 class="ba-h" data-reveal>Wellness that moves with you.</h2>
+        <p class="ba-lede" data-reveal>No two journeys place the same demands on the body.</p>
+        <p class="ba-lede" data-reveal>Your Aviation Wellness experience can be considered around your travel schedule, destination, priorities and what you need to do when you arrive.</p>
+        <p class="ba-lede" data-reveal>Whether the objective is energy, recovery, hydration, sleep, performance, clarity or simply feeling restored, the Jettset team can work with Bio Atelier and selected wellness partners to build the right experience around the journey.</p>
+        <div class="ba-flow" data-reveal-group>
+          <div class="ba-flow-step" data-reveal><span class="ba-flow-index">01</span><p>Tell us how you&rsquo;re travelling</p></div>
+          <span class="ba-flow-arrow" aria-hidden="true">&rarr;</span>
+          <div class="ba-flow-step" data-reveal><span class="ba-flow-index">02</span><p>Tell us what matters</p></div>
+          <span class="ba-flow-arrow" aria-hidden="true">&rarr;</span>
+          <div class="ba-flow-step" data-reveal><span class="ba-flow-index">03</span><p>We curate the experience</p></div>
+          <span class="ba-flow-arrow" aria-hidden="true">&rarr;</span>
+          <div class="ba-flow-step" data-reveal><span class="ba-flow-index">04</span><p>Everything is coordinated around your journey</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 08 — OFFICIAL WELLNESS PARTNER ============
+         Placeholder stands in for official Bio Atelier brand/product/
+         laboratory/material imagery only — nothing invented. -->
+    <section class="ba-section ba-partner" id="ba-partner">
+      <div class="ba-container">
+        <div class="ba-partner-grid">
+          <div data-reveal>
+            <span class="ba-eyebrow">Official Wellness Partner</span>
+            <h2 class="ba-h">Bio Atelier</h2>
+            <p class="ba-lede">Bio Atelier is a premium longevity company focused on purity, precision and intelligent delivery.</p>
+            <p class="ba-lede">Its formulations are independently tested, with guidance from an experienced Medical Advisory Board.</p>
+            <p class="ba-lede">As Jettset&rsquo;s Official Wellness Partner, Bio Atelier brings its expertise across supplementation, cellular recovery and longevity to every stage of the experience.</p>
+            <p class="ba-partner-tagline">Pure. Precise. Powerful.</p>
+            <div class="ba-cta-row">
+              <a class="ba-cta" href="https://www.bio-atelier.co/" target="_blank" rel="noopener">Discover Bio Atelier</a>
+            </div>
+          </div>
+          <figure class="ba-placeholder ba-partner-figure" data-reveal>
+            <span class="ba-placeholder-tag">Image Placeholder</span>
+            <span class="ba-placeholder-title">Bio Atelier</span>
+            <span class="ba-placeholder-desc">Official Bio Atelier brand / product / laboratory / material image</span>
+            <span class="ba-placeholder-dims">1600 &times; 1800 &middot; 8:9 portrait</span>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 09 — ROLLOUT / AVAILABILITY ============
+         London is the initial launch point, not the full extent of the
+         service — quiet, no destination postcard imagery. -->
+    <section class="ba-section ba-rollout" id="ba-rollout">
+      <div class="ba-container">
+        <h2 class="ba-h" data-reveal>Launching first through London. Designed to travel further.</h2>
+        <p class="ba-lede" data-reveal>Aviation Wellness will launch initially across selected Jettset journeys through London, before expanding across further destinations and experiences.</p>
+        <p class="ba-lede" data-reveal>Availability will continue to evolve as the wellness network grows.</p>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 10 — FINAL CTA ============ -->
+    <section class="ba-final" id="ba-final">
+      <div class="ba-container">
+        <span class="ba-eyebrow" data-reveal>Aviation Wellness</span>
+        <h2 class="ba-h" data-reveal>How do you want to arrive?</h2>
+        <p class="ba-lede" data-reveal>Tell us what matters before, during and after your journey. We&rsquo;ll show you what can be incorporated.</p>
+        <div class="ba-cta-row" data-reveal>
+          <a class="ba-cta" href="#ba-idea">Explore Aviation Wellness</a>
+          <a class="ba-cta ba-cta-quiet" href="https://wa.me/447378111111" target="_blank" rel="noopener">Message The Jettset Team</a>
+        </div>
+        <p class="ba-final-support" data-reveal>Request the full Aviation Wellness menu and speak with the team about your journey.</p>
+      </div>
     </section>
 
   </main>

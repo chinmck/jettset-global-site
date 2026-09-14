@@ -1,95 +1,97 @@
 /* ==========================================================================
-   Jettset × Bio Atelier — Wellness Partnership
+   Jettset × Bio Atelier — Aviation Wellness
    Page-specific styles. Every new selector here is prefixed `.ba-` so it
    cannot collide with sitewide rules in styles.css or with other page
    stylesheets (medical.css, house-section.css, etc). Shared chrome — the
    nav, side panel, contact mark and footer — is left untouched and keeps
-   inheriting its look from styles.css.
+   inheriting its look from styles.css. Section entrances reuse the
+   sitewide [data-reveal] / [data-reveal-group] mechanism already defined
+   in styles.css and wired up in script.js — no new JS for that.
 
-   Typography: this page intentionally uses EB Garamond (display) / Inter
-   (body) per locked brand type for this partnership campaign. That is a
-   deliberate departure from the sitewide Canela Text / General Sans pairing
-   in styles.css — scoped to `.ba-page` only, so the shared nav/footer chrome
-   is unaffected and still matches the rest of the site.
-   ========================================================================== */
+   Typography: EB Garamond (display) / Inter (body), scoped to `.ba-page`
+   only, per the locked brand type for this campaign — deliberate from the
+   sitewide Canela Text / General Sans pairing. Shared nav/footer chrome is
+   unaffected.
+
+   Palette: mapped onto the site's existing tokens (near-black / warm ivory
+   / gold / platinum / grey) so a future palette update in styles.css
+   propagates here. Dark-dominant throughout — only Section 04 (the
+   Journey Recovery Collection) uses a full ivory surface, per brief. */
 
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
 
 .ba-page{
-  /* Palette mapped onto the site's existing tokens (Near Black / Warm Ivory /
-     Champagne Gold / Titanium / Smoke) so a future palette update in
-     styles.css propagates here automatically. --ba-coral is the one addition:
-     a Bio Atelier partner accent, used only to distinguish the co-brand
-     moments (partner mark, active destination, protocol value) — it is not
-     part of the five locked Jettset tones and is scoped to this page only. */
-  --ba-ink: var(--black, #0A0908);
-  --ba-ivory: var(--off-white, #F5F3EF);
-  --ba-gold: var(--gold, #C9A24B);
+  --ba-ink: var(--black, #0A0908);           /* primary canvas — near-black */
+  --ba-charcoal: var(--black-elevated, #16140F); /* secondary dark surface */
+  --ba-ivory: var(--off-white, #F5F3EF);     /* typography + the one ivory section */
+  --ba-stone: #C9BEB0;                        /* warm stone — secondary copy on dark */
+  --ba-champagne: #C6A97C;                    /* muted champagne — sparing accent */
+  --ba-gold: var(--gold, #C9A24B);            /* used very sparingly, per brief */
   --ba-titanium: var(--platinum, #D8DBDE);
   --ba-smoke: var(--grey, #8A8782);
-  --ba-line: var(--grey-line, rgba(245,243,239,0.14));
-  --ba-coral: #B9705C;
+  --ba-line: var(--grey-line, rgba(245,243,239,0.12));
+  --ba-wood: linear-gradient(160deg, #1c1712, #0c0a08); /* dark-wood surface for placeholders */
 
   background: var(--ba-ink);
   color: var(--ba-ivory);
   font-family: 'Inter', sans-serif;
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
-  /* NOT `overflow-x:hidden` here: setting only one axis on a non-<body>
-     element forces the other axis's computed overflow to `auto` (CSS
-     Overflow spec), which turns this <main> into its own scroll
-     container and breaks `position:sticky` for the pinned hero below —
-     it just scrolls away instead of sticking. Horizontal overflow is
-     already guarded sitewide by `body{overflow-x:hidden}` in styles.css
-     (body gets a spec exemption that propagates its overflow to the
-     viewport instead of becoming a local scroll container), so this
-     page doesn't need its own copy of that rule. */
+  /* No overflow-x:hidden here — it would force overflow-y:auto on this
+     <main> (CSS Overflow spec: one non-visible axis forces the other to
+     `auto`), turning it into its own scroll container and breaking the
+     hero's position:sticky. Horizontal overflow is already guarded
+     sitewide by body{overflow-x:hidden} in styles.css. */
 }
+
+.ba-page .ba-container{ max-width:1120px; margin:0 auto; }
 
 .ba-page .ba-serif{ font-family:'EB Garamond', serif; }
 
-.ba-page .ba-tag{
-  font-size:0.68rem; letter-spacing:0.14em; color:var(--ba-smoke);
-  text-transform:uppercase; display:block; margin-bottom:14px;
+.ba-page .ba-eyebrow{
+  font-family:'Inter', sans-serif; font-size:0.68rem; letter-spacing:0.16em;
+  color:var(--ba-champagne); text-transform:uppercase; display:block; margin-bottom:18px;
 }
 
-.ba-page .ba-section{ padding:110px 8vw; }
-@media (max-width:768px){ .ba-page .ba-section{ padding:70px 6vw; } }
+.ba-page .ba-section{ padding:clamp(72px,9vw,132px) 8vw; border-top:1px solid var(--ba-line); }
+.ba-page .ba-section:first-of-type{ border-top:none; }
 
-.ba-page h1,
-.ba-page h2.ba-h,
-.ba-page h3.ba-serif{ font-family:'EB Garamond', serif; font-weight:500; }
+.ba-page h2.ba-h{
+  font-family:'EB Garamond', serif; font-weight:500; color:var(--ba-ivory);
+  font-size:clamp(1.8rem,3.6vw,2.9rem); line-height:1.14; letter-spacing:-0.005em;
+}
 
-.ba-page h2.ba-h{ font-size:clamp(1.7rem,3.2vw,2.6rem); line-height:1.15; }
+.ba-page .ba-lede{
+  color:var(--ba-stone); line-height:1.85; font-size:0.98rem; max-width:56ch;
+}
+.ba-page .ba-lede + .ba-lede{ margin-top:18px; }
 
 .ba-page .ba-cta{
-  display:inline-block; margin-top:28px; padding:14px 30px;
+  display:inline-flex; align-items:center; gap:8px; margin-top:30px; padding:15px 32px;
   border:1px solid var(--ba-gold); color:var(--ba-gold); text-decoration:none;
-  font-family:'Inter', sans-serif; font-size:0.78rem; letter-spacing:0.08em;
+  font-family:'Inter', sans-serif; font-size:0.76rem; letter-spacing:0.09em; text-transform:uppercase;
   transition:background .25s, color .25s;
 }
 .ba-page .ba-cta:hover{ background:var(--ba-gold); color:var(--ba-ink); }
 .ba-page .ba-cta:visited{ color:var(--ba-gold); }
-
-.ba-page .ba-grid2{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
-.ba-page .ba-grid2-top{ align-items:flex-start; }
-@media (max-width:820px){ .ba-page .ba-grid2{ grid-template-columns:1fr; } }
-
-.ba-page .ba-body-copy{
-  color:var(--ba-titanium); line-height:1.8; font-size:0.94rem; max-width:44ch;
+.ba-page .ba-cta-quiet{
+  border-color:var(--ba-line); color:var(--ba-ivory);
 }
+.ba-page .ba-cta-quiet:hover{ background:var(--ba-ivory); color:var(--ba-ink); }
+.ba-page .ba-cta-quiet:visited{ color:var(--ba-ivory); }
+.ba-page .ba-cta-row{ display:flex; flex-wrap:wrap; gap:16px; align-items:center; }
 
 /* ================= HERO =================
-   `#baHeroPlate` is a single, swappable <img src> with no width/height
-   baked into the markup — sizing comes entirely from this CSS
-   (object-fit: cover). Full viewport, no copy, no overlay. The only
-   motion is a barely-perceptible scale drift (1 -> 1.025) as the guest
-   begins scrolling, applied directly to the image by
-   bio-atelier-wellness.js. The wrap is only slightly taller than one
-   viewport (140vh) — just enough room for that drift to play out — after
-   which the sticky image is simply covered by Chapter Two rising over it
-   in ordinary page flow. No pinned sequence, no reveal. */
-.ba-page .ba-doorway-wrap{ position:relative; height:140vh; padding:0; }
+   `#baHeroPlate` is a single, swappable, LOCKED <img src> with no
+   width/height baked into the markup — sizing comes entirely from this
+   CSS (object-fit: cover). Full viewport, minimal copy over the frame's
+   calmer lower-left, no reveal sequence. The only motion is a
+   barely-perceptible scale drift (1 -> 1.025) as the guest begins
+   scrolling, applied directly to the image by bio-atelier-wellness.js.
+   The wrap is only slightly taller than one viewport (140vh) — just
+   enough room for that drift — after which Chapter Two rises over the
+   sticky image in ordinary page flow. */
+.ba-page .ba-doorway-wrap{ position:relative; height:140vh; padding:0; border-top:none; }
 .ba-page .ba-doorway-sticky{ position:sticky; top:0; height:100vh; overflow:hidden; background:var(--ba-ink); }
 
 .ba-page .ba-hero-plate{
@@ -103,66 +105,206 @@
   .ba-page .ba-hero-plate{ object-position:22% 26%; }
 }
 
+/* Scrim: a quiet gradient so the copy block reads cleanly regardless of
+   what sits behind it — not a design effect, just legibility. */
+.ba-page .ba-hero-scrim{
+  position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(0deg, rgba(6,5,4,0.72) 0%, rgba(6,5,4,0.28) 38%, transparent 62%);
+}
+
+.ba-page .ba-hero-copy{
+  /* Bottom padding matches the sitewide .chapter-hero-content convention
+     (130px / 90px on mobile) so this never collides with the fixed
+     .contact-mark call/WhatsApp icons at bottom-left. */
+  position:absolute; left:0; right:0; bottom:0; z-index:2;
+  padding:0 clamp(28px,6vw,64px) 130px;
+  max-width:640px;
+  animation: baHeroCopyIn 1.1s ease-out both;
+}
+@media (max-width:640px){
+  .ba-page .ba-hero-copy{ padding:0 24px 100px; }
+}
+@keyframes baHeroCopyIn{ from{ opacity:0; } to{ opacity:1; } }
+.ba-page .ba-hero-copy .ba-eyebrow{ color:var(--ba-champagne); }
+.ba-page .ba-hero-copy h1{
+  font-family:'EB Garamond', serif; font-weight:500; color:var(--ba-ivory);
+  font-size:clamp(2.4rem,6vw,4.2rem); line-height:1.05; margin:0;
+}
+.ba-page .ba-hero-copy .ba-hero-sub{
+  font-family:'EB Garamond', serif; font-style:italic; font-weight:400;
+  color:var(--ba-stone); font-size:clamp(1.05rem,1.8vw,1.35rem); margin:12px 0 0;
+}
+.ba-page .ba-hero-copy .ba-hero-body{
+  color:var(--ba-titanium); font-size:0.95rem; line-height:1.75; margin:20px 0 0; max-width:52ch;
+}
+
 /* Reduced motion: no drift at all — a calm static hero photo. */
 @media (prefers-reduced-motion: reduce){
   .ba-page .ba-doorway-wrap{ height:auto; }
   .ba-page .ba-doorway-sticky{ position:relative; height:100vh; }
   .ba-page .ba-hero-plate{ transform:none !important; }
+  .ba-page .ba-hero-copy{ animation:none; opacity:1; }
 }
 
-/* ================= CHAPTER 2 — ROUTE ================= */
-.ba-page .ba-route{ border-top:1px solid var(--ba-line); }
-.ba-page .ba-globe-plate{
-  position:relative; border:1px solid var(--ba-line); overflow:hidden; min-height:340px;
-  background: radial-gradient(ellipse at 50% 45%, rgba(185,112,92,0.14), transparent 60%), linear-gradient(135deg,#101010,#060606);
-}
-.ba-page .ba-origin-badge{
-  position:absolute; top:20px; left:20px; z-index:2;
-  font-family:'Inter', sans-serif; font-size:0.65rem; letter-spacing:0.1em;
-  text-transform:uppercase; color:var(--ba-titanium);
-  border:1px solid var(--ba-line); padding:8px 14px; background:rgba(10,10,10,0.6);
-}
-.ba-page .ba-dot{ display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--ba-coral); margin-right:8px; }
-.ba-page .ba-destselect{ display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
-.ba-page .ba-destselect button{
-  background:none; border:1px solid var(--ba-line); color:var(--ba-titanium);
-  font-family:'Inter', sans-serif; font-size:0.75rem; letter-spacing:0.04em;
-  padding:9px 16px; cursor:pointer; transition:border-color .2s, color .2s;
-}
-.ba-page .ba-destselect button.is-active{ border-color:var(--ba-coral); color:var(--ba-coral); }
-.ba-page .ba-destselect button:focus-visible{ outline:1px solid var(--ba-coral); outline-offset:2px; }
-.ba-page .ba-routebar{ display:flex; border:1px solid var(--ba-line); margin-top:36px; }
-.ba-page .ba-routebar > div{ flex:1; padding:20px 22px; border-right:1px solid var(--ba-line); }
-.ba-page .ba-routebar > div:last-child{ border-right:none; }
-.ba-page .ba-label{ display:block; font-family:'Inter', sans-serif; font-size:0.63rem; letter-spacing:0.1em; color:var(--ba-smoke); margin-bottom:8px; }
-.ba-page .ba-val{ font-family:'EB Garamond', serif; font-size:1rem; }
-.ba-page .ba-val-accent{ color:var(--ba-coral); }
-@media (max-width:768px){
-  .ba-page .ba-routebar{ flex-direction:column; }
-  .ba-page .ba-routebar > div{ border-right:none; border-bottom:1px solid var(--ba-line); }
+/* ================= SECTION 02 — THE BIG IDEA =================
+   Typography-led, near-black. No image. */
+.ba-page .ba-idea{ background:var(--ba-ink); }
+.ba-page .ba-idea .ba-container{ max-width:880px; }
+.ba-page .ba-idea .ba-h{ margin-bottom:32px; }
+.ba-page .ba-idea-statement{
+  margin-top:56px; padding-top:40px; border-top:1px solid var(--ba-line);
+  font-family:'EB Garamond', serif; font-weight:500; letter-spacing:0.04em;
+  text-transform:uppercase; font-size:clamp(1.1rem,2.6vw,1.6rem); color:var(--ba-champagne);
 }
 
-/* ================= CHAPTER 3 — PRODUCT =================
-   `.ba-case-plate` is a placeholder plate, not final product photography —
-   Bio Atelier packshot rights are pending. See the HTML comment beside it
-   in bio-atelier-wellness.html; do not replace it with an invented photo. */
-.ba-page .ba-product{ border-top:1px solid var(--ba-line); }
-.ba-page .ba-case-plate{
-  border:1px solid var(--ba-line); overflow:hidden; min-height:280px;
-  background: linear-gradient(160deg,#151515,#0a0a0a);
-  display:flex; align-items:center; justify-content:center;
+/* ================= SECTION 03 — PREPARE / RESET / ARRIVE ================= */
+.ba-page .ba-phases{ background:var(--ba-charcoal); }
+.ba-page .ba-phase-list{ display:flex; flex-direction:column; }
+.ba-page .ba-phase{
+  display:grid; grid-template-columns:auto 1fr; gap:clamp(24px,5vw,64px);
+  padding:clamp(28px,4vw,44px) 0; border-top:1px solid var(--ba-line);
 }
-.ba-page .ba-case-plate span{
-  font-family:'Inter', sans-serif; font-size:0.68rem; letter-spacing:0.12em;
-  text-transform:uppercase; color:var(--ba-smoke);
-  border:1px dashed var(--ba-line); padding:8px 16px; text-align:center;
+.ba-page .ba-phase:last-child{ border-bottom:1px solid var(--ba-line); }
+.ba-page .ba-phase-num{
+  font-family:'EB Garamond', serif; font-weight:500; color:var(--ba-line);
+  font-size:clamp(2.4rem,6vw,4rem); line-height:1; -webkit-text-stroke:1px var(--ba-smoke);
 }
-.ba-page .ba-price{ color:var(--ba-coral); font-family:'EB Garamond', serif; font-size:1.2rem; margin-top:18px; }
+.ba-page .ba-phase-body h3{
+  font-family:'EB Garamond', serif; font-weight:500; color:var(--ba-ivory);
+  font-size:clamp(1.2rem,2.2vw,1.6rem); margin:0 0 12px; letter-spacing:0.02em;
+}
+.ba-page .ba-phase-body p{ color:var(--ba-stone); line-height:1.8; font-size:0.94rem; max-width:60ch; }
+@media (max-width:640px){
+  .ba-page .ba-phase{ grid-template-columns:1fr; gap:10px; }
+}
 
-/* ================= CHAPTER 4 — STANDARD + CLOSING ================= */
-.ba-page .ba-standard{ border-top:1px solid var(--ba-line); }
-.ba-page .ba-standard h3{ font-size:1.15rem; margin-bottom:16px; }
-.ba-page .ba-list{ color:var(--ba-titanium); line-height:2; font-size:0.9rem; font-family:'Inter', sans-serif; }
-.ba-page .ba-closing{ border-top:1px solid var(--ba-line); text-align:center; padding:130px 8vw; }
-.ba-page .ba-closing h2.ba-h{ max-width:20ch; margin:0 auto; }
-@media (max-width:768px){ .ba-page .ba-closing{ padding:80px 6vw; } }
+/* ================= SECTION 04 — JOURNEY RECOVERY COLLECTION =================
+   The one intentional warm/ivory editorial surface on the page. */
+.ba-page .ba-collection{ background:var(--ba-ivory); color:var(--ba-ink); }
+.ba-page .ba-collection .ba-eyebrow{ color:var(--ba-gold); }
+.ba-page .ba-collection .ba-h{ color:var(--ba-ink); }
+.ba-page .ba-collection .ba-hero-sub-line{
+  font-family:'EB Garamond', serif; font-style:italic; color:#6B6355; font-size:1.1rem; margin:10px 0 26px;
+}
+.ba-page .ba-collection .ba-lede{ color:#4A453D; }
+.ba-page .ba-collection-grid{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:clamp(32px,5vw,64px); align-items:start; }
+@media (max-width:860px){ .ba-page .ba-collection-grid{ grid-template-columns:1fr; } }
+.ba-page .ba-label-row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; }
+.ba-page .ba-label{
+  border:1px solid rgba(10,9,8,0.18); color:#3A362F; font-family:'Inter', sans-serif;
+  font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; padding:8px 16px;
+}
+
+/* ================= PLACEHOLDER FIGURES (shared, several sections) =================
+   Not real imagery — an intentional, clearly-labelled placeholder in the
+   correct aspect ratio, styled as a dark-wood/charcoal surface so it
+   never reads as a broken image. */
+.ba-page .ba-placeholder{
+  border:1px solid var(--ba-line); background:var(--ba-wood);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; gap:6px; padding:32px; width:100%; margin:0;
+}
+.ba-page .ba-placeholder-tag{
+  font-family:'Inter', sans-serif; font-size:0.62rem; letter-spacing:0.16em;
+  text-transform:uppercase; color:var(--ba-champagne);
+}
+.ba-page .ba-placeholder-title{
+  font-family:'EB Garamond', serif; font-size:1.05rem; color:var(--ba-ivory); margin-top:4px;
+}
+.ba-page .ba-placeholder-desc{ font-size:0.8rem; color:var(--ba-smoke); max-width:36ch; line-height:1.6; }
+.ba-page .ba-placeholder-dims{
+  font-family:'Inter', sans-serif; font-size:0.68rem; letter-spacing:0.06em; color:var(--ba-smoke); margin-top:6px;
+}
+/* On the ivory collection surface, the placeholder stays a dark plate —
+   the one deliberate contrast moment, not a light box on light ground. */
+.ba-page .ba-collection .ba-placeholder{ border-color:rgba(10,9,8,0.16); }
+
+/* ================= SECTION 05 — PERSONALISED WELLNESS ================= */
+.ba-page .ba-personal{ background:var(--ba-ink); }
+.ba-page .ba-personal .ba-h{ margin-bottom:28px; }
+.ba-page .ba-personal-scenarios{ color:var(--ba-stone); line-height:2; font-size:0.96rem; margin:26px 0; }
+.ba-page .ba-menu{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:10px 20px; margin:28px 0 40px;
+  list-style:none; padding:0;
+}
+.ba-page .ba-menu li{
+  font-family:'Inter', sans-serif; font-size:0.88rem; color:var(--ba-titanium);
+  padding:12px 0; border-top:1px solid var(--ba-line);
+}
+@media (max-width:760px){ .ba-page .ba-menu{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:480px){ .ba-page .ba-menu{ grid-template-columns:1fr; } }
+
+.ba-page .ba-split{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,4vw,56px); margin-top:48px; }
+@media (max-width:760px){ .ba-page .ba-split{ grid-template-columns:1fr; } }
+.ba-page .ba-split-panel{ border-top:1px solid var(--ba-line); padding-top:26px; }
+.ba-page .ba-split-panel .ba-eyebrow{ color:var(--ba-titanium); margin-bottom:14px; }
+.ba-page .ba-split-panel p{ color:var(--ba-stone); line-height:1.8; font-size:0.92rem; }
+
+/* ================= SECTION 06 — RECOVERY TECHNOLOGY ================= */
+.ba-page .ba-recovery-tech{ background:var(--ba-charcoal); }
+.ba-page .ba-recovery-grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,5vw,64px); align-items:center; }
+@media (max-width:860px){ .ba-page .ba-recovery-grid{ grid-template-columns:1fr; } }
+.ba-page .ba-cat-list{ display:flex; flex-direction:column; margin-top:30px; }
+.ba-page .ba-cat-list span{
+  font-family:'EB Garamond', serif; font-size:1.15rem; color:var(--ba-ivory);
+  padding:16px 0; border-top:1px solid var(--ba-line);
+}
+.ba-page .ba-cat-list span:last-child{ border-bottom:1px solid var(--ba-line); }
+
+/* ================= SECTION 07 — WELLNESS THAT MOVES WITH YOU =================
+   Editorial flow, not cards — typography and connecting lines only. */
+.ba-page .ba-moves{ background:var(--ba-ink); }
+.ba-page .ba-flow{
+  display:flex; flex-wrap:wrap; align-items:flex-start; gap:0; margin-top:48px;
+}
+.ba-page .ba-flow-step{
+  flex:1 1 200px; min-width:180px; padding-right:28px; position:relative;
+}
+.ba-page .ba-flow-step .ba-flow-index{
+  font-family:'Inter', sans-serif; font-size:0.66rem; letter-spacing:0.14em;
+  color:var(--ba-smoke); text-transform:uppercase; display:block; margin-bottom:10px;
+}
+.ba-page .ba-flow-step p{ font-family:'EB Garamond', serif; font-size:1.15rem; color:var(--ba-ivory); line-height:1.35; }
+.ba-page .ba-flow-arrow{
+  flex:0 0 auto; align-self:center; color:var(--ba-line); font-size:1.4rem;
+  padding:0 8px; margin-top:22px;
+}
+@media (max-width:820px){
+  .ba-page .ba-flow{ flex-direction:column; }
+  /* flex-basis (the 200px in `flex: 1 1 200px`) sizes the main axis, which
+     becomes height once flex-direction is column — reset to auto here or
+     every stacked step gets a phantom 200px-tall gap under its text. */
+  .ba-page .ba-flow-step{ flex:0 0 auto; padding-right:0; padding-left:0; min-width:0; }
+  .ba-page .ba-flow-arrow{ transform:rotate(90deg); margin:6px 0; align-self:flex-start; }
+}
+.ba-page .ba-moves-close{ margin-top:44px; color:var(--ba-stone); line-height:1.8; font-size:0.94rem; max-width:60ch; }
+
+/* ================= SECTION 08 — OFFICIAL WELLNESS PARTNER =================
+   A slightly warmer neutral tone, still Jettset's dark layout system. */
+.ba-page .ba-partner{ background:#150F0A; }
+.ba-page .ba-partner-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:clamp(32px,5vw,64px); align-items:center; }
+@media (max-width:860px){ .ba-page .ba-partner-grid{ grid-template-columns:1fr; } }
+.ba-page .ba-partner .ba-eyebrow{ color:var(--ba-champagne); }
+.ba-page .ba-partner-tagline{
+  margin-top:24px; font-family:'EB Garamond', serif; font-style:italic;
+  color:var(--ba-champagne); font-size:1.15rem;
+}
+.ba-page .ba-placeholder.ba-partner-figure{ aspect-ratio:8/9; }
+
+/* ================= SECTION 09 — ROLLOUT / AVAILABILITY =================
+   Understated. Quiet. No destination imagery. */
+.ba-page .ba-rollout{ background:var(--ba-ink); }
+.ba-page .ba-rollout .ba-container{ max-width:760px; }
+.ba-page .ba-rollout .ba-h{ font-size:clamp(1.5rem,3vw,2.1rem); }
+
+/* ================= SECTION 10 — FINAL CTA ================= */
+.ba-page .ba-final{ background:var(--ba-ink); text-align:center; padding-top:clamp(90px,10vw,150px); padding-bottom:clamp(90px,10vw,150px); }
+.ba-page .ba-final .ba-container{ max-width:680px; margin:0 auto; }
+.ba-page .ba-final .ba-eyebrow{ text-align:center; }
+.ba-page .ba-final .ba-h{ text-align:center; }
+.ba-page .ba-final .ba-lede{ margin:20px auto 0; text-align:center; }
+.ba-page .ba-final .ba-cta-row{ justify-content:center; margin-top:34px; }
+.ba-page .ba-final-support{ margin-top:26px; color:var(--ba-smoke); font-size:0.82rem; }
+
+/* Aspect-ratio placeholder sizing per instance, set inline via style attr
+   in the markup (aspect-ratio varies per brief: 4:3, 8:5, 3:2, 8:9). */

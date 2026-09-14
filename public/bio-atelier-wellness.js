@@ -1,15 +1,16 @@
-/* Jettset × Bio Atelier — Wellness Partnership
-   Page-specific behaviour only: a barely-perceptible hero image drift and
-   the destination selector. Shared nav / side-panel / contact-sheet wiring
-   lives in script.js and is untouched by this file. All ids are `ba*` so
-   nothing here can collide with another page's script.
+/* Jettset × Bio Atelier — Aviation Wellness
+   Page-specific behaviour only: a barely-perceptible hero image drift.
+   Shared nav / side-panel / contact-sheet wiring, plus the sitewide
+   [data-reveal] scroll-entrance used throughout this page's sections,
+   both live in script.js and are untouched by this file. All ids here are
+   `ba*` so nothing collides with another page's script.
 
-   The hero is intentionally minimal: full-viewport photo, no copy, no
-   overlay, no scroll-jacked sequence. As the guest begins scrolling, the
-   image scales from 1 to 1.025 over the wrap's small extra height (40vh)
-   — subtle enough to read as "alive," not as an effect. Once that runway
-   is scrolled past, Chapter Two simply rises over the hero in normal page
-   flow; there is nothing else to hand off. */
+   The hero is intentionally minimal: full-viewport photo, restrained copy
+   over the frame, no scroll-jacked sequence. As the guest begins
+   scrolling, the image scales from 1 to 1.025 over the wrap's small extra
+   height (40vh) — subtle enough to read as "alive," not as an effect.
+   Once that runway is scrolled past, Section 02 simply rises over the
+   hero in normal page flow. */
 (function(){
   'use strict';
 
@@ -39,28 +40,5 @@
       if(!ticking){ requestAnimationFrame(render); ticking = true; }
     }, {passive:true});
     render();
-  }
-
-  // Destination selector — London stays fixed as the origin; only the
-  // destination, flight time and recommended protocol change.
-  var destButtons = document.querySelectorAll('.ba-destselect button');
-  var routeEl = document.getElementById('baRoute');
-  var timeEl = document.getElementById('baTime');
-  var protocolEl = document.getElementById('baProtocol');
-
-  if(destButtons.length && routeEl && timeEl && protocolEl){
-    destButtons.forEach(function(btn){
-      btn.addEventListener('click', function(){
-        destButtons.forEach(function(b){
-          b.classList.remove('is-active');
-          b.setAttribute('aria-pressed', 'false');
-        });
-        btn.classList.add('is-active');
-        btn.setAttribute('aria-pressed', 'true');
-        routeEl.textContent = 'London → ' + btn.dataset.baDest;
-        timeEl.textContent = btn.dataset.baTime;
-        protocolEl.textContent = btn.dataset.baProtocol;
-      });
-    });
   }
 })();
