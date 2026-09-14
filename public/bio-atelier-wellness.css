@@ -45,7 +45,10 @@
      sitewide by body{overflow-x:hidden} in styles.css. */
 }
 
-.ba-page .ba-container{ max-width:1120px; margin:0 auto; }
+/* 1100px matches the site's most common content max-width (see
+   .editorial-preview-col, .founder-note and others in styles.css) rather
+   than an invented figure. */
+.ba-page .ba-container{ max-width:1100px; margin:0 auto; }
 
 /* This is the only page on the site with a light section in the scroll
    path (the Journey Recovery Collection). The fixed nav logo already
@@ -65,11 +68,19 @@ body.ba-page-body .nav-logo-center img{
   color:var(--ba-champagne); text-transform:uppercase; display:block; margin-bottom:16px;
 }
 
-/* Tightened from the previous clamp(72px,9vw,132px) — still a generous,
-   deliberate rhythm between sections, but the top end no longer reads as
-   accidental empty space on wide viewports. */
-.ba-page .ba-section{ padding:clamp(60px,7.5vw,108px) 8vw; border-top:1px solid var(--ba-line); }
+/* Reuses the sitewide spacing-rhythm tokens (--space-standard-d/m,
+   defined once in styles.css and already used across .segments,
+   .editorial-preview-col, etc.) instead of an invented clamp() scale, and
+   the same 64px/32px side-padding pairing those sections use — this is
+   the site's actual "standard" section rhythm, not a parallel one. */
+.ba-page .ba-section{
+  padding:var(--space-standard-d, 96px) 64px;
+  border-top:1px solid var(--ba-line);
+}
 .ba-page .ba-section:first-of-type{ border-top:none; }
+@media (max-width:768px){
+  .ba-page .ba-section{ padding:var(--space-standard-m, 48px) 24px; }
+}
 
 .ba-page h2.ba-h{
   font-family:'EB Garamond', serif; font-weight:500; color:var(--ba-ivory);
@@ -82,10 +93,13 @@ body.ba-page-body .nav-logo-center img{
 }
 .ba-page .ba-lede + .ba-lede{ margin-top:16px; }
 
+/* Tracking (0.16em) matches the sitewide .btn-ghost button (0.18em) and
+   this page's own eyebrow labels (0.16em) — one tracked-uppercase
+   language across buttons and labels, not a separate value per element. */
 .ba-page .ba-cta{
   display:inline-flex; align-items:center; gap:8px; margin-top:26px; padding:13px 26px;
   border:1px solid var(--ba-gold); color:var(--ba-gold); text-decoration:none;
-  font-family:'Inter', sans-serif; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase;
+  font-family:'Inter', sans-serif; font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase;
   transition:background .25s, color .25s, border-color .25s;
 }
 .ba-page .ba-cta:hover{ background:var(--ba-gold); color:var(--ba-ink); }
@@ -334,20 +348,40 @@ body.ba-page-body .nav-logo-center img{
 .ba-page .ba-placeholder.ba-partner-figure{ aspect-ratio:8/9; }
 
 /* ================= SECTION 09 — ROLLOUT / AVAILABILITY =================
-   Understated. Quiet. No destination imagery. Deliberately shorter
-   padding than the standard .ba-section rhythm — the content here is
-   two short lines, and full-height padding around it read as unfinished
-   rather than restrained. */
-.ba-page .ba-rollout{ background:var(--ba-ink); padding-top:clamp(48px,6vw,80px); padding-bottom:clamp(48px,6vw,80px); }
+   Understated. Quiet. No destination imagery. Uses the sitewide
+   "compact" rhythm token (--space-compact-d/m — the same one used
+   wherever the rest of the site wants a quieter beat than its standard
+   section spacing) rather than the .ba-section default, since two short
+   lines inside full standard padding read as unfinished, not restrained. */
+/* Charcoal, not ink: Section 08 (Bio Atelier) already breaks the run of
+   near-black with its own warm-dark tone, but Section 10 (Final CTA)
+   sits on --ba-ink immediately after this one — two identical blacks
+   back to back read as repetition, not rhythm. This one small tonal
+   shift (no reorder, no new colour) keeps every section boundary on the
+   page distinct from its neighbours. */
+.ba-page .ba-rollout{
+  background:var(--ba-charcoal);
+  padding-top:var(--space-compact-d, 64px); padding-bottom:var(--space-compact-d, 64px);
+}
+@media (max-width:768px){
+  .ba-page .ba-rollout{ padding-top:var(--space-compact-m, 32px); padding-bottom:var(--space-compact-m, 32px); }
+}
 .ba-page .ba-rollout .ba-container{ max-width:720px; }
 .ba-page .ba-rollout .ba-h{ font-size:clamp(1.5rem,2.8vw,2rem); margin-bottom:20px; }
 
 /* ================= SECTION 10 — FINAL CTA =================
-   Top padding trimmed relative to the rollout section above it (already
-   quiet) so the two don't compound into a very long dark run; bottom
-   padding trimmed further still so the footer transition (below) reads
-   as one considered close rather than two separate large gaps. */
-.ba-page .ba-final{ background:var(--ba-ink); text-align:center; padding-top:clamp(64px,7vw,100px); padding-bottom:clamp(56px,6vw,84px); }
+   Standard rhythm on top (matching the rest of the page), compact
+   underneath — trimmed relative to the rollout section above it so the
+   two don't compound into a very long dark run, and trimmed further
+   still so the footer transition (below) reads as one considered close
+   rather than two separate large gaps. */
+.ba-page .ba-final{
+  background:var(--ba-ink); text-align:center;
+  padding-top:var(--space-standard-d, 96px); padding-bottom:var(--space-compact-d, 64px);
+}
+@media (max-width:768px){
+  .ba-page .ba-final{ padding-top:var(--space-standard-m, 48px); padding-bottom:var(--space-compact-m, 32px); }
+}
 .ba-page .ba-final .ba-container{ max-width:640px; margin:0 auto; }
 .ba-page .ba-final .ba-eyebrow{ text-align:center; }
 .ba-page .ba-final .ba-h{ text-align:center; }
