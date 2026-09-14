@@ -35,7 +35,15 @@
   font-family: 'Inter', sans-serif;
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  /* NOT `overflow-x:hidden` here: setting only one axis on a non-<body>
+     element forces the other axis's computed overflow to `auto` (CSS
+     Overflow spec), which turns this <main> into its own scroll
+     container and breaks `position:sticky` for the pinned hero below —
+     it just scrolls away instead of sticking. Horizontal overflow is
+     already guarded sitewide by `body{overflow-x:hidden}` in styles.css
+     (body gets a spec exemption that propagates its overflow to the
+     viewport instead of becoming a local scroll container), so this
+     page doesn't need its own copy of that rule. */
 }
 
 .ba-page .ba-serif{ font-family:'EB Garamond', serif; }
