@@ -220,6 +220,24 @@ body.ba-page-body .nav-logo-center img{
   .ba-page .ba-phase-num{ font-size:1.6rem; }
 }
 
+/* ================= SECTION 3B — COMPLIMENTARY ONBOARD WELLNESS =================
+   Jettset's own onboard recovery technology — a direct Jettset offering,
+   not a Bio Atelier product. Ink tone: sits between the charcoal Prepare/
+   Reset/Arrive section above and the ivory Collection section below, so
+   neither boundary repeats an identical tone. */
+.ba-page .ba-onboard{ background:var(--ba-ink); }
+.ba-page .ba-onboard-grid{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:clamp(28px,5vw,56px); align-items:center; margin-top:8px; }
+@media (max-width:860px){ .ba-page .ba-onboard-grid{ grid-template-columns:1fr; } }
+.ba-page .ba-onboard-list{ list-style:none; margin:0; padding:0; }
+.ba-page .ba-onboard-list li{ padding:18px 0; border-top:1px solid var(--ba-line); }
+.ba-page .ba-onboard-list li:last-child{ border-bottom:1px solid var(--ba-line); }
+.ba-page .ba-onboard-list h3{
+  font-family:'EB Garamond', serif; font-weight:500; color:var(--ba-ivory);
+  font-size:1.05rem; margin:0 0 6px; letter-spacing:0.01em;
+}
+.ba-page .ba-onboard-list p{ color:var(--ba-stone); font-size:0.88rem; margin:0; }
+.ba-page .ba-onboard .ba-suitability-note{ margin-top:30px; }
+
 /* ================= SECTION 04 — JOURNEY RECOVERY COLLECTION =================
    The one intentional warm/ivory editorial surface on the page. */
 /* Warmer and softer than pure --ba-ivory, so this — the page's one light
@@ -361,6 +379,21 @@ body.ba-page-body .nav-logo-center img{
   color:var(--ba-champagne); font-size:1.15rem;
 }
 .ba-page .ba-placeholder.ba-partner-figure{ aspect-ratio:8/9; }
+
+/* ================= SECTION 8B — JETTSET CARD MEMBERS =================
+   Ink tone: distinct from the warm-dark partner section above and the
+   charcoal rollout section below, so neither boundary repeats a tone. */
+.ba-page .ba-card-members{ background:var(--ba-ink); }
+.ba-page .ba-card-members-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:clamp(32px,5vw,64px); align-items:center; }
+@media (max-width:860px){ .ba-page .ba-card-members-grid{ grid-template-columns:1fr; } }
+.ba-page .ba-card-members .ba-suitability-note{ margin-top:24px; }
+/* Dark-surface variant of .ba-label-row/.ba-label (the base version is
+   tuned for the one ivory section) — light border, light text. */
+.ba-page .ba-label-row-dark{ margin-top:20px; }
+.ba-page .ba-label-row-dark + .ba-label-row-dark{ margin-top:10px; }
+.ba-page .ba-label-row-dark .ba-label{
+  border-color:var(--ba-line); color:var(--ba-titanium);
+}
 
 /* ================= SECTION 09 — ROLLOUT / AVAILABILITY =================
    Understated. Quiet. No destination imagery. Uses the sitewide
