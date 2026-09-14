@@ -86,21 +86,22 @@
 .ba-page .ba-doorway-sticky{ position:sticky; top:0; height:100vh; overflow:hidden; background:var(--ba-ink); }
 
 /* .ba-hero-frame carries a small, one-time, non-scroll-linked "breathing"
-   push so the opening frame reads as alive before the guest scrolls at
-   all. It is a separate layer from `.ba-hero-plate` (which JS animates
-   directly) so the two transforms never fight over the same property. */
+   push (~2.5% scale) so the opening frame reads as alive before the guest
+   scrolls at all — arrival / stillness, not a static photo. It is a
+   separate layer from `.ba-hero-plate` (which JS animates directly) so
+   the two transforms never fight over the same property. */
 .ba-page .ba-hero-frame{
   position:absolute; inset:0; overflow:hidden;
   animation: baHeroIdlePush 5s cubic-bezier(0.16,1,0.3,1) 0.3s both;
 }
-@keyframes baHeroIdlePush{ from{ transform:scale(1); } to{ transform:scale(1.018); } }
+@keyframes baHeroIdlePush{ from{ transform:scale(1); } to{ transform:scale(1.025); } }
 
 .ba-page .ba-hero-plate{
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
   object-position:32% 30%; /* keeps her in frame, negative space to the right, across aspect ratios */
-  transform-origin:36% 20%; /* roughly her eyeline, so the scroll push reads as toward her face, not the frame centre */
+  transform-origin:36% 20%; /* roughly her eyeline, so the close-in reads as toward her face, not the frame centre */
   will-change:transform, filter;
-  filter:brightness(1) saturate(1) blur(0px);
+  filter:brightness(1) blur(0px);
 }
 @media (max-width:640px){
   /* Portrait phones crop far more off the sides than desktop does, so the
@@ -108,13 +109,17 @@
   .ba-page .ba-hero-plate{ object-position:22% 26%; transform-origin:30% 16%; }
 }
 
-/* The light transition device: the existing warm window light broadening
-   until it's the whole frame, not a flash. Centred over the window side
-   of the photo (upper right) so it reads as coming from that light. */
+/* The reveal: the window light blooms across her cheek/eye and broadens
+   until it IS the frame — not a flash, and not a separate fade-to-black
+   step. This overlay sits in front of the (by now heavily zoomed) photo,
+   so its centre is placed relative to the viewport, near where her face
+   sits once close-in (close to `.ba-hero-plate`'s transform-origin) but
+   offset toward screen-right — the direction she's looking, and where the
+   window light would fall across her. */
 .ba-page .ba-hero-lightwash{
   position:absolute; inset:0; opacity:0; pointer-events:none;
   background:
-    radial-gradient(ellipse 78% 65% at 72% 34%, rgba(245,238,220,0.97) 0%, rgba(245,238,220,0.62) 48%, transparent 74%),
+    radial-gradient(ellipse 80% 68% at 58% 30%, rgba(245,238,220,0.97) 0%, rgba(245,238,220,0.62) 48%, transparent 74%),
     var(--ba-ivory);
 }
 .ba-page .ba-vignette{ position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse at 50% 55%, transparent 40%, rgba(0,0,0,0.6) 100%); }
