@@ -324,20 +324,15 @@ body.ba-page-body .nav-logo-center img{
   margin-top:32px; color:var(--ba-smoke); font-size:0.8rem; line-height:1.6; max-width:60ch;
 }
 
-/* ================= SECTION 06 — RECOVERY TECHNOLOGY ================= */
-.ba-page .ba-recovery-tech{ background:var(--ba-charcoal); }
-.ba-page .ba-recovery-grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,56px); align-items:center; }
-@media (max-width:860px){ .ba-page .ba-recovery-grid{ grid-template-columns:1fr; } }
-.ba-page .ba-cat-list{ display:flex; flex-direction:column; margin-top:26px; }
-.ba-page .ba-cat-list span{
-  font-family:'EB Garamond', serif; font-size:1.1rem; color:var(--ba-ivory);
-  padding:14px 0; border-top:1px solid var(--ba-line);
-}
-.ba-page .ba-cat-list span:last-child{ border-bottom:1px solid var(--ba-line); }
-
 /* ================= SECTION 07 — WELLNESS THAT MOVES WITH YOU =================
-   Editorial flow, not cards — typography and connecting lines only. */
-.ba-page .ba-moves{ background:var(--ba-ink); }
+   Editorial flow, not cards — typography and connecting lines only.
+   Charcoal, not ink: Section 06 (Recovery Technology) was removed as a
+   redundant duplicate of the Onboard Wellness section, which left this
+   section sitting directly after the ink-toned Personalised Wellness
+   section above — the same tone repeated back to back. This one small
+   tonal shift restores the page's no-identical-adjacent-tone rule
+   without touching the section's content or layout. */
+.ba-page .ba-moves{ background:var(--ba-charcoal); }
 .ba-page .ba-flow{
   display:flex; flex-wrap:wrap; align-items:center; gap:0; margin-top:40px;
 }
