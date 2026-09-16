@@ -238,6 +238,21 @@ body.ba-page-body .nav-logo-center img{
 .ba-page .ba-onboard-list p{ color:var(--ba-stone); font-size:0.88rem; margin:0; }
 .ba-page .ba-onboard .ba-suitability-note{ margin-top:30px; }
 
+/* Real onboard-wellness photography, same dark-wood-bordered plate the
+   placeholder used. object-fit:cover (not contain, unlike the Collection
+   product shot): this is a full cabin lifestyle photo, not a product
+   label that must stay fully visible — cover gives the same edge-to-edge,
+   premium full-bleed treatment as the hero, and the image's own aspect
+   ratio is close enough to the 8:5 box that the crop is minimal. */
+.ba-page .ba-onboard-figure{
+  border:1px solid var(--ba-line); background:var(--ba-wood);
+  width:100%; min-width:0; margin:0; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+}
+.ba-page .ba-onboard-figure img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+
 /* ================= SECTION 04 — JOURNEY RECOVERY COLLECTION =================
    The one intentional warm/ivory editorial surface on the page. */
 /* Warmer and softer than pure --ba-ivory, so this — the page's one light
