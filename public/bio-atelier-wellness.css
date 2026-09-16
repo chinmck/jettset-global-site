@@ -238,12 +238,11 @@ body.ba-page-body .nav-logo-center img{
 .ba-page .ba-onboard-list p{ color:var(--ba-stone); font-size:0.88rem; margin:0; }
 .ba-page .ba-onboard .ba-suitability-note{ margin-top:30px; }
 
-/* Real onboard-wellness photography, same dark-wood-bordered plate the
-   placeholder used. object-fit:cover (not contain, unlike the Collection
-   product shot): this is a full cabin lifestyle photo, not a product
-   label that must stay fully visible — cover gives the same edge-to-edge,
-   premium full-bleed treatment as the hero, and the image's own aspect
-   ratio is close enough to the 8:5 box that the crop is minimal. */
+/* Real photography, same dark-wood-bordered plate the placeholder used.
+   Shared by the Onboard Wellness and Card Members figures — both are
+   full lifestyle photos, not product labels that must stay fully
+   visible, so object-fit:cover gives the same edge-to-edge, premium
+   full-bleed treatment as the hero. */
 .ba-page .ba-onboard-figure{
   border:1px solid var(--ba-line); background:var(--ba-wood);
   width:100%; min-width:0; margin:0; overflow:hidden;
@@ -252,6 +251,13 @@ body.ba-page-body .nav-logo-center img{
 .ba-page .ba-onboard-figure img{
   width:100%; height:100%; object-fit:cover; display:block;
 }
+/* The Onboard Wellness photo (sleeping guest) is noticeably less wide
+   relative to its height than the 8:5 box, so a centred crop would cut
+   into his hair/forehead — biasing toward the top keeps his face fully
+   in frame and crops from the lower/chest area instead, which can
+   afford it. Scoped to this one section only; the Card Members photo
+   below is close enough to 8:5 already that a plain center crop is fine. */
+.ba-page #ba-onboard .ba-onboard-figure img{ object-position:50% 20%; }
 
 /* ================= SECTION 04 — JOURNEY RECOVERY COLLECTION =================
    The one intentional warm/ivory editorial surface on the page. */
@@ -315,16 +321,37 @@ body.ba-page-body .nav-logo-center img{
 /* ================= SECTION 05 — PERSONALISED WELLNESS ================= */
 .ba-page .ba-personal{ background:var(--ba-ink); }
 .ba-page .ba-personal-scenarios{ color:var(--ba-stone); line-height:1.9; font-size:0.96rem; margin:22px 0; }
-.ba-page .ba-menu{
-  display:grid; grid-template-columns:repeat(3,1fr); gap:2px 24px; margin:22px 0 34px;
-  list-style:none; padding:0;
+
+/* Icon-led category menu (replaces the old plain bullet list). Two
+   text/icon cards plus one photo-backed card (Skin & Vitality) — three
+   columns, not four: "Restore & Reset" (Compression/LED) was dropped
+   deliberately, since that content already lives in the dedicated
+   "Recovery, built into the journey" section above and duplicating it
+   here was the exact overlap the brief asked to consolidate away. */
+.ba-page .ba-menu-categories{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(20px,3vw,32px); margin:26px 0 34px;
 }
-.ba-page .ba-menu li{
-  font-family:'Inter', sans-serif; font-size:0.88rem; color:var(--ba-titanium);
-  padding:12px 0; border-top:1px solid var(--ba-line);
+@media (max-width:860px){ .ba-page .ba-menu-categories{ grid-template-columns:1fr; } }
+.ba-page .ba-menu-cat{
+  border:1px solid var(--ba-line); padding:28px 24px; min-width:0;
 }
-@media (max-width:760px){ .ba-page .ba-menu{ grid-template-columns:repeat(2,1fr); } }
-@media (max-width:480px){ .ba-page .ba-menu{ grid-template-columns:1fr; } }
+.ba-page .ba-menu-cat-icon{
+  display:inline-flex; width:30px; height:30px; color:var(--ba-champagne); margin-bottom:16px;
+}
+.ba-page .ba-menu-cat-icon svg{ width:100%; height:100%; }
+.ba-page .ba-menu-cat h3{
+  font-family:'EB Garamond', serif; font-weight:500; color:var(--ba-ivory);
+  font-size:1.15rem; margin:0 0 8px; letter-spacing:0.01em;
+}
+.ba-page .ba-menu-cat p{ color:var(--ba-stone); font-size:0.86rem; line-height:1.6; margin:0; }
+/* Photo card: same border/padding rhythm as its siblings, with a compact
+   image plate above the text instead of an icon. */
+.ba-page .ba-menu-cat-photo{ padding:0; overflow:hidden; display:flex; flex-direction:column; }
+.ba-page .ba-menu-cat-figure{ aspect-ratio:1/1; margin:0; overflow:hidden; }
+.ba-page .ba-menu-cat-figure img{ width:100%; height:100%; object-fit:cover; display:block; }
+.ba-page .ba-menu-cat-body{ padding:20px 24px 24px; }
+.ba-page .ba-menu-cat-body h3{ margin:0 0 8px; }
+.ba-page .ba-menu-cat-body p{ margin:0; }
 
 /* Ground vs air: a top rule and an eyebrow label each — no cards — so the
    two columns still read as one editorial spread, just clearly divided. */
@@ -340,7 +367,9 @@ body.ba-page-body .nav-logo-center img{
 }
 
 /* ================= SECTION 07 — WELLNESS THAT MOVES WITH YOU =================
-   Editorial flow, not cards — typography and connecting lines only.
+   Typography only, shortened: the 4-step flow diagram was removed (read
+   as a generic form, per brief) — the "Built around how you move"
+   section below now carries that role instead.
    Charcoal, not ink: Section 06 (Recovery Technology) was removed as a
    redundant duplicate of the Onboard Wellness section, which left this
    section sitting directly after the ink-toned Personalised Wellness
@@ -348,35 +377,28 @@ body.ba-page-body .nav-logo-center img{
    tonal shift restores the page's no-identical-adjacent-tone rule
    without touching the section's content or layout. */
 .ba-page .ba-moves{ background:var(--ba-charcoal); }
-.ba-page .ba-flow{
-  display:flex; flex-wrap:wrap; align-items:center; gap:0; margin-top:40px;
+
+/* ================= SECTION 7B — BUILT AROUND HOW YOU MOVE =================
+   Audience segmentation, matching the pattern of the homepage's
+   "Who We Fly" section — icon-led, no photography. Ink tone: distinct
+   from the charcoal Moves section above and the warm-dark Partner
+   section below. */
+.ba-page .ba-audience{ background:var(--ba-ink); }
+.ba-page .ba-audience-grid{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(24px,3vw,32px); margin-top:8px;
 }
-.ba-page .ba-flow-step{
-  flex:1 1 200px; min-width:180px; padding-right:24px; position:relative;
+@media (max-width:860px){ .ba-page .ba-audience-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:480px){ .ba-page .ba-audience-grid{ grid-template-columns:1fr; } }
+.ba-page .ba-audience-item{ border-top:1px solid var(--ba-line); padding-top:20px; }
+.ba-page .ba-audience-icon{
+  display:inline-flex; width:26px; height:26px; color:var(--ba-champagne); margin-bottom:14px;
 }
-.ba-page .ba-flow-step .ba-flow-index{
-  font-family:'Inter', sans-serif; font-size:0.64rem; letter-spacing:0.14em;
-  color:var(--ba-smoke); text-transform:uppercase; display:block; margin-bottom:8px;
+.ba-page .ba-audience-icon svg{ width:100%; height:100%; }
+.ba-page .ba-audience-item h3{
+  font-family:'EB Garamond', serif; font-weight:500; color:var(--ba-ivory);
+  font-size:1.05rem; margin:0 0 8px; letter-spacing:0.01em;
 }
-.ba-page .ba-flow-step p{ font-family:'EB Garamond', serif; font-size:1.1rem; color:var(--ba-ivory); line-height:1.35; }
-/* Concierge choreography, not a process diagram — a faint mark, not a
-   directional graphic. */
-.ba-page .ba-flow-arrow{
-  flex:0 0 auto; align-self:center; color:var(--ba-line); font-size:1.05rem;
-  padding:0 6px 20px;
-}
-@media (max-width:820px){
-  .ba-page .ba-flow{ flex-direction:column; align-items:stretch; }
-  /* flex-basis (the 200px in `flex: 1 1 200px`) sizes the main axis, which
-     becomes height once flex-direction is column — reset to auto here or
-     every stacked step gets a phantom 200px-tall gap under its text. */
-  .ba-page .ba-flow-step{
-    flex:0 0 auto; padding:18px 0; min-width:0;
-    border-top:1px solid var(--ba-line);
-  }
-  .ba-page .ba-flow-step:first-child{ border-top:none; padding-top:0; }
-  .ba-page .ba-flow-arrow{ display:none; }
-}
+.ba-page .ba-audience-item p{ color:var(--ba-stone); font-size:0.85rem; line-height:1.6; margin:0; }
 
 /* ================= SECTION 08 — OFFICIAL WELLNESS PARTNER =================
    A slightly warmer neutral tone, still Jettset's dark layout system. */
@@ -388,12 +410,43 @@ body.ba-page-body .nav-logo-center img{
   margin-top:20px; margin-bottom:4px; font-family:'EB Garamond', serif; font-style:italic;
   color:var(--ba-champagne); font-size:1.15rem;
 }
-.ba-page .ba-placeholder.ba-partner-figure{ aspect-ratio:8/9; }
+.ba-page .ba-partner-founder-line{
+  margin-top:16px; color:var(--ba-stone); font-size:0.92rem; line-height:1.7; max-width:54ch;
+}
+.ba-page .ba-proof-strip{
+  display:flex; flex-wrap:wrap; gap:0; margin-top:24px;
+}
+.ba-page .ba-proof-item{
+  font-family:'Inter', sans-serif; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--ba-titanium); padding:0 16px 0 0; margin-right:16px; border-right:1px solid var(--ba-line);
+}
+.ba-page .ba-proof-item:last-child{ border-right:none; padding-right:0; margin-right:0; }
+/* Below ~480px the three items no longer fit one line, and a wrapped
+   right-border leaves an orphaned divider trailing the first line —
+   switch to a stacked list with bottom rules instead. */
+@media (max-width:480px){
+  .ba-page .ba-proof-strip{ flex-direction:column; gap:10px; }
+  .ba-page .ba-proof-item{
+    border-right:none; padding-right:0; margin-right:0;
+  }
+}
+.ba-page .ba-partner-rollout-note{ margin-top:20px; }
+.ba-page .ba-partner-figure-real{
+  border:1px solid var(--ba-line); background:var(--ba-wood);
+  width:100%; min-width:0; margin:0; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+}
+.ba-page .ba-partner-figure-real img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
 
 /* ================= SECTION 8B — JETTSET CARD MEMBERS =================
-   Ink tone: distinct from the warm-dark partner section above and the
-   charcoal rollout section below, so neither boundary repeats a tone. */
-.ba-page .ba-card-members{ background:var(--ba-ink); }
+   Charcoal, not ink: the standalone Rollout section (previously the
+   buffer between this section and the Final CTA below, both ink) was
+   removed and folded into a short line inside the Partner section above
+   — without this tonal shift, Card Members and Final CTA would now sit
+   ink-on-ink back to back. */
+.ba-page .ba-card-members{ background:var(--ba-charcoal); }
 .ba-page .ba-card-members-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:clamp(32px,5vw,64px); align-items:center; }
 @media (max-width:860px){ .ba-page .ba-card-members-grid{ grid-template-columns:1fr; } }
 .ba-page .ba-card-members .ba-suitability-note{ margin-top:24px; }
@@ -404,28 +457,6 @@ body.ba-page-body .nav-logo-center img{
 .ba-page .ba-label-row-dark .ba-label{
   border-color:var(--ba-line); color:var(--ba-titanium);
 }
-
-/* ================= SECTION 09 — ROLLOUT / AVAILABILITY =================
-   Understated. Quiet. No destination imagery. Uses the sitewide
-   "compact" rhythm token (--space-compact-d/m — the same one used
-   wherever the rest of the site wants a quieter beat than its standard
-   section spacing) rather than the .ba-section default, since two short
-   lines inside full standard padding read as unfinished, not restrained. */
-/* Charcoal, not ink: Section 08 (Bio Atelier) already breaks the run of
-   near-black with its own warm-dark tone, but Section 10 (Final CTA)
-   sits on --ba-ink immediately after this one — two identical blacks
-   back to back read as repetition, not rhythm. This one small tonal
-   shift (no reorder, no new colour) keeps every section boundary on the
-   page distinct from its neighbours. */
-.ba-page .ba-rollout{
-  background:var(--ba-charcoal);
-  padding-top:var(--space-compact-d, 64px); padding-bottom:var(--space-compact-d, 64px);
-}
-@media (max-width:768px){
-  .ba-page .ba-rollout{ padding-top:var(--space-compact-m, 32px); padding-bottom:var(--space-compact-m, 32px); }
-}
-.ba-page .ba-rollout .ba-container{ max-width:720px; }
-.ba-page .ba-rollout .ba-h{ font-size:clamp(1.5rem,2.8vw,2rem); margin-bottom:20px; }
 
 /* ================= SECTION 10 — FINAL CTA =================
    Standard rhythm on top (matching the rest of the page), compact
