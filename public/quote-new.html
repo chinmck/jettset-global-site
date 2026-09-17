@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request a Private Jet Quote | Jettset Global</title>
+<meta name="description" content="Tell us your route and travel dates. Our aviation desk returns curated aircraft options within 10 minutes, discreetly and with no obligation.">
+<link rel="stylesheet" href="styles.css?v=cta-hero-1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+  /* Redesign for the new quote page only — scoped under #page-quote-new so it
+     cannot affect styles.css rules used by the original quote.html. */
+  #page-quote-new{
+    --qn-black:#12110E;
+    --qn-ink:#1C1B18;
+    --qn-paper:#FBF9F5;
+    --qn-panel:#FFFFFF;
+    --qn-line:rgba(18,17,14,0.10);
+    --qn-gold:#B8923F;
+    --qn-gold-deep:#8C763F;
+    --qn-grey:#6E6B64;
+    background:var(--qn-paper);
+    color:var(--qn-ink);
+  }
+  #page-quote-new *{box-sizing:border-box;}
+  #page-quote-new h1,#page-quote-new h2,#page-quote-new h3{
+    font-family:'Newsreader','General Sans',Georgia,serif;font-weight:400;margin:0;letter-spacing:-0.01em;
+  }
+
+  #page-quote-new .qn-top-bar{
+    display:flex;justify-content:center;align-items:center;gap:28px;
+    background:var(--qn-black);color:var(--qn-paper);
+    padding:10px 16px;font-size:13px;letter-spacing:.02em;flex-wrap:wrap;
+  }
+  #page-quote-new .qn-top-bar a{display:inline-flex;align-items:center;gap:7px;color:var(--qn-paper);text-decoration:none;font-weight:500;}
+  #page-quote-new .qn-top-bar a svg{width:14px;height:14px;fill:var(--qn-gold);flex:none;}
+  #page-quote-new .qn-top-bar .qn-divider{opacity:.3;}
+
+  /* The sitewide .nav is position:fixed with a drop-shadowed white logo,
+     designed to float transparently over a dark hero image. This page's
+     hero is light, so the nav is put back in normal document flow with a
+     solid light background and the logo/burger recolored dark to match. */
+  #page-quote-new .nav{
+    position:static;
+    background:var(--qn-paper);
+    border-bottom:1px solid var(--qn-line);
+    padding-top:16px;padding-bottom:16px;
+  }
+  #page-quote-new .nav-logo-center img{filter:brightness(0);}
+  #page-quote-new .nav-burger-glyph{color:var(--qn-ink);text-shadow:none;}
+  #page-quote-new .nav-burger:hover .nav-burger-glyph{color:var(--qn-gold-deep);}
+
+  #page-quote-new .qn-hero{max-width:960px;margin:0 auto;padding:64px 24px 40px;text-align:center;}
+  #page-quote-new .qn-hero .eyebrow{
+    display:inline-block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--qn-gold-deep);font-weight:600;margin-bottom:18px;
+  }
+  #page-quote-new .qn-hero h1{font-size:clamp(32px,5.2vw,54px);line-height:1.1;color:var(--qn-ink);}
+  #page-quote-new .qn-hero p.qn-sub{max-width:620px;margin:22px auto 0;font-size:17px;line-height:1.6;color:var(--qn-grey);}
+
+  #page-quote-new .qn-usp-badge{
+    display:inline-flex;align-items:center;gap:10px;margin:28px auto 0;
+    background:var(--qn-panel);border:1px solid var(--qn-line);border-radius:100px;
+    padding:12px 24px;box-shadow:0 6px 24px rgba(18,17,14,0.06);
+  }
+  #page-quote-new .qn-usp-badge .qn-dot{width:8px;height:8px;border-radius:50%;background:#3FA65C;flex:none;
+    box-shadow:0 0 0 4px rgba(63,166,92,0.15);}
+  #page-quote-new .qn-usp-badge span{font-size:14.5px;font-weight:600;color:var(--qn-ink);}
+  #page-quote-new .qn-usp-badge strong{color:var(--qn-gold-deep);}
+
+  #page-quote-new .qn-discretion{max-width:600px;margin:18px auto 0;font-size:14px;color:var(--qn-grey);line-height:1.55;}
+  #page-quote-new .qn-discretion svg{width:13px;height:13px;vertical-align:-1px;margin-right:5px;fill:var(--qn-gold-deep);}
+
+  #page-quote-new .qn-quote-wrap{max-width:720px;margin:0 auto;padding:8px 24px 64px;}
+  #page-quote-new .qn-quote-card{
+    background:var(--qn-panel);border:1px solid var(--qn-line);border-radius:20px;
+    padding:40px;box-shadow:0 20px 60px rgba(18,17,14,0.06);
+  }
+  #page-quote-new .qn-quote-card .quote-toggle{background:var(--qn-paper);border:1px solid var(--qn-line);border-radius:100px;padding:4px;}
+  #page-quote-new .qn-quote-card .quote-toggle button{
+    border-radius:100px;font-weight:600;color:var(--qn-grey);background:none;
+  }
+  #page-quote-new .qn-quote-card .quote-toggle button.active{background:var(--qn-black);color:var(--qn-paper);}
+  #page-quote-new .qn-quote-card .quote-field label{color:var(--qn-grey);}
+  #page-quote-new .qn-quote-card .quote-field input,
+  #page-quote-new .qn-quote-card .quote-field select,
+  #page-quote-new .qn-quote-card .quote-field textarea{
+    background:var(--qn-paper);border:1px solid var(--qn-line);color:var(--qn-ink);border-radius:10px;
+  }
+  #page-quote-new .qn-quote-card .quote-field input:focus,
+  #page-quote-new .qn-quote-card .quote-field select:focus,
+  #page-quote-new .qn-quote-card .quote-field textarea:focus{
+    outline:none;border-color:var(--qn-gold);background:var(--qn-panel);
+  }
+  #page-quote-new .qn-quote-card .stepper{border-color:var(--qn-line);background:var(--qn-paper);}
+  #page-quote-new .qn-quote-card .stepper button{color:var(--qn-ink);}
+  #page-quote-new .qn-quote-card .stepper button:hover{color:var(--qn-gold-deep);}
+  #page-quote-new .qn-quote-card .stepper span{color:var(--qn-ink);}
+  #page-quote-new .qn-quote-card .quote-field > label{color:var(--qn-grey);}
+  #page-quote-new .qn-quote-card .quote-consent label{color:var(--qn-grey);}
+  #page-quote-new .qn-quote-card .quote-submit{
+    background:var(--qn-black);color:var(--qn-paper);border-radius:10px;border:none;
+  }
+  #page-quote-new .qn-quote-card .quote-submit:hover{background:var(--qn-gold-deep);}
+  #page-quote-new .qn-urgent-note{max-width:720px;margin:22px auto 0;padding:0 24px;text-align:center;font-size:13.5px;color:var(--qn-grey);}
+  #page-quote-new .qn-urgent-note a{color:var(--qn-gold-deep);font-weight:600;text-decoration:none;}
+
+  #page-quote-new .qn-trust{background:var(--qn-black);color:var(--qn-paper);padding:64px 24px;}
+  #page-quote-new .qn-trust-inner{max-width:960px;margin:0 auto;}
+  #page-quote-new .qn-trust h2{color:var(--qn-paper);text-align:center;font-size:26px;margin-bottom:40px;}
+  #page-quote-new .qn-trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+  #page-quote-new .qn-trust-item{text-align:center;}
+  #page-quote-new .qn-trust-item .qn-icon{width:40px;height:40px;margin:0 auto 16px;color:var(--qn-gold);}
+  #page-quote-new .qn-trust-item .qn-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.4;}
+  #page-quote-new .qn-trust-item h3{font-family:inherit;font-size:15.5px;font-weight:600;margin-bottom:8px;color:var(--qn-paper);}
+  #page-quote-new .qn-trust-item p{font-size:13.5px;color:var(--qn-paper);opacity:.65;line-height:1.6;margin:0;}
+
+  #page-quote-new .qn-next{max-width:960px;margin:0 auto;padding:72px 24px;}
+  #page-quote-new .qn-next h2{text-align:center;font-size:26px;color:var(--qn-ink);margin-bottom:44px;}
+  #page-quote-new .qn-next-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  #page-quote-new .qn-next-step{text-align:center;}
+  #page-quote-new .qn-next-step .qn-num{
+    width:36px;height:36px;border-radius:50%;background:var(--qn-black);color:var(--qn-paper);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 16px;
+    font-size:14px;font-weight:600;font-family:'Newsreader',serif;
+  }
+  #page-quote-new .qn-next-step h3{font-size:15.5px;font-weight:600;margin-bottom:8px;color:var(--qn-ink);}
+  #page-quote-new .qn-next-step p{font-size:13.5px;color:var(--qn-grey);line-height:1.6;margin:0;}
+
+  #page-quote-new footer{border-top:1px solid var(--qn-line);background:var(--qn-paper);}
+  #page-quote-new .footer-logo{color:var(--qn-ink);}
+  #page-quote-new footer p,#page-quote-new footer a,#page-quote-new .footer-bottom{color:var(--qn-grey);}
+  #page-quote-new footer h4{color:var(--qn-ink);}
+
+  @media (max-width:720px){
+    #page-quote-new .qn-trust-grid,#page-quote-new .qn-next-grid{grid-template-columns:1fr;}
+    #page-quote-new .qn-quote-card{padding:28px 20px;}
+    #page-quote-new .qn-top-bar{gap:16px;font-size:12.5px;}
+    #page-quote-new .qn-quote-card .quote-toggle button{font-size:12px;white-space:nowrap;}
+  }
+</style>
+</head>
+<body>
+
+  <div id="jtVeil"></div>
+
+  <div id="page-quote-new">
+
+  <div class="qn-top-bar">
+    <a href="tel:+448005999888">
+      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3.654 1.328a.678.678 0 0 1 1.015-.063l2.143 2.143a.678.678 0 0 1 .063 1.015l-1.18 1.18a8.5 8.5 0 0 0 9.728 9.728l1.18-1.18a.678.678 0 0 1 1.015.063l2.143 2.143a.678.678 0 0 1-.063 1.015l-1.6 1.4a1.5 1.5 0 0 1-1.21.36C9.937 17.78 2.22 10.063.91 3.011a1.5 1.5 0 0 1 .36-1.21z"/></svg>
+      +44 800 5 999 888
+    </a>
+    <span class="qn-divider">|</span>
+    <a href="https://wa.me/447378111111?text=Hi%20Jettset%2C%20I%27d%20like%20to%20request%20a%20private%20jet%20quote." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.12-2.9-6.99A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.19 0 4.25.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.79c0 4.52-3.68 8.2-8.2 8.2a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.15.82.84-3.07-.2-.32a8.15 8.15 0 0 1-1.25-4.35c0-4.52 3.68-8.2 8.2-8.2zm-4.5 4.6c-.15 0-.4.06-.6.29-.21.23-.8.78-.8 1.9 0 1.12.82 2.2.93 2.35.11.15 1.6 2.5 3.9 3.44 1.9.79 2.3.63 2.71.6.42-.04 1.35-.55 1.54-1.09.19-.53.19-.98.13-1.08-.06-.1-.21-.16-.44-.28-.23-.11-1.35-.67-1.56-.74-.21-.08-.36-.11-.51.11-.15.23-.58.74-.71.89-.13.15-.26.17-.49.06-.23-.11-.96-.35-1.83-1.13-.68-.6-1.13-1.35-1.27-1.58-.13-.23-.01-.35.1-.47.1-.1.23-.26.35-.4.11-.13.15-.23.23-.38.08-.15.04-.29-.02-.4-.06-.11-.51-1.25-.71-1.7-.18-.44-.37-.38-.51-.39z"/></svg>
+      WhatsApp +44 7378 111 111
+    </a>
+  </div>
+
+  <nav class="nav" id="mainNav">
+    <button class="nav-burger" id="navBurgerOpen" aria-label="Open menu" aria-expanded="false">
+      <span class="nav-burger-glyph">+</span>
+    </button>
+
+    <a href="index.html" class="nav-logo-center">
+      <img src="images/nav-logo.png" alt="Jettset">
+    </a>
+  </nav>
+
+  <div class="contact-sheet-overlay" id="contactSheetOverlay">
+    <div class="contact-sheet">
+      <span class="eyebrow">Reach Us Directly</span>
+      <a href="tel:+448005999888" class="contact-sheet-option">Call</a>
+      <a href="https://wa.me/447378111111?text=Hi%20Jettset%2C%20I%27d%20like%20to%20request%20a%20private%20jet%20quote." class="contact-sheet-option">WhatsApp</a>
+      <a href="mailto:info@jettsetglobal.com" class="contact-sheet-option">Email</a>
+      <button type="button" class="contact-sheet-cancel" id="contactSheetCancel">Cancel</button>
+    </div>
+  </div>
+
+  <div class="side-overlay" id="sideOverlay"></div>
+  <div class="side-panel" id="sidePanel">
+    <div class="nav-index-inner">
+      <a href="index.html" class="nav-index-home" id="navHome">Jettset &mdash; Private Aviation &amp; Concierge House</a>
+      <div class="nav-index-proof">Enquiries Answered In &le;10 Min</div>
+
+      <div class="nav-index-group">
+        <span class="nav-index-num">01</span>
+        <div>
+          <span class="nav-index-title">Private Aviation</span>
+          <div class="nav-index-links">
+            <a href="charter.html" class="" id="navCharter">Charter</a>
+            <a href="jet-card.html" class="" id="navJetcard">Jet Card</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">02</span>
+        <div>
+          <span class="nav-index-title"><a href="concierge.html" class="" id="navConcierge">Concierge</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group">
+        <span class="nav-index-num">03</span>
+        <div>
+          <span class="nav-index-title">Membership</span>
+          <div class="nav-index-links">
+            <a href="club.html" class="" id="navClub">Club</a>
+            <a href="legs.html" class="" id="navLegs">Legs</a>
+            <a href="editions.html" class="" id="navEditions">Editions</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">04</span>
+        <div>
+          <span class="nav-index-title"><a href="advisory.html" class="" id="navAdvisory">Advisory</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group">
+        <span class="nav-index-num">05</span>
+        <div>
+          <span class="nav-index-title">Partnerships</span>
+          <div class="nav-index-links">
+            <a href="partners.html" class="" id="navPartners">Partner With Us</a>
+            <a href="access-partners.html" class="" id="navAccessPartners">Access Partners</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">06</span>
+        <div>
+          <span class="nav-index-title"><a href="about.html" class="" id="navAbout">About</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">07</span>
+        <div>
+          <span class="nav-index-title"><a href="the-manifest.html" class="" id="navJournal">The Manifest</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">08</span>
+        <div>
+          <span class="nav-index-title"><a href="in-motion.html" class="" id="navInMotion">In Motion</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">09</span>
+        <div>
+          <span class="nav-index-title"><a href="contact.html" class="" id="navContact">Contact</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-footer">
+        <a href="https://jettsetglobal.com/quote-new.html" class="nav-index-cta btn-ghost">Request My Quote</a>
+        <div class="nav-index-contact">
+          <a href="tel:+448005999888">Call</a>
+          <a href="https://wa.me/447378111111?text=Hi%20Jettset%2C%20I%27d%20like%20to%20request%20a%20private%20jet%20quote.">WhatsApp</a>
+          <a href="#" class="side-member-login" id="navMemberLogin"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a3.5 3.5 0 0 0-3.5 3.5V7H6a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-.5V5.5A3.5 3.5 0 0 0 10 2zm2 5H8V5.5a2 2 0 1 1 4 0V7z"/></svg>Member Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ NEW QUOTE PAGE (redesign per marketing brief) ============ -->
+
+  <section class="qn-hero">
+    <span class="eyebrow">Private Aviation</span>
+    <h1>Request a Private Jet Quote</h1>
+    <p class="qn-sub">Tell us your route and travel dates. Our aviation desk will return a curated set of aircraft options — discreetly, and with no obligation.</p>
+
+    <div class="qn-usp-badge">
+      <span class="qn-dot"></span>
+      <span>All enquiries are answered within <strong>10 minutes</strong></span>
+    </div>
+
+    <p class="qn-discretion">
+      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2 3 5v5c0 4.5 3 7.6 7 8.5 4-.9 7-4 7-8.5V5l-7-3z"/></svg>
+      Every enquiry is handled in strict confidence by a dedicated member of our team, with no obligation to book.
+    </p>
+  </section>
+
+  <div class="qn-quote-wrap">
+    <div class="qn-quote-card">
+      <div class="quote-toggle" id="quoteTripToggle">
+        <button class="active" data-trip="oneway">One-Way</button>
+        <button data-trip="roundtrip">Round-Trip</button>
+      </div>
+
+      <form class="quote-form" id="quoteForm" name="jettset-charter" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="jettset-charter">
+        <input type="hidden" id="qTripType" name="tripType" value="oneway">
+        <input type="hidden" id="qAdults" name="adults" value="1">
+        <input type="hidden" id="qChildren" name="children" value="0">
+        <input type="hidden" id="qPets" name="pets" value="0">
+        <input type="hidden" name="landing_page" value="/quote-new.html">
+
+        <div class="quote-row">
+          <div class="quote-field">
+            <label for="qFrom">From</label>
+            <input type="text" id="qFrom" name="from" placeholder="Departure city or airport" list="qCities" autocomplete="off">
+          </div>
+          <div class="quote-field">
+            <label for="qTo">To</label>
+            <input type="text" id="qTo" name="to" placeholder="Arrival city or airport" list="qCities" autocomplete="off">
+          </div>
+        </div>
+
+        <datalist id="qCities"></datalist>
+
+        <div class="quote-row" id="quoteDateRow">
+          <div class="quote-field">
+            <label for="qDepart">Departure</label>
+            <input type="date" id="qDepart" name="departureDate">
+          </div>
+          <div class="quote-field" id="qReturnField" style="display:none;">
+            <label for="qReturn">Return</label>
+            <input type="date" id="qReturn" name="returnDate">
+          </div>
+        </div>
+
+        <div class="quote-field">
+          <label>Passengers</label>
+          <div class="passenger-row">
+            <div class="stepper" data-counter="adults">
+              <button type="button" data-action="dec">&minus;</button>
+              <span>1 Adult</span>
+              <button type="button" data-action="inc">&plus;</button>
+            </div>
+            <div class="stepper" data-counter="children">
+              <button type="button" data-action="dec">&minus;</button>
+              <span>0 Children</span>
+              <button type="button" data-action="inc">&plus;</button>
+            </div>
+            <div class="stepper" data-counter="pets">
+              <button type="button" data-action="dec">&minus;</button>
+              <span>0 Pets</span>
+              <button type="button" data-action="inc">&plus;</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote-row">
+          <div class="quote-field">
+            <label for="qName">Full Name</label>
+            <input type="text" id="qName" name="name" placeholder="Your name">
+          </div>
+          <div class="quote-field">
+            <label for="qPhone">Phone Number</label>
+            <input type="tel" id="qPhone" name="phone" placeholder="With country code">
+          </div>
+        </div>
+
+        <div class="quote-row">
+          <div class="quote-field">
+            <label for="qEmail">Email Address</label>
+            <input type="email" id="qEmail" name="email" placeholder="you@email.com">
+          </div>
+          <div class="quote-field">
+            <label for="qContactMethod">Preferred Contact</label>
+            <select id="qContactMethod" name="preferredContact">
+              <option>Email</option>
+              <option>Phone</option>
+              <option>WhatsApp</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="quote-field">
+          <label for="qNotes">Anything Else We Should Know</label>
+          <textarea id="qNotes" name="notes" placeholder="Special requests, preferences, or context for your journey"></textarea>
+        </div>
+
+        <div class="quote-consent">
+          <input type="checkbox" id="qConsent" name="consent" value="agreed">
+          <label for="qConsent">I agree to be contacted by Jettset regarding this enquiry. Your information remains private and confidential, used solely by Jettset.</label>
+        </div>
+
+        <button type="submit" class="btn-ghost quote-submit" id="qSubmitBtn">Request My Quote</button>
+
+      </form>
+    </div>
+
+    <div class="qn-urgent-note">
+      For urgent flight requests, contact our team directly — <a href="tel:+448005999888">+44 800 5 999 888</a> or <a href="https://wa.me/447378111111?text=Hi%20Jettset%2C%20I%27d%20like%20to%20request%20a%20private%20jet%20quote.">WhatsApp +44 7378 111 111</a>.
+    </div>
+  </div>
+
+  <section class="qn-trust">
+    <div class="qn-trust-inner">
+      <h2>Why Fly With Jettset</h2>
+      <div class="qn-trust-grid">
+        <div class="qn-trust-item">
+          <div class="qn-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 4 6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-6-4-9s1.5-6.4 4-9z"/></svg></div>
+          <h3>Global Aircraft Access</h3>
+          <p>A worldwide network of aircraft, sourced to match your route and schedule.</p>
+        </div>
+        <div class="qn-trust-item">
+          <div class="qn-icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 8.5C8 19.6 5 16.5 5 12V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3>Licensed Operators</h3>
+          <p>Every flight is arranged with fully licensed, safety-vetted operators.</p>
+        </div>
+        <div class="qn-trust-item">
+          <div class="qn-icon"><svg viewBox="0 0 24 24"><path d="M4 8l8-5 8 5v8l-8 5-8-5V8z"/><path d="M12 3v18"/></svg></div>
+          <h3>Discreet Service</h3>
+          <p>Every enquiry and itinerary is handled in strict, private confidence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="qn-next">
+    <h2>What Happens Next</h2>
+    <div class="qn-next-grid">
+      <div class="qn-next-step">
+        <div class="qn-num">1</div>
+        <h3>Send Your Enquiry</h3>
+        <p>Share your route, dates and passenger details above.</p>
+      </div>
+      <div class="qn-next-step">
+        <div class="qn-num">2</div>
+        <h3>Receive Aircraft Options</h3>
+        <p>We return a curated shortlist matched to your journey.</p>
+      </div>
+      <div class="qn-next-step">
+        <div class="qn-num">3</div>
+        <h3>Speak With The Aviation Desk</h3>
+        <p>A member of our team confirms details and finalises your flight.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER (shared) ============ -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Jettset</div>
+        <p>A private aviation and concierge house, built for guests who expect the world to move on their terms.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Experiences</h4>
+        <ul>
+          <li><a href="charter.html">Charter</a></li>
+          <li><a href="jet-card.html">Jet Card</a></li>
+          <li><a href="club.html">Club</a></li>
+          <li><a href="legs.html">Legs</a></li>
+          <li><a href="concierge.html">Concierge</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="guest-segments.html">Guest Segments</a></li>
+          <li><a href="the-manifest.html">The Manifest</a></li>
+          <li><a href="in-motion.html">In Motion</a></li>
+          <li><a href="advisory.html">Advisory</a></li>
+          <li><a href="editions.html">Editions</a></li>
+          <li><a href="partners.html">Partner With Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="https://jettsetglobal.com/contact">Enquire</a></li>
+          <li><a href="mailto:info@jettsetglobal.com">info@jettsetglobal.com</a></li>
+          <li><a href="https://www.linkedin.com/company/jettset-global" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/jettset.global/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Jettset Global</span>
+      <span><a href="privacy.html">Privacy</a> &nbsp;&middot;&nbsp; <a href="terms.html">Terms</a> &nbsp;&middot;&nbsp; <a href="trust.html">Trust</a></span>
+    </div>
+  </footer>
+
+  </div>
+
+  <script src="script.js?v=cta-hero-1"></script>
+  <script>
+    (function(){
+      fetch('data/private-jet-airports.json')
+        .then(function(r){ return r.ok ? r.json() : []; })
+        .then(function(airports){
+          var datalist = document.getElementById('qCities');
+          if(!datalist) return;
+          var frag = document.createDocumentFragment();
+          airports.forEach(function(a){
+            var opt = document.createElement('option');
+            opt.value = a.city + ', ' + a.country + ' – ' + a.name + ' (' + a.code + ')';
+            frag.appendChild(opt);
+          });
+          datalist.appendChild(frag);
+        })
+        .catch(function(){ /* suggestions are progressive enhancement; plain text entry still works */ });
+    })();
+  </script>
+</body>
+</html>
