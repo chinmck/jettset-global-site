@@ -318,63 +318,7 @@
           </div>
         </div>
 
-        <datalist id="qCities">
-          <option value="London – Luton Airport (LTN)"></option>
-          <option value="London – Stansted Airport (STN)"></option>
-          <option value="London – Biggin Hill Airport (BQH)"></option>
-          <option value="London – Farnborough Airport (FAB)"></option>
-          <option value="London – City Airport (LCY)"></option>
-          <option value="Monaco – Heliport (MCM)"></option>
-          <option value="Monaco – Nice Côte d'Azur Airport (NCE)"></option>
-          <option value="Dubai – Dubai International Airport (DXB)"></option>
-          <option value="Dubai – Al Maktoum International Airport (DWC)"></option>
-          <option value="New York – Teterboro Airport (TEB)"></option>
-          <option value="New York – Westchester County Airport (HPN)"></option>
-          <option value="New York – JFK International Airport (JFK)"></option>
-          <option value="Miami – Opa-locka Executive Airport (OPF)"></option>
-          <option value="Miami – Fort Lauderdale Executive Airport (FXE)"></option>
-          <option value="Miami – Miami International Airport (MIA)"></option>
-          <option value="Lagos – Murtala Muhammed International Airport (LOS)"></option>
-          <option value="Paris – Le Bourget Airport (LBG)"></option>
-          <option value="Paris – Charles de Gaulle Airport (CDG)"></option>
-          <option value="Paris – Orly Airport (ORY)"></option>
-          <option value="Accra – Kotoka International Airport (ACC)"></option>
-          <option value="Los Angeles – Van Nuys Airport (VNY)"></option>
-          <option value="Los Angeles – LAX International Airport (LAX)"></option>
-          <option value="Toronto – Pearson International Airport (YYZ)"></option>
-          <option value="Toronto – Billy Bishop City Airport (YTZ)"></option>
-          <option value="Toronto – Buttonville Municipal Airport (YKZ)"></option>
-          <option value="Madrid – Adolfo Suárez–Barajas Airport (MAD)"></option>
-          <option value="Rome – Ciampino Airport (CIA)"></option>
-          <option value="Rome – Fiumicino Airport (FCO)"></option>
-          <option value="Milan – Linate Airport (LIN)"></option>
-          <option value="Milan – Malpensa Airport (MXP)"></option>
-          <option value="Geneva – Geneva Airport (GVA)"></option>
-          <option value="Zurich – Zurich Airport (ZRH)"></option>
-          <option value="Johannesburg – Lanseria Airport (HLA)"></option>
-          <option value="Johannesburg – OR Tambo International Airport (JNB)"></option>
-          <option value="Cape Town – Cape Town International Airport (CPT)"></option>
-          <option value="Nairobi – Wilson Airport (WIL)"></option>
-          <option value="Nairobi – Jomo Kenyatta International Airport (NBO)"></option>
-          <option value="Singapore – Seletar Airport (XSP)"></option>
-          <option value="Singapore – Changi Airport (SIN)"></option>
-          <option value="Hong Kong – Hong Kong International Airport (HKG)"></option>
-          <option value="Tokyo – Haneda Airport (HND)"></option>
-          <option value="Tokyo – Narita International Airport (NRT)"></option>
-          <option value="Sydney – Kingsford Smith Airport (SYD)"></option>
-          <option value="Sydney – Bankstown Airport (BWU)"></option>
-          <option value="Doha – Hamad International Airport (DOH)"></option>
-          <option value="Riyadh – King Khalid International Airport (RUH)"></option>
-          <option value="Istanbul – Istanbul Airport (IST)"></option>
-          <option value="Athens – Athens International Airport (ATH)"></option>
-          <option value="Ibiza – Ibiza Airport (IBZ)"></option>
-          <option value="Mykonos – Mykonos Airport (JMK)"></option>
-          <option value="Mumbai – Chhatrapati Shivaji Maharaj International Airport (BOM)"></option>
-          <option value="Delhi – Indira Gandhi International Airport (DEL)"></option>
-          <option value="São Paulo – Congonhas Airport (CGH)"></option>
-          <option value="São Paulo – Guarulhos International Airport (GRU)"></option>
-          <option value="Aspen – Pitkin County Airport (ASE)"></option>
-        </datalist>
+        <datalist id="qCities"></datalist>
 
         <div class="quote-row" id="quoteDateRow">
           <div class="quote-field">
@@ -546,5 +490,23 @@
   </div>
 
   <script src="script.js?v=cta-hero-1"></script>
+  <script>
+    (function(){
+      fetch('data/private-jet-airports.json')
+        .then(function(r){ return r.ok ? r.json() : []; })
+        .then(function(airports){
+          var datalist = document.getElementById('qCities');
+          if(!datalist) return;
+          var frag = document.createDocumentFragment();
+          airports.forEach(function(a){
+            var opt = document.createElement('option');
+            opt.value = a.city + ', ' + a.country + ' – ' + a.name + ' (' + a.code + ')';
+            frag.appendChild(opt);
+          });
+          datalist.appendChild(frag);
+        })
+        .catch(function(){ /* suggestions are progressive enhancement; plain text entry still works */ });
+    })();
+  </script>
 </body>
 </html>
