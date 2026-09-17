@@ -200,19 +200,12 @@
       <div class="nav-index-group is-single">
         <span class="nav-index-num">02</span>
         <div>
-          <span class="nav-index-title"><a href="/medical" class="" id="navMedical">Medical Aviation</a></span>
-        </div>
-      </div>
-
-      <div class="nav-index-group is-single">
-        <span class="nav-index-num">03</span>
-        <div>
           <span class="nav-index-title"><a href="concierge.html" class="" id="navConcierge">Concierge</a></span>
         </div>
       </div>
 
       <div class="nav-index-group">
-        <span class="nav-index-num">04</span>
+        <span class="nav-index-num">03</span>
         <div>
           <span class="nav-index-title">Membership</span>
           <div class="nav-index-links">
@@ -224,14 +217,14 @@
       </div>
 
       <div class="nav-index-group is-single">
-        <span class="nav-index-num">05</span>
+        <span class="nav-index-num">04</span>
         <div>
           <span class="nav-index-title"><a href="advisory.html" class="" id="navAdvisory">Advisory</a></span>
         </div>
       </div>
 
       <div class="nav-index-group">
-        <span class="nav-index-num">06</span>
+        <span class="nav-index-num">05</span>
         <div>
           <span class="nav-index-title">Partnerships</span>
           <div class="nav-index-links">
@@ -242,28 +235,28 @@
       </div>
 
       <div class="nav-index-group is-single">
-        <span class="nav-index-num">07</span>
+        <span class="nav-index-num">06</span>
         <div>
           <span class="nav-index-title"><a href="about.html" class="" id="navAbout">About</a></span>
         </div>
       </div>
 
       <div class="nav-index-group is-single">
-        <span class="nav-index-num">08</span>
+        <span class="nav-index-num">07</span>
         <div>
           <span class="nav-index-title"><a href="the-manifest.html" class="" id="navJournal">The Manifest</a></span>
         </div>
       </div>
 
       <div class="nav-index-group is-single">
-        <span class="nav-index-num">09</span>
+        <span class="nav-index-num">08</span>
         <div>
           <span class="nav-index-title"><a href="in-motion.html" class="" id="navInMotion">In Motion</a></span>
         </div>
       </div>
 
       <div class="nav-index-group is-single">
-        <span class="nav-index-num">10</span>
+        <span class="nav-index-num">09</span>
         <div>
           <span class="nav-index-title"><a href="contact.html" class="" id="navContact">Contact</a></span>
         </div>
@@ -305,16 +298,22 @@
         <button data-trip="roundtrip">Round-Trip</button>
       </div>
 
-      <form class="quote-form" id="quoteForm">
+      <form class="quote-form" id="quoteForm" name="jettset-charter" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="jettset-charter">
+        <input type="hidden" id="qTripType" name="tripType" value="oneway">
+        <input type="hidden" id="qAdults" name="adults" value="1">
+        <input type="hidden" id="qChildren" name="children" value="0">
+        <input type="hidden" id="qPets" name="pets" value="0">
+        <input type="hidden" name="landing_page" value="/quote-new.html">
 
         <div class="quote-row">
           <div class="quote-field">
             <label for="qFrom">From</label>
-            <input type="text" id="qFrom" placeholder="Departure city or airport" list="qCities" autocomplete="off">
+            <input type="text" id="qFrom" name="from" placeholder="Departure city or airport" list="qCities" autocomplete="off">
           </div>
           <div class="quote-field">
             <label for="qTo">To</label>
-            <input type="text" id="qTo" placeholder="Arrival city or airport" list="qCities" autocomplete="off">
+            <input type="text" id="qTo" name="to" placeholder="Arrival city or airport" list="qCities" autocomplete="off">
           </div>
         </div>
 
@@ -323,11 +322,11 @@
         <div class="quote-row" id="quoteDateRow">
           <div class="quote-field">
             <label for="qDepart">Departure</label>
-            <input type="date" id="qDepart">
+            <input type="date" id="qDepart" name="departureDate">
           </div>
           <div class="quote-field" id="qReturnField" style="display:none;">
             <label for="qReturn">Return</label>
-            <input type="date" id="qReturn">
+            <input type="date" id="qReturn" name="returnDate">
           </div>
         </div>
 
@@ -355,22 +354,22 @@
         <div class="quote-row">
           <div class="quote-field">
             <label for="qName">Full Name</label>
-            <input type="text" id="qName" placeholder="Your name">
+            <input type="text" id="qName" name="name" placeholder="Your name">
           </div>
           <div class="quote-field">
             <label for="qPhone">Phone Number</label>
-            <input type="tel" id="qPhone" placeholder="With country code">
+            <input type="tel" id="qPhone" name="phone" placeholder="With country code">
           </div>
         </div>
 
         <div class="quote-row">
           <div class="quote-field">
             <label for="qEmail">Email Address</label>
-            <input type="email" id="qEmail" placeholder="you@email.com">
+            <input type="email" id="qEmail" name="email" placeholder="you@email.com">
           </div>
           <div class="quote-field">
             <label for="qContactMethod">Preferred Contact</label>
-            <select id="qContactMethod">
+            <select id="qContactMethod" name="preferredContact">
               <option>Email</option>
               <option>Phone</option>
               <option>WhatsApp</option>
@@ -380,11 +379,11 @@
 
         <div class="quote-field">
           <label for="qNotes">Anything Else We Should Know</label>
-          <textarea id="qNotes" placeholder="Special requests, preferences, or context for your journey"></textarea>
+          <textarea id="qNotes" name="notes" placeholder="Special requests, preferences, or context for your journey"></textarea>
         </div>
 
         <div class="quote-consent">
-          <input type="checkbox" id="qConsent">
+          <input type="checkbox" id="qConsent" name="consent" value="agreed">
           <label for="qConsent">I agree to be contacted by Jettset regarding this enquiry. Your information remains private and confidential, used solely by Jettset.</label>
         </div>
 
