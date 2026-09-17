@@ -310,13 +310,48 @@
         <div class="quote-row">
           <div class="quote-field">
             <label for="qFrom">From</label>
-            <input type="text" id="qFrom" placeholder="Departure city or airport">
+            <input type="text" id="qFrom" placeholder="Departure city or airport" list="qCities" autocomplete="off">
           </div>
           <div class="quote-field">
             <label for="qTo">To</label>
-            <input type="text" id="qTo" placeholder="Arrival city or airport">
+            <input type="text" id="qTo" placeholder="Arrival city or airport" list="qCities" autocomplete="off">
           </div>
         </div>
+
+        <datalist id="qCities">
+          <option value="London"></option>
+          <option value="Monaco"></option>
+          <option value="Dubai"></option>
+          <option value="New York"></option>
+          <option value="Miami"></option>
+          <option value="Lagos"></option>
+          <option value="Paris"></option>
+          <option value="Accra"></option>
+          <option value="Los Angeles"></option>
+          <option value="Toronto"></option>
+          <option value="Madrid"></option>
+          <option value="Rome"></option>
+          <option value="Milan"></option>
+          <option value="Geneva"></option>
+          <option value="Zurich"></option>
+          <option value="Johannesburg"></option>
+          <option value="Cape Town"></option>
+          <option value="Nairobi"></option>
+          <option value="Singapore"></option>
+          <option value="Hong Kong"></option>
+          <option value="Tokyo"></option>
+          <option value="Sydney"></option>
+          <option value="Doha"></option>
+          <option value="Riyadh"></option>
+          <option value="Istanbul"></option>
+          <option value="Athens"></option>
+          <option value="Ibiza"></option>
+          <option value="Mykonos"></option>
+          <option value="Mumbai"></option>
+          <option value="Delhi"></option>
+          <option value="São Paulo"></option>
+          <option value="Aspen"></option>
+        </datalist>
 
         <div class="quote-row" id="quoteDateRow">
           <div class="quote-field">
