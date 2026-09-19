@@ -446,6 +446,14 @@ body.ba-page-body .nav-logo-center img{
 }
 @media (max-width:768px){ .ba-page .ba-partner-textcol{ padding:var(--space-standard-m, 48px) 24px; } }
 .ba-page .ba-partner .ba-eyebrow{ color:var(--ba-champagne); }
+/* The "Bio Atelier" heading is the partner's own wordmark logo rather
+   than set text — the source asset's flat dark background was keyed
+   out to real transparency so it sits on the section's own warm-dark
+   background with no visible box. Sized to sit at roughly the same
+   visual weight as the .ba-h headings elsewhere on the page, not to
+   the source image's own pixel height. */
+.ba-page .ba-partner-name{ margin-bottom:22px; }
+.ba-page .ba-partner-name img{ height:clamp(30px,4.2vw,42px); width:auto; display:block; }
 .ba-page .ba-partner-tagline{
   margin-top:20px; margin-bottom:4px; font-family:'EB Garamond', serif; font-style:italic;
   color:var(--ba-champagne); font-size:1.15rem;
