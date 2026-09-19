@@ -6,7 +6,7 @@
 <title>Jettset Aviation Wellness</title>
 <meta name="description" content="Jettset Aviation Wellness is a new approach to supporting how travellers prepare, perform and recover before, during and after every journey — with Bio Atelier as Official Wellness Partner.">
 <link rel="stylesheet" href="styles.css?v=cta-hero-1">
-<link rel="stylesheet" href="bio-atelier-wellness.css?v=4">
+<link rel="stylesheet" href="bio-atelier-wellness.css?v=5">
 </head>
 <body class="ba-page-body">
 
@@ -16,7 +16,10 @@
     <button class="nav-burger" id="navBurgerOpen" aria-label="Open menu" aria-expanded="false">
       <span class="nav-burger-glyph">+</span>
     </button>
-    <a href="/" class="nav-logo-center"><img src="images/nav-logo.png" alt="Jettset"></a>
+
+    <a href="index.html" class="nav-logo-center" >
+      <img src="images/nav-logo.png" alt="Jettset">
+    </a>
   </nav>
 
   <div class="contact-mark" id="contactMark">
@@ -38,47 +41,115 @@
     </div>
   </div>
 
+  <div class="fleet-modal-overlay" id="fleetModalOverlay">
+    <div class="fleet-modal">
+      <button type="button" class="fleet-modal-close" id="fleetModalClose" aria-label="Close">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L8.94 10l-4.72 4.72a.75.75 0 1 0 1.06 1.06L10 11.06l4.72 4.72a.75.75 0 1 0 1.06-1.06L11.06 10l4.72-4.72a.75.75 0 0 0-1.06-1.06L10 8.94z"/></svg>
+      </button>
+      <div class="fleet-modal-head">
+        <span class="eyebrow">Category</span>
+        <h3 id="fleetModalTitle">&nbsp;</h3>
+        <div class="fleet-modal-meta" id="fleetModalMeta">&nbsp;</div>
+        <p id="fleetModalDesc">&nbsp;</p>
+      </div>
+      <div class="fleet-modal-aircraft" id="fleetModalAircraft"></div>
+      <p class="fleet-modal-empty" id="fleetModalEmpty">Fleet imagery for this category is being finalised — every journey is still sourced operator-direct against the specific aircraft available.</p>
+    </div>
+  </div>
+
   <div class="side-overlay" id="sideOverlay"></div>
   <div class="side-panel" id="sidePanel">
     <div class="nav-index-inner">
-      <a href="/" class="nav-index-home" id="navHome">Jettset &mdash; Private Aviation &amp; Concierge House</a>
+      <a href="index.html" class="nav-index-home" id="navHome">Jettset &mdash; Private Aviation &amp; Concierge House</a>
       <div class="nav-index-proof">Enquiries Answered In &le;10 Min</div>
 
       <div class="nav-index-group">
         <span class="nav-index-num">01</span>
-        <div><span class="nav-index-title">Private Aviation</span><div class="nav-index-links"><a href="/charter" id="navCharter">Charter</a><a href="/jet-card" id="navJetcard">Jet Card</a></div></div>
+        <div>
+          <span class="nav-index-title">Private Aviation</span>
+          <div class="nav-index-links">
+            <a href="charter.html" class="active" id="navCharter">Charter</a>
+            <a href="jet-card.html" class="" id="navJetcard">Jet Card</a>
+          </div>
+        </div>
       </div>
+
       <div class="nav-index-group is-single">
         <span class="nav-index-num">02</span>
-        <div><span class="nav-index-title"><a href="/medical" id="navMedical">Medical Aviation</a></span></div>
+        <div>
+          <span class="nav-index-title"><a href="concierge.html" class="" id="navConcierge">Concierge</a></span>
+        </div>
       </div>
-      <div class="nav-index-group is-single">
+
+      <div class="nav-index-group">
         <span class="nav-index-num">03</span>
-        <div><span class="nav-index-title"><a href="/concierge" id="navConcierge">Concierge</a></span></div>
+        <div>
+          <span class="nav-index-title">Membership</span>
+          <div class="nav-index-links">
+            <a href="club.html" class="" id="navClub">Club</a>
+            <a href="legs.html" class="" id="navLegs">Legs</a>
+            <a href="editions.html" class="" id="navEditions">Editions</a>
+          </div>
+        </div>
       </div>
-      <div class="nav-index-group">
-        <span class="nav-index-num">04</span>
-        <div><span class="nav-index-title">Membership</span><div class="nav-index-links"><a href="/club" id="navClub">Club</a><a href="/legs" id="navLegs">Legs</a><a href="/editions" id="navEditions">Editions</a></div></div>
-      </div>
+
       <div class="nav-index-group is-single">
-        <span class="nav-index-num">05</span>
-        <div><span class="nav-index-title"><a href="/advisory" id="navAdvisory">Advisory</a></span></div>
+        <span class="nav-index-num">04</span>
+        <div>
+          <span class="nav-index-title"><a href="advisory.html" class="" id="navAdvisory">Advisory</a></span>
+        </div>
       </div>
+
       <div class="nav-index-group">
-        <span class="nav-index-num">06</span>
-        <div><span class="nav-index-title">Partnerships</span><div class="nav-index-links"><a href="/partners" id="navPartners">Partner With Us</a><a href="/access-partners" id="navAccessPartners">Access Partners</a></div></div>
+        <span class="nav-index-num">05</span>
+        <div>
+          <span class="nav-index-title">Partnerships</span>
+          <div class="nav-index-links">
+            <a href="partners.html" class="" id="navPartners">Partner With Us</a>
+            <a href="access-partners.html" class="" id="navAccessPartners">Access Partners</a>
+          </div>
+        </div>
       </div>
-      <div class="nav-index-group is-single"><span class="nav-index-num">07</span><div><span class="nav-index-title"><a href="/about" id="navAbout">About</a></span></div></div>
-      <div class="nav-index-group is-single"><span class="nav-index-num">08</span><div><span class="nav-index-title"><a href="/the-manifest" id="navJournal">The Manifest</a></span></div></div>
-      <div class="nav-index-group is-single"><span class="nav-index-num">09</span><div><span class="nav-index-title"><a href="/in-motion" id="navInMotion">In Motion</a></span></div></div>
-      <div class="nav-index-group is-single"><span class="nav-index-num">10</span><div><span class="nav-index-title"><a href="/contact" id="navContact">Contact</a></span></div></div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">06</span>
+        <div>
+          <span class="nav-index-title"><a href="about.html" class="" id="navAbout">About</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">07</span>
+        <div>
+          <span class="nav-index-title"><a href="the-manifest.html" class="" id="navJournal">The Manifest</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">08</span>
+        <div>
+          <span class="nav-index-title"><a href="in-motion.html" class="" id="navInMotion">In Motion</a></span>
+        </div>
+      </div>
+
+      <div class="nav-index-group is-single">
+        <span class="nav-index-num">09</span>
+        <div>
+          <span class="nav-index-title"><a href="contact.html" class="" id="navContact">Contact</a></span>
+        </div>
+      </div>
 
       <div class="nav-index-footer">
         <a href="https://jettsetglobal.com/quote.html" class="nav-index-cta btn-ghost">Begin Your Journey</a>
-        <div class="nav-index-contact"><a href="tel:+448005999888">Call</a><a href="https://wa.me/447378111111">WhatsApp</a><a href="#" class="side-member-login" id="navMemberLogin">Member Login</a></div>
+        <div class="nav-index-contact">
+          <a href="tel:+448005999888">Call</a>
+          <a href="https://wa.me/447378111111">WhatsApp</a>
+          <a href="#" class="side-member-login" id="navMemberLogin"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a3.5 3.5 0 0 0-3.5 3.5V7H6a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-.5V5.5A3.5 3.5 0 0 0 10 2zm2 5H8V5.5a2 2 0 1 1 4 0V7z"/></svg>Member Login</a>
+        </div>
       </div>
     </div>
   </div>
+
 
   <main class="ba-page">
 
@@ -100,10 +171,19 @@
           <span class="ba-eyebrow">Jettset Aviation Wellness</span>
           <h1>Aviation Wellness</h1>
           <p class="ba-hero-sub">The Journey, Reimagined.</p>
-          <p class="ba-hero-body">Jettset Aviation Wellness is a new approach to supporting how travellers prepare, perform and recover before, during and after every journey.</p>
-          <p class="ba-hero-body">Bringing together recovery technology, curated supplementation, selected wellness treatments and specialist partners, the experience is built around the individual, the journey and what comes next.</p>
           <a class="ba-cta" href="#ba-personal">Explore Aviation Wellness</a>
         </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 1B — INTRO STRIP ============
+         Holds the two paragraphs previously in the hero itself, moved
+         here so the hero stays to headline/tagline/CTA only. Quiet band,
+         thin rule above and below, two columns. -->
+    <section class="ba-intro-strip">
+      <div class="ba-container ba-intro-strip-grid">
+        <p data-reveal>Jettset Aviation Wellness is a new approach to supporting how travellers prepare, perform and recover before, during and after every journey.</p>
+        <p data-reveal>Aviation Wellness brings together Jettset&rsquo;s own complimentary in-flight recovery technology with a personalised wellness protocol from our specialist partners — one experience, built around the individual.</p>
       </div>
     </section>
 
@@ -118,33 +198,35 @@
       </div>
     </section>
 
-    <!-- ============ SECTION 03 — PREPARE / RESET / ARRIVE ============ -->
-    <section class="ba-section ba-phases" id="ba-phases">
-      <div class="ba-container">
-        <div class="ba-phase-list" data-reveal-group>
-          <article class="ba-phase" data-reveal>
-            <span class="ba-phase-num">01</span>
-            <div class="ba-phase-body">
-              <h3>Prepare</h3>
-              <p>Before departure, wellness can be considered around the journey ahead — from hydration and supplementation to selected treatments designed around individual priorities.</p>
-            </div>
-          </article>
-          <article class="ba-phase" data-reveal>
-            <span class="ba-phase-num">02</span>
-            <div class="ba-phase-body">
-              <h3>Reset</h3>
-              <p>In the air, the focus shifts to comfort, recovery and intelligent use of time — with selected supplementation, recovery technologies and wellness rituals incorporated into the journey where appropriate.</p>
-            </div>
-          </article>
-          <article class="ba-phase" data-reveal>
-            <span class="ba-phase-num">03</span>
-            <div class="ba-phase-body">
-              <h3>Arrive</h3>
-              <p>The objective is simple: to arrive feeling more considered, more prepared and better placed for whatever is waiting on the other side.</p>
-            </div>
-          </article>
+    <!-- ============ SECTION 03 — BEFORE / DURING / AFTER TRIPTYCH ============
+         Replaces the plain-text Prepare/Reset/Arrive list with three
+         photos, each carrying a small eyebrow, a headline and one line —
+         not paragraphs. -->
+    <section class="ba-triptych" id="ba-phases">
+      <figure class="ba-triptych-panel" data-reveal>
+        <img src="images/bio-atelier/panel-prepare.jpg" alt="Guest preparing before a journey">
+        <div class="ba-triptych-overlay">
+          <span class="ba-triptych-eyebrow">Before</span>
+          <h3>Prepare</h3>
+          <p>Prime your body and mind for what&rsquo;s ahead.</p>
         </div>
-      </div>
+      </figure>
+      <figure class="ba-triptych-panel" data-reveal>
+        <img src="images/bio-atelier/panel-during.jpg" alt="Bio Atelier NAD+ oral spray onboard a Jettset flight">
+        <div class="ba-triptych-overlay">
+          <span class="ba-triptych-eyebrow">During</span>
+          <h3>Perform</h3>
+          <p>Stay energised, balanced and comfortable in the air.</p>
+        </div>
+      </figure>
+      <figure class="ba-triptych-panel" data-reveal>
+        <img src="images/bio-atelier/panel-recover.jpg" alt="Guest arriving and looking out over the city">
+        <div class="ba-triptych-overlay">
+          <span class="ba-triptych-eyebrow">After</span>
+          <h3>Recover</h3>
+          <p>Arrive ready for what&rsquo;s next.</p>
+        </div>
+      </figure>
     </section>
 
     <!-- ============ SECTION 3B — COMPLIMENTARY ONBOARD WELLNESS ============
@@ -187,6 +269,7 @@
       <div class="ba-container">
         <div class="ba-collection-grid">
           <div data-reveal>
+            <img src="images/bio-atelier/bio-atelier-logo.png" alt="Bio Atelier" class="ba-partner-logo-mark">
             <span class="ba-eyebrow">In Partnership With Bio Atelier</span>
             <h2 class="ba-h">The Journey Recovery Collection</h2>
             <p class="ba-hero-sub-line">Built for the journey.</p>
@@ -202,7 +285,7 @@
             </div>
           </div>
           <figure class="ba-collection-figure" style="aspect-ratio:4/3;" data-reveal>
-            <img src="images/bio-atelier/bio-atelier-nad-tmg-collection.jpg" alt="Jettset Aviation Wellness flight protocol kit by Bio Atelier, with labelled Power, Protect, Pause and Pure sachets and NAD+ oral spray, in premium editorial still-life">
+            <img src="images/bio-atelier/journey-recovery-collection-v2.jpg" alt="Bio Atelier NAD+ and TMG, presented with the delivery pen and vials, in premium editorial still-life">
           </figure>
         </div>
       </div>
@@ -229,14 +312,23 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2.5c2 2.4 3.2 5 3.2 7.7a3.2 3.2 0 1 1-6.4 0c0-2.7 1.2-5.3 3.2-7.7Z"/><path d="M5.5 13.5c1.6 1 2.6 2.6 2.6 4.3a2.6 2.6 0 1 1-5.2 0c0-1.7 1-3.3 2.6-4.3Z"/><path d="M18.5 13.5c1.6 1 2.6 2.6 2.6 4.3a2.6 2.6 0 1 1-5.2 0c0-1.7 1-3.3 2.6-4.3Z"/></svg>
             </span>
             <h3>Cellular &amp; Energy</h3>
-            <p>NAD+, Glutathione, Energy Injections</p>
+            <p>NAD+, Glutathione, Cellular Support</p>
           </div>
           <div class="ba-menu-cat" data-reveal>
             <span class="ba-menu-cat-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2.5s6.5 7 6.5 11.5a6.5 6.5 0 1 1-13 0C5.5 9.5 12 2.5 12 2.5Z"/></svg>
             </span>
             <h3>Hydration &amp; Recovery</h3>
-            <p>Hydration Infusions, Recovery Infusions, Recovery Injections</p>
+            <p>Hydration Infusions, Recovery Support</p>
+          </div>
+          <div class="ba-menu-cat ba-menu-cat-photo" data-reveal>
+            <figure class="ba-menu-cat-figure">
+              <img src="images/bio-atelier/restore-reset.jpg" alt="Guests using compression therapy onboard a Jettset cabin">
+            </figure>
+            <div class="ba-menu-cat-body">
+              <h3>Restore &amp; Reset</h3>
+              <p>Red Light Therapy, Compression Therapy</p>
+            </div>
           </div>
           <div class="ba-menu-cat ba-menu-cat-photo" data-reveal>
             <figure class="ba-menu-cat-figure">
@@ -260,19 +352,6 @@
           </div>
         </div>
         <p class="ba-suitability-note" data-reveal>Treatments and wellness services are subject to suitability, availability and the requirements of each journey.</p>
-      </div>
-    </section>
-
-    <!-- ============ SECTION 07 — WELLNESS THAT MOVES WITH YOU ============
-         Kept image-free intentionally: the flow is a process, not a
-         moment, and reads more calmly as pure typography than with a
-         lifestyle image competing for attention. See report for note. -->
-    <section class="ba-section ba-moves" id="ba-moves">
-      <div class="ba-container">
-        <h2 class="ba-h" data-reveal>Wellness that moves with you.</h2>
-        <p class="ba-lede" data-reveal>No two journeys place the same demands on the body.</p>
-        <p class="ba-lede" data-reveal>Your Aviation Wellness experience can be considered around your travel schedule, destination, priorities and what you need to do when you arrive.</p>
-        <p class="ba-lede" data-reveal>Whether the objective is energy, recovery, hydration, sleep, performance, clarity or simply feeling restored, the Jettset team can coordinate selected wellness services and specialist partners to build the right experience around the journey.</p>
       </div>
     </section>
 
@@ -315,33 +394,33 @@
       </div>
     </section>
 
-    <!-- ============ SECTION 08 — OFFICIAL WELLNESS PARTNER ============
-         Placeholder stands in for official Bio Atelier brand/product/
-         laboratory/material imagery only — nothing invented. -->
-    <section class="ba-section ba-partner" id="ba-partner">
-      <div class="ba-container">
-        <div class="ba-partner-grid">
-          <div data-reveal>
-            <span class="ba-eyebrow">Official Wellness Partner</span>
-            <h2 class="ba-h">Bio Atelier</h2>
-            <p class="ba-lede">Bio Atelier is a premium longevity company focused on purity, precision and intelligent delivery.</p>
-            <p class="ba-lede">Its formulations are independently tested, with guidance from an experienced Medical Advisory Board.</p>
-            <p class="ba-lede">As an Official Wellness Partner within Jettset Aviation Wellness, Bio Atelier brings its expertise across supplementation, cellular recovery and longevity into selected elements of the Jettset wellness experience.</p>
-            <p class="ba-partner-tagline">Pure. Precise. Powerful.</p>
-            <p class="ba-partner-founder-line">Jettset and Bio Atelier believe wellness should travel as well as you do.</p>
-            <div class="ba-proof-strip" data-reveal>
-              <span class="ba-proof-item">Independently Tested</span>
-              <span class="ba-proof-item">Physician-Guided</span>
-              <span class="ba-proof-item">EU GMP-Certified</span>
-            </div>
-            <div class="ba-cta-row">
-              <a class="ba-cta" href="https://www.bio-atelier.co/" target="_blank" rel="noopener">Discover Bio Atelier</a>
-            </div>
-            <p class="ba-suitability-note ba-partner-rollout-note">Aviation Wellness launches initially through London, before expanding across further destinations.</p>
-          </div>
-          <figure class="ba-partner-figure ba-partner-figure-real" style="aspect-ratio:8/9;" data-reveal>
-            <img src="images/bio-atelier/bio-atelier-partner-portrait.jpg" alt="Bio Atelier NAD+ and TMG supplement bottles, premium editorial still-life">
-          </figure>
+    <!-- ============ SECTION 08 — OFFICIAL WELLNESS PARTNER + LONDON LAUNCH ============
+         Combined two-column block: London panel with launch caption on
+         the left (replaces the old standalone Rollout section entirely),
+         Bio Atelier partner copy on the right. -->
+    <section class="ba-partner" id="ba-partner">
+      <div class="ba-partner-imgcol">
+        <img src="images/bio-atelier/london-panel.jpg" alt="Aerial view of Tower Bridge and the River Thames, London, at dusk">
+        <div class="ba-partner-imgcol-caption">
+          <span class="ba-eyebrow">Launching In London</span>
+          <p>Aviation Wellness launches initially through London, before expanding across further destinations.</p>
+        </div>
+      </div>
+      <div class="ba-partner-textcol" data-reveal>
+        <span class="ba-eyebrow">Official Wellness Partner</span>
+        <h2 class="ba-h">Bio Atelier</h2>
+        <p class="ba-lede">Bio Atelier is a premium longevity company focused on purity, precision and intelligent delivery.</p>
+        <p class="ba-lede">Its formulations are independently tested, with guidance from an experienced Medical Advisory Board.</p>
+        <p class="ba-lede">As an Official Wellness Partner within Jettset Aviation Wellness, Bio Atelier brings its expertise across supplementation, cellular recovery and longevity into selected elements of the Jettset wellness experience.</p>
+        <p class="ba-partner-tagline">Pure. Precise. Powerful.</p>
+        <p class="ba-partner-founder-line">Jettset and Bio Atelier believe wellness should travel as well as you do.</p>
+        <div class="ba-proof-strip">
+          <span class="ba-proof-item">Independently Tested</span>
+          <span class="ba-proof-item">Physician-Guided</span>
+          <span class="ba-proof-item">EU GMP-Certified</span>
+        </div>
+        <div class="ba-cta-row">
+          <a class="ba-cta" href="https://www.bio-atelier.co/" target="_blank" rel="noopener">Discover Bio Atelier</a>
         </div>
       </div>
     </section>
@@ -372,7 +451,7 @@
             <p class="ba-suitability-note">Available to eligible Jettset Card Members as part of the approved membership wellness benefit.</p>
           </div>
           <figure class="ba-onboard-figure" style="aspect-ratio:8/5;" data-reveal>
-            <img src="images/bio-atelier/jettset-card-member-protocol.jpg" alt="Jettset Card Member reviewing their monthly Aviation Wellness protocol in a Jettset cabin">
+            <img src="images/bio-atelier/card-members-kit.jpg" alt="Jettset Aviation Wellness kit, in partnership with Bio Atelier, open flat-lay showing the full monthly protocol">
           </figure>
         </div>
       </div>
@@ -396,12 +475,46 @@
 
   <footer class="ba-footer-adjoin">
     <div class="footer-grid">
-      <div><div class="footer-logo">Jettset</div><p>A private aviation and concierge house, built for guests who expect the world to move on their terms.</p></div>
-      <div class="footer-col"><h4>Experiences</h4><ul><li><a href="/charter">Charter</a></li><li><a href="/medical">Medical Aviation</a></li><li><a href="/jet-card">Jet Card</a></li><li><a href="/club">Club</a></li><li><a href="/legs">Legs</a></li><li><a href="/concierge">Concierge</a></li></ul></div>
-      <div class="footer-col"><h4>Company</h4><ul><li><a href="/about">About</a></li><li><a href="/guest-segments">Guest Segments</a></li><li><a href="/the-manifest">The Manifest</a></li><li><a href="/in-motion">In Motion</a></li><li><a href="/advisory">Advisory</a></li><li><a href="/editions">Editions</a></li><li><a href="/partners">Partner With Us</a></li></ul></div>
-      <div class="footer-col"><h4>Connect</h4><ul><li><a href="https://jettsetglobal.com/contact">Enquire</a></li><li><a href="mailto:info@jettsetglobal.com">info@jettsetglobal.com</a></li><li><a href="https://www.linkedin.com/company/jettset-global" target="_blank" rel="noopener noreferrer">LinkedIn</a></li><li><a href="https://www.instagram.com/jettset.global/" target="_blank" rel="noopener noreferrer">Instagram</a></li></ul></div>
+      <div>
+        <div class="footer-logo">Jettset</div>
+        <p>A private aviation and concierge house, built for guests who expect the world to move on their terms.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Experiences</h4>
+        <ul>
+          <li><a href="charter.html" >Charter</a></li>
+          <li><a href="jet-card.html" >Jet Card</a></li>
+          <li><a href="club.html" >Club</a></li>
+          <li><a href="legs.html" >Legs</a></li>
+          <li><a href="concierge.html" >Concierge</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html" >About</a></li>
+          <li><a href="guest-segments.html" >Guest Segments</a></li>
+          <li><a href="the-manifest.html" >The Manifest</a></li>
+          <li><a href="in-motion.html" >In Motion</a></li>
+          <li><a href="advisory.html" >Advisory</a></li>
+          <li><a href="editions.html" >Editions</a></li>
+          <li><a href="partners.html" >Partner With Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="https://jettsetglobal.com/contact" >Enquire</a></li>
+          <li><a href="mailto:info@jettsetglobal.com">info@jettsetglobal.com</a></li>
+          <li><a href="https://www.linkedin.com/company/jettset-global" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/jettset.global/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="footer-bottom"><span>&copy; 2026 Jettset Global</span><span><a href="/privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="/terms">Terms</a> &nbsp;&middot;&nbsp; <a href="/trust">Trust</a></span></div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Jettset Global</span>
+      <span><a href="privacy.html" >Privacy</a> &nbsp;&middot;&nbsp; <a href="terms.html" >Terms</a> &nbsp;&middot;&nbsp; <a href="trust.html" >Trust</a></span>
+    </div>
   </footer>
 
   <script src="script.js?v=cta-hero-1"></script>
