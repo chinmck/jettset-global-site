@@ -348,10 +348,11 @@ body.ba-page-body .nav-logo-center img{
 .ba-page .ba-personal{ background:var(--ba-ink); }
 .ba-page .ba-personal-scenarios{ color:var(--ba-stone); line-height:1.9; font-size:0.96rem; margin:22px 0; }
 
-/* Icon-led category menu (replaces the old plain bullet list). Four
-   cards: two icon-led (Cellular & Energy, Hydration & Recovery — no
-   final photography yet, per brief) and two photo-backed (Restore &
-   Reset, Skin & Vitality). */
+/* Photo-led category menu (replaces the old plain bullet list). All
+   four cards now carry real photography — Cellular & Energy and
+   Hydration & Recovery started as icon placeholders pending final
+   imagery, since replaced with approved photos to match Restore &
+   Reset and Skin & Vitality. */
 .ba-page .ba-menu-categories{
   display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(18px,2.5vw,28px); margin:26px 0 34px;
 }
@@ -360,10 +361,6 @@ body.ba-page-body .nav-logo-center img{
 .ba-page .ba-menu-cat{
   border:1px solid var(--ba-line); padding:28px 24px; min-width:0;
 }
-.ba-page .ba-menu-cat-icon{
-  display:inline-flex; width:30px; height:30px; color:var(--ba-champagne); margin-bottom:16px;
-}
-.ba-page .ba-menu-cat-icon svg{ width:100%; height:100%; }
 .ba-page .ba-menu-cat h3{
   font-family:'EB Garamond', serif; font-weight:500; color:var(--ba-ivory);
   font-size:1.15rem; margin:0 0 8px; letter-spacing:0.01em;
