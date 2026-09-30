@@ -154,25 +154,23 @@
   <main class="ba-page">
 
     <!-- ============ SECTION 01 — HERO ============
-         LOCKED, approved image: `jettset-bio-atelier-hero-placement.png`.
-         Do not replace, regenerate, recolour or heavily crop it. Single
-         swappable <img src>, no width/height baked into the markup.
-         Full-viewport, minimal copy over the calmer lower portion of the
-         frame. The only motion is a barely-perceptible scale drift
-         (1 -> 1.025) as the guest begins scrolling, driven by
-         aviation-wellness.js. Section 02 then rises naturally over the
-         sticky image in ordinary page flow — no scroll-jacked sequence,
-         no logo reveal, no brand-card takeover. -->
-    <section class="ba-doorway-wrap" id="baDoorwayWrap">
-      <div class="ba-doorway-sticky" id="baDoorwaySticky">
-        <img class="ba-hero-plate" id="baHeroPlate" src="images/bio-atelier/jettset-bio-atelier-hero-placement.png" alt="Guest seated in a Jettset cabin, looking out of the window">
-        <div class="ba-hero-scrim"></div>
-        <div class="ba-hero-copy">
-          <span class="ba-eyebrow">Jettset Aviation Wellness</span>
-          <h1>Aviation Wellness</h1>
-          <p class="ba-hero-sub">The Journey, Reimagined.</p>
-          <a class="ba-cta" href="#ba-personal">Explore Aviation Wellness</a>
-        </div>
+         Uses the established internal chapter-video treatment from the
+         Concierge page: full-bleed cover video, restrained bottom-left copy,
+         a legibility gradient and the shared responsive chapter rhythm. -->
+    <section class="chapter-hero">
+      <div class="chapter-hero-parallax">
+        <video class="chapter-hero-img" autoplay muted loop playsinline preload="auto" poster="images/bio-atelier/jettset-bio-atelier-hero-placement.png" aria-label="Jettset Aviation Wellness experience">
+          <source src="videos/aviation-wellness-hero.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="chapter-hero-content">
+        <span class="c-reveal ba-eyebrow" style="animation-delay:0.2s">Jettset Aviation Wellness</span>
+        <h1 class="c-reveal" style="animation-delay:0.4s">Aviation Wellness</h1>
+        <p class="c-reveal" style="animation-delay:0.65s">The Journey, Reimagined.</p>
+        <a class="c-reveal ba-cta" style="animation-delay:0.85s" href="#ba-personal">Explore Aviation Wellness</a>
+      </div>
+      <div class="chapter-hero-scroll c-reveal" style="animation-delay:1.1s">
+        <span></span>
       </div>
     </section>
 
