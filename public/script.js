@@ -6,7 +6,9 @@
   if (window.__jettsetTrackingRuntimeInstalled) return;
   window.__jettsetTrackingRuntimeInstalled = true;
 
-  var META_PIXEL_ID = '1377605307888175';
+  // Browser events must use the Meta Pixel ID. The separate Dataset ID is
+  // reserved for a future server-side Conversions API connection.
+  var META_PIXEL_ID = '2105990983342471';
   var GOOGLE_ADS_ID = 'AW-18409587176';
   var GOOGLE_ADS_CONVERSIONS = {
     quoteRequest: 'q426CJiPjPMcEOiDsMpE',
