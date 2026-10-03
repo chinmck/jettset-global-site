@@ -7,6 +7,8 @@ body{margin:0; background:var(--carbon); color:var(--chalk); font:400 16px/1.7 '
 a{color:inherit;}
 a:focus-visible{outline:1px solid var(--chalk); outline-offset:4px;}
 .ce-top{padding:22px clamp(20px,5vw,64px); border-bottom:1px solid rgba(81,87,90,0.5);}
+.ce-nav{display:flex; align-items:center; justify-content:space-between; gap:16px;}
+.ce-tools{display:flex; align-items:center; position:relative; z-index:5;}
 .ce-logo{display:inline-block; line-height:0;}
 .ce-logo img{height:34px; width:auto;}
 .ce-main{max-width:820px; margin:0 auto; padding:clamp(28px,5vw,56px) clamp(20px,5vw,40px) 72px;}

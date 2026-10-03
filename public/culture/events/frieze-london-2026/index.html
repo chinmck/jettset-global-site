@@ -14,11 +14,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap">
-<link rel="stylesheet" href="/culture/culture-event.css?v=1">
+<link rel="stylesheet" href="/culture/culture-event.css?v=2">
 </head>
 <body>
 <header class="ce-top">
-  <a class="ce-logo" href="/" aria-label="Jettset Global home"><img src="/images/nav-logo.png" alt="Jettset" width="120" height="34"></a>
+  <nav class="ce-nav" id="mainNav" aria-label="Site">
+    <a class="ce-logo" href="/" aria-label="Jettset Global home"><img src="/images/nav-logo.png" alt="Jettset" width="120" height="34"></a>
+    <div class="nav-tools ce-tools" id="navTools"></div>
+  </nav>
 </header>
 
 <main class="ce-main">
@@ -88,5 +91,6 @@
     });
   })();
 </script>
+<script src="/i18n.js"></script>
 </body>
 </html>

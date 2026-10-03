@@ -51,18 +51,15 @@ The homepage uses the portrait file when the screen is ≤680px wide or portrait
 - Dynamic text is covered: planner/builder panels, route labels, statuses, passenger counts, form `alert()` validation and confirmation messages.
 - Source table: `i18n-src/translations.py` → `python3 i18n-src/build.py` → regenerates the JSON and `docs/i18n-review.csv` (one row per string, FR/ES/AR side by side, for a human translator). Bump `VERSION` in `i18n.js` after editing translations.
 
-### Coverage — this is NOT a complete site translation
+### Coverage — all public pages (first-pass, review needed)
 
-| Translated | Status |
-|---|---|
-| Shared chrome on **all** pages: menu, contact sheet, footer, sound control, buttons | ✅ |
-| Homepage (`/`) incl. planner, builder, all sections | ✅ |
-| `quote`, `contact`, `jet-card-signup` forms + validation/alerts | ✅ |
-| **Not translated (English body copy):** `charter`, `jet-card`, `concierge`, `club`, `legs`, `editions`, `advisory`, `about`, `partners`, `access-partners`, `guest-segments`, `in-motion`, `the-manifest`, `manifest-article`, `london-ibiza`, `aviation-wellness` | ⬜ roughly 8,000+ words of page-specific copy |
-| **Deliberately excluded:** `privacy`, `terms`, `trust` (legal — need qualified legal translation), `medical*` (hidden pending partner sign-off; its two sub-pages don't load the language script) | ⬜ |
-| The Manifest article text lives in `script.js` as JS data (not translated) | ⬜ |
+Every public page now has French, Spanish and Arabic text: the shared navigation, footer and forms on all pages, the homepage and its planner/builder/calendar, `charter`, `jet-card`, `jet-card-signup`, `concierge`, `club`, `legs`, `editions`, `advisory`, `about`, `partners`, `access-partners`, `guest-segments`, `in-motion`, `the-manifest`, `manifest-article`, `london-ibiza`, `aviation-wellness`, `quote`, `contact`, the three Culture Calendar event pages, and the legal pages (`privacy`, `terms`, `trust`). QA method: each page was loaded in each language and (a) every translatable string it produced was checked against the dictionary and (b) the rendered text was scanned for English sentences — none remained in French on any page (a control scan on English flags 25–28 per page); no horizontal overflow at 390/375px in Arabic and French, or at 1280px in Arabic. Dictionaries: `public/i18n/{fr,es,ar}.json` (1,900+ strings, 30 patterns); source `i18n-src/`; side-by-side review sheet `docs/i18n-review.csv`.
 
-Strings shared with translated pages (labels, buttons, form fields) are already translated wherever they appear on the untranslated pages.
+**Pages that still need qualified translation review**
+- **Legal — qualified legal translators required before reliance:** `privacy`, `terms`, `trust` (sheet section `legal`). They are first-pass renderings of the English text; the English text remains the controlling version. Decide whether to show an "English version prevails" notice beside them in other languages (not added: it is a legal-wording decision).
+- **Health/wellness claims:** `aviation-wellness` (supplements, therapies, "clinically…" wording) — needs review by someone qualified in each target market's advertising/health-claims rules, as well as a translator.
+- **Everything else:** needs a native-speaker marketing review for tone (all rows in the sheet are marked first-pass). Brand names stay English by design (Jettset, Jet Card, Club, Legs, Editions, The Manifest, In Motion, Aviation Wellness, partner and event names).
+- **Not translated by design:** airport names/codes (database values), the film's baked end card, native date-picker format, and the destination local-time readout ("12:06 AM (UTC+2)").
 
 ### Wording that needs a human decision
 - **Consent / legal-adjacent lines** (contact-consent checkbox, "your information remains private…") — first-pass only, need legal review before use in FR/ES/AR.
