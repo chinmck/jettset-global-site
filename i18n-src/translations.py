@@ -547,3 +547,24 @@ ALERTS = [
   "Confirme que acepta que se le contacte en relación con Jet Card antes de enviar.",
   "يرجى تأكيد موافقتك على التواصل معك بشأن Jet Card قبل الإرسال."),
 ]
+
+# ---------------------------------------------------------------- jet-card enrolment form page
+JETCARD_SIGNUP = [
+ ("Macro shot of the brushed metal Jettset Jet Card with engraved logo, Jettset Global Jet Card membership sign-up",
+  "Gros plan sur la Jet Card Jettset en métal brossé, logo gravé — inscription à la Jet Card Jettset Global",
+  "Plano macro de la Jet Card de Jettset en metal cepillado con el logotipo grabado: inscripción a la Jet Card de Jettset Global",
+  "لقطة مقرّبة لبطاقة Jet Card من Jettset المصنوعة من المعدن المصقول مع الشعار المنقوش — الاشتراك في Jet Card من Jettset Global"),
+ ("Begin Your Jet Card Journey", "Commencez votre parcours Jet Card", "Comience su recorrido con Jet Card", "ابدأ رحلتك مع Jet Card"),
+ ("A dedicated line for guests considering a prepaid hours structure. Share your details, and a member of our team will follow up directly.",
+  "Une ligne dédiée aux invités qui envisagent une formule d’heures prépayées. Partagez vos coordonnées et un membre de notre équipe vous recontactera directement.",
+  "Una línea dedicada a huéspedes que consideran una estructura de horas prepagadas. Comparta sus datos y un miembro de nuestro equipo se pondrá en contacto directamente.",
+  "قناة مخصّصة للضيوف الذين يفكرون في نظام الساعات المدفوعة مسبقًا. شاركنا بياناتك وسيتابع معك أحد أعضاء فريقنا مباشرةً."),
+ ("I agree to be contacted by Jettset regarding Jet Card. Your information remains private and confidential, used solely by Jettset.",
+  "J’accepte d’être contacté(e) par Jettset au sujet de Jet Card. Vos informations restent privées et confidentielles, utilisées uniquement par Jettset.",
+  "Acepto que Jettset se ponga en contacto conmigo en relación con Jet Card. Su información es privada y confidencial, y la utiliza únicamente Jettset.",
+  "أوافق على أن تتواصل Jettset معي بشأن Jet Card. تبقى معلوماتك خاصة وسرية، وتستخدمها Jettset وحدها."),   # REVIEW consent wording — legal
+ ("Prefer to speak with someone directly? Call", "Vous préférez parler à quelqu’un directement ? Appelez le", "¿Prefiere hablar directamente con alguien? Llame al", "تفضّل التحدث مع أحد مباشرةً؟ اتصل على"),
+ ("or WhatsApp", "ou WhatsApp", "o WhatsApp", "أو واتساب"),
+ ("Jet Card Enrolment | Jettset Global", "Inscription Jet Card | Jettset Global", "Inscripción a Jet Card | Jettset Global", "الاشتراك في Jet Card | Jettset Global"),
+ ("Begin your Jettset Jet Card enrolment.", "Commencez votre inscription à la Jet Card Jettset.", "Comience su inscripción a la Jet Card de Jettset.", "ابدأ اشتراكك في بطاقة Jet Card من Jettset."),
+]

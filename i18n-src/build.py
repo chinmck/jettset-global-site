@@ -18,7 +18,7 @@ def add(section, en, fr, es, ar):
         data[l]['strings'][en] = v
     rows.append((section, en, fr, es, ar))
 
-for name in ('CHROME', 'FIELDS', 'HOME', 'ALERTS'):
+for name in ('CHROME', 'FIELDS', 'HOME', 'JETCARD_SIGNUP', 'ALERTS'):
     for r in getattr(T, name):
         add(name.lower(), *r)
 
