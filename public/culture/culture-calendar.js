@@ -28,10 +28,11 @@
     var e = shown[i];
     current = i;
     var items = dates.querySelectorAll('.cc-date-btn');
-    for (var k = 0; k < items.length; k++) {
-      if (k === i) items[k].setAttribute('aria-current', 'true'); else items[k].removeAttribute('aria-current');
-    }
+    // The selected marker and the featured text change together, so they are never out of step.
     function apply() {
+      for (var k = 0; k < items.length; k++) {
+        if (k === i) items[k].setAttribute('aria-current', 'true'); else items[k].removeAttribute('aria-current');
+      }
       cityEl.textContent = e.city;
       eventEl.textContent = e.name;
       discover.href = eventUrl(e);
