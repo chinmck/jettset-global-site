@@ -30,6 +30,15 @@
   var form = document.getElementById('heroEnquiry');
   if(!form) return;
 
+  // Phones: the sound icon floats just above the bar, so it needs the bar's live height.
+  (function(){
+    var hero = document.getElementById('heroSection');
+    if(!hero || !window.ResizeObserver) return;
+    new ResizeObserver(function(){
+      hero.style.setProperty('--he-h', form.offsetHeight + 'px');
+    }).observe(form);
+  })();
+
   var from = document.getElementById('heFrom');
   var to = document.getElementById('heTo');
   var date = document.getElementById('heDate');

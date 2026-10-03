@@ -78,3 +78,8 @@ Strings shared with translated pages (labels, buttons, form fields) are already 
 - Bar form behaviour (empty / same place / country / past date / valid), hand-off to `quote.html` incl. traveller count and date, language persisted through the hand-off.
 - Arabic RTL desktop + mobile; selector menu; side panel.
 - No console errors from the site on the Netlify preview (all site requests 200/206/304). Cloudflare Pages is red on `main` as well — pre-existing, unrelated.
+
+## Mobile update — sound icon and bar position (≤600px only; desktop unchanged)
+- "Sound On" becomes a 44×44 speaker icon: muted-speaker (×) when sound is off, speaker with waves when on. The existing toggle logic is unchanged; `aria-pressed` and the translated `aria-label` ("Turn film sound on/off") still update, and the text label stays in the DOM, visually hidden.
+- The bar sits 16px (+ any safe-area inset) above the bottom of the hero, which is `100svh` (the visible area above the browser controls). The icon floats 6px above the bar's right corner (left in Arabic), positioned from the bar's live height, so the two never overlap.
+- Header, fields, CTA and video crop are untouched. Checked at 390 and 375px (EN/FR/AR): no overlap, no sideways scroll.

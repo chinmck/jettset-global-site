@@ -1719,7 +1719,10 @@
 
       function setSoundState(soundOn){
         if(!soundToggle) return;
-        soundToggle.textContent = soundOn ? 'Sound Off' : 'Sound On';
+        var label = soundToggle.querySelector('.hero-sound-label');
+        if(label){ label.textContent = soundOn ? 'Sound Off' : 'Sound On'; }
+        else { soundToggle.textContent = soundOn ? 'Sound Off' : 'Sound On'; }
+        soundToggle.setAttribute('data-sound', soundOn ? 'on' : 'off');
         soundToggle.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
         soundToggle.setAttribute('aria-label', soundOn ? 'Turn film sound off' : 'Turn film sound on');
       }

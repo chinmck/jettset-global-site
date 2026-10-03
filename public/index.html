@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="hero-enquiry.css?v=15">
+<link rel="stylesheet" href="hero-enquiry.css?v=17">
 </head>
 <body>
 
@@ -189,7 +189,10 @@
       </form>
       <div class="hero-film-controls" aria-label="Hero film controls">
         <button class="hero-sound-toggle" id="heroSoundToggle" type="button"
-                aria-pressed="false" aria-label="Turn film sound on">Sound On</button>
+                aria-pressed="false" aria-label="Turn film sound on" data-sound="off">
+          <svg class="hs-icon hs-icon-off" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z" fill="currentColor" fill-opacity="0.15"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
+          <svg class="hs-icon hs-icon-on" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z" fill="currentColor" fill-opacity="0.15"/><path d="M15.5 9.2a4 4 0 0 1 0 5.6M18.3 6.8a7.6 7.6 0 0 1 0 10.4"/></svg>
+          <span class="hero-sound-label">Sound On</span></button>
       </div>
     </section>
 
@@ -891,7 +894,7 @@
   </footer>
 
   <script src="/i18n.js"></script>
-  <script src="script.js?v=cta-hero-2"></script>
+  <script src="script.js?v=cta-hero-3"></script>
   <script src="hero-enquiry.js"></script>
   <script src="house-section.js"></script>
   <script src="inside-house.js"></script>
