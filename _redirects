@@ -22,3 +22,4 @@
 /trust                /trust.html                 200
 /aviation-wellness    /aviation-wellness.html     200
 /bio-atelier-wellness /aviation-wellness          301!
+/culture/events/:slug    /culture/events/:slug/index.html    200
