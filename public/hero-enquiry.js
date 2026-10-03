@@ -173,8 +173,8 @@
     if(phone){
       list.style.left = '0'; list.style.width = f.width + 'px';
     } else {
-      var w = Math.min(Math.max(field.width + 120, 380), 460, f.width);
-      var left = Math.min(Math.max(field.left - f.left - 16, 0), Math.max(f.width - w, 0));
+      var w = Math.min(Math.max(field.width, 340), 440, f.width);
+      var left = Math.min(Math.max(field.left - f.left, 0), Math.max(f.width - w, 0));   // left edge on the active field
       list.style.left = left + 'px'; list.style.width = w + 'px';
     }
     // Never taller than the room above the bar (below the fixed header).
@@ -248,9 +248,14 @@
         var o = document.createElement('div');
         o.className = 'he-opt'; o.id = 'heOpt-' + (++uid); o.setAttribute('role', 'option'); o.setAttribute('aria-selected', 'false');
         var name = document.createElement('span'); name.className = 'he-opt-name'; name.textContent = rec.name;
-        var code = document.createElement('span'); code.className = 'he-opt-code'; code.textContent = rec.code || '';
+        var sub = document.createElement('span'); sub.className = 'he-opt-sub';
         var loc = document.createElement('span'); loc.className = 'he-opt-loc'; loc.textContent = [rec.city, rec.country].filter(Boolean).join(', ');
-        o.appendChild(name); if(rec.code) o.appendChild(code); o.appendChild(loc);
+        sub.appendChild(loc);
+        if(rec.code){
+          var code = document.createElement('span'); code.className = 'he-opt-code'; code.textContent = rec.code;
+          sub.appendChild(code);
+        }
+        o.appendChild(name); o.appendChild(sub);
         o._rec = rec;
         frag.appendChild(o); options.push(o);
       });
