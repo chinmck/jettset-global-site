@@ -52,6 +52,13 @@
 "Please enter where you are travelling from.": "يرجى إدخال مكان انطلاقك.",
 "Please enter where you are travelling to.": "يرجى إدخال وجهتك.",
 "Choose two different cities or airports.": "اختر مدينتين أو مطارين مختلفين.",
+"Start typing a city or airport": "اكتب اسم مدينة أو مطار",
+"Suggested airports": "مطارات مقترحة",
+"No matching airports found.": "لم يتم العثور على مطارات مطابقة.",
+"Please choose an airport from the list.": "يرجى اختيار مطار من القائمة.",
+"Loading airports…": "جارٍ تحميل المطارات…",
+"Airport list unavailable. Type a city or airport and we’ll confirm it with you.": "قائمة المطارات غير متاحة. اكتب مدينة أو مطارًا وسنؤكده معك.",
+"Airport suggestions": "اقتراحات المطارات",
 "Please choose a date from today onwards.": "يرجى اختيار تاريخ من اليوم فصاعدًا.",
 "Signature Journeys": "رحلات مميّزة",
 "Your Journey, Visualised.": "تخيّل رحلتك.",
@@ -357,6 +364,14 @@
 "Brazil": "البرازيل"
 },
 "patterns": [
+[
+"^Continue with “(.+)”\\. We’ll confirm the airport with you\\.$",
+"المتابعة مع «$1». سنؤكد المطار معك."
+],
+[
+"^(\\d+) airports? found\\.$",
+"تم العثور على $1 مطار."
+],
 [
 "^Select a city or airport in (.+)\\.$",
 "اختر مدينة أو مطارًا في $1."

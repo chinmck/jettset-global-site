@@ -51,6 +51,13 @@ fields,Select a city or airport in,Sélectionnez une ville ou un aéroport :,Sel
 fields,Please enter where you are travelling from.,Veuillez indiquer votre lieu de départ.,Indique desde dónde viaja.,يرجى إدخال مكان انطلاقك.
 fields,Please enter where you are travelling to.,Veuillez indiquer votre destination.,Indique a dónde viaja.,يرجى إدخال وجهتك.
 fields,Choose two different cities or airports.,Choisissez deux villes ou aéroports différents.,Elija dos ciudades o aeropuertos distintos.,اختر مدينتين أو مطارين مختلفين.
+fields,Start typing a city or airport,Saisissez une ville ou un aéroport,Escriba una ciudad o un aeropuerto,اكتب اسم مدينة أو مطار
+fields,Suggested airports,Aéroports suggérés,Aeropuertos sugeridos,مطارات مقترحة
+fields,No matching airports found.,Aucun aéroport correspondant.,No se han encontrado aeropuertos coincidentes.,لم يتم العثور على مطارات مطابقة.
+fields,Please choose an airport from the list.,Veuillez choisir un aéroport dans la liste.,Elija un aeropuerto de la lista.,يرجى اختيار مطار من القائمة.
+fields,Loading airports…,Chargement des aéroports…,Cargando aeropuertos…,جارٍ تحميل المطارات…
+fields,Airport list unavailable. Type a city or airport and we’ll confirm it with you.,"Liste des aéroports indisponible. Saisissez une ville ou un aéroport, nous le confirmerons avec vous.",Lista de aeropuertos no disponible. Escriba una ciudad o un aeropuerto y lo confirmaremos con usted.,قائمة المطارات غير متاحة. اكتب مدينة أو مطارًا وسنؤكده معك.
+fields,Airport suggestions,Suggestions d’aéroports,Sugerencias de aeropuertos,اقتراحات المطارات
 fields,Please choose a date from today onwards.,Veuillez choisir une date à partir d’aujourd’hui.,Elija una fecha a partir de hoy.,يرجى اختيار تاريخ من اليوم فصاعدًا.
 fields,Signature Journeys,Voyages signature,Viajes emblemáticos,رحلات مميّزة
 fields,"Your Journey, Visualised.",Visualisez votre voyage.,Visualice su viaje.,تخيّل رحلتك.
@@ -354,6 +361,8 @@ countries,Turkey,Turquie,Turquía,تركيا
 countries,Greece,Grèce,Grecia,اليونان
 countries,India,Inde,India,الهند
 countries,Brazil,Brésil,Brasil,البرازيل
+pattern,^Continue with “(.+)”\. We’ll confirm the airport with you\.$,Continuer avec « $1 ». Nous confirmerons l’aéroport avec vous.,Continuar con «$1». Confirmaremos el aeropuerto con usted.,المتابعة مع «$1». سنؤكد المطار معك.
+pattern,^(\d+) airports? found\.$,$1 {$1?aéroport trouvé|aéroports trouvés}.,$1 {$1?aeropuerto encontrado|aeropuertos encontrados}.,تم العثور على $1 مطار.
 pattern,^Select a city or airport in (.+)\.$,Sélectionnez une ville ou un aéroport : $1.,Seleccione una ciudad o un aeropuerto: $1.,اختر مدينة أو مطارًا في $1.
 pattern,^Approx\. (.+) hours$,Environ $1 heures,Aprox. $1 horas,نحو $1 ساعات
 pattern,^(\d+)h (\d+)m$,$1 h $2,$1 h $2 min,$1 س $2 د

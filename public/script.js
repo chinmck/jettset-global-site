@@ -1973,6 +1973,27 @@
         if(prefillTo) qTo.value = prefillTo;
         var qFrom = document.getElementById('qFrom');
         if(prefillFrom && qFrom) qFrom.value = prefillFrom;
+
+        // Airport records chosen in the hero journey bar (data/private-jet-airports.json): carry the
+        // structured record in hidden fields so the existing form + webhook receive code/name/city/country.
+        // If the visitor edits the text afterwards the record no longer applies, so it is cleared.
+        function applyAirport(prefix, inputEl, raw){
+          var rec = null;
+          try { rec = raw ? JSON.parse(raw) : null; } catch(err){ rec = null; }
+          if(!rec || !inputEl) return;
+          function field(suffix){ return document.getElementById('q' + prefix + 'Airport' + suffix); }
+          function fill(r){
+            ['Code','Name','City','Country'].forEach(function(k){ var f = field(k); if(f) f.value = r ? (r[k.toLowerCase()] || '') : ''; });
+            var st = field('Status');
+            if(st) st.value = !r ? 'edited - to confirm' : (r.unconfirmed ? 'typed - to confirm' : 'selected from airport database');
+          }
+          if(rec.unconfirmed){ fill({unconfirmed:true}); var ft = field('Name'); if(ft) ft.value = rec.text || ''; }
+          else fill(rec);
+          var original = inputEl.value;
+          inputEl.addEventListener('input', function(){ if(inputEl.value !== original) fill(null); });
+        }
+        applyAirport('From', qFrom, sessionStorage.getItem('prefill_qFromAirport'));
+        applyAirport('To', qTo, sessionStorage.getItem('prefill_qToAirport'));
         var qNotes = document.getElementById('qNotes');
         if(prefillNotes && qNotes) qNotes.value = prefillNotes;
 
@@ -2002,6 +2023,8 @@
 
         sessionStorage.removeItem('prefill_qTo');
         sessionStorage.removeItem('prefill_qFrom');
+        sessionStorage.removeItem('prefill_qToAirport');
+        sessionStorage.removeItem('prefill_qFromAirport');
         sessionStorage.removeItem('prefill_qNotes');
         sessionStorage.removeItem('prefill_qDepart');
         sessionStorage.removeItem('prefill_qTrip');

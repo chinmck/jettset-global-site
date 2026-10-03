@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="hero-enquiry.css?v=17">
+<link rel="stylesheet" href="hero-enquiry.css?v=20">
 </head>
 <body>
 
@@ -178,13 +178,14 @@
       <img class="hero-img-main" src="images/hero-film-poster.jpg" alt="" aria-hidden="true" id="heroPosterFallback" style="display:none;">
       <form class="hero-enquiry" id="heroEnquiry" action="quote.html" method="get" aria-label="Journey enquiry" novalidate>
         <div class="he-fields">
-          <label class="jv-field he-from" for="heFrom"><span>From</span><input id="heFrom" name="from" type="text" list="jvCities" autocomplete="off" placeholder="Departure city"></label>
-          <label class="jv-field he-to" for="heTo"><span>To</span><input id="heTo" name="to" type="text" list="jvCities" autocomplete="off" placeholder="Arrival city"></label>
+          <label class="jv-field he-from" for="heFrom"><span>From</span><input id="heFrom" name="from" type="text" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="heSuggestions" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Departure city"></label>
+          <label class="jv-field he-to" for="heTo"><span>To</span><input id="heTo" name="to" type="text" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="heSuggestions" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Arrival city"></label>
           <label class="jv-field he-date" for="heDate"><span>Date</span><input id="heDate" name="date" type="date"></label>
           <label class="jv-field he-travellers" for="heTravellers"><span>Travellers</span><select id="heTravellers" name="travellers"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="10">10</option><option value="12">12</option></select></label>
           <button class="he-cta" type="submit">Begin Your Journey <span class="he-cta-arrow" aria-hidden="true">&rarr;</span></button>
         </div>
-        <div class="he-suggestions" id="heSuggestions" aria-live="polite"></div>
+        <div class="he-suggestions" id="heSuggestions" role="listbox" aria-label="Airport suggestions" hidden></div>
+        <p class="he-sr" id="heCount" role="status" aria-live="polite"></p>
         <p class="he-status" id="heStatus" role="status" aria-live="polite"></p>
       </form>
       <div class="hero-film-controls" aria-label="Hero film controls">
@@ -895,11 +896,11 @@
 
   <script src="/i18n.js"></script>
   <script src="script.js?v=cta-hero-3"></script>
-  <script src="hero-enquiry.js"></script>
+  <script src="hero-enquiry.js?v=4"></script>
   <script src="house-section.js"></script>
   <script src="inside-house.js"></script>
   <script src="jettset-standard.js"></script>
   <script src="who-we-fly.js"></script>
-  <script type="module" src="./jettset-world/globe.js?v=20260723-lcy"></script>
+  <script type="module" src="./jettset-world/globe.js?v=20261003-airports"></script>
 </body>
 </html>

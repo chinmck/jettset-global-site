@@ -52,6 +52,13 @@
 "Please enter where you are travelling from.": "Veuillez indiquer votre lieu de départ.",
 "Please enter where you are travelling to.": "Veuillez indiquer votre destination.",
 "Choose two different cities or airports.": "Choisissez deux villes ou aéroports différents.",
+"Start typing a city or airport": "Saisissez une ville ou un aéroport",
+"Suggested airports": "Aéroports suggérés",
+"No matching airports found.": "Aucun aéroport correspondant.",
+"Please choose an airport from the list.": "Veuillez choisir un aéroport dans la liste.",
+"Loading airports…": "Chargement des aéroports…",
+"Airport list unavailable. Type a city or airport and we’ll confirm it with you.": "Liste des aéroports indisponible. Saisissez une ville ou un aéroport, nous le confirmerons avec vous.",
+"Airport suggestions": "Suggestions d’aéroports",
 "Please choose a date from today onwards.": "Veuillez choisir une date à partir d’aujourd’hui.",
 "Signature Journeys": "Voyages signature",
 "Your Journey, Visualised.": "Visualisez votre voyage.",
@@ -357,6 +364,14 @@
 "Brazil": "Brésil"
 },
 "patterns": [
+[
+"^Continue with “(.+)”\\. We’ll confirm the airport with you\\.$",
+"Continuer avec « $1 ». Nous confirmerons l’aéroport avec vous."
+],
+[
+"^(\\d+) airports? found\\.$",
+"$1 {$1?aéroport trouvé|aéroports trouvés}."
+],
 [
 "^Select a city or airport in (.+)\\.$",
 "Sélectionnez une ville ou un aéroport : $1."
