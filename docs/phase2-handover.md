@@ -3,22 +3,24 @@
 **Status:** preview only. Draft PR #31 (`feature/phase2-hero-bar-languages`) — **not merged, nothing published.**
 **Preview:** https://deploy-preview-31--jettset-global.netlify.app/
 
-## Hero film — edited (no longer blocked)
+## Hero film — edited per Visual Brand Book v03
 
-The original `public/images/hero-film.mp4` is **unchanged** (SHA-256 `e33ef8dd…05822a`). The edited film is a new file, `public/images/hero-film-v2.mp4`, and the homepage now points at it.
+The original `public/images/hero-film.mp4` is **unchanged** (SHA-256 `e33ef8dd…05822a`). Two new exports replace the earlier interim one:
 
-- **Where the old card starts:** footage runs to 19.625 s; the first frame of the old end card (slogan baked in white serif, followed by the logo from ≈23.3 s) is at **19.667 s** (frame 472). Nothing from that frame onward is used.
-- **New cut:** footage 0–19.667 s, easing to black over its last second (a restrained fade-out), then a separate black end card (6 s): black for ~0.7 s, the line fades in over 1.3 s, holds ~3.2 s, fades out over 0.8 s, ends on black. Total 25.7 s.
-- **Text:** exactly "the world moves differently now. so do we", set in **Fraunces 500 (optical size 48)**, the homepage's display typeface (`house-section.css`, rgb 245,243,239 headline colour), at an understated off-white (≈ #ECE9E2). No logo, copy, buttons or graphics. It is broken over three lines (the world moves / differently now. / so do we) so the one file also fits phones, where the 16:9 film is centre-cropped to about a quarter of its width.
-- **Loop:** the film already opens by fading up from black over ~0.5 s and the new card finishes on black, so the restart is black → fade-up with no flash or hold.
-- **Audio:** original audio is kept, fading out over its last ~2 s and padded with silence to the new length.
-- **Encode:** H.264 High, 1920×1080, 24 fps, CRF 24, AAC 160 kbps, faststart. 3.6 MB (was 3.4 MB).
-- **Site code:** the old mobile-only CSS/JS overlay (`.hero-slogan-frame`, closing/black-hold classes) that re-created the slogan in Canela Text was removed, because the line is now in the film. The late-CTA reveal logic is untouched.
-- **Checked:** every frame from 19.667 s onward contains only the new line (frame statistics); the logo and old wording appear in no frame.
-- **Not changed / for your decision:**
-  - The line is baked into the film in English only; it does not follow the language selector (the old card didn't either).
-  - Root `index.html` + `images/hero-film.{mp4,webm}` are a legacy static copy that the Next.js deploy (`public/`) does not serve; they still contain the old end card. I did not touch them. Say if you want them updated or removed.
-  - Canela Text (named in the CSS) is loaded from `fonts.cdnfonts.com`, which was returning HTTP 500 during this work; the homepage headlines actually render in Fraunces, hence the choice.
+- `public/images/hero-film-v3.mp4` — 1920×1080 (desktop / landscape), 3.6 MB
+- `public/images/hero-film-v3-mobile.mp4` — 720×1280 portrait (phones and any portrait screen), 2.0 MB
+
+The homepage uses the portrait file when the screen is ≤680px wide or portrait (a small inline script sets the source, because Chrome ignores `media` on `<source>`); otherwise the landscape file. There was no separate mobile video before: phones used the same 16:9 file, centre-cropped. The portrait cut uses exactly that centre crop, so the footage framing is unchanged.
+
+- **Cut:** the first frame of the old end card (baked slogan, then logo from ≈23.3 s) is at 19.667 s (frame 472). Footage stops at 19.625 s and eases to **Carbon `#111315`** over its last second.
+- **End card (in the video, not a website overlay):** solid Carbon, exact wording in two lines — "The world moves differently now." / "So do we." — in **Source Serif 4 Display** (60 pt optical size, regular), **Chalk `#F1F0EC`**, 64/68 at 1080 (the brand book's display size). Carbon holds ~0.7 s, the words fade in over 1.3 s, hold ~3.2 s, fade out over 0.8 s. No logo, buttons or other copy. Total 25.7 s.
+- **Loop:** the last frame and first frame are the same flat Carbon, and the footage fades up from it over 0.7 s — no flash or pause.
+- **Checked by frame analysis (both files):** from 19.667 s every frame is a flat Carbon field plus only the new text; the logo and old wording are in no frame.
+- **Audio:** original audio kept, fading out over its last ~2 s.
+- **Source limitation (mobile):** on the portrait file the 16:9 footage is a fixed centre crop (~31% of the width), as before, so in some shots the subject sits off-centre or is cut. A better portrait reframe needs the editable source/master. On the portrait end card the first sentence wraps to two lines ("The world moves / differently now." / "So do we.") because a 32-character line cannot fit at readable size on a phone; the wording and sentence order are unchanged.
+- **Cleanup:** the earlier interim `hero-film-v2.mp4` and the old mobile-only slogan overlay (CSS/JS) are removed.
+- **Language:** the end card is baked in English only, as the old card was. Root `index.html` + `images/hero-film.{mp4,webm}` is a legacy copy that the deploy doesn't serve; it still contains the old end card and was left untouched.
+- **Fonts:** Source Serif 4 was downloaded from Google Fonts for rendering; Manrope loads from Google Fonts on the homepage.
 
 ## 1. Journey enquiry bar — works in the preview
 
@@ -29,6 +31,7 @@ The original `public/images/hero-film.mp4` is **unchanged** (SHA-256 `e33ef8dd�
 - Continues into the **existing quote flow** via the same `prefill_q*` sessionStorage keys the planner/builder use → `quote.html` arrives pre-filled (verified: Paris → Ibiza, date, "3 adultos"). No new form endpoint or lead route. Without JS the form falls back to a plain GET to `quote.html`.
 - Validation: both places required, a country is not accepted as a place (suggestions offered, like the planner), the two places must differ, date can't be in the past. Free-text cities outside the catalogue pass through (the planner's own builder offers e.g. Aspen, which isn't in the catalogue).
 - Desktop: one line. ≤900 px: two compact rows lifted above the call/WhatsApp icons. 16 px inputs on phones to avoid iOS zoom. Reduced motion: no fade-in.
+- **Typography/colour (brand book v03):** Manrope for fields, labels, CTA, Sound On and the header Contact control; Chalk `#F1F0EC` text; Carbon `#111315` tint. The CTA has a fine 1px Bronze `#8E755A` line (fills Bronze on hover), compact (28px desktop, 26px phones), bold 9px Manrope.
 - **Layout (refined, discreet):** desktop/tablet — bottom-left beside the stacked call/WhatsApp buttons, bottom edge level with the lower button, ~57px tall (was ~75px). No outline; background is a light gradient (6% at the top edge to 26% at the bottom) with a 3px blur, so the film reads through it. Labels 8.5px at 86%, values 13px at 95%. The CTA is 30px tall, 9px semibold, with a fine 50%-gold hairline (fills gold on hover). Right edge stops short of "Sound On" (which wraps rather than growing).
 - **Phones (≤600px):** the fixed call/WhatsApp stack is replaced by a small **Contact** control in the header (beside the language selector); tap shows Call and WhatsApp (Esc / outside tap closes; reuses the existing "Contact", "Call", "WhatsApp" strings, so no new copy). The bar is two compact columns (From|To, Date|Travellers) with a slim CTA beneath, about 113px tall (was 145), more transparent, with a compact single-line CTA (26px, bold, fine muted-champagne line), sitting just above Sound On. The film's separate late "Begin Your Journey →" link stays removed — the bar's CTA is the single journey CTA.
 - **Legibility note:** over the film's brightest bottom-strip frames, raw type contrast is roughly 3.4–3.8:1 (about 7:1 on typical frames); a soft dark text-shadow carries the rest. That is lower than the earlier 22%-tint version, a deliberate trade for transparency. If you want 4.5:1 everywhere, raise the gradient's lower stop.

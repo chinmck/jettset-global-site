@@ -10,7 +10,10 @@
 <link rel="stylesheet" href="inside-house.css">
 <link rel="stylesheet" href="jettset-standard.css">
 <link rel="stylesheet" href="who-we-fly.css">
-<link rel="stylesheet" href="hero-enquiry.css?v=13">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="hero-enquiry.css?v=15">
 </head>
 <body>
 
@@ -161,8 +164,17 @@
       <video class="hero-video" id="heroFilm" muted playsinline autoplay loop preload="auto"
              poster="images/hero-film-poster.jpg"
              aria-label="Private jet, cinematic studio reveal, representing Jettset Global private aviation and concierge services">
-        <source src="images/hero-film-v2.mp4" type="video/mp4">
+        <source src="images/hero-film-v3.mp4" type="video/mp4">
       </video>
+      <script>
+        /* Portrait / phone screens get the portrait cut of the film (same footage, same end card, framed for a tall screen). */
+        (function(){
+          var v = document.getElementById('heroFilm');
+          if(v && window.matchMedia && window.matchMedia('(max-width:680px), (max-aspect-ratio:1/1)').matches){
+            v.src = 'images/hero-film-v3-mobile.mp4';
+          }
+        })();
+      </script>
       <img class="hero-img-main" src="images/hero-film-poster.jpg" alt="" aria-hidden="true" id="heroPosterFallback" style="display:none;">
       <form class="hero-enquiry" id="heroEnquiry" action="quote.html" method="get" aria-label="Journey enquiry" novalidate>
         <div class="he-fields">
