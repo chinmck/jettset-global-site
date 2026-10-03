@@ -27,10 +27,6 @@
     box.addEventListener('keydown', function(e){
       if(e.key === 'Escape' && !menu.hidden){ open(false); btn.focus(); }
     });
-    // Opening the language selector closes this one, and vice versa.
-    document.addEventListener('click', function(e){
-      if(e.target.closest && e.target.closest('.lang-switch-btn')) open(false);
-    });
   })();
 
   var form = document.getElementById('heroEnquiry');
@@ -62,7 +58,7 @@
   }
   if(date) date.min = todayISO();
 
-  function t(msg){ return (window.jtI18n && window.jtI18n.t) ? window.jtI18n.t(msg) : msg; }
+  function t(msg){ return msg; }
 
   function say(message, isError){
     status.textContent = message || '';

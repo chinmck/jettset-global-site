@@ -1,3 +1,5 @@
+> **Release note:** the EN/FR/ES/AR language selector described below was NOT included in the release to main. It stays in draft PR #31 until its translations are reviewed. The hero layout, journey bar, airport autocomplete and hero film are included.
+
 # Phase 2 handover — hero enquiry bar + language selector
 
 **Status:** preview only. Draft PR #31 (`feature/phase2-hero-bar-languages`) — **not merged, nothing published.**
