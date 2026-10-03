@@ -16,14 +16,14 @@
   position:absolute;
   left:var(--he-left);
   right:var(--he-right);
-  max-width:1080px;
+  max-width:1000px;
   bottom:32px;                                      /* = bottom of the lower contact button */
   z-index:2;
-  background:rgba(10,9,8,0.22);
-  -webkit-backdrop-filter:blur(5px);
-  backdrop-filter:blur(5px);
+  background:linear-gradient(to top, rgba(10,9,8,0.26), rgba(10,9,8,0.06));   /* clear at the top edge, a little depth where the type sits */
+  -webkit-backdrop-filter:blur(3px);
+  backdrop-filter:blur(3px);
   border:0;
-  padding:12px 20px 14px;
+  padding:7px 16px 8px;
   animation:heIn 0.9s ease 0.6s both;
 }
 @keyframes heIn{from{opacity:0;} to{opacity:1;}}
@@ -32,20 +32,22 @@
 .he-fields{
   display:grid;
   grid-template-columns:minmax(0,1.25fr) minmax(0,1.25fr) minmax(0,1fr) minmax(0,0.72fr) auto;
-  gap:0 22px;
+  gap:0 20px;
   align-items:end;
 }
 
-/* Field look comes from the planner's .jv-field; only the label contrast is
-   lifted so it stays readable over moving footage. */
-.hero-enquiry .jv-field span{color:rgba(245,243,239,0.96); text-shadow:0 1px 8px rgba(0,0,0,0.75), 0 0 2px rgba(0,0,0,0.45);}
+/* Field look comes from the planner's .jv-field; here it is quieter and tighter.
+   A soft text shadow (not a heavier tint) keeps everything legible over footage. */
+.hero-enquiry .jv-field{gap:2px;}
+.hero-enquiry .jv-field span{font-size:8.5px; letter-spacing:0.16em; color:rgba(245,243,239,0.86); text-shadow:0 1px 8px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.5);}
 .hero-enquiry .jv-field input,
 .hero-enquiry .jv-field select{
-  font-size:14px;
-  border-bottom-color:rgba(245,243,239,0.55);
-  text-shadow:0 1px 10px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.5);
+  font-size:13px; font-weight:400; padding:3px 0 5px;
+  color:rgba(245,243,239,0.95);
+  border-bottom-color:rgba(245,243,239,0.34);
+  text-shadow:0 1px 10px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.5);
 }
-.hero-enquiry .jv-field input::placeholder{color:rgba(245,243,239,0.7);}
+.hero-enquiry .jv-field input::placeholder{color:rgba(245,243,239,0.72);}
 .hero-enquiry .jv-field input:focus,
 .hero-enquiry .jv-field select:focus{border-bottom-color:var(--gold);}
 .hero-enquiry .jv-field select{
@@ -56,24 +58,25 @@
 .hero-enquiry .jv-field input[aria-invalid="true"],
 .hero-enquiry .jv-field select[aria-invalid="true"]{border-bottom-color:#d9926a;}
 
+/* Low-profile CTA: short, small bold type, a fine understated hairline. */
 .he-cta{
   appearance:none; -webkit-appearance:none;
-  display:inline-flex; align-items:center; justify-content:center; gap:10px;
-  min-height:42px;
-  padding:0 24px;
-  background:rgba(10,9,8,0.28);
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  min-height:30px;
+  padding:0 14px;
+  background:transparent;
   color:#f3efe6;
-  text-shadow:0 1px 8px rgba(0,0,0,0.7);
-  border:1px solid var(--gold);
-  font:500 10.5px/1.2 'General Sans','Inter',sans-serif;
-  letter-spacing:0.18em;
+  text-shadow:0 1px 8px rgba(0,0,0,0.75);
+  border:1px solid rgba(201,162,75,0.5);
+  font:600 9px/1.2 'General Sans','Inter',sans-serif;
+  letter-spacing:0.14em;
   text-transform:uppercase;
   white-space:nowrap;
   cursor:pointer;
   transition:color 0.3s, background 0.3s, border-color 0.3s;
 }
-.he-cta:hover{color:var(--black); background:var(--gold);}
-.he-cta:focus-visible{outline:1px solid rgba(243,239,230,0.85); outline-offset:4px;}
+.he-cta:hover{color:var(--black); background:var(--gold); border-color:var(--gold);}
+.he-cta:focus-visible{outline:1px solid rgba(243,239,230,0.85); outline-offset:3px;}
 .he-cta-arrow{display:inline-block;}
 
 /* Validation / suggestions — appears just above the bar, never inside the film's subject area. */
@@ -103,52 +106,109 @@
 /* Longer translated CTA labels (e.g. "Commencez votre voyage") get a little less
    padding/tracking on mid-width desktops so the four fields keep their room. */
 @media (min-width:901px) and (max-width:1180px){
-  .he-fields{gap:0 16px;}
-  .he-cta{padding:0 16px; letter-spacing:0.12em; gap:8px;}
+  .he-fields{gap:0 14px;}
+  .he-cta{padding:0 11px; letter-spacing:0.1em; gap:6px;}
 }
 
 /* Selectors below are prefixed .hero-enquiry on purpose: styles.css sets
    .jv-field:nth-of-type(3|4){grid-column:…} for the planner, which would otherwise win. */
 /* ---- 601–900px: two compact rows, still beside the contact stack ----
-   Row 1: From | To.  Row 2: Date | Travellers | CTA.  A 12-column grid keeps the
-   two rows' proportions stable down to phone widths. */
+   Row 1: From | To.  Row 2: Date | Travellers | CTA. */
 @media (max-width:900px){
-  .hero-enquiry{padding:10px 14px 12px;}
+  .hero-enquiry{padding:7px 12px 8px;}
   .he-fields{
     grid-template-columns:repeat(12,minmax(0,1fr));
-    gap:10px 8px;
+    gap:8px 8px;
   }
   .hero-enquiry .he-from{grid-column:1 / 7;}
   .hero-enquiry .he-to{grid-column:7 / 13;}
   .hero-enquiry .he-date{grid-column:1 / 6;}
   .hero-enquiry .he-travellers{grid-column:6 / 9;}
-  .hero-enquiry .he-cta{grid-column:9 / 13; padding:0 10px; width:100%; white-space:normal; text-align:center; line-height:1.25; letter-spacing:0.1em; font-size:10px; gap:6px;}
+  .hero-enquiry .he-cta{grid-column:9 / 13; padding:0 8px; width:100%; white-space:normal; text-align:center; line-height:1.2; letter-spacing:0.08em; font-size:9px; gap:5px;}
 }
-/* ---- Phones: no room beside the stacked contact buttons (38px icons, 20px
-   margin, 10px gap = 86px tall), so the bar spans the width just above them. ---- */
+
+/* ---- Phones (≤600px) ----
+   The call/WhatsApp stack moves into a small Contact control in the header, so
+   the bar can sit low in the frame, just above Sound On. Fields stay in two
+   compact columns (From|To, Date|Travellers) with a slim CTA beneath. */
 @media (max-width:600px){
+  .contact-mark{display:none;}
   .hero-enquiry{
-    --he-left:20px; --he-right:20px;
-    bottom:calc(20px + 38px + 10px + 38px + 16px);   /* 122px: above the stack */
+    --he-left:16px; --he-right:16px;
+    bottom:calc(max(22px, env(safe-area-inset-bottom)) + 40px);   /* clears the Sound On row */
+    padding:7px 12px 9px;
   }
-  .hero-enquiry .jv-field span{font-size:9px; letter-spacing:0.12em;}
+  .he-fields{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:4px 14px;
+  }
+  .hero-enquiry .he-from,
+  .hero-enquiry .he-to,
+  .hero-enquiry .he-date,
+  .hero-enquiry .he-travellers{grid-column:auto;}
+  .hero-enquiry .he-cta{grid-column:1 / 3; min-height:30px; margin-top:3px; padding:0 10px; letter-spacing:0.12em; font-size:9px;}
+  .hero-enquiry .jv-field span{font-size:8.5px; letter-spacing:0.12em;}
   /* 16px stops iOS from zooming the page when a field is focused. */
   .hero-enquiry .jv-field input,
-  .hero-enquiry .jv-field select{font-size:16px; padding:6px 0 8px;}
-  .he-cta{font-size:9.5px; letter-spacing:0.1em; min-height:40px; line-height:1.25; white-space:normal; text-align:center;}
+  .hero-enquiry .jv-field select{font-size:16px; padding:2px 0 4px; height:28px; box-sizing:border-box;}
   .he-cta-arrow{display:none;}
 }
 @media (max-width:380px){
-  .hero-enquiry{padding:10px 12px 12px;}
-  .he-fields{gap:8px 6px;}
-  .he-cta{padding:0 6px; letter-spacing:0.06em;}
+  .hero-enquiry{padding:7px 10px 9px;}
+  .he-fields{gap:5px 10px;}
+  .hero-enquiry .he-cta{padding:0 6px; letter-spacing:0.08em;}
 }
 
-/* A very short landscape viewport can't hold the bar and the film: keep it out of the way. */
+/* A very short viewport can't hold the bar and the film: keep it tight. */
 @media (max-height:480px) and (orientation:landscape){
-  .hero-enquiry{padding:8px 14px;}
+  .hero-enquiry{padding:6px 12px;}
 }
+
+/* ---- Header Contact control (phones only) ----
+   Replaces the fixed call/WhatsApp stack below 601px. Sits in the nav's right
+   cell beside the language selector; tap shows both actions. */
+.nav-tools{
+  grid-column:3;
+  justify-self:end;
+  display:flex; align-items:center; gap:2px;
+  position:relative;
+  z-index:2;
+}
+.nav-contact{position:relative; display:none;}
+.nav-contact-btn{
+  display:inline-flex; align-items:center;
+  min-width:44px; min-height:44px; padding:0 6px;
+  background:none; border:0; cursor:pointer;
+  color:var(--off-white, #F5F3EF);
+  font:500 10px/1 'General Sans','Inter',sans-serif;
+  letter-spacing:0.14em; text-transform:uppercase;
+  text-shadow:0 1px 12px rgba(0,0,0,0.9);
+  transition:color .25s;
+}
+.nav-contact-btn:hover,
+.nav-contact.is-open .nav-contact-btn{color:var(--gold, #C9A24B);}
+.nav-contact-btn:focus-visible,
+.nav-contact-opt:focus-visible{outline:1px solid rgba(243,239,230,0.85); outline-offset:3px;}
+.nav-contact-menu{
+  position:absolute; top:calc(100% + 6px); right:0;
+  min-width:132px; margin:0; padding:4px 0; list-style:none;
+  background:rgba(10,9,8,0.92);
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+  border:1px solid rgba(201,162,75,0.34);
+}
+.nav-contact-menu[hidden]{display:none;}
+.nav-contact-opt{
+  display:flex; align-items:center; min-height:44px; padding:0 18px;
+  color:rgba(245,243,239,0.9); text-decoration:none;
+  font:400 13px/1 'General Sans','Inter',sans-serif; letter-spacing:0.02em;
+}
+.nav-contact-opt:hover{color:var(--gold, #C9A24B); background:rgba(245,243,239,0.05);}
+@media (max-width:600px){
+  .nav-contact{display:block;}
+}
+html[dir="rtl"] .nav-contact-menu{right:auto; left:0;}
 
 @media (prefers-reduced-motion: reduce){
   .hero-enquiry{animation:none; transition:none;}
+  .he-cta, .nav-contact-btn{transition:none;}
 }

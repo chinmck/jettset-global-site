@@ -5,6 +5,28 @@
    enquiry capture, which pre-fills itself from those keys (see the
    "Quote page: apply any pre-fill values" block in script.js). */
 (function(){
+  // Header Contact control (phones): one tap shows Call and WhatsApp.
+  (function(){
+    var box = document.getElementById('navContact');
+    var btn = document.getElementById('navContactBtn');
+    var menu = document.getElementById('navContactMenu');
+    if(!box || !btn || !menu) return;
+    function open(v){
+      menu.hidden = !v;
+      btn.setAttribute('aria-expanded', v ? 'true' : 'false');
+      box.classList.toggle('is-open', v);
+    }
+    btn.addEventListener('click', function(){ open(menu.hidden); });
+    document.addEventListener('click', function(e){ if(!box.contains(e.target)) open(false); });
+    box.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && !menu.hidden){ open(false); btn.focus(); }
+    });
+    // Opening the language selector closes this one, and vice versa.
+    document.addEventListener('click', function(e){
+      if(e.target.closest && e.target.closest('.lang-switch-btn')) open(false);
+    });
+  })();
+
   var form = document.getElementById('heroEnquiry');
   if(!form) return;
 
