@@ -995,6 +995,10 @@ document.getElementById('jvTravellers').addEventListener('change', matchEnteredR
   });
 });
 
+// Shared with the hero enquiry bar (hero-enquiry.js) so both entry points
+// resolve and suggest locations identically.
+window.jtLocations = { find: findLocation, countryLocations, featuredAirportCodes: AIRPORT_CATALOG.map((a) => a.code) };
+
 const fixedJourneyAction = document.getElementById('journeyBar');
 const floatingContact = document.getElementById('contactMark');
 const siteHeader = document.getElementById('mainNav');
