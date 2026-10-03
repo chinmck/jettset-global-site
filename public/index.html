@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="inside-house.css">
 <link rel="stylesheet" href="jettset-standard.css">
 <link rel="stylesheet" href="who-we-fly.css">
+<link rel="stylesheet" href="hero-enquiry.css?v=4">
 </head>
 <body>
 
@@ -153,6 +154,17 @@
         <source src="images/hero-film.mp4?v=native-audio" type="video/mp4">
       </video>
       <img class="hero-img-main" src="images/hero-film-poster.jpg" alt="" aria-hidden="true" id="heroPosterFallback" style="display:none;">
+      <form class="hero-enquiry" id="heroEnquiry" action="quote.html" method="get" aria-label="Journey enquiry" novalidate>
+        <div class="he-fields">
+          <label class="jv-field he-from" for="heFrom"><span>From</span><input id="heFrom" name="from" type="text" list="jvCities" autocomplete="off" placeholder="Departure city"></label>
+          <label class="jv-field he-to" for="heTo"><span>To</span><input id="heTo" name="to" type="text" list="jvCities" autocomplete="off" placeholder="Arrival city"></label>
+          <label class="jv-field he-date" for="heDate"><span>Date</span><input id="heDate" name="date" type="date"></label>
+          <label class="jv-field he-travellers" for="heTravellers"><span>Travellers</span><select id="heTravellers" name="travellers"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="10">10</option><option value="12">12</option></select></label>
+          <button class="he-cta" type="submit">Begin Your Journey <span class="he-cta-arrow" aria-hidden="true">&rarr;</span></button>
+        </div>
+        <div class="he-suggestions" id="heSuggestions" aria-live="polite"></div>
+        <p class="he-status" id="heStatus" role="status" aria-live="polite"></p>
+      </form>
       <div class="hero-film-controls" aria-label="Hero film controls">
         <a class="hero-film-cta" href="https://jettsetglobal.com/quote.html">Begin Your Journey <span aria-hidden="true">→</span></a>
         <button class="hero-sound-toggle" id="heroSoundToggle" type="button"
@@ -857,7 +869,9 @@
     </div>
   </footer>
 
+  <script src="/i18n.js"></script>
   <script src="script.js?v=cta-hero-1"></script>
+  <script src="hero-enquiry.js"></script>
   <script src="house-section.js"></script>
   <script src="inside-house.js"></script>
   <script src="jettset-standard.js"></script>

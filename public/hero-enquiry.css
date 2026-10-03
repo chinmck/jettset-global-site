@@ -1,0 +1,151 @@
+/* ==========================================================================
+   Hero journey enquiry bar — a slim, translucent bar over the hero film.
+   Reuses the planner's .jv-field styling (label above a hairline input) and
+   the site's existing translucent-bar recipe (.journey-mark: dark glass,
+   thin gold border). Homepage only.
+
+   Placement: desktop sits above the film's own control row (late CTA +
+   sound toggle) and inboard of the fixed call/WhatsApp icons (bottom-left);
+   tablet/mobile lifts above those icons instead. Never over the nav.
+   ========================================================================== */
+
+.hero-enquiry{
+  --he-side: clamp(96px, 9vw, 150px);   /* clears the fixed contact icons */
+  position:absolute;
+  left:50%;
+  bottom:calc(clamp(26px,4.5vh,52px) + 66px); /* above the film controls row */
+  transform:translateX(-50%);
+  z-index:2;
+  width:min(1080px, calc(100% - (var(--he-side) * 2)));
+  background:rgba(10,9,8,0.46);
+  -webkit-backdrop-filter:blur(14px) saturate(1.1);
+  backdrop-filter:blur(14px) saturate(1.1);
+  border:1px solid rgba(201,162,75,0.34);
+  padding:12px 20px 14px;
+  animation:heIn 0.9s ease 0.6s both;
+  transition:border-color 0.3s;
+}
+.hero-enquiry:focus-within{border-color:rgba(201,162,75,0.7);}
+@keyframes heIn{from{opacity:0;} to{opacity:1;}}
+
+.he-fields{
+  display:grid;
+  grid-template-columns:minmax(0,1.25fr) minmax(0,1.25fr) minmax(0,1fr) minmax(0,0.72fr) auto;
+  gap:0 22px;
+  align-items:end;
+}
+
+/* Field look comes from the planner's .jv-field; only the label contrast is
+   lifted so it stays readable over moving footage. */
+.hero-enquiry .jv-field span{color:rgba(245,243,239,0.74);}
+.hero-enquiry .jv-field input,
+.hero-enquiry .jv-field select{
+  font-size:14px;
+  border-bottom-color:rgba(245,243,239,0.34);
+  text-shadow:0 1px 8px rgba(0,0,0,0.6);
+}
+.hero-enquiry .jv-field input::placeholder{color:rgba(245,243,239,0.46);}
+.hero-enquiry .jv-field input:focus,
+.hero-enquiry .jv-field select:focus{border-bottom-color:var(--gold);}
+.hero-enquiry .jv-field select{
+  -webkit-appearance:none; appearance:none; cursor:pointer;
+  background:transparent;
+}
+.hero-enquiry .jv-field select option{color:#0A0908; background:#F5F3EF;}
+.hero-enquiry .jv-field input[aria-invalid="true"],
+.hero-enquiry .jv-field select[aria-invalid="true"]{border-bottom-color:#d9926a;}
+
+.he-cta{
+  appearance:none; -webkit-appearance:none;
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  min-height:42px;
+  padding:0 24px;
+  background:transparent;
+  color:#f3efe6;
+  border:1px solid var(--gold);
+  font:500 10.5px/1.2 'General Sans','Inter',sans-serif;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  cursor:pointer;
+  transition:color 0.3s, background 0.3s, border-color 0.3s;
+}
+.he-cta:hover{color:var(--black); background:var(--gold);}
+.he-cta:focus-visible{outline:1px solid rgba(243,239,230,0.85); outline-offset:4px;}
+.he-cta-arrow{display:inline-block;}
+
+/* Validation / suggestions — appears just above the bar, never inside the film's subject area. */
+.he-status{
+  position:absolute;
+  left:0; right:0; bottom:calc(100% + 8px);
+  margin:0;
+  font:400 11px/1.5 'General Sans','Inter',sans-serif;
+  letter-spacing:0.02em;
+  color:#f3efe6;
+  text-shadow:0 1px 10px rgba(0,0,0,0.85);
+  pointer-events:none;
+}
+.he-status:empty{display:none;}
+.he-status.is-error{color:#f0c3a5;}
+.he-suggestions{
+  position:absolute;
+  left:0; right:0; bottom:calc(100% + 34px);
+  display:flex; flex-wrap:wrap; gap:6px;
+}
+.he-suggestions:empty{display:none;}
+.he-suggestions .jv-location-suggestion{
+  background:rgba(10,9,8,0.7);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+}
+
+/* Longer translated CTA labels (e.g. "Commencez votre voyage") get a little less
+   padding/tracking on mid-width desktops so the four fields keep their room. */
+@media (min-width:901px) and (max-width:1180px){
+  .he-fields{gap:0 16px;}
+  .he-cta{padding:0 16px; letter-spacing:0.12em; gap:8px;}
+}
+
+/* Selectors below are prefixed .hero-enquiry on purpose: styles.css sets
+   .jv-field:nth-of-type(3|4){grid-column:…} for the planner, which would otherwise win. */
+/* ---- Tablet / mobile: two compact rows, lifted above the call/WhatsApp icons ----
+   Row 1: From | To.  Row 2: Date | Travellers | CTA.  A 12-column grid keeps the
+   two rows' proportions stable from 900px down to 375px. */
+@media (max-width:900px){
+  .hero-enquiry{
+    --he-side:20px;
+    bottom:148px;               /* contact icons: 32px + 2×44px + 12px gap = 132px, plus air */
+    padding:10px 14px 12px;
+  }
+  .he-fields{
+    grid-template-columns:repeat(12,minmax(0,1fr));
+    gap:10px 8px;
+  }
+  .hero-enquiry .he-from{grid-column:1 / 7;}
+  .hero-enquiry .he-to{grid-column:7 / 13;}
+  .hero-enquiry .he-date{grid-column:1 / 6;}
+  .hero-enquiry .he-travellers{grid-column:6 / 9;}
+  .hero-enquiry .he-cta{grid-column:9 / 13; padding:0 10px; width:100%;}
+}
+@media (max-width:680px){
+  .hero-enquiry{bottom:136px;}  /* contact icons sit at 20px on phones */
+  .hero-enquiry .jv-field span{font-size:9px; letter-spacing:0.12em;}
+  /* 16px stops iOS from zooming the page when a field is focused. */
+  .hero-enquiry .jv-field input,
+  .hero-enquiry .jv-field select{font-size:16px; padding:6px 0 8px;}
+  .he-cta{font-size:9.5px; letter-spacing:0.1em; min-height:40px; line-height:1.25; white-space:normal; text-align:center;}
+  .he-cta-arrow{display:none;}
+}
+@media (max-width:380px){
+  .hero-enquiry{padding:10px 12px 12px;}
+  .he-fields{gap:8px 6px;}
+  .he-cta{padding:0 6px; letter-spacing:0.06em;}
+}
+
+/* A very short landscape viewport can't hold the bar and the film: keep it out of the way. */
+@media (max-height:480px) and (orientation:landscape){
+  .hero-enquiry{bottom:calc(clamp(26px,4.5vh,52px) + 52px); padding:8px 14px;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero-enquiry{animation:none; transition:none;}
+}

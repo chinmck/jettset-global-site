@@ -2042,7 +2042,13 @@ var blackHoldDuration = 1.7;
       // 'pageshow' fires on fresh loads AND on back/forward restores from
       // bfcache (where 'DOMContentLoaded' does not re-fire), so this is the
       // one event that reliably covers every way a guest can arrive here.
-      window.addEventListener('pageshow', revealPage);
+      // Hold the veil a moment (max 600ms) for the language layer so a visitor
+      // who chose French/Spanish/Arabic never sees English flash first.
+      window.addEventListener('pageshow', function(){
+        var ready = window.jtI18nReady, fired = false;
+        function go(){ if(fired) return; fired = true; revealPage(); }
+        if(ready && ready.then){ ready.then(go); setTimeout(go, 600); } else { go(); }
+      });
 
       // ---- OUTGOING: veil the screen, then navigate ----
       function jtNavigate(url){
