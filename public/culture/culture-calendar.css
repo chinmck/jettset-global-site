@@ -1,0 +1,111 @@
+/* The Global Culture Calendar — homepage feature over the Jettset House plate.
+   Brand book v03: Source Serif 4 Display for expressive lines, Manrope for labels/controls,
+   Chalk #F1F0EC type, Silver #BFC2C3 support, Graphite #51575A hairlines, Carbon #111315 grounds,
+   Bronze #8E755A only as a small selected mark. No panel, no box: type and a fine line on the photograph. */
+
+.cc{
+  --cc-chalk:#F1F0EC; --cc-silver:#BFC2C3; --cc-graphite:#51575A; --cc-carbon:#111315; --cc-bronze:#8E755A;
+  position:absolute; inset:0; z-index:2;
+  display:flex; flex-direction:column; justify-content:space-between;
+  padding:clamp(20px,3.2vw,40px) clamp(20px,3vw,36px) clamp(20px,2.6vw,32px);
+  font-family:'Manrope','Inter',sans-serif; color:var(--cc-chalk);
+  touch-action:pan-y;
+}
+/* a calm wash behind the type only where it sits, so the photograph stays the subject */
+.cc::before{
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:-1;
+  background:
+    linear-gradient(180deg, rgba(17,19,21,0.62) 0%, rgba(17,19,21,0.22) 30%, rgba(17,19,21,0) 46%),
+    linear-gradient(0deg, rgba(17,19,21,0.78) 0%, rgba(17,19,21,0.40) 24%, rgba(17,19,21,0) 44%);
+}
+
+.cc-head{text-align:right;}
+.cc-title{margin:0; font:600 10px/1.5 'Manrope','Inter',sans-serif; letter-spacing:0.22em; text-transform:uppercase; color:var(--cc-chalk); text-shadow:0 1px 10px rgba(0,0,0,0.5);}
+.cc-month{margin:2px 0 0; font:500 10px/1.5 'Manrope','Inter',sans-serif; letter-spacing:0.22em; text-transform:uppercase; color:var(--cc-silver); text-shadow:0 1px 10px rgba(0,0,0,0.5);}
+
+.cc-feature{
+  align-self:flex-end; text-align:right; max-width:min(100%,460px);
+  margin-top:clamp(10px,1.6vw,20px);
+  transition:opacity .7s ease;
+}
+.cc-feature[hidden]{display:none;}
+.cc-feature.is-fading{opacity:0;}
+.cc-feature-title{
+  margin:0;
+  font-family:'Source Serif 4','Source Serif Pro',Georgia,serif; font-optical-sizing:auto;
+  font-weight:400; font-size:clamp(30px,3.3vw,46px); line-height:1.06; letter-spacing:-0.005em;
+  text-shadow:0 2px 24px rgba(0,0,0,0.45);
+}
+.cc-city,.cc-event{display:block;}
+.cc-city::after{content:' \2014';}
+.cc-discover{
+  display:inline-block; margin-top:clamp(10px,1.2vw,16px); padding-bottom:3px;
+  font-family:'Source Serif 4','Source Serif Pro',Georgia,serif; font-size:clamp(15px,1.3vw,18px); font-weight:400; letter-spacing:0.02em;
+  color:var(--cc-chalk); text-decoration:none; border-bottom:1px solid var(--cc-graphite);
+  text-shadow:0 1px 10px rgba(0,0,0,0.5);
+  transition:border-color .3s;
+}
+.cc-discover:hover{border-bottom-color:var(--cc-chalk);}
+.cc a:focus-visible,.cc button:focus-visible{outline:1px solid var(--cc-chalk); outline-offset:4px;}
+
+.cc-lower{margin-top:auto; padding-top:20px; display:flex; flex-direction:column; align-items:center; gap:clamp(18px,2.2vw,26px);}
+.cc-timeline{width:100%; position:relative;}
+.cc-timeline[hidden]{display:none;}
+
+.cc-track{overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity;}
+.cc-track::-webkit-scrollbar{display:none;}
+.cc-dates{list-style:none; margin:0; padding:0; display:flex; position:relative; min-width:100%;}
+.cc-dates::before{content:''; position:absolute; left:6px; right:6px; top:6px; height:1px; background:rgba(191,194,195,0.55);}
+.cc-dates li{flex:1 0 auto; min-width:clamp(92px,28%,150px); scroll-snap-align:center;}
+.cc-dates li:first-child{text-align:left;}
+.cc-date-btn{
+  display:block; width:100%; padding:0 6px 4px 0; background:none; border:0; cursor:pointer; text-align:inherit;
+  color:var(--cc-silver); font:500 9.5px/1.45 'Manrope','Inter',sans-serif; letter-spacing:0.14em; text-transform:uppercase;
+  text-shadow:0 1px 8px rgba(0,0,0,0.7);
+  min-height:44px;
+}
+.cc-dot{display:block; width:13px; height:13px; margin:0 0 9px; border-radius:50%; border:1px solid rgba(241,240,236,0.8); background:rgba(17,19,21,0.55); position:relative; transition:background .5s, border-color .5s, transform .5s;}
+.cc-date-btn:hover .cc-dot{border-color:var(--cc-chalk);}
+.cc-date-btn[aria-current="true"]{color:var(--cc-chalk); font-weight:600;}
+.cc-date-btn[aria-current="true"] .cc-dot{background:var(--cc-bronze); border-color:var(--cc-bronze);}
+.cc-date-range,.cc-date-name{display:block;}
+.cc-date-name{margin-top:1px;}
+
+.cc-controls{position:absolute; right:0; top:-34px; display:flex; gap:2px;}
+.cc-btn{
+  width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;
+  background:none; border:0; cursor:pointer; color:var(--cc-silver); font-size:14px; line-height:1;
+  text-shadow:0 1px 8px rgba(0,0,0,0.7); transition:color .25s;
+}
+.cc-btn:hover{color:var(--cc-chalk);}
+.cc-pause-ic,.cc-pause-icon{display:block; width:8px; height:10px; border-left:1.5px solid currentColor; border-right:1.5px solid currentColor;}
+.cc-pause[aria-pressed="true"] .cc-pause-icon{width:0; height:0; border:0; border-left:8px solid currentColor; border-top:5px solid transparent; border-bottom:5px solid transparent;}
+
+.cc-cta{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:38px; padding:0 26px;
+  font:700 10px/1.2 'Manrope','Inter',sans-serif; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--cc-chalk); text-decoration:none;
+  border:1px solid #8E755A; background:rgba(17,19,21,0.28);
+  transition:background .3s;
+}
+.cc-cta:hover{background:#8E755A;}
+.cc-sr{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;}
+
+/* Phones and narrow screens: the plate becomes a taller band so the title, event, timeline and CTA each have room. */
+@media (max-width:780px){
+  .house-plate{height:clamp(520px,80svh,700px); min-height:520px;}
+  .cc{padding:22px 20px 22px;}
+  .cc-feature-title{font-size:clamp(28px,8vw,38px);}
+  .cc-dates li{min-width:104px;}
+  .cc-date-btn{font-size:9px; letter-spacing:0.12em;}
+  .cc-controls{top:-32px;}
+}
+@media (max-width:380px){
+  .cc{padding:20px 16px 20px;}
+  .cc-dates li{min-width:98px;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .cc-feature,.cc-dot,.cc-cta,.cc-discover{transition:none;}
+}
