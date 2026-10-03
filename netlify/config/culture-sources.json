@@ -1,0 +1,4 @@
+{
+  "_readme": "Explicit allowlist of event sources for the daily Global Culture Calendar sync (netlify/functions/culture-events-sync.mts). Only entries with \"enabled\": true are fetched, only over https, and only from the hosts listed in allowedHosts. Nothing is scraped. No credentials belong in this file: if a source needs an API key, add an env var and ask a developer to extend lib/culture/sync.mjs. See docs/culture-calendar.md for the exact fields and worked examples.",
+  "sources": []
+}
