@@ -287,6 +287,10 @@
     if(window.matchMedia('(max-width:600px)').matches && list.scrollIntoView) list.scrollIntoView({block: 'nearest'});
   }
 
+  // Warm the airport list while the page is idle so the first focus/typing is never waiting on it.
+  if('requestIdleCallback' in window) window.requestIdleCallback(function(){ load(); }, {timeout: 4000});
+  else setTimeout(load, 2000);
+
   [from, to].forEach(function(input){
     input.addEventListener('focus', function(){ say(''); load(); show(input); });
     input.addEventListener('click', function(){ if(list.hidden || activeInput !== input) show(input); });
