@@ -3,22 +3,22 @@
 **Status:** preview only. Draft PR #31 (`feature/phase2-hero-bar-languages`) — **not merged, nothing published.**
 **Preview:** https://deploy-preview-31--jettset-global.netlify.app/
 
-## Blocker — hero film edits need the editable source
+## Hero film — edited (no longer blocked)
 
-I inspected the film (`public/images/hero-film.mp4`, 1920×1080, 25.3 s) frame by frame, and the 4K master that sits in git history (`df6121e`, 3840×2160).
+The original `public/images/hero-film.mp4` is **unchanged** (SHA-256 `e33ef8dd…05822a`). The edited film is a new file, `public/images/hero-film-v2.mp4`, and the homepage now points at it.
 
-| Element | Where it lives | Time in film |
-|---|---|---|
-| Line "The World Moves Differently Now. So Do We." | **Baked into the video pixels** (white serif on black) | ≈ 20–23 s |
-| Jettset logo (end card) | **Baked into the video pixels** | ≈ 23–25.3 s |
-
-Neither is a website overlay, and no layered project or clean end-card-free master exists in the repo, `~/Downloads`, or git history. Per the brief I did **not** paint over them or add an improvised overlay. **Nothing about the film was changed.**
-
-**Source asset needed:** the layered edit (Premiere / After Effects / DaVinci) or a master export without the end card (final ~5 s as plain black). With that, the slogan can be re-set in Canela Text and the logo removed. The site header logo is untouched.
-
-Things to know when the source arrives:
-- On **mobile (≤680 px)** the site already hides the film during the slogan window and shows the line as a CSS overlay in Canela Text (`.hero.hero-slogan-frame::before` in `styles.css`). Desktop shows the baked-in version, so the two currently differ. The logo is baked in on both.
-- The line you specified is lowercase with no full stops: "the world moves differently now. so do we". The film and the mobile overlay use Title Case with full stops. **Decision needed on casing.**
+- **Where the old card starts:** footage runs to 19.625 s; the first frame of the old end card (slogan baked in white serif, followed by the logo from ≈23.3 s) is at **19.667 s** (frame 472). Nothing from that frame onward is used.
+- **New cut:** footage 0–19.667 s, easing to black over its last second (a restrained fade-out), then a separate black end card (6 s): black for ~0.7 s, the line fades in over 1.3 s, holds ~3.2 s, fades out over 0.8 s, ends on black. Total 25.7 s.
+- **Text:** exactly "the world moves differently now. so do we", set in **Fraunces 500 (optical size 48)**, the homepage's display typeface (`house-section.css`, rgb 245,243,239 headline colour), at an understated off-white (≈ #ECE9E2). No logo, copy, buttons or graphics. It is broken over three lines (the world moves / differently now. / so do we) so the one file also fits phones, where the 16:9 film is centre-cropped to about a quarter of its width.
+- **Loop:** the film already opens by fading up from black over ~0.5 s and the new card finishes on black, so the restart is black → fade-up with no flash or hold.
+- **Audio:** original audio is kept, fading out over its last ~2 s and padded with silence to the new length.
+- **Encode:** H.264 High, 1920×1080, 24 fps, CRF 24, AAC 160 kbps, faststart. 3.6 MB (was 3.4 MB).
+- **Site code:** the old mobile-only CSS/JS overlay (`.hero-slogan-frame`, closing/black-hold classes) that re-created the slogan in Canela Text was removed, because the line is now in the film. The late-CTA reveal logic is untouched.
+- **Checked:** every frame from 19.667 s onward contains only the new line (frame statistics); the logo and old wording appear in no frame.
+- **Not changed / for your decision:**
+  - The line is baked into the film in English only; it does not follow the language selector (the old card didn't either).
+  - Root `index.html` + `images/hero-film.{mp4,webm}` are a legacy static copy that the Next.js deploy (`public/`) does not serve; they still contain the old end card. I did not touch them. Say if you want them updated or removed.
+  - Canela Text (named in the CSS) is loaded from `fonts.cdnfonts.com`, which was returning HTTP 500 during this work; the homepage headlines actually render in Fraunces, hence the choice.
 
 ## 1. Journey enquiry bar — works in the preview
 
