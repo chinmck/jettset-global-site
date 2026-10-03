@@ -174,8 +174,15 @@
         /* Portrait / phone screens get the portrait cut of the film (same footage, same end card, framed for a tall screen). */
         (function(){
           var v = document.getElementById('heroFilm');
-          if(v && window.matchMedia && window.matchMedia('(max-width:680px), (max-aspect-ratio:1/1)').matches){
-            v.src = 'images/hero-film-v3-mobile.mp4';
+          /* PREVIEW-ONLY speed comparison (not for main): ?speed=1.08 or ?speed=1.12 plays the sped-up
+             encodes (audio tempo-matched, pitch preserved); no parameter = the current film at normal speed. */
+          var sp = (/[?&]speed=(1\.08|1\.12)\b/.exec(location.search) || [])[1];
+          var tag = sp ? '-' + sp : '';
+          var portrait = window.matchMedia && window.matchMedia('(max-width:680px), (max-aspect-ratio:1/1)').matches;
+          if(v && portrait){
+            v.src = 'images/hero-film-v3-mobile' + tag + '.mp4';
+          } else if(v && sp){
+            v.src = 'images/hero-film-v3' + tag + '.mp4';
           }
         })();
       </script>
