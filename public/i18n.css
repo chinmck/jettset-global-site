@@ -81,6 +81,9 @@ html[dir="rtl"] .journey-mark{right:auto; left:32px;}
   html[dir="rtl"] .contact-mark{left:auto; right:20px;}
   html[dir="rtl"] .journey-mark{right:auto; left:20px;}
 }
+/* Hero bar: contact stack moves to the right and Sound On to the left, so the bar's
+   anchoring side flips with them (the over-constrained inset on the "start" side wins). */
+html[dir="rtl"] .hero-enquiry{left:var(--he-right); right:var(--he-left);}
 html[dir="rtl"] .lang-switch{justify-self:end;}
 html[dir="rtl"] .lang-switch-menu{right:auto; left:0;}
 html[dir="rtl"] .hero-sound-toggle{text-align:left; margin:-14px 0 -14px -14px;}

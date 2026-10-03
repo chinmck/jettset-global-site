@@ -1,33 +1,34 @@
 /* ==========================================================================
-   Hero journey enquiry bar — a slim, translucent bar over the hero film.
-   Reuses the planner's .jv-field styling (label above a hairline input) and
-   the site's existing translucent-bar recipe (.journey-mark: dark glass,
-   thin gold border). Homepage only.
+   Hero journey enquiry bar — a slim, very translucent bar over the hero film.
+   Reuses the planner's .jv-field styling (label above a hairline input).
+   Homepage only.
 
-   Placement: desktop sits above the film's own control row (late CTA +
-   sound toggle) and inboard of the fixed call/WhatsApp icons (bottom-left);
-   tablet/mobile lifts above those icons instead. Never over the nav.
+   Placement: bottom-left, alongside the fixed call/WhatsApp stack, with the
+   bar's bottom edge level with the lower contact button (bottom:32px). Its
+   right edge stops short of the film's "Sound On" control. On phones there is
+   no room beside the stack, so the bar sits just above it instead.
+   No outline: the glass edge is defined by the blur alone.
    ========================================================================== */
 
 .hero-enquiry{
-  --he-side: clamp(96px, 9vw, 150px);   /* clears the fixed contact icons */
+  --he-left: 98px;                                  /* 32px margin + 42px icon + 24px gap */
+  --he-right: calc(clamp(24px,4vw,64px) + 104px + 24px); /* clears the Sound On control, even when a translated label wraps */
   position:absolute;
-  left:50%;
-  bottom:calc(clamp(26px,4.5vh,52px) + 66px); /* above the film controls row */
-  transform:translateX(-50%);
+  left:var(--he-left);
+  right:var(--he-right);
+  max-width:1080px;
+  bottom:32px;                                      /* = bottom of the lower contact button */
   z-index:2;
-  width:min(1080px, calc(100% - (var(--he-side) * 2)));
-  background:rgba(10,9,8,0.46);
-  -webkit-backdrop-filter:blur(14px) saturate(1.1);
-  backdrop-filter:blur(14px) saturate(1.1);
-  border:1px solid rgba(201,162,75,0.34);
+  background:rgba(10,9,8,0.22);
+  -webkit-backdrop-filter:blur(5px);
+  backdrop-filter:blur(5px);
+  border:0;
   padding:12px 20px 14px;
   animation:heIn 0.9s ease 0.6s both;
-  transition:border-color 0.3s;
 }
-.hero-enquiry:focus-within{border-color:rgba(201,162,75,0.7);}
 @keyframes heIn{from{opacity:0;} to{opacity:1;}}
 
+.hero-sound-toggle{max-width:104px; white-space:normal; line-height:1.4;}   /* longer translated labels wrap instead of growing into the bar */
 .he-fields{
   display:grid;
   grid-template-columns:minmax(0,1.25fr) minmax(0,1.25fr) minmax(0,1fr) minmax(0,0.72fr) auto;
@@ -37,14 +38,14 @@
 
 /* Field look comes from the planner's .jv-field; only the label contrast is
    lifted so it stays readable over moving footage. */
-.hero-enquiry .jv-field span{color:rgba(245,243,239,0.74);}
+.hero-enquiry .jv-field span{color:rgba(245,243,239,0.96); text-shadow:0 1px 8px rgba(0,0,0,0.75), 0 0 2px rgba(0,0,0,0.45);}
 .hero-enquiry .jv-field input,
 .hero-enquiry .jv-field select{
   font-size:14px;
-  border-bottom-color:rgba(245,243,239,0.34);
-  text-shadow:0 1px 8px rgba(0,0,0,0.6);
+  border-bottom-color:rgba(245,243,239,0.55);
+  text-shadow:0 1px 10px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.5);
 }
-.hero-enquiry .jv-field input::placeholder{color:rgba(245,243,239,0.46);}
+.hero-enquiry .jv-field input::placeholder{color:rgba(245,243,239,0.7);}
 .hero-enquiry .jv-field input:focus,
 .hero-enquiry .jv-field select:focus{border-bottom-color:var(--gold);}
 .hero-enquiry .jv-field select{
@@ -60,8 +61,9 @@
   display:inline-flex; align-items:center; justify-content:center; gap:10px;
   min-height:42px;
   padding:0 24px;
-  background:transparent;
+  background:rgba(10,9,8,0.28);
   color:#f3efe6;
+  text-shadow:0 1px 8px rgba(0,0,0,0.7);
   border:1px solid var(--gold);
   font:500 10.5px/1.2 'General Sans','Inter',sans-serif;
   letter-spacing:0.18em;
@@ -107,15 +109,11 @@
 
 /* Selectors below are prefixed .hero-enquiry on purpose: styles.css sets
    .jv-field:nth-of-type(3|4){grid-column:…} for the planner, which would otherwise win. */
-/* ---- Tablet / mobile: two compact rows, lifted above the call/WhatsApp icons ----
+/* ---- 601–900px: two compact rows, still beside the contact stack ----
    Row 1: From | To.  Row 2: Date | Travellers | CTA.  A 12-column grid keeps the
-   two rows' proportions stable from 900px down to 375px. */
+   two rows' proportions stable down to phone widths. */
 @media (max-width:900px){
-  .hero-enquiry{
-    --he-side:20px;
-    bottom:148px;               /* contact icons: 32px + 2×44px + 12px gap = 132px, plus air */
-    padding:10px 14px 12px;
-  }
+  .hero-enquiry{padding:10px 14px 12px;}
   .he-fields{
     grid-template-columns:repeat(12,minmax(0,1fr));
     gap:10px 8px;
@@ -124,10 +122,15 @@
   .hero-enquiry .he-to{grid-column:7 / 13;}
   .hero-enquiry .he-date{grid-column:1 / 6;}
   .hero-enquiry .he-travellers{grid-column:6 / 9;}
-  .hero-enquiry .he-cta{grid-column:9 / 13; padding:0 10px; width:100%;}
+  .hero-enquiry .he-cta{grid-column:9 / 13; padding:0 10px; width:100%; white-space:normal; text-align:center; line-height:1.25; letter-spacing:0.1em; font-size:10px; gap:6px;}
 }
-@media (max-width:680px){
-  .hero-enquiry{bottom:136px;}  /* contact icons sit at 20px on phones */
+/* ---- Phones: no room beside the stacked contact buttons (38px icons, 20px
+   margin, 10px gap = 86px tall), so the bar spans the width just above them. ---- */
+@media (max-width:600px){
+  .hero-enquiry{
+    --he-left:20px; --he-right:20px;
+    bottom:calc(20px + 38px + 10px + 38px + 16px);   /* 122px: above the stack */
+  }
   .hero-enquiry .jv-field span{font-size:9px; letter-spacing:0.12em;}
   /* 16px stops iOS from zooming the page when a field is focused. */
   .hero-enquiry .jv-field input,
@@ -143,7 +146,7 @@
 
 /* A very short landscape viewport can't hold the bar and the film: keep it out of the way. */
 @media (max-height:480px) and (orientation:landscape){
-  .hero-enquiry{bottom:calc(clamp(26px,4.5vh,52px) + 52px); padding:8px 14px;}
+  .hero-enquiry{padding:8px 14px;}
 }
 
 @media (prefers-reduced-motion: reduce){

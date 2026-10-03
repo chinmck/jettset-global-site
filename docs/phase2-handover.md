@@ -29,11 +29,12 @@ Things to know when the source arrives:
 - Continues into the **existing quote flow** via the same `prefill_q*` sessionStorage keys the planner/builder use → `quote.html` arrives pre-filled (verified: Paris → Ibiza, date, "3 adultos"). No new form endpoint or lead route. Without JS the form falls back to a plain GET to `quote.html`.
 - Validation: both places required, a country is not accepted as a place (suggestions offered, like the planner), the two places must differ, date can't be in the past. Free-text cities outside the catalogue pass through (the planner's own builder offers e.g. Aspen, which isn't in the catalogue).
 - Desktop: one line. ≤900 px: two compact rows lifted above the call/WhatsApp icons. 16 px inputs on phones to avoid iOS zoom. Reduced motion: no fade-in.
-- Does not touch the nav, the sound control, or the contact icons (measured clear at every width below).
+- **Layout:** bottom-left, alongside the stacked call/WhatsApp buttons, with the bar's bottom edge level with the lower button. No outline; tint is 22 % so the film shows through (measured ≥4.5:1 label contrast over the brightest frames). The right edge stops short of "Sound On" (which wraps rather than growing in longer languages). On phones there is no room beside the stack, so the bar spans the width just above it. The film's separate late "Begin Your Journey →" link was removed — the bar's CTA is the single journey CTA.
+- Measured clear of the nav, sound control and contact buttons in EN/FR/ES/AR at 1024, 768, 390 and 375 px, with no horizontal scrolling.
 
 **Copy flagged for approval (new, not in the existing site):** "Please enter where you are travelling from." · "Please enter where you are travelling to." · "Choose two different cities or airports." · "Please choose a date from today onwards." The CTA, field labels and placeholders reuse approved wording.
 
-**Review points:** the bar sits over the lower ~15 % of the film (floor/legs of the subject in most scenes); and the film's own late "Begin Your Journey →" link now sits just below a bar with the same CTA — redundant, left untouched pending your call.
+**Review point:** the bar sits over the lower ~10 % of the film (floor/legs of the subject in most scenes).
 
 ## 2. Language selector — English, Français, Español, العربية
 
