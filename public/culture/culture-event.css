@@ -1,0 +1,39 @@
+/* Global Culture Calendar event pages — brand book v03 (Carbon ground, Chalk type, Silver support,
+   Graphite hairlines, Bronze for the one CTA line). Source Serif 4 Display / Manrope. */
+:root{--carbon:#111315; --chalk:#F1F0EC; --silver:#BFC2C3; --graphite:#51575A; --bronze:#8E755A;}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0; background:var(--carbon); color:var(--chalk); font:400 16px/1.7 'Manrope','Inter',system-ui,sans-serif;}
+a{color:inherit;}
+a:focus-visible{outline:1px solid var(--chalk); outline-offset:4px;}
+.ce-top{padding:22px clamp(20px,5vw,64px); border-bottom:1px solid rgba(81,87,90,0.5);}
+.ce-logo{display:inline-block; line-height:0;}
+.ce-logo img{height:34px; width:auto;}
+.ce-main{max-width:820px; margin:0 auto; padding:clamp(28px,5vw,56px) clamp(20px,5vw,40px) 72px;}
+.ce-crumb{margin:0 0 22px; font:600 10px/1.5 'Manrope',sans-serif; letter-spacing:0.22em; text-transform:uppercase; color:var(--silver);}
+.ce-crumb a{text-decoration:none; border-bottom:1px solid var(--graphite);}
+.ce-crumb a:hover{border-bottom-color:var(--chalk);}
+.ce-title{margin:0; font:400 clamp(38px,7vw,68px)/1.04 'Source Serif 4','Source Serif Pro',Georgia,serif; font-optical-sizing:auto; letter-spacing:-0.01em;}
+.ce-meta{margin:22px 0 0; font:500 12px/1.9 'Manrope',sans-serif; letter-spacing:0.2em; text-transform:uppercase; color:var(--silver);}
+.ce-lede{margin:28px 0 0; padding-top:24px; border-top:1px solid var(--bronze); max-width:34ch; font:400 clamp(20px,2.6vw,26px)/1.4 'Source Serif 4',Georgia,serif;}
+.ce-figure{margin:36px 0 0;}
+.ce-figure img{display:block; width:100%; height:auto; max-height:520px; object-fit:cover; object-position:center 60%;}
+.ce-figure figcaption{margin-top:8px; font-size:12px; color:var(--silver);}
+.ce-section{margin-top:44px;}
+.ce-h2{margin:0 0 14px; font:600 11px/1.5 'Manrope',sans-serif; letter-spacing:0.22em; text-transform:uppercase; color:var(--silver);}
+.ce-h3{margin:22px 0 4px; font:600 15px/1.5 'Manrope',sans-serif;}
+.ce-section p{margin:0 0 14px; max-width:62ch; color:var(--chalk);}
+.ce-airports{list-style:none; margin:18px 0 0; padding:0; border-top:1px solid rgba(81,87,90,0.6);}
+.ce-airports li{display:flex; justify-content:space-between; gap:16px; padding:10px 0; border-bottom:1px solid rgba(81,87,90,0.6); font-size:14px;}
+.ce-code{color:var(--silver); font-weight:600; letter-spacing:0.12em; font-size:12px;}
+.ce-link{text-decoration:none; border-bottom:1px solid var(--graphite);}
+.ce-link:hover{border-bottom-color:var(--chalk);}
+.ce-actions{margin:48px 0 0;}
+.ce-cta{display:inline-flex; align-items:center; gap:10px; min-height:48px; padding:0 28px; border:1px solid var(--bronze); text-decoration:none; font:600 12px/1.2 'Manrope',sans-serif; letter-spacing:0.18em; text-transform:uppercase; transition:background .3s;}
+.ce-cta:hover{background:var(--bronze);}
+.ce-back{margin:32px 0 0; font-size:13px; letter-spacing:0.06em;}
+.ce-back a{text-decoration:none; border-bottom:1px solid var(--graphite); padding-bottom:3px;}
+.ce-back a:hover{border-bottom-color:var(--chalk);}
+.ce-foot{margin-top:56px; padding-top:20px; border-top:1px solid rgba(81,87,90,0.6);}
+.ce-foot p{margin:0 0 8px; font-size:12.5px; line-height:1.6; color:var(--silver); max-width:70ch;}
+@media (prefers-reduced-motion:reduce){.ce-cta{transition:none;}}

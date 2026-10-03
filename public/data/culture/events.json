@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "calendar": "The Global Culture Calendar",
+  "note": "Published, human-reviewed events only. This file is the single source for the homepage carousel, the event pages (scripts/build-culture-pages.mjs) and the sitemap. Candidates found by the scheduled sync are held in Netlify Blobs as 'pending review' and never written here automatically. Dates are ISO (YYYY-MM-DD) in the event's own timezone.",
+  "events": [
+    {
+      "id": "frieze-london-2026",
+      "slug": "frieze-london-2026",
+      "name": "Frieze London",
+      "city": "London",
+      "country": "United Kingdom",
+      "venue": "The Regent's Park",
+      "startDate": "2026-10-14",
+      "endDate": "2026-10-18",
+      "timezone": "Europe/London",
+      "organiser": "Frieze",
+      "officialUrl": "https://www.frieze.com/fairs/frieze-london-frieze-masters",
+      "source": {
+        "id": "manual-official-site",
+        "type": "manual",
+        "url": "https://www.frieze.com/fairs/frieze-london-frieze-masters/faqs",
+        "note": "Dates and venue read from the organiser's own pages (via search result text; frieze.com blocked automated page fetches, so a human should re-confirm on the site)."
+      },
+      "status": "confirmed",
+      "publication": "published",
+      "lastChecked": "2026-10-03",
+      "editorial": {
+        "reviewed": null,
+        "lede": "A Jettset guide to planning your journey to the fair.",
+        "context": [
+          "Frieze London takes place alongside Frieze Masters in The Regent's Park, and its days draw collectors, gallerists, artists and curators to the city together. Around the fair, private views, dinners and studio visits fill the calendar, so the shape of your trip often matters more than the fair itself.",
+          "Hotels, cars and flight slots tend to tighten in a busy week like this one. If the fair anchors your plans, it helps to settle your dates and your arrival airport before the smaller details."
+        ],
+        "guidance": [
+          {
+            "title": "Dates and venue",
+            "body": "The organiser lists Frieze London and Frieze Masters for 14–18 October 2026 at The Regent's Park, London. Opening days, preview access and ticketing are set by Frieze, so confirm them on the official page before you travel."
+          },
+          {
+            "title": "Choosing an airport",
+            "body": "London is served by several airports that handle private flights, including London City, Farnborough, Biggin Hill, Luton and Stansted. The right one depends on your aircraft, your timing and where you are staying, and we confirm it when we plan your journey."
+          },
+          {
+            "title": "Before you travel",
+            "body": "Entry requirements depend on your nationality and where you are travelling from. Check the UK government's current guidance well ahead of your departure."
+          }
+        ],
+        "airports": [
+          "LCY",
+          "FAB",
+          "BQH",
+          "LTN",
+          "STN"
+        ]
+      },
+      "countryCode": "GB"
+    },
+    {
+      "id": "asia-now-paris-2026",
+      "slug": "asia-now-paris-2026",
+      "name": "Asia Now",
+      "city": "Paris",
+      "country": "France",
+      "venue": "Monnaie de Paris",
+      "startDate": "2026-10-20",
+      "endDate": "2026-10-24",
+      "timezone": "Europe/Paris",
+      "organiser": "Asia Now – Paris Asian Art Fair",
+      "officialUrl": "https://asianowparis.com/",
+      "source": {
+        "id": "manual-official-site",
+        "type": "manual",
+        "url": "https://asianowparis.com/",
+        "note": "Read directly from the organiser's site on 2026-10-03: 'October 20-24, 2026', VIP preview Monday 19 October, Monnaie de Paris. Some third-party listings show 22–26 October; the organiser's dates are used."
+      },
+      "status": "confirmed",
+      "publication": "published",
+      "lastChecked": "2026-10-03",
+      "editorial": {
+        "reviewed": null,
+        "lede": "A Jettset guide to planning your journey to the fair.",
+        "context": [
+          "Asia Now brings galleries and artists from across Asia and its diasporas to the Monnaie de Paris, on the Left Bank, for a week that is as much about conversation as about the work on the walls.",
+          "It runs in the same fortnight as Art Basel Paris, so the city is full of visitors with overlapping plans. Giving your Paris days a clear order, with the fair you care most about first, makes the week easier."
+        ],
+        "guidance": [
+          {
+            "title": "Dates and venue",
+            "body": "The organiser lists Asia Now for 20–24 October 2026 at the Monnaie de Paris, with a VIP preview on Monday 19 October. Confirm access arrangements with the organiser."
+          },
+          {
+            "title": "Overlap with Art Basel Paris",
+            "body": "Art Basel Paris is listed for 23–25 October 2026, so the two fairs overlap on 23 and 24 October. If you plan to attend both, consider which days suit each."
+          },
+          {
+            "title": "Choosing an airport",
+            "body": "Paris Le Bourget is the airport most associated with business aviation for the city, and it is one of the airports we plan with. We confirm the best arrival airport for your aircraft and schedule when we plan your journey."
+          }
+        ],
+        "airports": [
+          "LBG"
+        ]
+      },
+      "countryCode": "FR"
+    },
+    {
+      "id": "art-basel-paris-2026",
+      "slug": "art-basel-paris-2026",
+      "name": "Art Basel Paris",
+      "city": "Paris",
+      "country": "France",
+      "venue": "Grand Palais",
+      "startDate": "2026-10-23",
+      "endDate": "2026-10-25",
+      "timezone": "Europe/Paris",
+      "organiser": "Art Basel",
+      "officialUrl": "https://www.artbasel.com/paris",
+      "source": {
+        "id": "manual-official-site",
+        "type": "manual",
+        "url": "https://www.artbasel.com/paris",
+        "note": "Read from the organiser's site on 2026-10-03: 'October 23 - 25, 2026'. The Grand Palais venue and the earlier preview days come from press coverage and should be re-confirmed on artbasel.com."
+      },
+      "status": "confirmed",
+      "publication": "published",
+      "lastChecked": "2026-10-03",
+      "editorial": {
+        "reviewed": null,
+        "lede": "A Jettset guide to planning your journey to the fair.",
+        "context": [
+          "Art Basel Paris fills the Grand Palais for the autumn art calendar's busiest weekend in the city, and its influence spreads well beyond the fair: gallery openings, institutional shows and private dinners all cluster around it.",
+          "For travellers, the main question is timing. Invitation previews come before the public days, and the weekend is crowded, so deciding when you need to be in Paris, and where you will base yourself, is the useful first step."
+        ],
+        "guidance": [
+          {
+            "title": "Dates and venue",
+            "body": "The organiser lists Art Basel Paris for 23–25 October 2026. Preview days, opening hours and ticketing are set by Art Basel, so check the official page for the current schedule."
+          },
+          {
+            "title": "Overlap with Asia Now",
+            "body": "Asia Now is listed for 20–24 October 2026 at the Monnaie de Paris, so the two fairs overlap on 23 and 24 October."
+          },
+          {
+            "title": "Choosing an airport",
+            "body": "Paris Le Bourget is the airport most associated with business aviation for the city and is one of the airports we plan with. We confirm the best arrival airport for your aircraft and schedule when we plan your journey."
+          }
+        ],
+        "airports": [
+          "LBG"
+        ]
+      },
+      "countryCode": "FR"
+    }
+  ]
+}

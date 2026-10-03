@@ -7,6 +7,10 @@
 <meta name="description" content="Operator-direct private jet charter and concierge, built around the guest, not the fleet. Discreet by design.">
 <link rel="stylesheet" href="styles.css?v=cta-hero-1">
 <link rel="stylesheet" href="house-section.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap">
+<link rel="stylesheet" href="culture/culture-calendar.css?v=1">
 <link rel="stylesheet" href="inside-house.css">
 <link rel="stylesheet" href="jettset-standard.css">
 <link rel="stylesheet" href="who-we-fly.css">
@@ -201,12 +205,30 @@
           </picture>
           <div class="house-plate-veil"></div>
 
-          <div class="house-index">
-            <p class="house-index-label">Elsewhere, this week</p>
-            <div class="house-index-stage" id="house-index-stage" aria-live="off">
-              <p class="house-index-item is-current">Monaco — Grand Prix Week</p>
+          <section class="cc" id="cultureCalendar" role="region" aria-roledescription="carousel" aria-label="The Global Culture Calendar">
+            <header class="cc-head">
+              <h3 class="cc-title">The Global Culture Calendar</h3>
+              <p class="cc-month" id="ccMonth"></p>
+            </header>
+
+            <div class="cc-feature" id="ccFeature" hidden>
+              <p class="cc-feature-title"><span class="cc-city" id="ccCity"></span><span class="cc-event" id="ccEvent"></span></p>
+              <a class="cc-discover" id="ccDiscover" href="#">Discover <span aria-hidden="true">&#8599;</span></a>
             </div>
-          </div>
+
+            <div class="cc-lower">
+              <div class="cc-timeline" id="ccTimeline" hidden>
+                <div class="cc-track" id="ccTrack"><ol class="cc-dates" id="ccDates"></ol></div>
+                <div class="cc-controls">
+                  <button type="button" class="cc-btn" id="ccPrev" aria-label="Previous event"><span aria-hidden="true">&#8592;</span></button>
+                  <button type="button" class="cc-btn cc-pause" id="ccPause" aria-label="Pause automatic rotation" aria-pressed="false"><span class="cc-pause-icon" aria-hidden="true"></span></button>
+                  <button type="button" class="cc-btn" id="ccNext" aria-label="Next event"><span aria-hidden="true">&#8594;</span></button>
+                </div>
+              </div>
+              <a class="cc-cta" href="/quote">Begin Your Journey</a>
+            </div>
+            <p class="cc-sr" id="ccLive" role="status" aria-live="polite"></p>
+          </section>
         </div>
 
         <div class="house-foot" aria-hidden="true"></div>
@@ -859,6 +881,8 @@
 
   <script src="script.js?v=cta-hero-1"></script>
   <script src="house-section.js"></script>
+  <script src="culture/culture-lib.js?v=1"></script>
+  <script src="culture/culture-calendar.js?v=1"></script>
   <script src="inside-house.js"></script>
   <script src="jettset-standard.js"></script>
   <script src="who-we-fly.js"></script>
