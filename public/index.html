@@ -5,11 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jettset Global | Private Aviation & Concierge</title>
 <meta name="description" content="Operator-direct private jet charter and concierge, built around the guest, not the fleet. Discreet by design.">
-<link rel="stylesheet" href="styles.css?v=cta-hero-1">
+<link rel="stylesheet" href="styles.css?v=cta-hero-2">
 <link rel="stylesheet" href="house-section.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap">
+<link rel="stylesheet" href="culture/culture-calendar.css?v=1">
 <link rel="stylesheet" href="inside-house.css">
 <link rel="stylesheet" href="jettset-standard.css">
 <link rel="stylesheet" href="who-we-fly.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="hero-enquiry.css?v=21">
 </head>
 <body>
 
@@ -23,6 +31,16 @@
     <a class='nav-logo-center' href='/'>
       <img src="images/nav-logo.png" alt="Jettset">
     </a>
+
+    <div class="nav-tools" id="navTools">
+      <div class="nav-contact" id="navContact">
+        <button type="button" class="nav-contact-btn" id="navContactBtn" aria-haspopup="true" aria-expanded="false" aria-controls="navContactMenu">Contact</button>
+        <ul class="nav-contact-menu" id="navContactMenu" hidden>
+          <li><a class="nav-contact-opt" href="tel:+448005999888" aria-label="Call Jettset">Call</a></li>
+          <li><a class="nav-contact-opt" href="https://wa.me/447378111111" aria-label="WhatsApp Jettset" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
   </nav>
 
   <div class="contact-mark" id="contactMark">
@@ -150,13 +168,36 @@
       <video class="hero-video" id="heroFilm" muted playsinline autoplay loop preload="auto"
              poster="images/hero-film-poster.jpg"
              aria-label="Private jet, cinematic studio reveal, representing Jettset Global private aviation and concierge services">
-        <source src="images/hero-film.mp4?v=native-audio" type="video/mp4">
+        <source src="images/hero-film-v3.mp4" type="video/mp4">
       </video>
+      <script>
+        /* Portrait / phone screens get the portrait cut of the film (same footage, same end card, framed for a tall screen). */
+        (function(){
+          var v = document.getElementById('heroFilm');
+          if(v && window.matchMedia && window.matchMedia('(max-width:680px), (max-aspect-ratio:1/1)').matches){
+            v.src = 'images/hero-film-v3-mobile.mp4';
+          }
+        })();
+      </script>
       <img class="hero-img-main" src="images/hero-film-poster.jpg" alt="" aria-hidden="true" id="heroPosterFallback" style="display:none;">
+      <form class="hero-enquiry" id="heroEnquiry" action="quote.html" method="get" aria-label="Journey enquiry" novalidate>
+        <div class="he-fields">
+          <label class="jv-field he-from" for="heFrom"><span>From</span><input id="heFrom" name="from" type="text" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="heSuggestions" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Departure city"></label>
+          <label class="jv-field he-to" for="heTo"><span>To</span><input id="heTo" name="to" type="text" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="heSuggestions" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Arrival city"></label>
+          <label class="jv-field he-date" for="heDate"><span>Date</span><input id="heDate" name="date" type="date"></label>
+          <label class="jv-field he-travellers" for="heTravellers"><span>Travellers</span><select id="heTravellers" name="travellers"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="10">10</option><option value="12">12</option></select></label>
+          <button class="he-cta" type="submit">Begin Your Journey <span class="he-cta-arrow" aria-hidden="true">&rarr;</span></button>
+        </div>
+        <div class="he-suggestions" id="heSuggestions" role="listbox" aria-label="Airport suggestions" hidden></div>
+        <p class="he-sr" id="heCount" role="status" aria-live="polite"></p>
+        <p class="he-status" id="heStatus" role="status" aria-live="polite"></p>
+      </form>
       <div class="hero-film-controls" aria-label="Hero film controls">
-        <a class="hero-film-cta" href="https://jettsetglobal.com/quote.html">Begin Your Journey <span aria-hidden="true">→</span></a>
         <button class="hero-sound-toggle" id="heroSoundToggle" type="button"
-                aria-pressed="false" aria-label="Turn film sound on">Sound On</button>
+                aria-pressed="false" aria-label="Turn film sound on" data-sound="off">
+          <svg class="hs-icon hs-icon-off" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z" fill="currentColor" fill-opacity="0.15"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
+          <svg class="hs-icon hs-icon-on" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z" fill="currentColor" fill-opacity="0.15"/><path d="M15.5 9.2a4 4 0 0 1 0 5.6M18.3 6.8a7.6 7.6 0 0 1 0 10.4"/></svg>
+          <span class="hero-sound-label">Sound On</span></button>
       </div>
     </section>
 
@@ -194,19 +235,37 @@
           </a>
         </div>
 
-        <div class="house-plate">
+        <div class="house-plate" id="culture-calendar">
           <picture>
             <source media="(max-width: 780px)" srcset="assets/house-plate-mobile.jpg">
             <img class="house-plate-media is-active" src="assets/house-plate-desktop.jpg" width="1376" height="768" alt="A figure walks through a colonnaded stone courtyard at dusk, with the soft shadow of a private jet passing overhead on the wall behind him.">
           </picture>
           <div class="house-plate-veil"></div>
 
-          <div class="house-index">
-            <p class="house-index-label">Elsewhere, this week</p>
-            <div class="house-index-stage" id="house-index-stage" aria-live="off">
-              <p class="house-index-item is-current">Monaco — Grand Prix Week</p>
+          <section class="cc" id="cultureCalendar" role="region" aria-roledescription="carousel" aria-label="The Global Culture Calendar">
+            <header class="cc-head">
+              <h3 class="cc-title">The Global Culture Calendar</h3>
+              <p class="cc-month" id="ccMonth"></p>
+            </header>
+
+            <div class="cc-feature" id="ccFeature" hidden>
+              <p class="cc-feature-title"><span class="cc-city" id="ccCity"></span><span class="cc-event" id="ccEvent"></span></p>
+              <a class="cc-discover" id="ccDiscover" href="#">Discover <span aria-hidden="true">&#8599;</span></a>
             </div>
-          </div>
+
+            <div class="cc-lower">
+              <div class="cc-timeline" id="ccTimeline" hidden>
+                <div class="cc-track" id="ccTrack"><ol class="cc-dates" id="ccDates"></ol></div>
+                <div class="cc-controls">
+                  <button type="button" class="cc-btn" id="ccPrev" aria-label="Previous event"><span aria-hidden="true">&#8592;</span></button>
+                  <button type="button" class="cc-btn cc-pause" id="ccPause" aria-label="Pause automatic rotation" aria-pressed="false"><span class="cc-pause-icon" aria-hidden="true"></span></button>
+                  <button type="button" class="cc-btn" id="ccNext" aria-label="Next event"><span aria-hidden="true">&#8594;</span></button>
+                </div>
+              </div>
+              <a class="cc-cta" href="/quote">Begin Your Journey</a>
+            </div>
+            <p class="cc-sr" id="ccLive" role="status" aria-live="polite"></p>
+          </section>
         </div>
 
         <div class="house-foot" aria-hidden="true"></div>
@@ -857,11 +916,15 @@
     </div>
   </footer>
 
-  <script src="script.js?v=cta-hero-1"></script>
+  <script src="/i18n.js"></script>
+  <script src="script.js?v=cta-hero-3"></script>
+  <script src="hero-enquiry.js?v=6"></script>
   <script src="house-section.js"></script>
+  <script src="culture/culture-lib.js?v=1"></script>
+  <script src="culture/culture-calendar.js?v=2"></script>
   <script src="inside-house.js"></script>
   <script src="jettset-standard.js"></script>
   <script src="who-we-fly.js"></script>
-  <script type="module" src="./jettset-world/globe.js?v=20260723-lcy"></script>
+  <script type="module" src="./jettset-world/globe.js?v=20261003-airports"></script>
 </body>
 </html>
