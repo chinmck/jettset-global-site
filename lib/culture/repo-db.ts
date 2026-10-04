@@ -1,6 +1,7 @@
+import { randomUUID } from "node:crypto";
 import { and, desc, eq, inArray } from "drizzle-orm";
 import { getDb } from "../../db/index";
-import { cultureCandidates, cultureEvents, cultureReviews, cultureSourceStates, cultureSyncRuns } from "../../db/schema";
+import { auditLog, cultureCandidates, cultureEvents, cultureReviews, cultureSourceStates, cultureSyncRuns } from "../../db/schema";
 
 // Drizzle/Postgres implementation of the repository used by the weekly sync and the Partner Hub
 // (same interface as lib/culture/repo-memory.mjs). Timestamps cross the boundary as ISO strings.
@@ -24,8 +25,18 @@ function inPatch(patch: Record<string, any>, tsKeys: readonly string[]) {
   return o;
 }
 
-export function dbRepo() {
-  const db = getDb();
+type Stmt = (h: any) => any;
+type Atomic = (stmts: Stmt[]) => Promise<unknown>;
+export type AuditInput = { actorId?: string | null; action: string; entityType: string; entityId?: string | null; before?: unknown; after?: unknown; ipAddress?: string | null };
+
+// Production: Neon's HTTP driver has no interactive transactions, but db.batch() sends every statement in
+// ONE request that Neon runs as a single transaction (all succeed or none are applied).
+const neonAtomic = (db: any): Atomic => (stmts) => db.batch(stmts.map((s) => s(db)));
+
+// `atomic` is injectable so the same repository code can be exercised against a real Postgres in tests
+// (where the statements run inside db.transaction).
+export type Db = ReturnType<typeof getDb>;
+export function makeRepo(db: Db, atomic: Atomic = neonAtomic(db)) {
   return {
     async listEvents() { return (await db.select().from(cultureEvents)).map((r) => outRow(r, EVENT_TS)); },
     async getEvent(id: string) { const [r] = await db.select().from(cultureEvents).where(eq(cultureEvents.id, id)).limit(1); return outRow(r, EVENT_TS); },
@@ -46,6 +57,31 @@ export function dbRepo() {
     },
     async updateCandidate(id: string, patch: Record<string, any>) { const [r] = await db.update(cultureCandidates).set(inPatch(patch, CAND_TS) as any).where(eq(cultureCandidates.id, id)).returning(); return outRow(r, CAND_TS); },
 
+    /** Publishes/updates the event, updates the candidate, records the review and the audit entry as ONE
+     *  atomic unit: if any write fails, none of them are applied. */
+    async commitDecision(input: { candidate: Record<string, any>; result: Record<string, any>; audit: AuditInput }) {
+      const { candidate, result, audit } = input;
+      const stmts: Stmt[] = [];
+      let candidatePatch = result.candidatePatch;
+      if (result.event?.type === "insert") {
+        const rec = { ...result.event.record, id: randomUUID() };
+        candidatePatch = { ...candidatePatch, eventId: rec.id };
+        stmts.push((h) => h.insert(cultureEvents).values(inPatch(rec, EVENT_TS) as any));
+      } else if (result.event?.type === "update") {
+        stmts.push((h) => h.update(cultureEvents).set({ ...inPatch(result.event.patch, EVENT_TS), updatedAt: new Date() } as any).where(eq(cultureEvents.id, result.event.id)));
+      }
+      stmts.push((h) => h.update(cultureCandidates).set(inPatch(candidatePatch, CAND_TS) as any).where(eq(cultureCandidates.id, candidate.id)));
+      stmts.push((h) => h.insert(cultureReviews).values({ ...result.review, decidedAt: toDate(result.review.decidedAt) ?? new Date() } as any));
+      stmts.push((h) => h.insert(auditLog).values({ actorId: audit.actorId ?? null, action: audit.action, entityType: audit.entityType, entityId: audit.entityId ?? null, before: audit.before ?? null, after: audit.after ?? null, ipAddress: audit.ipAddress ?? null }));
+      await atomic(stmts);
+    },
+    /** Event update + its audit entry as one atomic unit (used for editorial sign-off). */
+    async commitEventUpdate(id: string, patch: Record<string, any>, audit: AuditInput) {
+      await atomic([
+        (h) => h.update(cultureEvents).set({ ...inPatch(patch, EVENT_TS), updatedAt: new Date() } as any).where(eq(cultureEvents.id, id)),
+        (h) => h.insert(auditLog).values({ actorId: audit.actorId ?? null, action: audit.action, entityType: audit.entityType, entityId: audit.entityId ?? null, before: audit.before ?? null, after: audit.after ?? null, ipAddress: audit.ipAddress ?? null }),
+      ]);
+    },
     async insertReview(r: Record<string, any>) { await db.insert(cultureReviews).values({ ...r, decidedAt: toDate(r.decidedAt) ?? new Date() } as any); },
     async listReviews(n = 50) { return (await db.select().from(cultureReviews).orderBy(desc(cultureReviews.decidedAt)).limit(n)).map((r) => outRow(r, ["decidedAt"])); },
 
@@ -65,5 +101,6 @@ export function dbRepo() {
     async listSourceStates() { return (await db.select().from(cultureSourceStates)).map((r) => outRow(r, ["lastAttempt", "lastSuccess"])); },
   };
 }
+export const dbRepo = () => makeRepo(getDb());
 export type CultureRepo = ReturnType<typeof dbRepo>;
 export { and };

@@ -44,7 +44,7 @@ export default async function CultureReview({ searchParams }: { searchParams: Pr
   return <div className="partner-shell"><HubNav role={user.role} /><main className="hub-main">
     <span className="hub-eyebrow">Jettset administration</span>
     <h1 className="hub-title">Culture Calendar Review.</h1>
-    <p className="hub-lede">Staff approval for The Global Culture Calendar. Feeds and the weekly sync only raise items here: nothing reaches the public calendar, event pages or sitemap until a staff member approves it.</p>
+    <p className="hub-lede">Staff approval for The Global Culture Calendar. The weekly sync only raises items here{cultureSources.some((s: any) => s.enabled) ? "" : " (no feed is enabled, so these are manual verification tasks from the curated watchlist, not dates retrieved automatically)"}: nothing reaches the public calendar, event pages or sitemap until a staff member approves it.</p>
 
     {sp.ok && <p className="cul-flash cul-ok" role="status">{sp.ok}</p>}
     {sp.error && <p className="cul-flash cul-err" role="alert">{sp.error}</p>}

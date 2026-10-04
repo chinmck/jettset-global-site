@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { requirePartner } from "@/lib/partner-auth";
 import { writeAudit } from "@/lib/audit";
@@ -38,12 +39,9 @@ export async function decideCandidate(formData: FormData) {
       : null;
     const today = cal.londonToday();
     const result = applyDecision({ candidate, decision, notes: str(formData, "notes"), edits, editorial, reviewer: user.id, today, events });
-    // Persist: event first (so a failed write never leaves an approved-but-missing event), then the decision record.
-    if (result.event?.type === "insert") await repo.insertEvent(result.event.record);
-    else if (result.event?.type === "update") await repo.updateEvent(result.event.id, result.event.patch);
-    await repo.updateCandidate(candidate.id, result.candidatePatch);
-    await repo.insertReview(result.review);
-    await writeAudit({ actorId: user.id, action: `culture.${decision}`, entityType: "culture_candidate", entityId: candidate.id, before: candidate.current ?? null, after: result.review.after ?? null });
+    // One atomic write: event + candidate + review + audit entry all apply, or none do.
+    const h = await headers();
+    await repo.commitDecision({ candidate, result, audit: { actorId: user.id, action: `culture.${decision}`, entityType: "culture_candidate", entityId: candidate.id, before: candidate.current ?? null, after: result.review.after ?? null, ipAddress: h.get("x-nf-client-connection-ip") ?? h.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null } });
     revalidatePath(BASE);
     message = decision === "approve" ? "Approved: the public calendar will show it within a few minutes." : decision === "reject" ? "Rejected and recorded." : "Kept pending: verification note recorded.";
   } catch (error) {
@@ -62,8 +60,9 @@ export async function signOffEditorial(formData: FormData) {
     if (!e) return back("error", "Event not found.");
     const ed = e.editorial ?? {};
     if (!ed.lede || (ed.context ?? []).join(" ").length < 120) return back("error", "Add a Jettset lede and editorial context before signing off.");
-    await repo.updateEvent(id, { editorialReviewedBy: user.id, editorialReviewedAt: new Date().toISOString(), lastVerifiedOn: cal.londonToday() });
-    await writeAudit({ actorId: user.id, action: "culture.editorial_signoff", entityType: "culture_event", entityId: id });
+    const h = await headers();
+    await repo.commitEventUpdate(id, { editorialReviewedBy: user.id, editorialReviewedAt: new Date().toISOString(), lastVerifiedOn: cal.londonToday() },
+      { actorId: user.id, action: "culture.editorial_signoff", entityType: "culture_event", entityId: id, ipAddress: h.get("x-nf-client-connection-ip") ?? h.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null });
     revalidatePath(BASE);
   } catch { return back("error", "Could not record the sign-off."); }
   return back("ok", "Editorial signed off: the page can now be indexed.");

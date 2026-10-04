@@ -12,7 +12,7 @@
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
-    "test:culture": "node --test tests/culture-calendar.test.mjs tests/i18n.test.mjs",
+    "test:culture": "node --test tests/culture-calendar.test.mjs tests/culture-db.test.mjs tests/i18n.test.mjs",
     "culture:lib": "node scripts/sync-culture-lib.mjs"
   },
   "dependencies": {
@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.37.1",
+    "@electric-sql/pglite": "^0.5.8",
     "@tailwindcss/postcss": "4.2.1",
     "@types/node": "22.19.19",
     "@types/react": "19.2.14",
