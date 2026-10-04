@@ -21,7 +21,7 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: clamp(60px, 7.6vh, 76px) 56px clamp(20px, 2.6vh, 32px);
+  padding: clamp(60px, 7.6vh, 76px) 56px clamp(24px, 4vh, 40px);
   scroll-margin-top: 0;
   background: #0b0b0c;                 /* clean, uninterrupted charcoal-black canvas */
   font-family: var(--jp-text);
@@ -40,7 +40,7 @@
     "chips stage"
     "panel panel";
   column-gap: clamp(32px, 4vw, 64px);
-  row-gap: clamp(14px, 2.2vh, 24px);
+  row-gap: clamp(12px, 1.8vh, 18px);
   align-items: start;
 }
 .route-map.jw-embed .jw-embed-stage { align-self: center; grid-row: 1 / span 2; }
@@ -56,7 +56,7 @@
   font-family: var(--jp-display);
   font-optical-sizing: auto;
   font-weight: 500;
-  font-size: clamp(32px, 5vh, 50px);
+  font-size: clamp(30px, 4.6vh, 46px);
   line-height: 1.08; letter-spacing: -0.012em;
   max-width: 14em; margin: 0 0 clamp(10px, 1.6vh, 16px); text-wrap: balance;
   color: var(--jp-ivory);
@@ -65,14 +65,14 @@
   font-family: var(--jp-text);
   font-size: 15px; line-height: 1.6; font-weight: 400;
   color: rgba(245, 243, 239, 0.78);
-  max-width: 36em; margin: 0 0 clamp(16px, 2.6vh, 26px); text-wrap: pretty;
+  max-width: 36em; margin: 0 0 clamp(14px, 2.2vh, 22px); text-wrap: pretty;
 }
 
 /* ---- fields ---- */
 .route-map.jw-embed .jv-fields {
   max-width: 600px;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  gap: clamp(12px, 1.8vh, 18px) 14px;
+  gap: clamp(10px, 1.5vh, 16px) 14px;
 }
 .route-map.jw-embed .jv-field:nth-of-type(3) { grid-column: 1; }
 .route-map.jw-embed .jv-field:nth-of-type(4) { grid-column: 3; }
@@ -98,11 +98,12 @@
 .route-map.jw-embed .jv-location-suggestion:focus-visible { outline: 2px solid var(--jp-gold); outline-offset: 2px; }
 
 /* ---- curated route cards ---- */
-.route-map.jw-embed .route-chips { gap: 8px; }
+.route-map.jw-embed .route-chips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; max-width: 600px; }
+.route-map.jw-embed .route-chip { width: 100%; }
 .route-map.jw-embed .route-chip {
   font-family: var(--jp-text); font-size: 12.5px; font-weight: 600; color: rgba(245, 243, 239, 0.86);
   background: rgba(245, 243, 239, 0.03); border: 1px solid var(--jp-line);
-  padding: 9px 13px; min-height: 48px;
+  padding: 8px 14px; min-height: 46px;
 }
 .route-map.jw-embed .route-chip-sub { font-size: 11px; font-weight: 500; letter-spacing: 0.03em; color: var(--jp-grey); opacity: 1; margin-top: 2px; }
 .route-map.jw-embed .route-chip:hover { border-color: var(--jp-gold-dim); color: var(--jp-ivory); }
@@ -113,7 +114,7 @@
 .route-map.jw-embed .jv-explore-routes { font-family: var(--jp-text); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; color: var(--jp-grey); margin-top: 10px; min-height: 28px; }
 
 /* ---- globe: sized from the viewport height so the overview stays above the fold ---- */
-.route-map.jw-embed .world-stage { width: 100%; max-width: min(100%, max(320px, calc(100vh - 360px)), 720px); margin: 0 auto; aspect-ratio: 1 / 1; }
+.route-map.jw-embed .world-stage { width: 100%; max-width: min(100%, max(320px, calc(100vh - 405px)), 720px); margin: 0 auto; aspect-ratio: 1 / 1; }
 .route-map.jw-embed #globeCanvas { width: 100%; height: auto; aspect-ratio: 1 / 1; filter: none; }
 
 /* WebGL unavailable: an intentional, on-brand curated-route list in place of the globe. */
@@ -132,7 +133,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(300px, 400px);
   column-gap: 40px;
   align-items: stretch;
-  padding: clamp(18px, 2.6vh, 28px) 36px;
+  padding: clamp(14px, 2.2vh, 22px) 32px;
   background: var(--jp-panel);
   border: 1px solid var(--jp-line);
   border-top-color: rgba(201, 162, 75, 0.45);
