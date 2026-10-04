@@ -1,49 +1,62 @@
 # The Global Culture Calendar
 
-Homepage feature (the colonnade plate in the Jettset House section) plus one page per event.
+A curated, rolling 12-month calendar (current Europe/London month + the next 11), with a staff approval
+workflow in the Partner Hub. **Nothing reaches the public site except through a staff decision.**
 
 ## How it fits together
+
 | Piece | Where |
 |---|---|
-| Published, reviewed events (single source of truth) | `public/data/culture/events.json` |
-| Homepage carousel | `public/culture/culture-calendar.{js,css}`, markup in `public/homepage.html` + `index.html` (`#cultureCalendar`) |
-| Shared date/month logic | `public/culture/culture-lib.js` |
-| Event pages + sitemap generator | `scripts/build-culture-pages.mjs` → `public/culture/events/<slug>/index.html`, `public/sitemap-culture.xml` |
-| Daily sync (server-side) | `netlify/functions/culture-events-sync.mts`, logic in `lib/culture/` |
-| Review report | `netlify/functions/culture-review.mts` |
-| Source allowlist | `netlify/config/culture-sources.json` |
-| Tests | `npm run test:culture` |
+| Date/window helpers (single source) | `lib/culture/calendar.cjs` (browser copy `public/culture/culture-lib.js` is generated: `npm run culture:lib`) |
+| Domain rules (candidates, decisions, indexing) | `lib/culture/domain.mjs` |
+| Weekly sync | `lib/culture/sync.mjs`, run by `netlify/functions/culture-events-sync.mts` |
+| Storage | Neon Postgres via Drizzle: `culture_events`, `culture_candidates`, `culture_reviews`, `culture_sync_runs`, `culture_source_states` |
+| Staff review UI | Partner Hub → **Culture Calendar** (`/partner/admin/culture`), roles `admin`/`executive` only |
+| Public data | `/api/culture/events` (approved only), falls back to `public/data/culture/events.json` if the DB is unreachable |
+| Event pages | `/culture/events/<slug>` (dynamic; 404 unknown, 410 cancelled) |
+| Sitemap | `/sitemap-culture.xml` (approved **and** editorially signed-off events only) |
 
-Hosting is Netlify (`@netlify/plugin-nextjs`; static pages in `public/`). There is no CMS. The existing Postgres (Neon/Drizzle) holds the partner hub only, so **pending candidates are stored in Netlify Blobs** (no credentials needed on Netlify; store name `culture-events`).
+## Rules enforced in code (and tested)
+- The sync writes only review **candidates**, source health, run history and a private `lastSourceCheckAt`. It never edits, publishes or removes a public event.
+- Date, venue and cancellation changes to a published event appear as *proposed changes* with before/after; they apply only when staff approve.
+- Approving a **new** event needs staff-written Jettset editorial (lede ≥ 20 chars, context ≥ 120 chars), so no thin pages.
+- An event page is indexable/in the sitemap only when published **and** signed off in the Hub. The three seeded events stay `noindex` until someone signs them off.
+- Pending/rejected/needs-verification items have no public page. Public pages contain no external links; the CTA is the internal enquiry journey.
+- Every decision records reviewer, time and notes (`culture_reviews`) plus the Hub audit log.
+- **Atomic decisions:** approve/reject/needs-verification write the event (insert/update), the candidate update, the review record and the audit entry in one `db.batch()` (Neon runs a batch as a single transaction). Either all four apply or none do. Editorial sign-off (event update + audit) is atomic the same way.
 
-## What the carousel shows
-Events from `events.json` with `publication: "published"` and `status: "confirmed"` whose dates overlap the **current month** (visitor's date, computed in the browser; "October 2026" is not hard-coded). If the current month has none, the next month that has events is shown and the month label follows. Cancelled, postponed and pending events never show. It advances every 6.5 s with a soft crossfade and loops; it pauses on hover, focus, when off-screen or the tab is hidden, and via a pause button. It supports prev/next, timeline clicks, ←/→ keys and touch swipe, and does not auto-advance under `prefers-reduced-motion`.
+## What the weekly sync does with today's configuration
+**It does not automatically retrieve any event dates.** No feed is enabled (`culture-sources.json` has `sources: []`), so the run status is `no_feeds`. Each Monday it:
+1. **Generates manual verification tasks** from the curated watchlist: for every watchlist event expected inside the 12-month window with no approved event, a Hub item says "usually held in <months>; dates and venue are NOT confirmed — check the organiser page". Watchlist entries contain no dates. (First run against the current data created 45 such items; the queue is the main workload.)
+2. **Raises recheck tasks** for published events not checked recently (28 days; 14 when the start is within 14 days). These are prompts for a person to re-confirm; they compare nothing automatically.
+3. Records the run and source health, reporting `no_feeds`, `failed`, `partial` or `empty` honestly.
 
-## Adding or changing an event (the review step)
-1. Edit `public/data/culture/events.json` (ISO dates in the event's timezone, official URL, source, `status`, `publication`, `lastChecked`) and write original Jettset `editorial` copy (lede, context, guidance, airports from `private-jet-airports.json`). Do not copy organiser text.
-2. `npm run culture:build` regenerates pages and sitemap; `npm run culture:check` and `npm run test:culture` verify.
-3. A page is **noindex and absent from the sitemap** until `editorial.reviewed` is set to `{ "by": "<name>", "on": "YYYY-MM-DD" }` by a person who has reviewed the copy. Setting it also switches on `index, follow` and the `Event` JSON-LD (name, dates, venue/city/country code, organiser, description — all visible on the page). Do not set it for thin pages.
-4. Merge through a pull request: that is the publication approval.
+It does **not** fetch dates, venues or cancellations from the web, and it cannot detect that a published event changed. Date/venue/cancellation *change detection* only works for an enabled, verified feed (the code path is implemented and tested with simulated feeds, but no real feed uses it). The public calendar therefore reflects what staff have approved, not live data.
 
-## Daily sync
-`culture-events-sync` runs daily at 05:17 UTC (`netlify.toml`). It fetches only sources in `culture-sources.json` with `"enabled": true` (https, host in `allowedHosts`), compares them with `events.json`, and writes **pending review** items (`new`, `change`, `cancellation`) to Blobs. It never edits `events.json`. On any failure (HTTP error, timeout, bad feed, storage error) it logs, records the error against the source and leaves everything stored unchanged; the public calendar is unaffected because the browser reads only the reviewed file.
+## Sources and coverage
+- Probes of F1, Art Basel, Venice Biennale, Salone del Mobile, Edinburgh Fringe and Wimbledon found no usable official feed (404/410). A source must have id, type (`ics`|`json`), https URL on an allow-listed host and a `verifiedOn` date before it runs.
+- The watchlist (`netlify/config/culture-watchlist.json`, 44 recurring events) is a reference list. 38 links were checked on 2026-10-04; 6 were blocked or unverified and are flagged in the file.
+- **Coverage gaps:** anything not on the watchlist, one-off events, and anything without a verifiable official source. This is not global coverage. To add automation, verify an official feed URL, add it to `culture-sources.json` with `verifiedOn`, and test it.
 
-Review report: `GET /.netlify/functions/culture-review` with header `Authorization: Bearer $CULTURE_REVIEW_TOKEN` returns pending items, the last run and source health. `POST {"key":"pending/…","action":"dismiss"}` clears an item. It cannot publish.
+## Weekly schedule
+`netlify.toml`: `[functions."culture-events-sync"] schedule = "17 5 * * 1"` — Mondays 05:17 **UTC** (05:17 GMT in winter, 06:17 BST in summer; Netlify cron has no DST handling).
 
-### Still required for live automated updates (not configured)
-1. **Feed URLs.** `sources` is empty: no official ICS/RSS/API feed URLs were supplied or verified, and no single worldwide feed exists. Add one entry per official feed, e.g.
+## Deployment targets and checks
+- **Production is Netlify** (`jettsetglobal.com` is served by Netlify; `main` deploys it). The check that matters for release is the Netlify deploy preview / build (`netlify/jettset-global/deploy-preview`, Header/Redirect rules).
+- A **Cloudflare Pages** project (`jettset-global-site`) is still connected to the repo and its check fails on every commit, including `main`, since at least 2026-09-14 (it last passed on the 2026-07-22 baseline commit). It is a leftover from the original starter template (`vite.config.ts`, `worker/`, `wrangler`), not a production target: the domain's A record points at Netlify and `package.json` builds with `next build` for Netlify. `jettset-global-site.pages.dev` still serves an old, stale copy of the homepage. Recommended: disconnect or disable the Pages project in the Cloudflare dashboard (needs account access; not done from the repo). Its failure is not a required check (`main` has no branch protection or required status checks).
 
-```json
-{
-  "id": "example-official-ics",
-  "enabled": true,
-  "type": "ics",
-  "url": "https://events.example.org/calendar.ics",
-  "allowedHosts": ["events.example.org"],
-  "timezone": "Europe/London"
-}
-```
-JSON APIs use `"type": "json"` plus `"mapping": { "itemsPath": "data.events", "uid": "id", "name": "title", "start": "start", "end": "end", "city": "venue.city", "country": "venue.country", "url": "url", "status": "status" }`.
-So the sync recognises a published event, set `source.id` and `source.uid` on it in `events.json` (otherwise it matches by identical official URL, or identical name + year).
-2. **Environment variable** `CULTURE_REVIEW_TOKEN` (a long random string) in Netlify to use the review endpoint. No other credentials are needed. A feed that needs an API key would need a small code change (`lib/culture/sync.mjs`) plus an env var; never put keys in the repo or browser.
-3. **Netlify Blobs** are automatic on Netlify. After enabling a source, run the function once (Netlify → Functions → culture-events-sync → Run now) and check the log line `culture sync finished …` shows `failures: 0` and no `note`.
+## Migration: exact order
+Use a **non-production Neon branch first**, then production. Migrations here are hand-applied (the Drizzle journal is informational).
+1. Prerequisite: `0000_partner_hub.sql` and `0001_guest_relationship_tools.sql` are already applied (needs `partner_users`). PostgreSQL 13+.
+2. Take a Neon point-in-time restore point/branch of production.
+3. Apply `drizzle/0002_culture_calendar.sql` as a single script, e.g. `psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f drizzle/0002_culture_calendar.sql`, or paste into the Neon SQL editor. The file is wrapped in `BEGIN; … COMMIT;`, only **adds** `culture_*` tables, never alters existing ones, and is safe to re-run (tables/indexes `IF NOT EXISTS`, foreign keys guarded, seed `ON CONFLICT DO NOTHING`).
+4. Verify: `select count(*) from culture_events;` → 3 (and `editorial_reviewed_by` is null on all).
+5. Deploy the code. 6. Hub → Culture Calendar → **Run sync now** → expect status `no_feeds` and ~45 manual items.
+
+## Environment
+`DATABASE_URL` (Neon) must be set for the Netlify site (Next + functions). Existing NextAuth/Resend variables are unchanged. No new secrets; none committed.
+
+## Test status — what was and was not verified
+- `npm run test:culture` (39 tests) and `npx next build` pass.
+- **Verified against a real PostgreSQL engine (PGlite, in-process Postgres — not Neon):** migrations 0000→0001→0002 apply; 0002 re-runs twice without error or duplicates; a mid-script failure leaves nothing behind; the real repository code runs the sync (no_feeds), candidate creation/idempotency, approve (new + update + cancellation path), reject (not re-raised), needs-verification, changed-date proposal vs untouched public data, failed-feed and storage-failure reporting, and the rollback of a decision when one write fails.
+- **Not verified (no staging Neon credentials were available):** the Neon HTTP driver and `db.batch()` transactional behaviour against real Neon; NextAuth sign-in and the Hub pages/server actions under a real staff vs partner session (the staff guard is unit-tested only); the deployed Netlify scheduled function, its env/secrets, and the live Hub "Run sync now". Run steps 1–6 above on a Neon branch first to close these.

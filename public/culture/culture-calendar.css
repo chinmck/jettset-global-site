@@ -21,7 +21,7 @@
 
 .cc-head{text-align:right;}
 .cc-title{margin:0; font:600 10px/1.5 'Manrope','Inter',sans-serif; letter-spacing:0.22em; text-transform:uppercase; color:var(--cc-chalk); text-shadow:0 1px 10px rgba(0,0,0,0.5);}
-.cc-month{margin:2px 0 0; font:500 10px/1.5 'Manrope','Inter',sans-serif; letter-spacing:0.22em; text-transform:uppercase; color:var(--cc-silver); text-shadow:0 1px 10px rgba(0,0,0,0.5);}
+.cc-month{margin:0; font:500 10px/1.5 'Manrope','Inter',sans-serif; letter-spacing:0.22em; text-transform:uppercase; color:var(--cc-silver); text-shadow:0 1px 10px rgba(0,0,0,0.5);}
 
 .cc-feature{
   align-self:flex-end; text-align:right; max-width:min(100%,460px);
@@ -91,6 +91,26 @@
 }
 .cc-cta:hover{background:#8E755A;}
 .cc-sr{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;}
+
+/* rolling range, month bar and 12-month strip */
+.cc-range{margin:0; font:500 9.5px/1.5 'Manrope','Inter',sans-serif; letter-spacing:0.18em; text-transform:uppercase; color:var(--cc-silver); text-shadow:0 1px 10px rgba(0,0,0,0.5);}
+.cc-monthbar{display:inline-flex; align-items:center; justify-content:flex-end; gap:2px; margin-top:2px;}
+.cc-monthbar .cc-btn[disabled]{opacity:.3; cursor:default;}
+.cc-months{display:flex; width:100%; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; border-top:1px solid rgba(81,87,90,0.7);}
+.cc-months::-webkit-scrollbar{display:none;}
+.cc-mbtn{
+  flex:1 0 auto; min-width:44px; min-height:44px; padding:0 6px; background:none; border:0; cursor:pointer;
+  color:rgba(191,194,195,0.6); font:500 9.5px/1 'Manrope','Inter',sans-serif; letter-spacing:0.14em; text-transform:uppercase;
+  text-shadow:0 1px 8px rgba(0,0,0,0.7); position:relative; transition:color .25s;
+}
+.cc-mbtn.has-events{color:var(--cc-silver);}
+.cc-mbtn:hover{color:var(--cc-chalk);}
+.cc-mbtn .cc-yr{display:block; margin-top:3px; font-size:8px; letter-spacing:.08em; opacity:.8;}
+.cc-mbtn.is-active{color:var(--cc-chalk); font-weight:700;}
+.cc-mbtn.is-active::before{content:''; position:absolute; left:6px; right:6px; top:-1px; height:2px; background:var(--cc-bronze);}
+.cc-empty{align-self:flex-end; margin:clamp(10px,1.6vw,20px) 0 0; text-align:right; max-width:420px; font-family:'Source Serif 4','Source Serif Pro',Georgia,serif; font-size:clamp(18px,1.8vw,24px); line-height:1.3; color:var(--cc-silver); text-shadow:0 2px 18px rgba(0,0,0,0.5);}
+.cc-empty[hidden]{display:none;}
+.cc-controls{top:-38px;}
 
 /* Phones and narrow screens: the plate becomes a taller band so the title, event, timeline and CTA each have room. */
 @media (max-width:780px){

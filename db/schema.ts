@@ -102,3 +102,82 @@ export const auditLog = pgTable("audit_log", {
   entityType: text("entity_type").notNull(), entityId: uuid("entity_id"), before: jsonb("before"), after: jsonb("after"), ipAddress: text("ip_address"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
+
+/* ---------- Global Culture Calendar (curated, staff-approved) ----------
+   Public data lives in culture_events (published/cancelled). Feeds and the watchlist only ever write
+   culture_candidates; a staff decision in the Partner Hub (culture_reviews) is the only way a
+   candidate becomes, changes or removes a public event. */
+export const cultureEvents = pgTable("culture_events", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  slug: text("slug").notNull(),
+  name: text("name").notNull(),
+  category: text("category").notNull(),
+  city: text("city").notNull(),
+  country: text("country").notNull(),
+  countryCode: text("country_code"),
+  venue: text("venue").notNull(),
+  startDate: date("start_date", { mode: "string" }).notNull(),
+  endDate: date("end_date", { mode: "string" }).notNull(),
+  timezone: text("timezone").notNull(),
+  status: text("status").notNull().default("published"),            // published | cancelled
+  organiser: text("organiser"),
+  sourceName: text("source_name"), sourceUrl: text("source_url"),     // staff-only references, never shown publicly
+  sourceRef: text("source_ref"), watchKey: text("watch_key"),
+  lastVerifiedOn: date("last_verified_on", { mode: "string" }),       // set only by a staff decision; shown on the page
+  lastSourceCheckAt: timestamp("last_source_check_at", { withTimezone: true }),   // set by the sync; private
+  editorial: jsonb("editorial").$type<{ lede?: string; context?: string[]; guidance?: Array<{ title: string; body: string }>; airports?: string[] }>(),
+  editorialReviewedBy: uuid("editorial_reviewed_by").references(() => partnerUsers.id),
+  editorialReviewedAt: timestamp("editorial_reviewed_at", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+}, (t) => [uniqueIndex("culture_events_slug_idx").on(t.slug), index("culture_events_status_start_idx").on(t.status, t.startDate)]);
+
+export const cultureCandidates = pgTable("culture_candidates", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  kind: text("kind").notNull(),             // new | change | cancellation | manual_verification | recheck
+  status: text("status").notNull().default("pending"),   // pending | needs_verification | approved | rejected | superseded
+  eventId: uuid("event_id").references(() => cultureEvents.id),
+  watchKey: text("watch_key"),
+  fingerprint: text("fingerprint").notNull(),
+  proposed: jsonb("proposed").notNull(),
+  current: jsonb("current"),
+  sourceId: text("source_id"), sourceName: text("source_name"), sourceUrl: text("source_url"), sourceRef: text("source_ref"),
+  sourceCheckedAt: timestamp("source_checked_at", { withTimezone: true }),
+  uncertainty: text("uncertainty"),
+  verificationNotes: text("verification_notes"),
+  decidedBy: uuid("decided_by").references(() => partnerUsers.id),
+  decidedAt: timestamp("decided_at", { withTimezone: true }),
+  decisionNotes: text("decision_notes"),
+  firstSeen: timestamp("first_seen", { withTimezone: true }).defaultNow().notNull(),
+  lastSeen: timestamp("last_seen", { withTimezone: true }).defaultNow().notNull(),
+}, (t) => [uniqueIndex("culture_candidates_fingerprint_idx").on(t.fingerprint), index("culture_candidates_status_idx").on(t.status)]);
+
+export const cultureReviews = pgTable("culture_reviews", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  candidateId: uuid("candidate_id").notNull().references(() => cultureCandidates.id),
+  reviewerId: uuid("reviewer_id").notNull().references(() => partnerUsers.id),
+  decision: text("decision").notNull(),     // approve | reject | needs_verification
+  notes: text("notes"),
+  before: jsonb("before"), after: jsonb("after"),
+  decidedAt: timestamp("decided_at", { withTimezone: true }).defaultNow().notNull(),
+}, (t) => [index("culture_reviews_candidate_idx").on(t.candidateId)]);
+
+export const cultureSyncRuns = pgTable("culture_sync_runs", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  startedAt: timestamp("started_at", { withTimezone: true }).notNull(),
+  finishedAt: timestamp("finished_at", { withTimezone: true }),
+  trigger: text("trigger").notNull().default("schedule"),   // schedule | manual
+  status: text("status").notNull(),                       // ok | partial | failed | empty | no_feeds
+  headline: text("headline"),
+  summary: jsonb("summary"),
+}, (t) => [index("culture_sync_runs_started_idx").on(t.startedAt)]);
+
+export const cultureSourceStates = pgTable("culture_source_states", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  kind: text("kind").notNull(),             // feed | watchlist
+  lastAttempt: timestamp("last_attempt", { withTimezone: true }),
+  lastSuccess: timestamp("last_success", { withTimezone: true }),
+  lastError: text("last_error"),
+  itemsSeen: integer("items_seen").notNull().default(0),
+});

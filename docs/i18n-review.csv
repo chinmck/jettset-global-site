@@ -1825,6 +1825,10 @@ extras,Category profile,Profil de catégorie,Perfil de categoría,ملف الف�
 extras,Representative / typical plan · configuration varies,Plan représentatif / typique · la configuration varie,Plano representativo / típico · la configuración varía,مخطط نموذجي / معتاد · وتختلف التهيئة
 extras,Choose two different locations from the supplied city list.,Choisissez deux lieux différents dans la liste de villes proposée.,Elija dos ubicaciones distintas de la lista de ciudades facilitada.,اختر موقعين مختلفين من قائمة المدن المتاحة.
 extras,Aviation Wellness,Aviation Wellness,Aviation Wellness,Aviation Wellness
+extras,Previous month,Mois précédent,Mes anterior,الشهر السابق
+extras,Next month,Mois suivant,Mes siguiente,الشهر التالي
+extras,Choose a month,Choisir un mois,Elegir un mes,اختر شهرًا
+extras,Resume automatic rotation,Reprendre la rotation automatique,Reanudar la rotación automática,استئناف التبديل التلقائي
 extras,January,janvier,enero,يناير
 extras,February,février,febrero,فبراير
 extras,March,mars,marzo,مارس
@@ -1921,6 +1925,9 @@ pattern,"^Thank you, (.+)\. We've received your message, and a member of our tea
 pattern,"^Thank you, (.+)\. You're on the Legs waitlist — we'll be in touch as soon as access opens for (.+)\.$","Merci, $1. Vous figurez sur la liste d’attente Legs — nous vous contacterons dès l’ouverture de l’accès pour $2.","Gracias, $1. Está en la lista de espera de Legs; nos pondremos en contacto con usted en cuanto se abra el acceso para $2.",شكرًا لك، $1. أنت على قائمة انتظار Legs — سنتواصل معك فور فتح الوصول في $2.
 pattern,"^Thank you, (.+)\. Your interest in Jettset Editions has been registered\. We will be in touch when early access opens\.$","Merci, $1. Votre intérêt pour Jettset Editions a bien été enregistré. Nous vous contacterons à l’ouverture de l’accès anticipé.","Gracias, $1. Hemos registrado su interés en Jettset Editions. Nos pondremos en contacto con usted cuando se abra el acceso anticipado.",شكرًا لك، $1. تم تسجيل اهتمامك بـ Jettset Editions. سنتواصل معك عند فتح الوصول المبكر.
 pattern,"^Thank you, (.+)\. A member of our Jet Card team will be in touch shortly\.$","Merci, $1. Un membre de notre équipe Jet Card vous contactera très prochainement.","Gracias, $1. Un miembro de nuestro equipo de Jet Card se pondrá en contacto con usted en breve.",شكرًا لك، $1. سيتواصل معك أحد أعضاء فريق Jet Card قريبًا.
+pattern,^(January|February|March|April|May|June|July|August|September|October|November|December) (\d{4}) – (January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})$,$1 $2 – $3 $4,$1 de $2 – $3 de $4,$1 $2 – $3 $4
+pattern,^No approved events in (January|February|March|April|May|June|July|August|September|October|November|December) (\d{4}) yet\.$,Aucun événement approuvé en $1 $2 pour le moment.,Aún no hay eventos aprobados en $1 de $2.,لا توجد فعاليات معتمدة في $1 $2 حتى الآن.
+pattern,"^(January|February|March|April|May|June|July|August|September|October|November|December) (\d{4}), (\d+) events?$","$1 $2, $3 {$3?événement|événements}","$1 de $2, $3 {$3?evento|eventos}",$1 $2، $3 {$3?فعالية|فعاليات}
 pattern,^(January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})$,$1 $2,$1 de $2,$1 $2
 pattern,^(\d+)[–-](\d+) (JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)$,$1–$2 $3,$1–$2 $3,$1–$2 $3
 pattern,^(\d+) (JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)$,$1 $2,$1 $2,$1 $2
