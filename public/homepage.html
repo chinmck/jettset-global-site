@@ -18,6 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="hero-enquiry.css?v=21">
+<link rel="stylesheet" href="journey-planner.css?v=3">
 </head>
 <body>
 
@@ -272,12 +273,13 @@
       </div>
     </section>
 
-    <section class="route-map jw-embed" id="routeMapSection">
+    <section class="route-map jw-embed" id="routeMapSection" aria-labelledby="jpHeading">
+      <div class="jp-backdrop" aria-hidden="true"></div>
       <div class="jw-embed-grid">
         <div class="jw-embed-copy">
-          <span class="eyebrow">Signature Journeys</span>
-          <h2>Your Journey, Visualised.</h2>
-          <p>Enter your route and see the journey take shape.</p>
+          <span class="eyebrow">Private Journey Planner</span>
+          <h2 id="jpHeading">Plan your private journey.</h2>
+          <p>Choose your route, date and travellers to see an indicative flight overview, then tell us what matters to you.</p>
           <div class="jv-fields" aria-label="Journey details">
             <label class="jv-field" for="jvFrom"><span>From</span><input id="jvFrom" type="text" value="London" list="jvCities" autocomplete="off"></label>
             <span class="jv-arrow" aria-hidden="true">&#8594;</span>
@@ -312,20 +314,37 @@
           <button type="button" class="jv-explore-routes" id="jvExploreRoutes" aria-expanded="false">Explore more routes <span aria-hidden="true">+</span></button>
         </div>
 
+        <fieldset class="jp-wellness" id="jpWellness">
+          <legend class="jp-wellness-title">Wellness for the journey <span class="jp-optional">Optional</span></legend>
+          <p class="jp-wellness-help">Tell us what matters before, during and after your journey. These are preferences to discuss with Jettset, not a booking.</p>
+          <div class="jp-wellness-options">
+            <label class="jp-wellness-opt"><input type="checkbox" name="wellness" value="Prepare"><span>Prepare</span></label>
+            <label class="jp-wellness-opt"><input type="checkbox" name="wellness" value="In-flight"><span>In-flight</span></label>
+            <label class="jp-wellness-opt"><input type="checkbox" name="wellness" value="Recover"><span>Recover</span></label>
+          </div>
+        </fieldset>
+
         <div class="jw-embed-panel">
           <div class="journey-panel" id="journeyPanel">
-            <h3 class="jp-route-name" id="jpRouteName">London &rarr; Monaco</h3>
-            <span class="jp-route-sub" id="jpRouteSub">Riviera Escape</span>
-            <div class="jp-grid">
-              <div><span class="jp-stat-label">Estimated Flight Time</span><span class="jp-stat-value" id="jpFlightTime">1h 40m</span></div>
-              <div><span class="jp-stat-label">Suggested Aircraft</span><span class="jp-stat-value" id="jpAircraft">Light / Midsize Jet</span></div>
-              <div><span class="jp-stat-label">Local Time, Destination</span><span class="jp-stat-value" id="jpLocalTime">Loading local time&hellip;</span></div>
+            <div class="jp-route">
+              <span class="jp-stat-label">Selected route</span>
+              <h3 class="jp-route-name" id="jpRouteName">London &rarr; Monaco</h3>
+              <span class="jp-route-sub" id="jpRouteSub">Riviera Escape</span>
             </div>
-            <p class="jp-aircraft-note" id="jpAircraftNote" hidden>Indicative category based on route and traveller count. Final aircraft selection is confirmed personally during enquiry.</p>
-            <p class="jp-concierge" id="jpConcierge">Ground transfer from Nice Côte d’Azur and villa coordination arranged as part of the same journey.</p>
-            <div class="jp-cultural" id="jpCultural">Monaco Grand Prix — May</div>
-            <button type="button" class="jp-cta" id="jpCta">Request This Journey</button>
-            <p class="jp-cta-note">Every enquiry is reviewed personally and handled in confidence.</p>
+            <div class="jp-grid">
+              <div><span class="jp-stat-label">Estimated flight time</span><span class="jp-stat-value" id="jpFlightTime">1h 40m</span></div>
+              <div><span class="jp-stat-label">Indicative aircraft category</span><span class="jp-stat-value" id="jpAircraft">Light / Midsize Jet</span></div>
+              <div><span class="jp-stat-label">Local time at destination</span><span class="jp-stat-value" id="jpLocalTime">Loading local time&hellip;</span></div>
+            </div>
+            <div class="jp-action">
+              <button type="button" class="jp-cta" id="jpCta">Request This Journey</button>
+              <p class="jp-cta-note">Sends an enquiry to Jettset. This does not book or confirm a flight.</p>
+            </div>
+            <div class="jp-detail">
+              <p class="jp-aircraft-note" id="jpAircraftNote">Estimates are indicative. Final aircraft selection and arrangements are confirmed personally during enquiry.</p>
+              <p class="jp-concierge" id="jpConcierge">Ground transfer from Nice Côte d’Azur and villa coordination arranged as part of the same journey.</p>
+              <div class="jp-cultural" id="jpCultural">Monaco Grand Prix — May</div>
+            </div>
           </div>
         </div>
       </div>
@@ -925,6 +944,6 @@
   <script src="inside-house.js"></script>
   <script src="jettset-standard.js"></script>
   <script src="who-we-fly.js"></script>
-  <script type="module" src="./jettset-world/globe.js?v=20261003-airports"></script>
+  <script type="module" src="./jettset-world/globe.js?v=20261005-planner"></script>
 </body>
 </html>

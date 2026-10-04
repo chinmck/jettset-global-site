@@ -87,6 +87,24 @@ E = {
 "MAY": ("MAI", "MAY", "مايو"), "JUN": ("JUIN", "JUN", "يونيو"), "JUL": ("JUIL.", "JUL", "يوليو"), "AUG": ("AOÛT", "AGO", "أغسطس"),
 "SEP": ("SEPT.", "SEP", "سبتمبر"), "OCT": ("OCT.", "OCT", "أكتوبر"), "NOV": ("NOV.", "NOV", "نوفمبر"), "DEC": ("DÉC.", "DIC", "ديسمبر"),
 }
+# Private Journey Planner (homepage #routeMapSection). REVIEW: first-pass translations.
+E.update({
+"Private Journey Planner": ("Planificateur de voyage privé", "Planificador de viajes privados", "مخطط الرحلات الخاصة"),
+"Plan your private journey.": ("Planifiez votre voyage privé.", "Planifique su viaje privado.", "خطّط لرحلتك الخاصة."),
+"Choose your route, date and travellers to see an indicative flight overview, then tell us what matters to you.": ("Choisissez votre itinéraire, votre date et le nombre de voyageurs pour découvrir un aperçu indicatif du vol, puis dites-nous ce qui compte pour vous.", "Elija su ruta, la fecha y el número de viajeros para ver un resumen orientativo del vuelo y, después, cuéntenos qué es importante para usted.", "اختر مسارك والتاريخ وعدد المسافرين لترى نظرة عامة استرشادية على الرحلة، ثم أخبرنا بما يهمّك."),
+'Wellness for the journey <span class="jp-optional">Optional</span>': ('Bien-être pour le voyage <span class="jp-optional">Facultatif</span>', 'Bienestar para el viaje <span class="jp-optional">Opcional</span>', 'العافية خلال الرحلة <span class="jp-optional">اختياري</span>'),
+"Tell us what matters before, during and after your journey. These are preferences to discuss with Jettset, not a booking.": ("Dites-nous ce qui compte avant, pendant et après votre voyage. Il s’agit de préférences à discuter avec Jettset, et non d’une réservation.", "Cuéntenos qué es importante antes, durante y después de su viaje. Son preferencias para conversar con Jettset, no una reserva.", "أخبرنا بما يهمّك قبل رحلتك وأثناءها وبعدها. هذه تفضيلات لمناقشتها مع Jettset وليست حجزًا."),
+"Prepare": ("Préparer", "Preparar", "التحضير"),
+"In-flight": ("En vol", "A bordo", "على متن الرحلة"),
+"Recover": ("Récupérer", "Recuperar", "التعافي"),
+"Selected route": ("Itinéraire choisi", "Ruta seleccionada", "المسار المختار"),
+"Estimated flight time": ("Durée de vol estimée", "Duración estimada del vuelo", "مدة الرحلة المقدّرة"),
+"Indicative aircraft category": ("Catégorie d’appareil indicative", "Categoría de aeronave orientativa", "فئة الطائرة الاسترشادية"),
+"Local time at destination": ("Heure locale à destination", "Hora local en el destino", "التوقيت المحلي في الوجهة"),
+"Sends an enquiry to Jettset. This does not book or confirm a flight.": ("Envoie une demande à Jettset. Cela ne réserve ni ne confirme aucun vol.", "Envía una consulta a Jettset. No reserva ni confirma ningún vuelo.", "يرسل استفسارًا إلى Jettset. ولا يحجز رحلة ولا يؤكدها."),
+"Estimates are indicative. Final aircraft selection and arrangements are confirmed personally during enquiry.": ("Les estimations sont indicatives. Le choix définitif de l’appareil et les modalités sont confirmés personnellement lors de la demande.", "Las estimaciones son orientativas. La selección final de la aeronave y los detalles se confirman personalmente durante la consulta.", "التقديرات استرشادية. يتم تأكيد اختيار الطائرة النهائي والترتيبات شخصيًا أثناء الاستفسار."),
+})
+
 P = [
  # calendar + dates
  (r"^(January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})$", "$1 $2", "$1 de $2", "$1 $2"),

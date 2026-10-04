@@ -804,7 +804,6 @@ function updateJourneyPanel(route) {
   document.getElementById('jpRouteSub').textContent = route.sub || 'Signature Journey';
   document.getElementById('jpFlightTime').textContent = route.flightTime;
   document.getElementById('jpAircraft').textContent = route.aircraft;
-  document.getElementById('jpAircraftNote').hidden = !route.isCustom;
   document.getElementById('jpConcierge').textContent = route.concierge;
   fromInput.value = route.a.inputValue || route.a.name;
   toInput.value = route.b.inputValue || route.b.name;
@@ -857,6 +856,11 @@ document.getElementById('jpCta').addEventListener('click', () => {
   if (to) sessionStorage.setItem('prefill_qTo', to);
   if (date) sessionStorage.setItem('prefill_qDepart', date);
   sessionStorage.setItem('prefill_qAdults', travellers);
+  // Optional wellness preferences travel in the enquiry's existing notes field (quote.html pre-fills it).
+  // They are preferences to discuss, not a booking; nothing is written when none are chosen.
+  const wellness = [...document.querySelectorAll('#jpWellness input[name="wellness"]:checked')].map((input) => input.value);
+  if (wellness.length) sessionStorage.setItem('prefill_qNotes', `Wellness preferences to discuss: ${wellness.join(', ')}.`);
+  else if ((sessionStorage.getItem('prefill_qNotes') || '').startsWith('Wellness preferences')) sessionStorage.removeItem('prefill_qNotes');
   window.location.href = 'quote.html';
 });
 
