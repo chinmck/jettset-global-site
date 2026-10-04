@@ -225,7 +225,13 @@
   .route-map.jw-embed .jw-embed-copy h2 { font-size: clamp(32px, 9vw, 40px); }
   .route-map.jw-embed .jw-embed-copy > p { font-size: 15px; margin-bottom: 28px; }
   .route-map.jw-embed .jv-fields { gap: 20px 10px; }
-  .route-map.jw-embed .world-stage { max-width: min(340px, 100%); }
+  /* First mobile screen: title, fields and the whole globe together. Section padding and the copy-to-globe gap are
+     tightened, and the globe is sized from the viewport height (340px max, never below 280px). */
+  .route-map.jw-embed { padding-top: 28px; }
+  .route-map.jw-embed .jw-embed-grid { row-gap: 32px; }
+  .route-map.jw-embed .jw-embed-copy { margin-bottom: -24px; }
+  .route-map.jw-embed .world-stage { max-width: min(340px, 100%, max(280px, calc(100vh - 495px))); }
+  @supports (height: 100svh) { .route-map.jw-embed .world-stage { max-width: min(340px, 100%, max(280px, calc(100svh - 495px))); } }
   .route-map.jw-embed .route-chips { display: grid; grid-template-columns: 1fr 1fr; }
   .route-map.jw-embed .journey-panel { padding: 24px 20px; row-gap: 20px; }
   .jp-main { grid-template-columns: 1fr; grid-template-areas: "route" "stats" "detail"; row-gap: 20px; }
