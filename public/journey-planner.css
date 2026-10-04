@@ -21,38 +21,20 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: clamp(88px, 10.5vh, 108px) 56px clamp(24px, 3.2vh, 40px);
+  padding: clamp(60px, 7.6vh, 76px) 56px clamp(20px, 2.6vh, 32px);
   scroll-margin-top: 0;
-  background: #0a0a0a;
+  background: #0b0b0c;                 /* clean, uninterrupted charcoal-black canvas */
   font-family: var(--jp-text);
 }
 
-/* Atmospheric architecture: faint pilasters, a cornice line and a warm wash. Low contrast, no imagery. */
-.jp-backdrop {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(55% 60% at 74% 36%, rgba(201, 162, 75, 0.075), transparent 72%),
-    linear-gradient(180deg, rgba(10, 10, 10, 0.55) 0%, rgba(10, 10, 10, 0) 22%, rgba(10, 10, 10, 0) 70%, rgba(10, 10, 10, 0.7) 100%),
-    repeating-linear-gradient(90deg, rgba(245, 243, 239, 0.028) 0 1px, transparent 1px 11.5%),
-    repeating-linear-gradient(90deg, rgba(245, 243, 239, 0.012) 0 56px, transparent 56px 11.5%),
-    linear-gradient(180deg, #0c0c0d 0%, #111213 55%, #0b0b0b 100%);
-}
-.jp-backdrop::before {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; top: 11%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(245, 243, 239, 0.07) 20%, rgba(245, 243, 239, 0.07) 80%, transparent);
-}
+/* No decorative texture: the backdrop layer is intentionally empty. */
+.jp-backdrop { display: none; }
 
 .route-map.jw-embed .jw-embed-grid {
   max-width: 1328px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   grid-template-areas:
     "copy stage"
     "chips stage"
@@ -131,7 +113,16 @@
 .route-map.jw-embed .jv-explore-routes { font-family: var(--jp-text); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; color: var(--jp-grey); margin-top: 10px; min-height: 28px; }
 
 /* ---- globe: sized from the viewport height so the overview stays above the fold ---- */
-.route-map.jw-embed .world-stage { width: 100%; max-width: clamp(320px, 54vh, 640px); margin: 0 auto; }
+.route-map.jw-embed .world-stage { width: 100%; max-width: min(100%, max(320px, calc(100vh - 360px)), 720px); margin: 0 auto; aspect-ratio: 1 / 1; }
+.route-map.jw-embed #globeCanvas { width: 100%; height: auto; aspect-ratio: 1 / 1; filter: none; }
+
+/* WebGL unavailable: an intentional, on-brand curated-route list in place of the globe. */
+.route-map.jw-embed .world-stage:has(.static-fallback.is-shown) { aspect-ratio: auto; max-width: 560px; }
+.route-map.jw-embed .static-fallback.is-shown { display: block; width: 100%; border-top: 1px solid rgba(201, 162, 75, 0.45); border-bottom: 1px solid var(--jp-line); }
+.route-map.jw-embed .static-route-row { font-family: var(--jp-display); font-size: clamp(16px, 2.4vh, 22px); color: var(--jp-ivory); padding: 14px 4px; border-bottom: 1px solid var(--jp-line); }
+.route-map.jw-embed .static-route-row span:last-child { font-family: var(--jp-text); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--jp-gold); }
+.route-map.jw-embed .static-route-row:last-child { border-bottom: 0; }
+.route-map.jw-embed .static-route-row:hover { color: var(--jp-gold); }
 .route-map.jw-embed .globe-hint { font-family: var(--jp-text); font-size: 10px; font-weight: 600; letter-spacing: 0.16em; color: rgba(245, 243, 239, 0.55); bottom: 0; }
 
 /* ---- journey overview: one wide panel ---- */
