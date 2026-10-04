@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="hero-enquiry.css?v=21">
-<link rel="stylesheet" href="journey-planner.css?v=3">
+<link rel="stylesheet" href="journey-planner.css?v=4">
 </head>
 <body>
 
@@ -314,18 +314,9 @@
           <button type="button" class="jv-explore-routes" id="jvExploreRoutes" aria-expanded="false">Explore more routes <span aria-hidden="true">+</span></button>
         </div>
 
-        <fieldset class="jp-wellness" id="jpWellness">
-          <legend class="jp-wellness-title">Wellness for the journey <span class="jp-optional">Optional</span></legend>
-          <p class="jp-wellness-help">Tell us what matters before, during and after your journey. These are preferences to discuss with Jettset, not a booking.</p>
-          <div class="jp-wellness-options">
-            <label class="jp-wellness-opt"><input type="checkbox" name="wellness" value="Prepare"><span>Prepare</span></label>
-            <label class="jp-wellness-opt"><input type="checkbox" name="wellness" value="In-flight"><span>In-flight</span></label>
-            <label class="jp-wellness-opt"><input type="checkbox" name="wellness" value="Recover"><span>Recover</span></label>
-          </div>
-        </fieldset>
-
         <div class="jw-embed-panel">
           <div class="journey-panel" id="journeyPanel">
+            <div class="jp-main">
             <div class="jp-route">
               <span class="jp-stat-label">Selected route</span>
               <h3 class="jp-route-name" id="jpRouteName">London &rarr; Monaco</h3>
@@ -336,14 +327,26 @@
               <div><span class="jp-stat-label">Indicative aircraft category</span><span class="jp-stat-value" id="jpAircraft">Light / Midsize Jet</span></div>
               <div><span class="jp-stat-label">Local time at destination</span><span class="jp-stat-value" id="jpLocalTime">Loading local time&hellip;</span></div>
             </div>
-            <div class="jp-action">
-              <button type="button" class="jp-cta" id="jpCta">Request This Journey</button>
-              <p class="jp-cta-note">Sends an enquiry to Jettset. This does not book or confirm a flight.</p>
-            </div>
             <div class="jp-detail">
               <p class="jp-aircraft-note" id="jpAircraftNote">Estimates are indicative. Final aircraft selection and arrangements are confirmed personally during enquiry.</p>
               <p class="jp-concierge" id="jpConcierge">Ground transfer from Nice Côte d’Azur and villa coordination arranged as part of the same journey.</p>
               <div class="jp-cultural" id="jpCultural">Monaco Grand Prix — May</div>
+            </div>
+            </div>
+            <div class="jp-side">
+        <fieldset class="jp-wellness" id="jpWellness">
+                <legend class="jp-wellness-title">Wellness for the journey <span class="jp-optional">Optional</span></legend>
+                <p class="jp-wellness-help">Tell us what matters before, during and after your journey. These are preferences to discuss with Jettset, not a booking.</p>
+                <div class="jp-wellness-options">
+                  <label class="jp-wellness-opt"><input type="checkbox" name="wellness" value="Prepare"><span>Prepare</span></label>
+                  <label class="jp-wellness-opt"><input type="checkbox" name="wellness" value="In-flight"><span>In-flight</span></label>
+                  <label class="jp-wellness-opt"><input type="checkbox" name="wellness" value="Recover"><span>Recover</span></label>
+                </div>
+              </fieldset>
+            <div class="jp-action">
+              <button type="button" class="jp-cta" id="jpCta">Request This Journey</button>
+              <p class="jp-cta-note">Sends an enquiry to Jettset. This does not book or confirm a flight.</p>
+            </div>
             </div>
           </div>
         </div>
