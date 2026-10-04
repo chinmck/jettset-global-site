@@ -17,9 +17,19 @@
   --house-gold-muted: #8C763F;   /* Muted Gold — quiet rules */
   --house-grey: #8A8782;         /* Editorial Grey — supporting copy */
 
-  --house-serif: "Fraunces", "Iowan Old Style", "Georgia", serif;
-  --house-sans: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
-  --house-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  /* Approved type system. Source Serif 4 (Display optical size) for headlines and editorial display
+     text; Manrope for body, labels, captions and buttons. Loaded once in the page <head>. To carry the
+     system to another section, reuse these three tokens. */
+  --type-display: "Source Serif 4", "Source Serif Pro", Georgia, serif;
+  --type-text: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --house-serif: var(--type-display);
+  --house-sans: var(--type-text);
+  --house-mono: var(--type-text);
+
+  /* Shared vertical rhythm with the Culture Calendar panel beside it (spacing scale: compact 64 / standard 96 / immersive 140). */
+  --house-top: clamp(96px, 12vh, 120px);
+  --house-space-compact: 64px;
+  --house-space-standard: 96px;
 
   --house-unit: 8px; /* 8px base spacing logic */
   --house-edge: clamp(24px, 6vw, 96px);
@@ -67,9 +77,10 @@
 .house-rail-label {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  font-family: var(--house-mono);
-  font-size: 11px;
-  letter-spacing: 0.28em;
+  font-family: var(--house-sans);
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--house-grey);
   white-space: nowrap;
@@ -86,17 +97,18 @@
   grid-column: 2 / 8;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: calc(var(--house-unit) * 9) calc(var(--house-unit) * 6) calc(var(--house-unit) * 10) var(--house-edge);
+  justify-content: center;
+  padding: var(--house-top) calc(var(--house-unit) * 7) var(--house-space-compact) var(--house-edge);
 }
 
 .house-kicker {
-  font-family: var(--house-mono);
-  font-size: 12px;
-  letter-spacing: 0.22em;
+  font-family: var(--house-sans);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--house-gold);
-  margin: 0 0 calc(var(--house-unit) * 3);
+  margin: 0 0 calc(var(--house-unit) * 4);
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.9s ease, transform 0.9s ease;
@@ -105,11 +117,13 @@
 .house-headline {
   font-family: var(--house-serif);
   font-weight: 500;
-  font-size: clamp(32px, 3.6vw, 58px);
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  margin: 0 0 calc(var(--house-unit) * 4);
-  max-width: 20ch;
+  font-optical-sizing: auto;
+  font-size: clamp(36px, 4.1vw, 60px);
+  line-height: 1.08;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+  margin: 0 0 calc(var(--house-unit) * 5);
+  max-width: none;
 }
 
 .house-headline-line {
@@ -131,11 +145,13 @@
 
 .house-body {
   font-family: var(--house-sans);
+  font-weight: 400;
   font-size: 17px;
-  line-height: 1.65;
-  color: rgba(245, 243, 239, 0.78);
-  max-width: 46ch;
-  margin: 0 0 calc(var(--house-unit) * 3.5);
+  line-height: 1.7;
+  color: rgba(245, 243, 239, 0.8);
+  max-width: 44ch;
+  text-wrap: pretty;
+  margin: 0 0 var(--house-space-compact);
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 0.9s ease 0.22s, transform 0.9s ease 0.22s;
@@ -144,23 +160,27 @@
 .house-line {
   font-family: var(--house-serif);
   font-style: italic;
-  font-size: 18px;
+  font-weight: 400;
+  font-size: clamp(21px, 1.75vw, 26px);
+  line-height: 1.38;
   color: var(--house-ivory);
   border-top: 1px solid rgba(201, 162, 75, 0.3);
-  padding-top: calc(var(--house-unit) * 2.5);
+  padding-top: calc(var(--house-unit) * 3);
   margin: 0 0 calc(var(--house-unit) * 4);
-  max-width: 40ch;
+  max-width: 30ch;
+  text-wrap: balance;
   opacity: 0;
   transition: opacity 1s ease 0.34s;
 }
 
 .house-editorial-line {
   font-family: var(--house-sans);
+  font-weight: 500;
   font-size: 13px;
-  line-height: 1.5;
-  color: rgba(138, 135, 130, 0.85);
-  max-width: 34ch;
-  margin: 0 0 calc(var(--house-unit) * 4);
+  line-height: 1.6;
+  color: rgba(138, 135, 130, 0.95);
+  max-width: 40ch;
+  margin: 0 0 calc(var(--house-unit) * 5);
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.9s ease 0.5s, transform 0.9s ease 0.5s;
@@ -172,8 +192,9 @@
   gap: calc(var(--house-unit) * 1.25);
   align-self: flex-start;
   font-family: var(--house-sans);
-  font-size: 13px;
-  letter-spacing: 0.14em;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--house-ivory);
   text-decoration: none;
@@ -197,6 +218,32 @@
 
 .house-cta:hover .house-cta-arrow {
   transform: translateX(3px);
+}
+
+/* ---- Inline service links in the italic sentence: wording and typography stay the sentence's own; a fine
+   muted-gold underline marks the links, brightening on hover, with a clear focus ring for keyboard users. ---- */
+
+.house-line a {
+  color: inherit;
+  font: inherit;
+  white-space: nowrap;                 /* a link never breaks across two lines */
+  text-decoration: underline;
+  text-decoration-color: rgba(201, 162, 75, 0.6);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  transition: text-decoration-color 0.3s ease, color 0.3s ease;
+}
+
+.house-line a:hover {
+  color: var(--house-gold);
+  text-decoration-color: var(--house-gold);
+}
+
+.house-line a:focus-visible {
+  outline: 2px solid var(--house-ivory);
+  outline-offset: 4px;
+  border-radius: 2px;
+  text-decoration-color: var(--house-gold);
 }
 
 /* ---- Reveal state, set by JS via IntersectionObserver ---- */
@@ -330,7 +377,7 @@
   }
 
   .house-plate {
-    order: 1;
+    order: 2;
     height: 46vh;
     min-height: 300px;
   }
@@ -359,8 +406,9 @@
   }
 
   .house-editorial {
-    order: 2;
-    padding: calc(var(--house-unit) * 4) var(--house-edge) calc(var(--house-unit) * 5);
+    order: 1;
+    justify-content: flex-start;
+    padding: 72px var(--house-edge) 72px;       /* immersive mobile rhythm: clear separation from hero above and calendar below */
   }
 
   .house-kicker::before {
@@ -368,10 +416,10 @@
   }
 
   .house-headline {
-    font-size: clamp(32px, 9vw, 44px);
-    line-height: 1.16;
-    max-width: 12ch;
-    margin-bottom: calc(var(--house-unit) * 4.5);
+    font-size: clamp(32px, 8.8vw, 44px);
+    line-height: 1.1;
+    max-width: none;
+    margin-bottom: 32px;
   }
 
   .house-headline-line + .house-headline-line {
@@ -380,15 +428,17 @@
 
   .house-body {
     font-size: 16px;
-    line-height: 1.72;
-    max-width: none;
-    margin-bottom: calc(var(--house-unit) * 4);
+    line-height: 1.7;
+    max-width: 38ch;
+    margin-bottom: 48px;
   }
 
   .house-line {
-    font-size: 16px;
-    line-height: 1.35;
-    padding-top: calc(var(--house-unit) * 3);
+    font-size: 22px;
+    line-height: 1.38;
+    padding-top: 32px;
+    margin-bottom: 32px;
+    max-width: 24ch;
   }
 
   .house-foot {
@@ -412,4 +462,15 @@
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+/* Shorter desktop/tablet-landscape windows: tighten the vertical rhythm (compact -> 48) so the House copy and the
+   calendar beside it still read as one screen. */
+@media (min-width: 781px) and (max-height: 820px) {
+  .house-section { --house-space-compact: 40px; --house-top: 96px; }
+  .house-kicker { margin-bottom: 24px; }
+  .house-headline { margin-bottom: 32px; font-size: clamp(34px, 3.8vw, 52px); }
+  .house-body { font-size: 16px; line-height: 1.65; }
+  .house-line { margin-bottom: 24px; padding-top: 24px; font-size: clamp(20px, 1.6vw, 24px); }
+  .house-editorial-line { margin-bottom: 28px; }
 }

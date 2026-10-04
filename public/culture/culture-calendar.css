@@ -107,8 +107,9 @@
 .house-grid{min-height:clamp(700px,100svh,900px);}
 .house-grid .house-plate{grid-row:1 / span 2; min-height:100%;}
 .house-grid .house-foot{grid-column:2 / 8;}
+@media (min-width:781px){.house-grid .house-foot{margin:0;}}
 .house-plate-media{object-position:54% 50%;}
-.cc{padding-top:clamp(96px,12vh,120px); padding-bottom:clamp(18px,3.2vh,40px);}
+.cc{padding-top:var(--house-top,clamp(96px,12vh,120px)); padding-bottom:clamp(18px,3.2vh,40px);}
 .cc-lower{padding-top:0; gap:0;}
 .cc-controls{top:-36px;}
 .cc-discover{margin-top:clamp(12px,1.4vw,18px);}

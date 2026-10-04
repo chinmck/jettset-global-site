@@ -122,8 +122,8 @@
     .catch(function () { /* the feature degrades to its title, month and CTA */ });
 
   // The fixed site-wide "Begin Your Journey" mark would sit on top of the timeline, so it steps aside while the
-  // calendar is on screen and returns as soon as the visitor scrolls past it.
-  var plate = document.getElementById('culture-calendar'), mark = document.getElementById('journeyBar');
+  // House section and calendar are on screen and returns as soon as the visitor scrolls past it.
+  var plate = document.getElementById('jettsetHouse') || document.getElementById('culture-calendar'), mark = document.getElementById('journeyBar');
   if (plate && mark && 'IntersectionObserver' in window) {
     new IntersectionObserver(function (en) { mark.classList.toggle('cc-stand-aside', en[0].isIntersecting); }, { threshold: 0 }).observe(plate);
   }
