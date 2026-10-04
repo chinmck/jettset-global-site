@@ -1826,6 +1826,10 @@
 "Representative / typical plan · configuration varies": "Plano representativo / típico · la configuración varía",
 "Choose two different locations from the supplied city list.": "Elija dos ubicaciones distintas de la lista de ciudades facilitada.",
 "Aviation Wellness": "Aviation Wellness",
+"Previous month": "Mes anterior",
+"Next month": "Mes siguiente",
+"Choose a month": "Elegir un mes",
+"Resume automatic rotation": "Reanudar la rotación automática",
 "January": "enero",
 "February": "febrero",
 "March": "marzo",
@@ -1967,6 +1971,18 @@
 [
 "^Thank you, (.+)\\. A member of our Jet Card team will be in touch shortly\\.$",
 "Gracias, $1. Un miembro de nuestro equipo de Jet Card se pondrá en contacto con usted en breve."
+],
+[
+"^(January|February|March|April|May|June|July|August|September|October|November|December) (\\d{4}) – (January|February|March|April|May|June|July|August|September|October|November|December) (\\d{4})$",
+"$1 de $2 – $3 de $4"
+],
+[
+"^No approved events in (January|February|March|April|May|June|July|August|September|October|November|December) (\\d{4}) yet\\.$",
+"Aún no hay eventos aprobados en $1 de $2."
+],
+[
+"^(January|February|March|April|May|June|July|August|September|October|November|December) (\\d{4}), (\\d+) events?$",
+"$1 de $2, $3 {$3?evento|eventos}"
 ],
 [
 "^(January|February|March|April|May|June|July|August|September|October|November|December) (\\d{4})$",

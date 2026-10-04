@@ -1,0 +1,737 @@
+{
+  "_readme": "Curated watchlist of internationally significant recurring cultural and sporting events (Jettset 'Culturally Fluent Luxury'). It holds NO dates: no reliable machine-readable source exists for these, so each weekly sync raises a MANUAL VERIFICATION item in the Partner Hub for every edition falling inside the rolling 12-month window, until staff approve it with verified dates and venue (or reject it). Add or remove entries by pull request; sourceUrl is only a staff reference page, not a feed. sourceUrlVerified records whether the link answered an automated check on sourceUrlVerifiedOn (some sites block bots).",
+  "watchlist": [
+    {
+      "key": "art-basel-basel",
+      "name": "Art Basel",
+      "category": "art-design-architecture",
+      "city": "Basel",
+      "country": "Switzerland",
+      "timezone": "Europe/Zurich",
+      "typicalMonths": [
+        6
+      ],
+      "cadence": "annual",
+      "sourceName": "Art Basel",
+      "sourceUrl": "https://www.artbasel.com/basel",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "art-basel-miami-beach",
+      "name": "Art Basel Miami Beach",
+      "category": "art-design-architecture",
+      "city": "Miami Beach",
+      "country": "United States",
+      "timezone": "America/New_York",
+      "typicalMonths": [
+        12
+      ],
+      "cadence": "annual",
+      "sourceName": "Art Basel",
+      "sourceUrl": "https://www.artbasel.com/miami-beach",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "art-basel-paris",
+      "name": "Art Basel Paris",
+      "category": "art-design-architecture",
+      "city": "Paris",
+      "country": "France",
+      "timezone": "Europe/Paris",
+      "typicalMonths": [
+        10
+      ],
+      "cadence": "annual",
+      "sourceName": "Art Basel",
+      "sourceUrl": "https://www.artbasel.com/paris",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "art-basel-hong-kong",
+      "name": "Art Basel Hong Kong",
+      "category": "art-design-architecture",
+      "city": "Hong Kong",
+      "country": "Hong Kong",
+      "timezone": "Asia/Hong_Kong",
+      "typicalMonths": [
+        3
+      ],
+      "cadence": "annual",
+      "sourceName": "Art Basel",
+      "sourceUrl": "https://www.artbasel.com/hong-kong",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "frieze-london",
+      "name": "Frieze London",
+      "category": "art-design-architecture",
+      "city": "London",
+      "country": "United Kingdom",
+      "timezone": "Europe/London",
+      "typicalMonths": [
+        10
+      ],
+      "cadence": "annual",
+      "sourceName": "Frieze",
+      "sourceUrl": "https://www.frieze.com/fairs/frieze-london",
+      "sourceUrlVerified": false
+    },
+    {
+      "key": "frieze-los-angeles",
+      "name": "Frieze Los Angeles",
+      "category": "art-design-architecture",
+      "city": "Los Angeles",
+      "country": "United States",
+      "timezone": "America/Los_Angeles",
+      "typicalMonths": [
+        2
+      ],
+      "cadence": "annual",
+      "sourceName": "Frieze",
+      "sourceUrl": "https://www.frieze.com/fairs/frieze-los-angeles",
+      "sourceUrlVerified": false
+    },
+    {
+      "key": "venice-biennale-art",
+      "name": "Venice Art Biennale",
+      "category": "art-design-architecture",
+      "city": "Venice",
+      "country": "Italy",
+      "timezone": "Europe/Rome",
+      "typicalMonths": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "cadence": "even",
+      "sourceName": "La Biennale di Venezia",
+      "sourceUrl": "https://www.labiennale.org/en/art",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "venice-biennale-architecture",
+      "name": "Venice Architecture Biennale",
+      "category": "art-design-architecture",
+      "city": "Venice",
+      "country": "Italy",
+      "timezone": "Europe/Rome",
+      "typicalMonths": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "cadence": "odd",
+      "sourceName": "La Biennale di Venezia",
+      "sourceUrl": "https://www.labiennale.org/en/architecture",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "salone-del-mobile",
+      "name": "Salone del Mobile.Milano",
+      "category": "art-design-architecture",
+      "city": "Milan",
+      "country": "Italy",
+      "timezone": "Europe/Rome",
+      "typicalMonths": [
+        4
+      ],
+      "cadence": "annual",
+      "sourceName": "Salone del Mobile.Milano",
+      "sourceUrl": "https://www.salonemilano.it/en",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "design-miami",
+      "name": "Design Miami",
+      "category": "art-design-architecture",
+      "city": "Miami Beach",
+      "country": "United States",
+      "timezone": "America/New_York",
+      "typicalMonths": [
+        12
+      ],
+      "cadence": "annual",
+      "sourceName": "Design Miami",
+      "sourceUrl": "https://designmiami.com",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "london-design-festival",
+      "name": "London Design Festival",
+      "category": "art-design-architecture",
+      "city": "London",
+      "country": "United Kingdom",
+      "timezone": "Europe/London",
+      "typicalMonths": [
+        9
+      ],
+      "cadence": "annual",
+      "sourceName": "London Design Festival",
+      "sourceUrl": "https://www.londondesignfestival.com",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "art-dubai",
+      "name": "Art Dubai",
+      "category": "art-design-architecture",
+      "city": "Dubai",
+      "country": "United Arab Emirates",
+      "timezone": "Asia/Dubai",
+      "typicalMonths": [
+        3,
+        4
+      ],
+      "cadence": "annual",
+      "sourceName": "Art Dubai",
+      "sourceUrl": "https://www.artdubai.ae",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "new-york-fashion-week",
+      "name": "New York Fashion Week",
+      "category": "fashion",
+      "city": "New York",
+      "country": "United States",
+      "timezone": "America/New_York",
+      "typicalMonths": [
+        2,
+        9
+      ],
+      "cadence": "annual",
+      "sourceName": "CFDA",
+      "sourceUrl": "https://cfda.com/fashion-calendar",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "london-fashion-week",
+      "name": "London Fashion Week",
+      "category": "fashion",
+      "city": "London",
+      "country": "United Kingdom",
+      "timezone": "Europe/London",
+      "typicalMonths": [
+        2,
+        9
+      ],
+      "cadence": "annual",
+      "sourceName": "British Fashion Council",
+      "sourceUrl": "https://www.britishfashioncouncil.co.uk",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "milan-fashion-week",
+      "name": "Milan Fashion Week",
+      "category": "fashion",
+      "city": "Milan",
+      "country": "Italy",
+      "timezone": "Europe/Rome",
+      "typicalMonths": [
+        2,
+        9
+      ],
+      "cadence": "annual",
+      "sourceName": "Camera Nazionale della Moda Italiana",
+      "sourceUrl": "https://www.cameramoda.it/en/",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "paris-fashion-week",
+      "name": "Paris Fashion Week",
+      "category": "fashion",
+      "city": "Paris",
+      "country": "France",
+      "timezone": "Europe/Paris",
+      "typicalMonths": [
+        2,
+        3,
+        9,
+        10
+      ],
+      "cadence": "annual",
+      "sourceName": "Fédération de la Haute Couture et de la Mode",
+      "sourceUrl": "https://fhcm.paris/en/",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "paris-haute-couture-week",
+      "name": "Paris Haute Couture Week",
+      "category": "fashion",
+      "city": "Paris",
+      "country": "France",
+      "timezone": "Europe/Paris",
+      "typicalMonths": [
+        1,
+        7
+      ],
+      "cadence": "annual",
+      "sourceName": "Fédération de la Haute Couture et de la Mode",
+      "sourceUrl": "https://fhcm.paris/en/",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "pitti-uomo",
+      "name": "Pitti Immagine Uomo",
+      "category": "fashion",
+      "city": "Florence",
+      "country": "Italy",
+      "timezone": "Europe/Rome",
+      "typicalMonths": [
+        1,
+        6
+      ],
+      "cadence": "annual",
+      "sourceName": "Pitti Immagine",
+      "sourceUrl": "https://www.pittimmagine.com/en/corporate/fairs/uomo.html",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "sundance",
+      "name": "Sundance Film Festival",
+      "category": "film",
+      "city": "Park City",
+      "country": "United States",
+      "timezone": "America/Denver",
+      "typicalMonths": [
+        1
+      ],
+      "cadence": "annual",
+      "sourceName": "Sundance Institute",
+      "sourceUrl": "https://festival.sundance.org",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "berlinale",
+      "name": "Berlin International Film Festival",
+      "category": "film",
+      "city": "Berlin",
+      "country": "Germany",
+      "timezone": "Europe/Berlin",
+      "typicalMonths": [
+        2
+      ],
+      "cadence": "annual",
+      "sourceName": "Berlinale",
+      "sourceUrl": "https://www.berlinale.de/en/home.html",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "academy-awards",
+      "name": "Academy Awards",
+      "category": "film",
+      "city": "Los Angeles",
+      "country": "United States",
+      "timezone": "America/Los_Angeles",
+      "typicalMonths": [
+        3
+      ],
+      "cadence": "annual",
+      "sourceName": "Academy of Motion Picture Arts and Sciences",
+      "sourceUrl": "https://www.oscars.org",
+      "sourceUrlVerified": false
+    },
+    {
+      "key": "cannes-film-festival",
+      "name": "Cannes Film Festival",
+      "category": "film",
+      "city": "Cannes",
+      "country": "France",
+      "timezone": "Europe/Paris",
+      "typicalMonths": [
+        5
+      ],
+      "cadence": "annual",
+      "sourceName": "Festival de Cannes",
+      "sourceUrl": "https://www.festival-cannes.com/en/",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "venice-film-festival",
+      "name": "Venice International Film Festival",
+      "category": "film",
+      "city": "Venice",
+      "country": "Italy",
+      "timezone": "Europe/Rome",
+      "typicalMonths": [
+        8,
+        9
+      ],
+      "cadence": "annual",
+      "sourceName": "La Biennale di Venezia",
+      "sourceUrl": "https://www.labiennale.org/en/cinema",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "tiff",
+      "name": "Toronto International Film Festival",
+      "category": "film",
+      "city": "Toronto",
+      "country": "Canada",
+      "timezone": "America/Toronto",
+      "typicalMonths": [
+        9
+      ],
+      "cadence": "annual",
+      "sourceName": "TIFF",
+      "sourceUrl": "https://www.tiff.net",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "bfi-london-film-festival",
+      "name": "BFI London Film Festival",
+      "category": "film",
+      "city": "London",
+      "country": "United Kingdom",
+      "timezone": "Europe/London",
+      "typicalMonths": [
+        10
+      ],
+      "cadence": "annual",
+      "sourceName": "BFI",
+      "sourceUrl": "https://www.bfi.org.uk/lff",
+      "sourceUrlVerified": false
+    },
+    {
+      "key": "grammy-awards",
+      "name": "Grammy Awards",
+      "category": "music-performing-arts",
+      "city": "Los Angeles",
+      "country": "United States",
+      "timezone": "America/Los_Angeles",
+      "typicalMonths": [
+        2
+      ],
+      "cadence": "annual",
+      "sourceName": "Recording Academy",
+      "sourceUrl": "https://www.grammy.com",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "coachella",
+      "name": "Coachella Valley Music and Arts Festival",
+      "category": "music-performing-arts",
+      "city": "Indio",
+      "country": "United States",
+      "timezone": "America/Los_Angeles",
+      "typicalMonths": [
+        4
+      ],
+      "cadence": "annual",
+      "sourceName": "Coachella",
+      "sourceUrl": "https://www.coachella.com",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "glastonbury",
+      "name": "Glastonbury Festival",
+      "category": "music-performing-arts",
+      "city": "Pilton",
+      "country": "United Kingdom",
+      "timezone": "Europe/London",
+      "typicalMonths": [
+        6
+      ],
+      "cadence": "annual",
+      "sourceName": "Glastonbury Festivals",
+      "sourceUrl": "https://www.glastonburyfestivals.co.uk",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04",
+      "note": "Not held every year (fallow years): confirm there is an edition."
+    },
+    {
+      "key": "montreux-jazz",
+      "name": "Montreux Jazz Festival",
+      "category": "music-performing-arts",
+      "city": "Montreux",
+      "country": "Switzerland",
+      "timezone": "Europe/Zurich",
+      "typicalMonths": [
+        7
+      ],
+      "cadence": "annual",
+      "sourceName": "Montreux Jazz Festival",
+      "sourceUrl": "https://www.montreuxjazzfestival.com",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "salzburg-festival",
+      "name": "Salzburg Festival",
+      "category": "music-performing-arts",
+      "city": "Salzburg",
+      "country": "Austria",
+      "timezone": "Europe/Vienna",
+      "typicalMonths": [
+        7,
+        8
+      ],
+      "cadence": "annual",
+      "sourceName": "Salzburg Festival",
+      "sourceUrl": "https://www.salzburgerfestspiele.at/en",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "bayreuth-festival",
+      "name": "Bayreuth Festival",
+      "category": "music-performing-arts",
+      "city": "Bayreuth",
+      "country": "Germany",
+      "timezone": "Europe/Berlin",
+      "typicalMonths": [
+        7,
+        8
+      ],
+      "cadence": "annual",
+      "sourceName": "Bayreuther Festspiele",
+      "sourceUrl": "https://www.bayreuther-festspiele.de/en/",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "edinburgh-festivals",
+      "name": "Edinburgh Festival Fringe",
+      "category": "music-performing-arts",
+      "city": "Edinburgh",
+      "country": "United Kingdom",
+      "timezone": "Europe/London",
+      "typicalMonths": [
+        8
+      ],
+      "cadence": "annual",
+      "sourceName": "Edinburgh Festival Fringe Society",
+      "sourceUrl": "https://www.edfringe.com",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "eurovision",
+      "name": "Eurovision Song Contest",
+      "category": "music-performing-arts",
+      "city": "Host city varies",
+      "country": "Host country varies",
+      "timezone": "Europe/London",
+      "typicalMonths": [
+        5
+      ],
+      "cadence": "annual",
+      "sourceName": "Eurovision",
+      "sourceUrl": "https://eurovision.tv",
+      "sourceUrlVerified": false,
+      "note": "Host city/venue changes each year."
+    },
+    {
+      "key": "worlds-50-best-restaurants",
+      "name": "The World's 50 Best Restaurants",
+      "category": "food-hospitality",
+      "city": "Host city varies",
+      "country": "Host country varies",
+      "timezone": "Europe/London",
+      "typicalMonths": [
+        6
+      ],
+      "cadence": "annual",
+      "sourceName": "The World's 50 Best Restaurants",
+      "sourceUrl": "https://www.theworlds50best.com",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04",
+      "note": "Host city/venue changes each year."
+    },
+    {
+      "key": "rio-carnival",
+      "name": "Rio Carnival",
+      "category": "festivals",
+      "city": "Rio de Janeiro",
+      "country": "Brazil",
+      "timezone": "America/Sao_Paulo",
+      "typicalMonths": [
+        2,
+        3
+      ],
+      "cadence": "annual",
+      "sourceName": "Visit Rio",
+      "sourceUrl": "https://www.visit.rio",
+      "sourceUrlVerified": false
+    },
+    {
+      "key": "fete-des-lumieres",
+      "name": "Fête des Lumières",
+      "category": "festivals",
+      "city": "Lyon",
+      "country": "France",
+      "timezone": "Europe/Paris",
+      "typicalMonths": [
+        12
+      ],
+      "cadence": "annual",
+      "sourceName": "Ville de Lyon",
+      "sourceUrl": "https://www.fetedeslumieres.lyon.fr/en",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "australian-open",
+      "name": "Australian Open",
+      "category": "sport",
+      "city": "Melbourne",
+      "country": "Australia",
+      "timezone": "Australia/Melbourne",
+      "typicalMonths": [
+        1
+      ],
+      "cadence": "annual",
+      "sourceName": "Tennis Australia",
+      "sourceUrl": "https://ausopen.com",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "super-bowl",
+      "name": "Super Bowl",
+      "category": "sport",
+      "city": "Host city varies",
+      "country": "United States",
+      "timezone": "America/New_York",
+      "typicalMonths": [
+        2
+      ],
+      "cadence": "annual",
+      "sourceName": "NFL",
+      "sourceUrl": "https://www.nfl.com/super-bowl/",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04",
+      "note": "Host city/venue changes each year."
+    },
+    {
+      "key": "masters",
+      "name": "The Masters",
+      "category": "sport",
+      "city": "Augusta",
+      "country": "United States",
+      "timezone": "America/New_York",
+      "typicalMonths": [
+        4
+      ],
+      "cadence": "annual",
+      "sourceName": "Augusta National",
+      "sourceUrl": "https://www.masters.com",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "monaco-grand-prix",
+      "name": "Monaco Grand Prix",
+      "category": "sport",
+      "city": "Monaco",
+      "country": "Monaco",
+      "timezone": "Europe/Monaco",
+      "typicalMonths": [
+        5,
+        6
+      ],
+      "cadence": "annual",
+      "sourceName": "Formula 1",
+      "sourceUrl": "https://www.formula1.com/en/racing/2027",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "roland-garros",
+      "name": "Roland-Garros",
+      "category": "sport",
+      "city": "Paris",
+      "country": "France",
+      "timezone": "Europe/Paris",
+      "typicalMonths": [
+        5,
+        6
+      ],
+      "cadence": "annual",
+      "sourceName": "Roland-Garros",
+      "sourceUrl": "https://www.rolandgarros.com/en-us",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "wimbledon",
+      "name": "The Championships, Wimbledon",
+      "category": "sport",
+      "city": "London",
+      "country": "United Kingdom",
+      "timezone": "Europe/London",
+      "typicalMonths": [
+        6,
+        7
+      ],
+      "cadence": "annual",
+      "sourceName": "Wimbledon",
+      "sourceUrl": "https://www.wimbledon.com",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    },
+    {
+      "key": "the-open",
+      "name": "The Open Championship",
+      "category": "sport",
+      "city": "Host course varies",
+      "country": "United Kingdom",
+      "timezone": "Europe/London",
+      "typicalMonths": [
+        7
+      ],
+      "cadence": "annual",
+      "sourceName": "The R&A",
+      "sourceUrl": "https://www.theopen.com",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04",
+      "note": "Host course changes each year."
+    },
+    {
+      "key": "us-open-tennis",
+      "name": "US Open (tennis)",
+      "category": "sport",
+      "city": "New York",
+      "country": "United States",
+      "timezone": "America/New_York",
+      "typicalMonths": [
+        8,
+        9
+      ],
+      "cadence": "annual",
+      "sourceName": "USTA",
+      "sourceUrl": "https://www.usopen.org",
+      "sourceUrlVerified": true,
+      "sourceUrlVerifiedOn": "2026-10-04"
+    }
+  ]
+}

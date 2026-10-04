@@ -1826,6 +1826,10 @@
 "Representative / typical plan · configuration varies": "مخطط نموذجي / معتاد · وتختلف التهيئة",
 "Choose two different locations from the supplied city list.": "اختر موقعين مختلفين من قائمة المدن المتاحة.",
 "Aviation Wellness": "Aviation Wellness",
+"Previous month": "الشهر السابق",
+"Next month": "الشهر التالي",
+"Choose a month": "اختر شهرًا",
+"Resume automatic rotation": "استئناف التبديل التلقائي",
 "January": "يناير",
 "February": "فبراير",
 "March": "مارس",
@@ -1967,6 +1971,18 @@
 [
 "^Thank you, (.+)\\. A member of our Jet Card team will be in touch shortly\\.$",
 "شكرًا لك، $1. سيتواصل معك أحد أعضاء فريق Jet Card قريبًا."
+],
+[
+"^(January|February|March|April|May|June|July|August|September|October|November|December) (\\d{4}) – (January|February|March|April|May|June|July|August|September|October|November|December) (\\d{4})$",
+"$1 $2 – $3 $4"
+],
+[
+"^No approved events in (January|February|March|April|May|June|July|August|September|October|November|December) (\\d{4}) yet\\.$",
+"لا توجد فعاليات معتمدة في $1 $2 حتى الآن."
+],
+[
+"^(January|February|March|April|May|June|July|August|September|October|November|December) (\\d{4}), (\\d+) events?$",
+"$1 $2، $3 {$3?فعالية|فعاليات}"
 ],
 [
 "^(January|February|March|April|May|June|July|August|September|October|November|December) (\\d{4})$",

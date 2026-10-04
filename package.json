@@ -12,9 +12,8 @@
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
-    "culture:build": "node scripts/build-culture-pages.mjs",
-    "culture:check": "node scripts/build-culture-pages.mjs --check",
-    "test:culture": "node --test tests/culture-calendar.test.mjs"
+    "test:culture": "node --test tests/culture-calendar.test.mjs tests/i18n.test.mjs",
+    "culture:lib": "node scripts/sync-culture-lib.mjs"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.1",

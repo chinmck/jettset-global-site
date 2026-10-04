@@ -16,3 +16,26 @@
 
 .hub-invite-panel{border:1px solid var(--hub-line);background:var(--hub-panel);padding:clamp(24px,4vw,42px)}.hub-invite-panel .hub-section-head{align-items:flex-start;margin-bottom:0}.hub-invite-panel .hub-section-head .hub-muted{max-width:360px;margin:3px 0 0;line-height:1.5}.hub-invite-form{max-width:none;margin-top:32px}.hub-invite-actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap}.hub-invite-actions .hub-button:disabled{cursor:wait;opacity:.55}.hub-invite-message{margin:0;color:var(--hub-gold);font-size:13px}.hub-invite-message.is-error{color:#d99586}
 @media(max-width:850px){.hub-invite-panel .hub-section-head{gap:12px}}
+
+/* Culture Calendar Review */
+.cul-flash{margin:16px 0;padding:12px 16px;border:1px solid rgba(185,154,85,.4);font-size:14px;line-height:1.5}
+.cul-ok{color:#d8d2c6}.cul-err{color:#e8b4a0}
+.cul-small{font-size:18px;text-transform:capitalize}
+.cul-list{display:grid;gap:20px}
+.cul-card{border:1px solid rgba(244,239,230,.14);padding:20px 22px;background:rgba(244,239,230,.02)}
+.cul-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:10px}
+.cul-head h3{flex-basis:100%;margin:6px 0 0;font:400 22px/1.25 Georgia,serif}
+.cul-badge{font:600 10px/1 sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:6px 8px;border:1px solid rgba(244,239,230,.3)}
+.cul-change,.cul-cancellation{border-color:#b99a55;color:#e3cf9d}.cul-nv{border-color:#e8b4a0;color:#e8b4a0}
+.cul-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 24px;margin:12px 0}
+.cul-meta dt{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#827d75}.cul-meta dd{margin:2px 0 0;font-size:14px}
+.cul-uncertain,.cul-note{font-size:14px;line-height:1.55;color:#d8d2c6;margin:10px 0}
+.cul-diff caption{text-align:left;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#827d75;padding-bottom:6px}
+.cul-form{margin-top:14px;display:grid;gap:12px}
+.cul-form fieldset{border:1px solid rgba(244,239,230,.12);padding:12px 14px}.cul-form legend{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#bfc2c3;padding:0 6px}
+.cul-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.cul-form label{display:grid;gap:4px;font-size:12px;letter-spacing:.06em;color:#bfc2c3}
+.cul-form input,.cul-form select,.cul-form textarea{background:#111315;color:#f1f0ec;border:1px solid rgba(244,239,230,.25);padding:8px 10px;font:14px/1.4 sans-serif;min-height:38px}
+.cul-actions{display:flex;flex-wrap:wrap;gap:10px}
+.cul-actions button,.hub-section form button{background:none;border:1px solid rgba(244,239,230,.4);color:#f1f0ec;padding:10px 16px;font:600 11px/1 sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;min-height:40px}
+.cul-approve{border-color:#8e755a !important}.cul-actions button:hover{background:rgba(244,239,230,.08)}

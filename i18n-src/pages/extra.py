@@ -78,6 +78,10 @@ E = {
 "Choose two different locations from the supplied city list.": ("Choisissez deux lieux différents dans la liste de villes proposée.", "Elija dos ubicaciones distintas de la lista de ciudades facilitada.", "اختر موقعين مختلفين من قائمة المدن المتاحة."),
 "Aviation Wellness": ("Aviation Wellness", "Aviation Wellness", "Aviation Wellness"),
 "Charter": ("Affrètement", "Chárter", "تأجير الطائرات"),
+"Previous month": ("Mois précédent", "Mes anterior", "الشهر السابق"),
+"Next month": ("Mois suivant", "Mes siguiente", "الشهر التالي"),
+"Choose a month": ("Choisir un mois", "Elegir un mes", "اختر شهرًا"),
+"Resume automatic rotation": ("Reprendre la rotation automatique", "Reanudar la rotación automática", "استئناف التبديل التلقائي"),
 # months (also used by date patterns)
 "January": ("janvier", "enero", "يناير"), "February": ("février", "febrero", "فبراير"), "March": ("mars", "marzo", "مارس"),
 "April": ("avril", "abril", "أبريل"), "May": ("mai", "mayo", "مايو"), "June": ("juin", "junio", "يونيو"),
@@ -89,6 +93,9 @@ E = {
 }
 P = [
  # calendar + dates
+ (r"^(January|February|March|April|May|June|July|August|September|October|November|December) (\d{4}) – (January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})$", "$1 $2 – $3 $4", "$1 de $2 – $3 de $4", "$1 $2 – $3 $4"),
+ (r"^No approved events in (January|February|March|April|May|June|July|August|September|October|November|December) (\d{4}) yet\.$", "Aucun événement approuvé en $1 $2 pour le moment.", "Aún no hay eventos aprobados en $1 de $2.", "لا توجد فعاليات معتمدة في $1 $2 حتى الآن."),
+ (r"^(January|February|March|April|May|June|July|August|September|October|November|December) (\d{4}), (\d+) events?$", "$1 $2, $3 {$3?événement|événements}", "$1 de $2, $3 {$3?evento|eventos}", "$1 $2، $3 {$3?فعالية|فعاليات}"),
  (r"^(January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})$", "$1 $2", "$1 de $2", "$1 $2"),
  (r"^(\d+)[–-](\d+) (JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)$", "$1–$2 $3", "$1–$2 $3", "$1–$2 $3"),
  (r"^(\d+) (JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)$", "$1 $2", "$1 $2", "$1 $2"),

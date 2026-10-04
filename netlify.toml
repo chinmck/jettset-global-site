@@ -9,7 +9,7 @@
   schedule = "*/15 * * * *"
 
 [functions."culture-events-sync"]
-  schedule = "17 5 * * *"
+  schedule = "17 5 * * 1"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

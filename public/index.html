@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap">
-<link rel="stylesheet" href="culture/culture-calendar.css?v=1">
+<link rel="stylesheet" href="culture/culture-calendar.css?v=2">
 <link rel="stylesheet" href="inside-house.css">
 <link rel="stylesheet" href="jettset-standard.css">
 <link rel="stylesheet" href="who-we-fly.css">
@@ -245,15 +245,23 @@
           <section class="cc" id="cultureCalendar" role="region" aria-roledescription="carousel" aria-label="The Global Culture Calendar">
             <header class="cc-head">
               <h3 class="cc-title">The Global Culture Calendar</h3>
-              <p class="cc-month" id="ccMonth"></p>
+              <p class="cc-range" id="ccRange"></p>
+              <div class="cc-monthbar">
+                <button type="button" class="cc-btn" id="ccMonthPrev" aria-label="Previous month"><span aria-hidden="true">&#8592;</span></button>
+                <p class="cc-month" id="ccMonth"></p>
+                <button type="button" class="cc-btn" id="ccMonthNext" aria-label="Next month"><span aria-hidden="true">&#8594;</span></button>
+              </div>
             </header>
 
             <div class="cc-feature" id="ccFeature" hidden>
               <p class="cc-feature-title"><span class="cc-city" id="ccCity"></span><span class="cc-event" id="ccEvent"></span></p>
+              <p class="cc-feature-meta" id="ccMeta"></p>
               <a class="cc-discover" id="ccDiscover" href="#">Discover <span aria-hidden="true">&#8599;</span></a>
             </div>
+            <p class="cc-empty" id="ccEmpty" hidden></p>
 
             <div class="cc-lower">
+              <div class="cc-months" id="ccMonths" role="group" aria-label="Choose a month"></div>
               <div class="cc-timeline" id="ccTimeline" hidden>
                 <div class="cc-track" id="ccTrack"><ol class="cc-dates" id="ccDates"></ol></div>
                 <div class="cc-controls">
@@ -920,8 +928,8 @@
   <script src="script.js?v=cta-hero-3"></script>
   <script src="hero-enquiry.js?v=6"></script>
   <script src="house-section.js"></script>
-  <script src="culture/culture-lib.js?v=1"></script>
-  <script src="culture/culture-calendar.js?v=2"></script>
+  <script src="culture/culture-lib.js?v=2"></script>
+  <script src="culture/culture-calendar.js?v=3"></script>
   <script src="inside-house.js"></script>
   <script src="jettset-standard.js"></script>
   <script src="who-we-fly.js"></script>
