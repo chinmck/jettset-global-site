@@ -77,11 +77,11 @@
 
   /* ============================================================
      RESTRAINED AUTOPLAY (progressive enhancement)
-     Rotates through the existing divisions every 5s with a ~500ms crossfade, so visitors discover that the
+     Rotates through the existing divisions every 3s with a ~500ms crossfade, so visitors discover that the
      numbered tabs can be selected. Everything stays directly selectable. Skipped entirely for visitors who
      prefer reduced motion. The CSS-only radio core above is untouched when this does not run.
      ============================================================ */
-  var INTERVAL = 5000;
+  var INTERVAL = 3000;
   var motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   if (motionQuery.matches || !("IntersectionObserver" in window)) return;
 
