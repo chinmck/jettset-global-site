@@ -94,7 +94,7 @@
 
   var current = Math.max(0, radios.findIndex(function (r) { return r.checked; }));
   var elapsed = 0;
-  var inView = false, hovering = false, focused = false, userPaused = false, stopped = false, tabHidden = document.hidden;
+  var started = false, focused = false, userPaused = false, stopped = false, tabHidden = document.hidden;
   var internal = false, raf = null, last = 0;
 
   root.classList.add("ih-enhanced", "ih-autoplay");
@@ -115,7 +115,8 @@
   (rail.parentNode).insertBefore(toggle, rail.nextSibling);
 
   function running() {
-    return inView && !hovering && !focused && !userPaused && !stopped && !tabHidden;
+    // Once started (first time the section is on screen) rotation keeps running while the page scrolls.
+    return started && !focused && !userPaused && !stopped && !tabHidden;
   }
 
   function paintToggle() {
@@ -162,7 +163,7 @@
   function sync() {
     if (running() && raf === null) { last = performance.now(); raf = requestAnimationFrame(frame); }
     root.classList.toggle("ih-paused", !running());
-    root.setAttribute("data-ih-state", running() ? "playing" : "paused:" + [inView ? "" : "offscreen", hovering ? "hover" : "", focused ? "focus" : "", userPaused ? "user" : "", stopped ? "selected" : "", tabHidden ? "tab-hidden" : ""].filter(Boolean).join(","));
+    root.setAttribute("data-ih-state", running() ? "playing" : "paused:" + [started ? "" : "not-started", focused ? "focus" : "", userPaused ? "user" : "", stopped ? "selected" : "", tabHidden ? "tab-hidden" : ""].filter(Boolean).join(","));
   }
 
   // Manual selection (mouse, touch, keyboard arrows) stops rotation on that tab so it can be read.
@@ -180,15 +181,21 @@
     paintCurrent(); paintToggle(); sync();
   });
 
-  root.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") { hovering = true; sync(); } });
-  root.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") { hovering = false; sync(); } });
-  root.addEventListener("focusin", function () { focused = true; sync(); });
-  root.addEventListener("focusout", function (e) { if (!e.relatedTarget || !root.contains(e.relatedTarget)) { focused = false; sync(); } });
+  // Keyboard focus on a tab or link inside the section holds rotation so it can be read. The pause/resume button is
+  // excluded (and so is mouse focus), otherwise pressing Resume would leave rotation looking stuck.
+  root.addEventListener("focusin", function (e) {
+    if (e.target === toggle || !(e.target.matches && e.target.matches(":focus-visible"))) return;
+    focused = true; sync();
+  });
+  root.addEventListener("focusout", function (e) { if (!e.relatedTarget || !root.contains(e.relatedTarget) || e.relatedTarget === toggle) { focused = false; sync(); } });
   document.addEventListener("visibilitychange", function () { tabHidden = document.hidden; sync(); });
 
-  new IntersectionObserver(function (entries) {
-    inView = entries[0].isIntersecting; sync();
-  }, { threshold: 0.35 }).observe(root);
+  // Start the first time the section is properly in view, then keep going; leaving the viewport never pauses it.
+  var starter = new IntersectionObserver(function (entries) {
+    if (!entries[0].isIntersecting) return;
+    started = true; starter.disconnect(); sync();
+  }, { threshold: 0.35 });
+  starter.observe(root);
 
   // If the visitor turns on reduced motion while the page is open, hand control back to the plain tabs.
   var onMotionChange = function () {
