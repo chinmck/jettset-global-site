@@ -174,7 +174,7 @@ window.MEDICAL_FLEET_CATEGORIES = [
     "key": "midsize",
     "num": "03",
     "name": "Midsize Jets",
-    "desc": "The working core of the fleet — a second patient bed or additional companions.",
+    "desc": "The working core of the fleet, a second patient bed or additional companions.",
     "aircraft": [
       {
         "manufacturer": "Bombardier",

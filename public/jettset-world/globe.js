@@ -8,7 +8,7 @@ const ROUTES = [
     label: 'London &rarr; Monaco', sub: 'Riviera Escape',
     flightTime: '1h 40m', aircraft: 'Light / Midsize Jet',
     concierge: 'Ground transfer from Nice Côte d’Azur and villa coordination arranged as part of the same journey.',
-    cultural: 'Monaco Grand Prix — May',
+    cultural: 'Monaco Grand Prix, May',
   },
   {
     id: 'london-dubai', a: { name: 'London', lat: 51.5074, lon: -0.1278, timeZone: 'Europe/London' },
@@ -32,7 +32,7 @@ const ROUTES = [
     label: 'Miami &rarr; New York', sub: 'Fair Week Route',
     flightTime: '2h 20m', aircraft: 'Light / Midsize Jet',
     concierge: 'Gallery and preview-day access coordinated through Concierge ahead of arrival.',
-    cultural: 'Miami Art Basel — December',
+    cultural: 'Miami Art Basel, December',
   },
   {
     id: 'lagos-london', a: { name: 'Lagos', lat: 6.5244, lon: 3.3792, timeZone: 'Africa/Lagos' },
@@ -40,7 +40,7 @@ const ROUTES = [
     label: 'Lagos &rarr; London', sub: '',
     flightTime: '6h 30m', aircraft: 'Heavy Jet',
     concierge: 'Ground transfer and onward arrangements held ready on both ends of the journey.',
-    cultural: 'Lagos Seasonal Travel — December',
+    cultural: 'Lagos Seasonal Travel, December',
   },
   {
     id: 'london-paris', a: { name: 'London', lat: 51.5074, lon: -0.1278, timeZone: 'Europe/London' },
@@ -48,7 +48,7 @@ const ROUTES = [
     label: 'London &rarr; Paris', sub: '',
     flightTime: '55m', aircraft: 'Light Jet',
     concierge: 'Show-seating and venue transfers arranged alongside the journey.',
-    cultural: 'Paris Fashion Week — September',
+    cultural: 'Paris Fashion Week, September',
   },
   {
     id: 'london-accra', a: { name: 'London', lat: 51.5074, lon: -0.1278, timeZone: 'Europe/London' },
@@ -103,7 +103,7 @@ const AIRPORT_CATALOG = [
 ].map((airport) => ({
   ...airport,
   kind: 'airport',
-  inputValue: `${airport.city} — ${airport.name} (${airport.code})`,
+  inputValue: `${airport.city}, ${airport.name} (${airport.code})`,
   markerLabel: airport.code,
 }));
 
