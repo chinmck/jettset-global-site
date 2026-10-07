@@ -42,7 +42,7 @@
   row-gap: clamp(12px, 1.8vh, 18px);
   align-items: start;
 }
-.jp-left { grid-area: left; align-self: stretch; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.jp-left { grid-area: left; align-self: stretch; display: flex; flex-direction: column; justify-content: flex-start; padding-top: clamp(32px, 6vh, 56px); min-width: 0; }
 .route-map.jw-embed .jw-embed-stage { grid-area: stage; align-self: center; }
 
 /* ---- headings and copy ---- */
@@ -195,6 +195,7 @@
 /* Shorter desktop windows (browser chrome takes height): tighten so the overview still ends inside the window. */
 @media (min-width: 1181px) and (max-height: 860px) {
   .route-map.jw-embed { padding-top: 60px; padding-bottom: 28px; }
+  .jp-left { padding-top: 24px; }
   .route-map.jw-embed .jw-embed-copy .eyebrow { margin-bottom: 8px; }
   .route-map.jw-embed .jw-embed-copy h2 { font-size: 34px; margin-bottom: 8px; }
   .route-map.jw-embed .jw-embed-copy > p { font-size: 14px; line-height: 1.5; margin-bottom: 12px; }
