@@ -784,17 +784,27 @@ AIRPORT_CATALOG.forEach((airport) => {
   cityDatalist.appendChild(option);
 });
 
-chipWrap.querySelectorAll('.route-chip').forEach((button) => {
-  button.addEventListener('click', () => selectRoute(button.dataset.id, true));
-});
-
+// Curated routes are secondary: one restrained control opens the list; choosing a route fills From/To and updates
+// the globe and overview (selectRoute), then closes the list.
 const exploreRoutes = document.getElementById('jvExploreRoutes');
-exploreRoutes.addEventListener('click', () => {
-  const expanded = routeSection.classList.toggle('routes-expanded');
-  exploreRoutes.setAttribute('aria-expanded', String(expanded));
-  exploreRoutes.innerHTML = expanded
-    ? 'Show fewer routes <span aria-hidden="true">−</span>'
-    : 'Explore more routes <span aria-hidden="true">+</span>';
+function setRoutesOpen(open, restoreFocus = false) {
+  routeSection.classList.toggle('routes-open', open);
+  exploreRoutes.setAttribute('aria-expanded', String(open));
+  exploreRoutes.innerHTML = `Explore suggested routes <span aria-hidden="true">${open ? '−' : '+'}</span>`;
+  if (!open && restoreFocus) exploreRoutes.focus();
+}
+chipWrap.querySelectorAll('.route-chip').forEach((button) => {
+  button.addEventListener('click', () => {
+    selectRoute(button.dataset.id, true);
+    setRoutesOpen(false, true);
+  });
+});
+exploreRoutes.addEventListener('click', () => setRoutesOpen(!routeSection.classList.contains('routes-open')));
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && routeSection.classList.contains('routes-open')) setRoutesOpen(false, true);
+});
+document.addEventListener('click', (event) => {
+  if (routeSection.classList.contains('routes-open') && !event.target.closest('.jw-embed-chips')) setRoutesOpen(false);
 });
 
 let timeInterval = null;

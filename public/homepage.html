@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="hero-enquiry.css?v=21">
-<link rel="stylesheet" href="journey-planner.css?v=12">
+<link rel="stylesheet" href="journey-planner.css?v=15">
 </head>
 <body>
 
@@ -276,9 +276,10 @@
     <section class="route-map jw-embed" id="routeMapSection" aria-labelledby="jpHeading">
       <div class="jp-backdrop" aria-hidden="true"></div>
       <div class="jw-embed-grid">
+        <div class="jp-left">
         <div class="jw-embed-copy">
           <span class="eyebrow">Private Journey Planner</span>
-          <h2 id="jpHeading">Plan your private journey.</h2>
+          <h2 id="jpHeading">Your journey, considered.</h2>
           <p>Choose your route, date and travellers to visualise your journey.</p>
           <div class="jv-fields" aria-label="Journey details">
             <label class="jv-field" for="jvFrom"><span>From</span><input id="jvFrom" type="text" value="London" list="jvCities" autocomplete="off"></label>
@@ -292,6 +293,20 @@
           <div class="jv-location-suggestions" id="jvLocationSuggestions" aria-live="polite"></div>
         </div>
 
+        <div class="jw-embed-chips">
+          <button type="button" class="jv-explore-routes" id="jvExploreRoutes" aria-expanded="false" aria-controls="routeChips">Explore suggested routes <span aria-hidden="true">+</span></button>
+          <div class="route-chips" id="routeChips" aria-label="Curated routes">
+            <button type="button" class="route-chip is-active" data-id="london-monaco"><span class="route-chip-label">London &rarr; Monaco</span><span class="route-chip-sub">Riviera Escape</span></button>
+            <button type="button" class="route-chip" data-id="london-dubai"><span class="route-chip-label">London &rarr; Dubai</span><span class="route-chip-sub">Gulf Crossing</span></button>
+            <button type="button" class="route-chip" data-id="ny-london"><span class="route-chip-label">New York &rarr; London</span><span class="route-chip-sub">Atlantic Crossing</span></button>
+            <button type="button" class="route-chip" data-id="miami-newyork"><span class="route-chip-label">Miami &rarr; New York</span><span class="route-chip-sub">Fair Week Route</span></button>
+            <button type="button" class="route-chip" data-id="lagos-london"><span class="route-chip-label">Lagos &rarr; London</span><span class="route-chip-sub">Lagos Crossing</span></button>
+            <button type="button" class="route-chip" data-id="london-paris"><span class="route-chip-label">London &rarr; Paris</span><span class="route-chip-sub">City Pair</span></button>
+            <button type="button" class="route-chip" data-id="london-accra"><span class="route-chip-label">London &rarr; Accra</span><span class="route-chip-sub">West Africa Connection</span></button>
+          </div>
+        </div>
+        </div>
+
         <div class="jw-embed-stage">
           <div class="world-stage">
             <canvas id="globeCanvas" width="900" height="900" aria-label="Three-dimensional globe showing recognisable world geography"></canvas>
@@ -299,19 +314,6 @@
             <div class="static-fallback" id="staticFallback"></div>
             <noscript><div class="jv-noscript">Interactive globe unavailable. Choose a curated route below or continue with the journey enquiry.</div></noscript>
           </div>
-        </div>
-
-        <div class="jw-embed-chips">
-          <div class="route-chips" id="routeChips" aria-label="Curated routes">
-            <button type="button" class="route-chip is-active" data-id="london-monaco"><span class="route-chip-label">London &rarr; Monaco</span><span class="route-chip-sub">Riviera Escape</span></button>
-            <button type="button" class="route-chip" data-id="london-dubai"><span class="route-chip-label">London &rarr; Dubai</span><span class="route-chip-sub">Gulf Crossing</span></button>
-            <button type="button" class="route-chip" data-id="ny-london"><span class="route-chip-label">New York &rarr; London</span><span class="route-chip-sub">Atlantic Crossing</span></button>
-            <button type="button" class="route-chip" data-id="miami-newyork"><span class="route-chip-label">Miami &rarr; New York</span><span class="route-chip-sub">Fair Week Route</span></button>
-            <button type="button" class="route-chip route-chip-more" data-id="lagos-london"><span class="route-chip-label">Lagos &rarr; London</span><span class="route-chip-sub">Lagos Crossing</span></button>
-            <button type="button" class="route-chip route-chip-more" data-id="london-paris"><span class="route-chip-label">London &rarr; Paris</span><span class="route-chip-sub">City Pair</span></button>
-            <button type="button" class="route-chip route-chip-more" data-id="london-accra"><span class="route-chip-label">London &rarr; Accra</span><span class="route-chip-sub">West Africa Connection</span></button>
-          </div>
-          <button type="button" class="jv-explore-routes" id="jvExploreRoutes" aria-expanded="false">Explore more routes <span aria-hidden="true">+</span></button>
         </div>
 
         <div class="jw-embed-panel">
@@ -947,6 +949,6 @@
   <script src="inside-house.js"></script>
   <script src="jettset-standard.js"></script>
   <script src="who-we-fly.js"></script>
-  <script type="module" src="./jettset-world/globe.js?v=20261005-planner"></script>
+  <script type="module" src="./jettset-world/globe.js?v=20261007-routes"></script>
 </body>
 </html>
