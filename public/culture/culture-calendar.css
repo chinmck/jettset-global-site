@@ -37,7 +37,6 @@
   text-shadow:0 2px 24px rgba(0,0,0,0.45);
 }
 .cc-city,.cc-event{display:block;}
-.cc-city::after{content:' \2014';}
 .cc-discover{
   display:inline-block; margin-top:clamp(10px,1.2vw,16px); padding-bottom:3px;
   font-family:'Source Serif 4','Source Serif Pro',Georgia,serif; font-size:clamp(15px,1.3vw,18px); font-weight:400; letter-spacing:0.02em;

@@ -87,23 +87,7 @@ E = {
 "MAY": ("MAI", "MAY", "مايو"), "JUN": ("JUIN", "JUN", "يونيو"), "JUL": ("JUIL.", "JUL", "يوليو"), "AUG": ("AOÛT", "AGO", "أغسطس"),
 "SEP": ("SEPT.", "SEP", "سبتمبر"), "OCT": ("OCT.", "OCT", "أكتوبر"), "NOV": ("NOV.", "NOV", "نوفمبر"), "DEC": ("DÉC.", "DIC", "ديسمبر"),
 }
-# Jettset House section (type-system pass): body copy now uses an unspaced em dash; closing sentence links to service pages.
-import sys, os
-sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
-import translations as _T
-_old = "Jettset brings private aviation, concierge and cultural intelligence into one trusted relationship. We understand the people, places, timing and expectations surrounding every journey — not only the aircraft that carries it."
-for _row in _T.__dict__.values():
-    pass
-def _find(en):
-    for name in dir(_T):
-        v = getattr(_T, name)
-        if isinstance(v, (list, tuple)):
-            for r in v:
-                if isinstance(r, tuple) and len(r) == 4 and r[0] == en:
-                    return r
-_r = _find(_old)
-if _r:
-    E[_old.replace(" — ", "—")] = tuple(x.replace(" — ", "—") for x in _r[1:])
+# Jettset House section: closing sentence links to service pages.
 E['That same care extends to <a href="/aviation-wellness">wellbeing</a>, specialist <a href="/medical">medical aviation</a> and aircraft sales.'] = (
     'Le même soin s’étend au <a href="/aviation-wellness">bien-être</a>, à l’<a href="/medical">aviation médicale</a> spécialisée et à la vente d’avions.',
     'Ese mismo cuidado se extiende al <a href="/aviation-wellness">bienestar</a>, a la <a href="/medical">aviación médica</a> especializada y a la venta de aeronaves.',
@@ -141,7 +125,6 @@ P = [
  (r"^(\d+) (JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)$", "$1 $2", "$1 $2", "$1 $2"),
  (r"^(\d+) (JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC) – (\d+) (JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)$", "$1 $2 – $3 $4", "$1 $2 – $3 $4", "$1 $2 – $3 $4"),
  (r"^(.+), (.+), (\d+)[–-](\d+) (January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})$", "$1, $2, $3–$4 $5 $6", "$1, $2, $3–$4 de $5 de $6", "$1، $2، $3–$4 $5 $6"),
- (r"^(.+) — (.+), (\d+)[–-](\d+) (January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})$", "$1 — $2, $3–$4 $5 $6", "$1 — $2, $3–$4 de $5 de $6", "$1 — $2، $3–$4 $5 $6"),
  (r"^Discover (.+), (.+)$", "Découvrir $1, $2", "Descubrir $1, $2", "اكتشف $1، $2"),
  # route labels and flight times
  (r"^([A-Z][A-Za-zÀ-ÿ .'’-]+) → ([A-Z][A-Za-zÀ-ÿ .'’-]+)$", "$1 → $2", "$1 → $2", "$1 ← $2"),

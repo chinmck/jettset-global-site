@@ -47,7 +47,7 @@
       var li = btn.parentNode;
       track.scrollTo({ left: Math.max(0, li.offsetLeft - (track.clientWidth - li.offsetWidth) / 2), behavior: reduceMotion ? 'auto' : 'smooth' });
     }
-    if (byUser) live.textContent = e.city + ' — ' + e.name + ', ' + lib.longRange(e.startDate, e.endDate);
+    if (byUser) live.textContent = e.city + ', ' + e.name + ', ' + lib.longRange(e.startDate, e.endDate);
   }
 
   function go(i, byUser) { render(((i % shown.length) + shown.length) % shown.length, byUser); }

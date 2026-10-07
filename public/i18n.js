@@ -24,7 +24,7 @@
     ar:{name:'العربية', code:'AR', label:'اللغة', pick:'اختر اللغة'}
   };
   var STORE = 'jt-lang';
-  var VERSION = '9';
+  var VERSION = '10';
   var ATTRS = ['placeholder','aria-label','alt','title'];
   var SKIP = {SCRIPT:1, STYLE:1, NOSCRIPT:1, SVG:1, CANVAS:1, TEXTAREA:1, TEMPLATE:1, CODE:1, PRE:1};
   var INLINE = {A:1, SPAN:1, STRONG:1, EM:1, B:1, I:1, BR:1, SMALL:1, SUP:1, SUB:1, ABBR:1, TIME:1, MARK:1, U:1, WBR:1};

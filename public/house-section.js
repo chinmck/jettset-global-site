@@ -39,14 +39,14 @@
      Approved curated static set — locked. Do not add dates, "happening
      now"/live-status wording, or any city/event not on this list. */
   var coordinates = [
-    "Monaco — Grand Prix Week",
-    "Milan — Salone del Mobile",
-    "Paris — Fashion Week",
-    "Miami — Art Basel",
-    "Cannes — Festival Week",
-    "Lagos — Art and Culture Season",
-    "Dubai — Design Week",
-    "London — Frieze Week"
+    "Monaco: Grand Prix Week",
+    "Milan: Salone del Mobile",
+    "Paris: Fashion Week",
+    "Miami: Art Basel",
+    "Cannes: Festival Week",
+    "Lagos: Art and Culture Season",
+    "Dubai: Design Week",
+    "London: Frieze Week"
   ];
 
   function initIndex() {
