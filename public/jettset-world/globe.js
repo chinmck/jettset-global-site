@@ -784,17 +784,27 @@ AIRPORT_CATALOG.forEach((airport) => {
   cityDatalist.appendChild(option);
 });
 
-chipWrap.querySelectorAll('.route-chip').forEach((button) => {
-  button.addEventListener('click', () => selectRoute(button.dataset.id, true));
-});
-
+// Curated routes are secondary: one restrained control opens the list; choosing a route fills From/To and updates
+// the globe and overview (selectRoute), then closes the list.
 const exploreRoutes = document.getElementById('jvExploreRoutes');
-exploreRoutes.addEventListener('click', () => {
-  const expanded = routeSection.classList.toggle('routes-expanded');
-  exploreRoutes.setAttribute('aria-expanded', String(expanded));
-  exploreRoutes.innerHTML = expanded
-    ? 'Show fewer routes <span aria-hidden="true">−</span>'
-    : 'Explore more routes <span aria-hidden="true">+</span>';
+function setRoutesOpen(open, restoreFocus = false) {
+  routeSection.classList.toggle('routes-open', open);
+  exploreRoutes.setAttribute('aria-expanded', String(open));
+  exploreRoutes.innerHTML = `Explore suggested routes <span aria-hidden="true">${open ? '−' : '+'}</span>`;
+  if (!open && restoreFocus) exploreRoutes.focus();
+}
+chipWrap.querySelectorAll('.route-chip').forEach((button) => {
+  button.addEventListener('click', () => {
+    selectRoute(button.dataset.id, true);
+    setRoutesOpen(false, true);
+  });
+});
+exploreRoutes.addEventListener('click', () => setRoutesOpen(!routeSection.classList.contains('routes-open')));
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && routeSection.classList.contains('routes-open')) setRoutesOpen(false, true);
+});
+document.addEventListener('click', (event) => {
+  if (routeSection.classList.contains('routes-open') && !event.target.closest('.jw-embed-chips')) setRoutesOpen(false);
 });
 
 let timeInterval = null;
@@ -1012,6 +1022,29 @@ new IntersectionObserver((entries) => {
   floatingContact?.classList.toggle('is-journey-suppressed', insideJourney);
   siteHeader?.classList.toggle('is-journey-suppressed', insideJourney);
 }, { threshold: 0.12 }).observe(routeSection);
+
+// Desktop anchor landing: the section's top edge should sit flush with the viewport top so the whole planner (heading
+// to Request button) is in one window. Content above can reflow while a smooth scroll or a hash load is in flight,
+// so settle the final position once it stops. Mobile keeps its existing behaviour.
+const desktopPlanner = window.matchMedia('(min-width: 981px)');
+function settleOnPlanner() {
+  if (!desktopPlanner.matches) return;
+  const top = routeSection.getBoundingClientRect().top;
+  if (Math.abs(top) > 4) window.scrollBy({ top, behavior: 'instant' });
+}
+if (location.hash === '#routeMapSection') window.addEventListener('load', () => setTimeout(settleOnPlanner, 250));
+document.querySelectorAll('a[href="#routeMapSection"]').forEach((link) => {
+  link.addEventListener('click', () => {
+    // Wait until the (smooth) scroll has genuinely stopped, then settle the section flush with the viewport top.
+    let last = window.scrollY, still = 0, ticks = 0;
+    const timer = setInterval(() => {
+      ticks += 1;
+      still = Math.abs(window.scrollY - last) < 1 ? still + 1 : 0;
+      last = window.scrollY;
+      if (still >= 3 || ticks > 40) { clearInterval(timer); settleOnPlanner(); }
+    }, 100);
+  });
+});
 
 selectRoute(ROUTES[0]);
 initGlobe();

@@ -128,6 +128,12 @@ E.update({
 "Estimates are indicative. Final aircraft selection and arrangements are confirmed personally during enquiry.": ("Les estimations sont indicatives. Le choix définitif de l’appareil et les modalités sont confirmés personnellement lors de la demande.", "Las estimaciones son orientativas. La selección final de la aeronave y los detalles se confirman personalmente durante la consulta.", "التقديرات استرشادية. يتم تأكيد اختيار الطائرة النهائي والترتيبات شخصيًا أثناء الاستفسار."),
 })
 
+E.update({
+"Your journey, considered.": ("Votre voyage, pensé avec soin.", "Su viaje, cuidadosamente pensado.", "رحلتك، بعناية فائقة."),
+'Explore suggested routes <span aria-hidden="true">+</span>': ('Explorer les itinéraires suggérés <span aria-hidden="true">+</span>', 'Explorar rutas sugeridas <span aria-hidden="true">+</span>', 'استكشف المسارات المقترحة <span aria-hidden="true">+</span>'),
+'Explore suggested routes <span aria-hidden="true">−</span>': ('Explorer les itinéraires suggérés <span aria-hidden="true">−</span>', 'Explorar rutas sugeridas <span aria-hidden="true">−</span>', 'استكشف المسارات المقترحة <span aria-hidden="true">−</span>'),
+})
+
 P = [
  # calendar + dates
  (r"^(January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})$", "$1 $2", "$1 de $2", "$1 $2"),
