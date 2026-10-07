@@ -547,3 +547,124 @@
     animation: none !important;
   }
 }
+
+
+/* ===============================================================
+   AUTOPLAY ENHANCEMENT (inside-house.js adds .ih-enhanced only when
+   motion is allowed). Rooms are stacked in one grid cell so the
+   section never changes height while it rotates, and the outgoing
+   and incoming rooms crossfade over ~500ms.
+   =============================================================== */
+
+.ih-enhanced .inside-house-rooms {
+  display: grid;
+}
+
+.ih-enhanced .inside-house-room {
+  display: grid;
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  animation: none;
+  transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+}
+
+.ih-enhanced #inside-house-tab-aviation:checked ~ .inside-house-rooms [data-room="aviation"],
+.ih-enhanced #inside-house-tab-membership:checked ~ .inside-house-rooms [data-room="membership"],
+.ih-enhanced #inside-house-tab-concierge:checked ~ .inside-house-rooms [data-room="concierge"],
+.ih-enhanced #inside-house-tab-advisory:checked ~ .inside-house-rooms [data-room="advisory"],
+.ih-enhanced #inside-house-tab-culture:checked ~ .inside-house-rooms [data-room="culture"] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.5s ease, visibility 0s linear 0s;
+}
+
+/* Progress: the active tab's gold underline fills over each 3-second interval. */
+.ih-enhanced .inside-house-item-button {
+  position: relative;
+}
+
+.ih-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--inside-house-gold);
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ih-autoplay .ih-current .ih-progress {
+  opacity: 0.9;
+}
+
+/* Pause / resume: a small round control, kept quiet. */
+.ih-toggle {
+  position: absolute;
+  /* bottom-right of the directory column, clear of the fixed contact icons on the left */
+  left: calc(max(320px, 34%) - 60px);
+  bottom: calc(var(--inside-house-unit) * 3);
+  z-index: 3;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: rgba(10, 9, 8, 0.55);
+  border: 1px solid rgba(201, 162, 75, 0.4);
+  border-radius: 50%;
+  color: var(--inside-house-ivory);
+  cursor: pointer;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.ih-toggle:hover {
+  border-color: var(--inside-house-gold);
+}
+
+.ih-toggle:focus-visible {
+  outline: 2px solid var(--inside-house-ivory);
+  outline-offset: 3px;
+}
+
+.ih-toggle-icon {
+  display: block;
+  width: 8px;
+  height: 10px;
+  border-left: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+}
+
+.ih-toggle.is-paused .ih-toggle-icon {
+  width: 0;
+  height: 0;
+  border: 0;
+  border-left: 8px solid currentColor;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  margin-left: 2px;
+}
+
+@media (max-width: 780px) {
+  .ih-toggle {
+    left: auto;
+    right: var(--inside-house-edge);
+    bottom: calc(var(--inside-house-unit) * 2);
+  }
+
+  /* The active tab already carries a gold bottom border here; soften it while rotating so the progress fill reads. */
+  .ih-autoplay .inside-house-item-button.ih-current {
+    border-bottom-color: rgba(201, 162, 75, 0.3) !important;
+  }
+
+  .ih-progress {
+    height: 2px;
+    bottom: -2px;
+  }
+}
