@@ -528,11 +528,43 @@ footer.ba-footer-adjoin{ border-top:1px solid var(--grey-line); }
 
 /* ============================================================
    HERO VIDEO FRAMING
-   The hero film is the landscape clip (1920 x 1080) served as
-   videos/aviation-wellness-hero.mp4. Full-bleed chapter treatment:
-   the previous portrait side-frame (480 x 848) would crop this film
-   to a vertical slice and cut the end card. Zoom-in stays off so the
-   end card stays sharp; cover is centered.
+   The hero film is a portrait clip (480 x 848). Stretched full-bleed with object-fit: cover on a landscape
+   screen it was cropped to a thin band across the middle and enlarged about 3x, which is why the subjects were
+   cut off and soft. It is now shown whole, at its own proportions and close to native size, in a frame on the
+   right, with the copy on the calm dark ground to its left. Portrait screens keep the full-bleed treatment
+   (the clip's proportions match), without the extra parallax/zoom scaling that softened it.
    ============================================================ */
 .ba-page .chapter-hero-parallax { inset: 0; }
-.ba-page .chapter-hero-img { animation: none; object-position: center center; }
+.ba-page .chapter-hero-img { animation: none; object-position: center 30%; }
+
+@media (min-aspect-ratio: 1/1) and (min-width: 700px) {
+  .ba-page .chapter-hero {
+    --ba-pv: min(calc(100vh - 124px), 960px);      /* frame height, clear of the fixed header */
+    --ba-pw: calc(var(--ba-pv) * 0.566);           /* 480 : 848 */
+    --ba-pr: clamp(28px, 6vw, 96px);
+    background:
+      radial-gradient(55% 75% at 76% 52%, rgba(198, 169, 124, 0.1), transparent 70%),
+      #060504;
+  }
+  .ba-page .chapter-hero::after { display: none; }
+  .ba-page .chapter-hero-parallax {
+    inset: auto;
+    top: 96px;
+    right: var(--ba-pr);
+    width: var(--ba-pw);
+    height: var(--ba-pv);
+    box-shadow: 0 0 0 1px rgba(198, 169, 124, 0.22), 0 30px 80px rgba(0, 0, 0, 0.55);
+  }
+  .ba-page .chapter-hero-parallax::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(6, 5, 4, 0.45) 0%, transparent 30%);
+  }
+  .ba-page .chapter-hero-img { object-position: center center; }
+  .ba-page .chapter-hero-content {
+    max-width: calc(100% - var(--ba-pw) - var(--ba-pr) - 4vw);
+  }
+  .ba-page .chapter-hero-content h1 { font-size: clamp(44px, 6.6vw, 112px); }
+}
